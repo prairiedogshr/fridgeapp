@@ -1,0 +1,19 @@
+{
+  "name": "fridgeapp",
+  "version": "1.0.0",
+  "description": "An app for roomate productivity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prairiedogshr/fridgeapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prairiedogshr/fridgeapp/issues"
+  },
+  "homepage": "https://github.com/prairiedogshr/fridgeapp#readme"
+}

@@ -7,7 +7,6 @@ require('./config/middleware.js')(app, express);
 
 //passport
 //will be passport
-
 //routes
 // require('./config/routes.js')(app, express);
 

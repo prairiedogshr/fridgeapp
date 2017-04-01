@@ -1,15 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import App from './App.jsx';
+import createHistory from 'history/createBrowserHistory'
+import Routes from './config/routes.jsx';
 import reducer from './reducers';
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const history = createHistory();
+
+const store = createStore(
+	reducer, 
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 render(
   <Provider store={store}>
-    <App />
+  	<Routes />
   </Provider>,
   document.getElementById('root')
 )

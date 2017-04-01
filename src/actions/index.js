@@ -1,5 +1,5 @@
 const CHECK_HOME = 'CHECK_HOME';
-// const GET_CHORES = 'GET_CHORES';
+const ADD_CHORE = 'ADD_CHORE';
 
 // example action
 export const isHomeless = (user) => {
@@ -10,10 +10,10 @@ export const isHomeless = (user) => {
   }
 }
 
-// export const getChores = () => {
-//   console.log('getting chores');
-//   return {
-//     type: GET_CHORES,
-//     payload: null
-//   }
-// }
+export const addChore = (choreText) => {
+  console.log('adding chore: ', choreText);
+  return {
+    type: ADD_CHORE,
+    payload: choreText
+  }
+}

@@ -1,9 +1,22 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-// import { getChores } from '../actions';
+import { addChore } from '../actions';
 
 class Chores extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      choreInput: ""
+    }
+  }
+
+  handleSubmit = e => {
+    if (e.which === 13) {
+      this.props.addChore(e.target.value);
+      e.target.value = '';
+    }
+  }
 
   render() {
     const chores = this.props.chores.list;
@@ -20,6 +33,15 @@ class Chores extends Component {
             }, this)
           }
         </ul>
+        <h3>
+          Add Chore
+        </h3>
+        <input
+          type="text"
+          placeholder=""
+          autoFocus="true"
+          onKeyDown={this.handleSubmit}
+        />
       </div>
     )
   }
@@ -30,5 +52,8 @@ const mapStateToProps = ({choresReducer}) => ({
 })
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  {
+    addChore
+  }
 )(Chores)

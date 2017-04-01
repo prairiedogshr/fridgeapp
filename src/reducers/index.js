@@ -10,7 +10,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-// export default dummyFunc = (a,b) => {
-//   return a+b;
-// }

@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
+// import different reducers here
+import homelessReducer from './test.js'
 
-// const rootReducer = combineReducers({
-//   // enter all app reducers here
-// });
+const rootReducer = combineReducers({
+  homelessReducer
+});
 
-// export default rootReducer;
+export default rootReducer;
 
-export default dummyFunc = (a,b) => {
-  return a+b;
-}
+// export default dummyFunc = (a,b) => {
+//   return a+b;
+// }

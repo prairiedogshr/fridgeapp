@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Component } from 'react'
-import {connect } from 'react-redux'
+import { connect } from 'react-redux'
 // import actions here and then add the to mapStateToProps
 import { isHomeless } from './actions'
+import Chores from './components/chores.jsx';
 
 // main react app component
 class App extends Component {
@@ -16,7 +17,9 @@ class App extends Component {
         <button onClick={()=>{
           console.log('this.props: ', this.props);
           this.props.isHomeless('Kyle')
-          }}>click</button>
+          }}>click
+        </button>
+        <Chores />
       </div>
     )
   }

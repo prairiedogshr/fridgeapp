@@ -2,9 +2,9 @@
 
 module.exports = (app, express) => {
 
-	app.get('/', (req,res) => {
-	  res.send("Welcome to the Fridge API, for Dev information check the github ReadMe.")
-	})
+	// app.get('/', (req,res) => {
+	//   res.send("Welcome to the Fridge API, for Dev information check the github ReadMe.")
+	// })
 
 	app.get('/api/user', (req,res) => {
 	  res.send("API get all userszzzz")

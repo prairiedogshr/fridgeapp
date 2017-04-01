@@ -9,13 +9,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>WAZZUP!</h1>
+        <h1>Ahhhhh anhhhhh</h1>
         <div>
           {this.props.homelessReducer[this.props.homelessReducer.length - 1]}
         </div>
         <button onClick={()=>{
           console.log('this.props: ', this.props);
-          this.props.isHomeless('Rich')
+          this.props.isHomeless('Kyle')
           }}>click</button>
       </div>
     )

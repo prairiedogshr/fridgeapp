@@ -1,0 +1,14 @@
+.fullWidth {
+  width: 100vw !important;
+  padding: none;
+  margin: none;
+}
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: grey !important;
+  text-align: center;
+}

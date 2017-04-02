@@ -1,3 +1,4 @@
+import babel-polyfill;
 import React from 'react';
 import { render } from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
@@ -10,7 +11,7 @@ import reducer from './reducers';
 const history = createHistory();
 
 const store = createStore(
-	reducer, 
+	reducer,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 render(

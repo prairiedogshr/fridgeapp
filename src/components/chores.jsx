@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addChore } from '../actions';
+import { addChore, completeChore, undoComplete } from '../actions';
 
 class Chores extends Component {
   constructor(props) {
@@ -18,17 +18,39 @@ class Chores extends Component {
     }
   }
 
+  completeChore = choreId => {
+    console.log('+++++++++++++', choreId);
+    this.props.completeChore(choreId);
+  }
+
+  undoComplete = choreId => {
+    console.log('-------------', choreId);
+    this.props.undoComplete(choreId);
+  }
+
   render() {
-    const chores = this.props.chores.list;
+    const complete = this.props.chores.complete;
+    const incomplete = this.props.chores.incomplete;
     return (
       <div>
         <h1>
-          Chores
+          Complete Chores
         </h1>
         <ul>
-          {chores.map( (chore, ind) => {
+          {complete.map( (chore, ind) => {
               return (
-                <li key={ind}>{chore}</li>
+                <li key={chore.id} onClick={ ()=>{this.completeChore(chore.id)} }>{chore.value}</li>
+              )
+            }, this)
+          }
+        </ul>
+        <h1>
+          Incomplete Chores
+        </h1>
+        <ul>
+          {incomplete.map( (chore, ind) => {
+              return (
+                <li key={chore.id} onClick={ ()=>{this.undoComplete(chore.id)} }>{chore.value}</li>
               )
             }, this)
           }
@@ -54,6 +76,8 @@ const mapStateToProps = ({choresReducer}) => ({
 export default connect(
   mapStateToProps,
   {
-    addChore
+    addChore,
+    completeChore,
+    undoComplete
   }
 )(Chores)

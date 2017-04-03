@@ -8,7 +8,7 @@ require('./config/middleware.js')(app, express);
 //passport
 //will be passport
 //routes
-// require('./config/routes.js')(app, express);
+require('./config/routes.js')(app, express);
 
 app.listen(port, () => {
   console.log('Server is on '+ port)

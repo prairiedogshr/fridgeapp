@@ -12,3 +12,6 @@
   background-color: grey !important;
   text-align: center;
 }
+.header-padding {
+  padding-top: 50px;
+}

@@ -4,22 +4,14 @@ import { connect } from 'react-redux'
 // import actions here and then add the to mapStateToProps
 import { isHomeless } from './actions'
 import Chores from './components/chores.jsx';
+import Login from './components/login.jsx';
 
 // main react app component
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Ahhhhh anhhhhh</h1>
-        <div>
-          {this.props.homelessReducer[this.props.homelessReducer.length - 1]}
-        </div>
-        <button onClick={()=>{
-          console.log('this.props: ', this.props);
-          this.props.isHomeless('Kyle')
-          }}>click
-        </button>
-        <Chores />
+        <Login />
       </div>
     )
   }

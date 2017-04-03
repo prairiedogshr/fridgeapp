@@ -10,3 +10,4 @@ module.exports = (app, express) => {
 	// app.put('/users/:id', userController.updateUser);
 	// app.put('/houses/:id', houseController.updateHouse);
 }
+

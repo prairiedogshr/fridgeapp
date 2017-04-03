@@ -19,7 +19,6 @@ class App extends Component {
           this.props.isHomeless('Kyle')
           }}>click
         </button>
-        <Chores />
       </div>
     )
   }

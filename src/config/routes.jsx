@@ -12,7 +12,7 @@ const Home = () => (
 	<Link to="/app">App</Link>
 	<br />
 	<Link to="/chores">Chores</Link>
-	</div>
+	<br />
 	<Link to="/dashboards">Dashboard</Link>
 	</div>
 	)

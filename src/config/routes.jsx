@@ -13,6 +13,8 @@ const Home = () => (
 	<br />
 	<Link to="/chores">Chores</Link>
 	</div>
+	<Link to="/dashboards">Dashboard</Link>
+	</div>
 	)
 const Home2 = () => <h3>Hello? World?</h3>
 

@@ -1,5 +1,5 @@
 // add verb into actionTypes.js and then import here
-import { CHECK_HOME, ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE } from './actionTypes';
+import { CHECK_HOME, ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK } from './actionTypes';
 
 // example action
 export const isHomeless = (user) => {
@@ -10,6 +10,7 @@ export const isHomeless = (user) => {
   };
 };
 
+// Chore actions
 export const addChore = (choreText) => {
   console.log('ACTION - adding chore: ', choreText);
   return {
@@ -31,5 +32,30 @@ export const undoComplete = (choreId) => {
   return {
     type: UNDO_COMPLETE,
     payload: choreId,
+  };
+};
+
+// Task actions
+export const addTask = (taskText) => {
+  console.log('ACTION - adding chore: ', taskText);
+  return {
+    type: ADD_TASK,
+    payload: taskText,
+  };
+};
+
+export const completeTask = (taskId) => {
+  console.log(`ACTION - completing chore: ${taskId}`);
+  return {
+    type: COMPLETE_TASK,
+    payload: taskId,
+  };
+};
+
+export const undoCompleteTask = (taskId) => {
+  console.log(`ACTION - undo complete: ${taskId}`);
+  return {
+    type: UNDO_COMPLETE_TASK,
+    payload: taskId,
   };
 };

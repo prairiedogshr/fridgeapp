@@ -1,32 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { HashRouter, Route, Link, Switch } from 'react-router-dom'
+import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import SignIn from '../containers/loginContainer.jsx';
 import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
 import Profile from '../containers/profileContainer.jsx';
-import App from '../App.jsx'
+import App from '../App.jsx';
 import Chores from '../containers/choresContainer.jsx';
 import House from '../containers/houseContainer.jsx';
 
 const Home = () => (
-	<div>
-	<h1>hold page</h1>
-	<Link to="/app">App</Link>
-	<br />
-	<Link to="/chores">Chores</Link>
-	<br />
-	<Link to="/dashboard">Dashboard</Link>
-	<br />
-	<Link to="/house">House</Link>
-	</div>
-	)
+  <div>
+    <h1>hold page</h1>
+    <Link to="/app">App</Link>
+    <br />
+    <Link to="/chores">Chores</Link>
+    <br />
+    <Link to="/tasks">Tasks</Link>
+    <br />
+    <Link to="/dashboard">Dashboard</Link>
+    <br />
+    <Link to="/house">House</Link>
+  </div>
+);
 
-const SignInHold = () =>  <div className="centered">
-															 <h3>LOGIN PAGE</h3>
-														<a href="/#/dashboard"><h4>LOGIN SUCCESS</h4></a>
-														<a href="/#/profile"><h4>SIGNUP SUCCESS</h4></a>
-													</div>
+const SignInHold = () => <div className="centered">
+  <h3>LOGIN PAGE</h3>
+  <a href="/#/dashboard"><h4>LOGIN SUCCESS</h4></a>
+  <a href="/#/profile"><h4>SIGNUP SUCCESS</h4></a>
+</div>;
 
 
 const Routes = () => (

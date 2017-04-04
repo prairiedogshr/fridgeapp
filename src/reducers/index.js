@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux'
+
 // import different reducers here
-import homelessReducer from './test.js';
-import choresReducer from './chores.js';
+import homelessReducer from './test';
+import choresReducer from './chores';
 
 const rootReducer = combineReducers({
   homelessReducer,
-  choresReducer
+  choresReducer,
 });
 
 export default rootReducer;

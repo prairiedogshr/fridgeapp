@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import Chores from '../components/chores.jsx';
+import Chores from '../containers/choresContainer.jsx';
 // import actions here and then add the to mapStateToProps
 
 // main react app component

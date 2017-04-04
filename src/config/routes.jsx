@@ -6,7 +6,7 @@ import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
 import Profile from '../containers/profileContainer.jsx';
 import App from '../App.jsx'
-import Chores from '../components/chores.jsx';
+import Chores from '../containers/choresContainer.jsx';
 
 const Home = () => (
 	<div>

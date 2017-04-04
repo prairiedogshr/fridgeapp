@@ -1,10 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addChore, completeChore, undoComplete } from '../actions';
 import CompleteChore from '../components/completeChore.jsx';
 import IncompleteChore from '../components/incompleteChore.jsx';
 import AddChore from '../components/addChore.jsx';
+import { addChore, completeChore, undoComplete } from '../actions';
 
 class Chores extends Component {
 
@@ -54,6 +54,6 @@ export default connect(
   {
     addChore,
     completeChore,
-    undoComplete
+    undoComplete,
   }
 )(Chores)

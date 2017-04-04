@@ -4,6 +4,7 @@ import { HashRouter, Route, Link, Switch } from 'react-router-dom'
 import SignIn from '../containers/loginContainer.jsx';
 import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
+import Profile from '../containers/profileContainer.jsx';
 import App from '../App.jsx'
 import Chores from '../components/chores.jsx';
 
@@ -31,6 +32,7 @@ const Routes = () => (
       <Route exact path="/" component={Home} />
       <Route path="/login" component={SignInHold} />
       <Route path="/signup" component={SignInHold} />
+      <Route path="/profile" component={Profile} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/chores" component={Chores} />
       <Route path="/tasks" component={Tasks} />

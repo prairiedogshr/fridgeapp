@@ -35,7 +35,6 @@ export const undoComplete = (choreId) => {
   };
 };
 
-<<<<<<< HEAD
 export const updateHouseInfo = (updateInfo) => {
   return {
     type: UPDATE_HOUSE_INFO,
@@ -59,7 +58,6 @@ export const removeUser = (user) => {
     payload: user
   }
 }
-=======
 // Task actions
 export const addTask = (taskText) => {
   console.log('ACTION - adding chore: ', taskText);
@@ -84,4 +82,3 @@ export const undoCompleteTask = (taskId) => {
     payload: taskId,
   };
 };
->>>>>>> dev

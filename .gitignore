@@ -3,9 +3,14 @@
 .DS_Store
 .DS_Store?
 
+# Setup Files #
+######################
 .env
-
 node_modules/
-build/bundle.js
 .eslintrc
 .eslintrc.js
+.idea/
+
+# Build Files #
+######################
+build/bundle.js

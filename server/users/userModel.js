@@ -5,7 +5,7 @@ const helpers = require('../config/helpers.js');
 
 module.exports = {
 
-getUserByEmail: (email, callback) => {
+findUserByEmail: (email, callback) => {
 	console.log('email ', email)
 	console.log('got into getuserbyemail')
 	db.select().from('user').where('email', email)
@@ -21,31 +21,39 @@ getUserByEmail: (email, callback) => {
 },
 
 signup: (user, callback) => {
-		console.log('user being created: ', user);
-		helpers.hashPass(user.password, function(err, result) {
-			db('user').insert({
-				first_name,
-				last_name,
-				email,
-				username,
-				password,
-				phone,
-				admin,
-				info,
-				created_at,
-				updated_at
-			}).then((inserted) => {
-				// db.select().from('user').where('email', user.email)
-				// .then(newUser => {
-				// 	var token = jwt.encode(newUser, 'secret');
-				// 	callback(null, token); 
-				// })
-				callback(null, true);
-			}).catch((err) => {
-				callback(err);
-			});
-		});
-	},
+	console.log('user being created: ', user);
+	db.select().from('user').where('email', user.email)
+	.then(user => {
+		if (user) {
+			callback('email already exists', null)
+			return
+		} else {
+			helpers.hashPass(user.password, function(err, result) {
+				console.log('hashed pass: ', result)
+				db('user').insert({
+					first_name: user.first_name,
+					last_name: user.last_name,
+					email: user.email,
+					username: user.username,
+					password: result,
+					password: user.password,
+					phone: user.phone,
+					admin: user.admin,
+					info: user.info,
+					created_at: new Date(),
+					updated_at: new Date()
+				}).then((inserted) => {
+				db.select().from('user').where('email', user.email)
+				.then(newUser => {
+					callback(null, newUser[0]); 
+				}).catch((err) => {
+					callback(err);
+				});
+				});
+			})			
+		}
+	})
+},
 
 	signin: function(email, password, callback) {
 		helpers.checkPass(email, password, function(err, match) {

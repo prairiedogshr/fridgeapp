@@ -1,9 +1,11 @@
-const brypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 const db = require('./config.js');
-var SALT_WORK_FACTOR = 10;
+const SALT_WORK_FACTOR = 10;
 
 module.exports = {
 	checkPass: (email, password, callback) => {
+		console.log('trying password ', email)
+		console.log(password)
 		db.select().from('user').where('email', email)
 		.then(user => {
 			bcrypt.compare(password, user[0].password, (err, isMatch) => {

@@ -18,22 +18,23 @@ const getUser = (req, res, next) => {
 	console.log('getting user');
 	User.getUserByEmail(req.params, (err, user) => {
 		if (err) next(err);
-
-		// res.send(user);
-	console.log(req.params.id)
-	res.send('ok');
+		res.send('ok');
 	})
 };
 
-const test = (req, res, next) => {
-	User.getUserByEmail('test@test.com', (err, user) => {
-		res.send(user)
-	})
+const signup = (req, res, next) => {
+	User.signup(req.body, (err, user) => {
+		if (err) {
+			console.log('err: ', err)
+			next(new Error(err));
+		}
+		res.redirect('/dashboard');
+	});
 }
 // })
 
 module.exports = {
 	signin,
 	getUser,
-	test
+	signup
 	};

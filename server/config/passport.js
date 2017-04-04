@@ -30,30 +30,19 @@ module.exports = (passport) => {
     });
   });
 	//local sign up
-	passport.use('local-signup', new LocalStrategy({
-		usernameField: 'username',
-		passwordField: 'password',
-		session: true,
-		passReqToCallback: true
-	}, (user, password, done) => {
-		console.log('++++++++++++ ')
-		process.nextTick(() => {
-			User.findByEmail(email, (err, user) => {
-				if (err) return done(err);
+	// passport.use('local-signup', new LocalStrategy({
+	// 	session: true,
+	// 	passReqToCallback: true
+	// }, (req, user, done) => {
+	// 	console.log('++++++++++++ ', user)
+	// 	process.nextTick(() => {
+	// 		User.signup(req.body, (err, user) => {
+	// 			if (err) return done(err);
 
-				if (user) {
-					return done(null, false, req.flash('signup message', 'That email is already taken.'));
-				} else {
-					User.signup(email, password, (err, token) => {
-						if (err) {
-							throw err;
-						}
-						return done(null, token);
-					});
-				}
-			})
-		})
-	}));
+	// 			return done(null, user);
+	// 			});
+	// 		})
+	// 	}));
 	//log in
 	passport.use('local-login', new LocalStrategy({
 		usernameField: 'email',
@@ -61,18 +50,24 @@ module.exports = (passport) => {
 		session: true,
 		passReqToCallback: true,
 	}, (req, email, password, done) => {
-		User.getUserByEmail(email, (err, user) => {
+		User.signin(email, password, (err, match) => {
 			if (err) {
 				console.log('err ', err);
 				return done(err);
 			}
 
-			if (!user) {
-				console.log('no user');
+			if (!match) {
+				console.log('wrong pass!');
 				return done(null, false, req.flash('loginMessage', 'Oops, wrong password!'));
 			} else {
-				console.log('heres the user: ', user)
-				return done(null, user);
+				User.findUserByEmail(email, (err, user) => {
+					if (err) {
+						console.log('err ', err);
+						return done(err)
+					} else {
+						done(null, user[0])
+					}
+				})
 			}
 		})
 	}))

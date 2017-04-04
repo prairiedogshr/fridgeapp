@@ -9,7 +9,8 @@ const initialState = {
 		zip: 20500,
 		info: 'white house',
 		created_at: new Date(),
-		updated_at: new Date()
+		updated_at: new Date(),
+		admin: 1
 	},
 	users: [
 	{

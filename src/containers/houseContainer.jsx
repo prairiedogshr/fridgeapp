@@ -6,6 +6,13 @@ import User from '../components/user.jsx';
 
 class House extends Component {
 
+	updateHouse: function(item, value) {
+		this.props.updateHouseInfo({
+			item,
+			value 
+		})
+	}
+
 	render() {
 		const users = this.props.users;
 		const houseInfo = this.props.houseInfo;

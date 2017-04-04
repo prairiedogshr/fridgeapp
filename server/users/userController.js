@@ -7,25 +7,33 @@ const localPassport = require('../config/passport.js')(passport);
 
 
 const signin = (req, res, next) => {
-	res.send('hi')
-	passport.authenticate('local'), (req, res) => {
+	console.log('reeeequeeest ', req.body)
+    passport.authenticate('local-signin', {failureRedirect: '/login' }),
+    (req, res) => 
 		res.send('got here');
 		// res.redirect('/dashboard');
-	}
 };
 
 const getUser = (req, res, next) => {
-	User.getUser(req.params.id, (err, user) => {
+	console.log('getting user');
+	User.getUserByEmail(req.params, (err, user) => {
 		if (err) next(err);
 
 		// res.send(user);
 	console.log(req.params.id)
 	res.send('ok');
 	})
+};
+
+const test = (req, res, next) => {
+	User.getUserByEmail('test@test.com', (err, user) => {
+		res.send(user)
+	})
 }
 // })
 
 module.exports = {
 	signin,
-	getUser
+	getUser,
+	test
 	};

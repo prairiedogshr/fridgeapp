@@ -1,14 +1,24 @@
-const knex = require('knex')({
+// const connection = require('knex')({
+//   client: 'mysql',
+//   connection: {
+//     host: process.env.DB_SERVER,
+//     user: process.env.DB_USERNAME,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_DATABASE,
+//   },
+//   useNullAsDefault: true
+// });
+// const db = require('knex')(connection);
+
+var db = require('knex')({
   client: 'mysql',
   connection: {
-    host: process.env.DB_SERVER,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-  },
-  useNullAsDefault: true
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'fridge'
+  }
 });
-const db = require('bookshelf')(knex);
 
 
 
@@ -16,9 +26,9 @@ const db = require('bookshelf')(knex);
 // USER TABLE
 ////////////////////////////////////////////////////////////////
 
-db.knex.schema.hasTable('user').then(exists => {
+db.schema.hasTable('user').then(exists => {
   if(!exists) {
-    db.knex.schema.createTable('user', user => {
+    db.schema.createTable('user', user => {
       user.increments('iduser').primary();
       user.string('first_name', 30).notNullable();
       user.string('last_name', 30).notNullable();
@@ -26,7 +36,7 @@ db.knex.schema.hasTable('user').then(exists => {
       user.string('username', 16).notNullable();
       user.string('password', 32).notNullable();
       user.string('phone', 10).notNullable();
-      user.integer('house').nullable().unsigned();
+      // user.integer('house').nullable().unsigned();
       user.foreign('house').references('house.idhouse');
       user.boolean('admin').defaultTo(0); 
       user.text('info').nullable();
@@ -43,19 +53,19 @@ db.knex.schema.hasTable('user').then(exists => {
 // HOUSE TABLE
 ////////////////////////////////////////////////////////////////
 
-db.knex.schema.hasTable('house').then(exists => {
+db.schema.hasTable('house').then(exists => {
   if(!exists) {
-    db.knex.schema.createTable('house', house => {
-      user.increments('idhouse').primary();
-      user.integer('admin').notNullable().unsigned();
-      user.foreign('admin').references('user.iduser');
-      user.string('address', 255).notNullable();
-      user.string('unit_number', 30).nullable();
-      user.string('city', 100).notNullable();
-      user.string('state', 2).notNullable();
-      user.string('zip', 5).notNullable();
-      user.text('info').nullable();
-      user.timestamps();      
+    db.schema.createTable('house', house => {
+      house.increments('idhouse').primary();
+      // house.integer('admin').notNullable().unsigned();
+      house.foreign('admin').references('user.iduser');
+      house.string('address', 255).notNullable();
+      house.string('unit_number', 30).nullable();
+      house.string('city', 100).notNullable();
+      house.string('state', 2).notNullable();
+      house.string('zip', 5).notNullable();
+      house.text('info').nullable();
+      house.timestamps();      
     }).then(table => {
       console.log('Created table: ', table);
     });
@@ -68,16 +78,16 @@ db.knex.schema.hasTable('house').then(exists => {
 // CHORE TABLE
 ////////////////////////////////////////////////////////////////
 
-db.knex.schema.hasTable('chore').then(exists => {
+db.schema.hasTable('chore').then(exists => {
   if(!exists) {
-    db.knex.schema.createTable('chore', chore => {
-      user.increments('idchore').primary();
-      user.integer('house').notNullable().unsigned();
-      user.foreign('house').references('house.idhouse');
-      user.integer('assigned_to').nullable().unsigned();
-      user.foreign('assigned_to').references('user.iduser');
-      user.boolean('done').defaultTo(0); 
-      user.timestamps();      
+    db.schema.createTable('chore', chore => {
+      chore.increments('idchore').primary();
+      // chore.integer('house').notNullable().unsigned();
+      chore.foreign('house').references('house.idhouse');
+      // chore.integer('assigned_to').nullable().unsigned();
+      chore.foreign('assigned_to').references('user.iduser');
+      chore.boolean('done').defaultTo(0); 
+      chore.timestamps();      
     }).then(table => {
       console.log('Created table: ', table);
     });
@@ -90,19 +100,19 @@ db.knex.schema.hasTable('chore').then(exists => {
 // TASK TABLE
 ////////////////////////////////////////////////////////////////
 
-db.knex.schema.hasTable('task').then(exists => {
+db.schema.hasTable('task').then(exists => {
   if(!exists) {
-    db.knex.schema.createTable('task', task => {
-      user.increments('idtask').primary();
-      user.integer('house').notNullable().unsigned();
-      user.foreign('house').references('house.idhouse');
-      user.date('due').nullable();
-      user.integer('parent').nullable().unsigned();
-      user.boolean('done').defaultTo(0); 
-      user.integer('claimed_by').nullable().unsigned();
-      user.foreign('claimed_by').references('user.iduser');
-      user.boolean('done').nullable();
-      user.timestamps();      
+    db.schema.createTable('task', task => {
+      task.increments('idtask').primary();
+      // task.integer('house').notNullable().unsigned();
+      task.foreign('house').references('house.idhouse');
+      task.date('due').nullable();
+      task.integer('parent').nullable().unsigned();
+      task.boolean('done').defaultTo(0); 
+      // task.integer('claimed_by').nullable().unsigned();
+      task.foreign('claimed_by').references('user.iduser');
+      // task.boolean('done').nullable();
+      task.timestamps();      
     }).then(table => {
       console.log('Created table: ', table);
     });
@@ -115,18 +125,18 @@ db.knex.schema.hasTable('task').then(exists => {
 // USER TABLE
 ////////////////////////////////////////////////////////////////
 
-db.knex.schema.hasTable('expense').then(exists => {
+db.schema.hasTable('expense').then(exists => {
   if(!exists) {
-    db.knex.schema.createTable('expense', expense => {
-      user.increments('idexpense').primary();
-      user.string('name', 255).notNullable();
-      user.decimal('balance', 10, 2).notNullable();
-      user.integer('billing_month').notNullable();
-      user.date('due').nullable();
-      user.boolean('paid').defaultTo(0); 
-      user.integer('house').notNullable().unsigned();
-      user.foreign('house').references('house.idhouse');
-      user.timestamps();      
+    db.schema.createTable('expense', expense => {
+      expense.increments('idexpense').primary();
+      expense.string('name', 255).notNullable();
+      expense.decimal('balance', 10, 2).notNullable();
+      expense.integer('billing_month').notNullable();
+      expense.date('due').nullable();
+      expense.boolean('paid').defaultTo(0); 
+      // expense.integer('house').notNullable().unsigned();
+      expense.foreign('house').references('house.idhouse');
+      expense.timestamps();      
     }).then(table => {
       console.log('Created table: ', table);
     });

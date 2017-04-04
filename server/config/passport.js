@@ -20,37 +20,35 @@ const User = require('../users/userModel.js');
 
 module.exports = (passport) => {
 
-	passport.serializeUser((user, cb) => {
-			done(null, user.id);
+	passport.serializeUser((user, done) => {
+			done(null, user.iduser);
 		});
 
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    User.findUserById(id, function(err, user) {
       done(err, user);
     });
   });
 	//local sign up
 	passport.use('local-signup', new LocalStrategy({
-		usernameField: 'email',
+		usernameField: 'username',
 		passwordField: 'password',
+		session: true,
 		passReqToCallback: true
-	},
-	(req, email, password, done) => {
+	}, (user, password, done) => {
+		console.log('++++++++++++ ')
 		process.nextTick(() => {
-			User.findOne({ 'local.email': email }, (err, user) => {
+			User.findByEmail(email, (err, user) => {
 				if (err) return done(err);
 
 				if (user) {
 					return done(null, false, req.flash('signup message', 'That email is already taken.'));
 				} else {
-					var newUser = new User();
-					newUser.local.email = email;
-					newUser.local.password = newUser.generateHash(password);
-					newUser.save((err) => {
+					User.signup(email, password, (err, token) => {
 						if (err) {
 							throw err;
 						}
-						return done(null, newUser);
+						return done(null, token);
 					});
 				}
 			})
@@ -60,17 +58,22 @@ module.exports = (passport) => {
 	passport.use('local-login', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password',
-		passReqToCallback: true
-	},
-	(req, email, password, done) => {
-		User.findOne({'local.email': email }, (err, user) => {
-			if (err) return done(err);
-
-			if (!user) {
-				return done(null, false, req.flash('loginMessage', 'Oops, wrong password!'));
+		session: true,
+		passReqToCallback: true,
+	}, (req, email, password, done) => {
+		User.getUserByEmail(email, (err, user) => {
+			if (err) {
+				console.log('err ', err);
+				return done(err);
 			}
 
-			return done(null, user);
+			if (!user) {
+				console.log('no user');
+				return done(null, false, req.flash('loginMessage', 'Oops, wrong password!'));
+			} else {
+				console.log('heres the user: ', user)
+				return done(null, user);
+			}
 		})
 	}))
 }

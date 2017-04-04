@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import SignIn from '../containers/loginContainer.jsx';
+import Log from '../components/log.jsx';
+import Auth from '../components/login.jsx'
 import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
 import Profile from '../containers/profileContainer.jsx';
 import App from '../App.jsx';
+import Register from '../components/register.jsx'
 import Chores from '../containers/choresContainer.jsx';
 import Settings from '../containers/settingsContainer.jsx';
 import House from '../containers/houseContainer.jsx';
+import User from '../components/user.jsx'
 
 const Home = () => (
   <div>
@@ -16,6 +20,8 @@ const Home = () => (
     <Link to="/app">App</Link>
     <br />
     <Link to="/chores">Chores</Link>
+    <br />
+    <Link to="/login">login</Link>
     <br />
     <Link to="/tasks">Tasks</Link>
     <br />
@@ -37,18 +43,17 @@ const Routes = () => (
   <HashRouter>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/login" component={SignInHold} />
+      <Route path="/login" component={Auth} />
       <Route path="/signup" component={SignInHold} />
       <Route path="/profile" component={Profile} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/chores" component={Chores} />
       <Route path="/tasks" component={Tasks} />
-      <Route path="/signin" component={SignInHold} />
+      <Route path="/signin" component={Auth} />
       <Route path="/app" component={App} />
       <Route path="/settings" component={Settings} />
       <Route path="/house" component={House} />
     </Switch>
   </HashRouter>
 );
-
 export default Routes;

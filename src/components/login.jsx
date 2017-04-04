@@ -1,66 +1,58 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import Register from './register.jsx';
+import Log from './log.jsx'
+import {  loginUser,
+  logoutUser,
+  registerUser,
+  protectedTest} from '../actions'
 
-const Parent  = React.createClass({
-  getInitialState:()=>{
-    return {signup:false,login:true}
-  },
-  switch:(word)=>{
-    const signup,login;
-    if(word == "signup"){signup = true;login = false;}
-    else{login = true; signup = false;}
-    return this.setState({login:login,signup:signup})
-
-  },
-  render:()=>{
-        const self = this;
-        return (
-              <div>
-                <div id="buttons">
-                  <p id="signupButton" onClick={self.switch.bind(null,"signup")} className={self.state.signup ? "yellow":"blue"}>Sign In</p>
-                  <p id="loginButton" onClick={self.switch.bind(null,"login")} className={self.state.login ? "yellow":"blue"}> Login</p>
-                </div>
-                   { self.state.signup?<Signup/> : null}
-                   {self.state.login? <Login /> : null}
-             </div>
-        )
-
+class Auth extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      signup:false,
+      login:true
+    }
   }
+
+  switch = (word) =>{
+    var signup;
+    var login;
+    if(word === "signup"){signup = true; login = false;}
+    else{login = true; signup= false;}
+    return this.setState({login:login, signup:signup})
+  }
+
+  render(){
+    var self = this;
+    return(
+      <div>
+        <div id= "buttons">
+          <p id ="signupButton" onClick ={self.switch.bind(null,"signup")}
+            className={self.state.signup ? "yellow": "blue"}> Sign Up </p>
+          <p id= "loginButton" onClick = {self.switch.bind(null, "login")}
+            className={self.state.login ? "yellow": "blue"}>Login</p>
+        </div>
+        { self.state.signup?<Register/> : null}
+        {self.state.login? <Log /> : null}
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = ({authReducer}) => ({
+  auth: authReducer
 })
 
-const Signup = React.createClass({
-      render:()=>{
-            return (
-            <div>
-              <div id="signup">
-                <input type="text" id="first" placeholder="First Name"/>
-                <input type="text" id="last" placeholder="Last Name"/>
-                <input type="email" id="email" placeholder="Email"/>
-            <input type="password" id="password" placeholder="Password"/>
-            <input type="password" id="confirm" placeholder="Confirm Password"/>
-            <button id="send">Send</button>
-            </div>
-            </div>
-            )
-      }
-})
-
-const Login = React.createClass({
-      render:()=>{
-            return (
-                  <div>
-                 <div id="login">
-                    <input type="email" id="email" placeholder="Email"/>
-                    <input type="password" id="password" placeholder="Password"/>
-                    <button id="send">Send</button>
-                  </div>
-
-                  </div>
-
-            )
-      }
-})
-
-
-ReactDOM.render(<Parent/>,document.getElementById("login"))
+export default connect(
+  mapStateToProps,
+  {
+    loginUser,
+    logoutUser,
+    registerUser,
+    protectedTest
+  }
+)(Auth)

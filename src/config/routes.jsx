@@ -7,6 +7,7 @@ import Tasks from '../containers/tasksContainer.jsx';
 import Profile from '../containers/profileContainer.jsx';
 import App from '../App.jsx'
 import Chores from '../containers/choresContainer.jsx';
+import House from '../containers/houseContainer.jsx';
 
 const Home = () => (
 	<div>
@@ -16,6 +17,8 @@ const Home = () => (
 	<Link to="/chores">Chores</Link>
 	<br />
 	<Link to="/dashboard">Dashboard</Link>
+	<br />
+	<Link to="/house">House</Link>
 	</div>
 	)
 
@@ -38,6 +41,7 @@ const Routes = () => (
       <Route path="/tasks" component={Tasks} />
       <Route path="/signin" component={SignInHold} />
       <Route path="/app" component={App} />
+      <Route path="/house" component={House} />
     </Switch>
   </HashRouter>
 );

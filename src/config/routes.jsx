@@ -6,29 +6,38 @@ import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
 import App from '../App.jsx'
 import Chores from '../components/chores.jsx';
+
 const Home = () => (
 	<div>
-	<h1>Hello World!</h1>
+	<h1>hold page</h1>
 	<Link to="/app">App</Link>
 	<br />
 	<Link to="/chores">Chores</Link>
 	<br />
-	<Link to="/dashboards">Dashboard</Link>
+	<Link to="/dashboard">Dashboard</Link>
 	</div>
 	)
-const Home2 = () => <h3>Hello? World?</h3>
+
+const SignInHold = () =>  <div className="centered">
+															 <h3>LOGIN PAGE</h3>
+														<a href="/#/dashboard"><h4>LOGIN SUCCESS</h4></a>
+														<a href="/#/profile"><h4>SIGNUP SUCCESS</h4></a>
+													</div>
+
 
 const Routes = () => (
-	<HashRouter>
-		<Switch>
-  		<Route exact path="/" component={Home} />
-  		<Route path="/dashboard" component={Dashboard} />
-			<Route path="/chores" component={Chores} />
-  		<Route path="/tasks" component={Tasks} />
-  		<Route path="/signin" component={SignIn} />
-  		<Route path="/app" component={App} />
-  	</Switch>
+  <HashRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/login" component={SignInHold} />
+      <Route path="/signup" component={SignInHold} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/chores" component={Chores} />
+      <Route path="/tasks" component={Tasks} />
+      <Route path="/signin" component={SignInHold} />
+      <Route path="/app" component={App} />
+    </Switch>
   </HashRouter>
-)
+);
 
 export default Routes;

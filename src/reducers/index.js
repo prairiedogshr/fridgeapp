@@ -9,8 +9,8 @@ import tasksReducer from './tasks';
 const rootReducer = combineReducers({
   homelessReducer,
   choresReducer,
-  houseReducer
-  tasksReducer,
+  houseReducer,
+  tasksReducer
 });
 
 export default rootReducer;

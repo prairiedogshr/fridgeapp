@@ -1,34 +1,35 @@
+
 // =============================================================
 // LOCAL DATABASE CONFIGURATION
 // =============================================================
 
-// const knex = require('knex')({
-//   client: 'mysql',
-//   connection: {
-//     host: '127.0.0.1',
-//     user: 'root',
-//     password: '',
-//     database: 'fridge',
-//   },
-// });
+const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'fridge',
+  },
+});
 
 
 // =============================================================
 // REMOTE DATABASE CONFIGURATION: AWS RDS
 // =============================================================
 
-require('dotenv').config();
+// require('dotenv').config();
 
-const knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    host: process.env.DB_SERVER,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-  },
-  useNullAsDefault: true,
-});
+// const knex = require('knex')({
+//   client: 'mysql',
+//   connection: {
+//     host: process.env.DB_SERVER,
+//     user: process.env.DB_USERNAME,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_DATABASE,
+//   },
+//   useNullAsDefault: true,
+// });
 
 const db = require('bookshelf')(knex);
 
@@ -151,4 +152,4 @@ db.knex.schema.hasTable('expense').then((exists) => {
 });
 
 
-module.exports = db;
+module.exports = db.knex;

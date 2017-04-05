@@ -10,7 +10,7 @@ import userReducer from './user';
 import authReducer from './auth';
 import tasksReducer from './tasks';
 import settingsReducer from './settings';
-import userReducer from './user';
+
 
 const rootReducer = combineReducers({
   homelessReducer,
@@ -23,4 +23,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-ucer;

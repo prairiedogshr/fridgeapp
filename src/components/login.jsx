@@ -36,7 +36,7 @@ class Auth extends Component{
           <p id= "loginButton" onClick = {self.switch.bind(null, "login")}
             className={self.state.login ? "yellow": "blue"}>Login</p>
         </div>
-        { self.state.signup?<Register/> : null}
+        {self.state.signup?<Register/> : null}
         {self.state.login? <Log /> : null}
       </div>
     )

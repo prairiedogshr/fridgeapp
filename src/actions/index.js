@@ -1,4 +1,5 @@
 // add verb into actionTypes.js and then import here
+
 import { CHECK_HOME, ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK, EDIT_PROFILE, AUTH_USER, AUTH_ERROR, UNAUTH_USER,PROTECTED_TEST} from './actionTypes';
 import axios from 'axios';
 import cookie from 'cookie';
@@ -90,6 +91,7 @@ export const undoCompleteTask = (taskId) => {
   }
 };
 
+
 export const updateProfile = (field, data) => {
   console.log(field, data);
   return {
@@ -99,7 +101,8 @@ export const updateProfile = (field, data) => {
       data,
     }
   }
-}
+};
+
 
 
 
@@ -129,7 +132,6 @@ export const errorHandler = (dispatch, error, type) => {
   }
 }
 
-console.log(errorHandler)
 
 export const loginUser = ({ email, password })  => {
   return (dispatch) => {
@@ -154,9 +156,9 @@ export const logoutUser=()=>{
 }
 
 
-  export const registerUser = ({ email, firstName, lastName, password }) => {
+  export const registerUser = ({ email, first, last, username, password }) => {
     return (dispatch) => {
-      axios.post(`${API_URL}/auth/register`, { email, firstName, lastName, password })
+      axios.post(`${API_URL}/auth/register`, { email, first, last,username, password })
       .then(response => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });

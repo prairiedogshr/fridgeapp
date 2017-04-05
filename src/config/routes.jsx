@@ -23,6 +23,8 @@ const Home = () => (
     <br />
     <Link to="/login">login</Link>
     <br />
+    <Link to="/signin">Signup</Link>
+    <br />
     <Link to="/tasks">Tasks</Link>
     <br />
     <Link to="/dashboard">Dashboard</Link>

@@ -11,7 +11,12 @@ class Register extends Component {
       last:"",
       email:"",
       username:"",
+<<<<<<< HEAD
       password:""
+=======
+      password:"",
+
+>>>>>>> fixed the login
     }
   }
   render() {

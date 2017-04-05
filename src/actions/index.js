@@ -11,7 +11,10 @@ import { CHECK_HOME,
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  PROTECTED_TEST} from './actionTypes';
+  PROTECTED_TEST,
+  ADD_USER,
+  REMOVE_USER,
+  UPDATE_HOUSE_INFO,} from './actionTypes';
   
 import axios from 'axios';
 import cookie from 'cookie';
@@ -25,10 +28,10 @@ export const isHomeless = (user) => {
   return {
     type: CHECK_HOME,
     payload: {
-      check: `${user} is homeless`
-    }
-  }
-}
+      check: `${user} is homeless`,
+    },
+  };
+};
 
 // Chore actions
 export const addChore = (choreText) => {
@@ -55,22 +58,19 @@ export const undoComplete = (choreId) => {
   };
 };
 
-export const updateHouseInfo = (updateInfo) => {
-  return {
-    type: UPDATE_HOUSE_INFO,
-    payload: {
-      item: updateInfo.item,
-      value: updateInfo.value
-    }
-  }
-};
+export const updateHouseInfo = updateInfo => ({
+  type: UPDATE_HOUSE_INFO,
+  payload: {
+    item: updateInfo.item,
+    value: updateInfo.value,
+  },
+});
 
-export const addUser = (user) => {
-  return {
-    type: ADD_USER,
-    payload: user
-  }
-};
+export const addUser = user => ({
+  type: ADD_USER,
+  payload: user,
+});
+
 
 export const removeUser = (user) => {
   return {
@@ -101,7 +101,7 @@ export const undoCompleteTask = (taskId) => {
   return {
     type: UNDO_COMPLETE_TASK,
     payload: taskId,
-  }
+  };
 };
 
 
@@ -112,6 +112,7 @@ export const updateProfile = (field, data) => {
     payload: {
       field,
       data,
+
     }
   }
 };

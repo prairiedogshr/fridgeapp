@@ -7,12 +7,27 @@ import AddChore from '../components/addChore.jsx';
 import { addChore, completeChore, undoComplete } from '../actions';
 
 class Chores extends Component {
-
-  handleSubmit = e => {
-    if (e.which === 13) {
-      this.props.addChore(e.target.value);
-      e.target.value = '';
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputField: '',
     }
+  }
+
+  handleKeyUp = (e) => {
+    if (e.which === 13) {
+      this.props.addChore(this.state.inputField);
+      e.target.value = '';
+      this.state.inputField = '';
+    } else {
+      this.state.inputField = e.target.value;
+    }
+  }
+
+  buttonSubmit = () => {
+    this.props.addChore(this.state.inputField);
+    this.state.inputField = '';
+    console.log(AddChore.inputField);
   }
 
   completeChore = choreId => {
@@ -38,7 +53,8 @@ class Chores extends Component {
           undoComplete={this.undoComplete}
         />
         <AddChore
-          handleSubmit={this.handleSubmit}
+          handleKeyUp={this.handleKeyUp}
+          buttonSubmit={this.buttonSubmit}
         />
       </div>
     )
@@ -56,4 +72,4 @@ export default connect(
     completeChore,
     undoComplete,
   }
-)(Chores)
+)(Chores);

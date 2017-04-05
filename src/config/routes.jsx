@@ -31,6 +31,7 @@ const Home = () => (
     <br />
     <Link to="/settings">Settings</Link>
     <Link to="/house">House</Link>
+    <Link to="/profile">profile</Link>
   </div>
 );
 

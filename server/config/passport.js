@@ -21,7 +21,7 @@ const User = require('../users/userModel.js');
 module.exports = (passport) => {
 
 	passport.serializeUser((user, done) => {
-			done(null, user.iduser);
+			done(null, user.user_id);
 		});
 
   passport.deserializeUser(function(id, done) {
@@ -58,14 +58,14 @@ module.exports = (passport) => {
 
 			if (!match) {
 				console.log('wrong pass!');
-				return done(null, false, req.flash('loginMessage', 'Oops, wrong password!'));
+				return done(null, false);
 			} else {
+				console.log('got in here with: ', email)
 				User.findUserByEmail(email, (err, user) => {
 					if (err) {
-						console.log('err ', err);
 						return done(err)
 					} else {
-						done(null, user[0])
+						done(null, user)
 					}
 				})
 			}

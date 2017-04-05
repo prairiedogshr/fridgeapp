@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(session({
 secret: 'our secret',
 name: 'cookie name',
-// store: sessionStore, // connect-mongo session store
+// store: 
 // proxy: true,
 resave: true,
 saveUninitialized: true

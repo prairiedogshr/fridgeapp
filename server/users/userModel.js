@@ -69,5 +69,19 @@ signup: (user, callback) => {
 	findUserById: (id, callback) => {
 		db.select().from('user').where('iduser', id)
 		.then(user => callback(null, user));
+	},
+
+	updateUser: (update, callback) => {
+		db('user').where('iduser', update.id)
+		.update({
+			[update.key]: update.value
+		})
+		.then(updated => {
+			callback(null, true)
+		}).catch((err) => {
+			callback(err);
+		})
 	}
 }
+
+

@@ -30,11 +30,22 @@ const signup = (req, res, next) => {
 		}
 		res.redirect('/dashboard');
 	});
+};
+
+const updateUser = (req, res, next) => {
+	console.log('got into update user')
+	User.updateUser(req.body, (err, user) => {
+		if (err) {
+			next(new Error(err));
+		} else {
+			res.send(user);
+		}
+	})
 }
-// })
 
 module.exports = {
 	signin,
 	getUser,
-	signup
+	signup,
+	updateUser
 	};

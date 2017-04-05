@@ -12,10 +12,7 @@ const initialState = {
 		updated_at: new Date(),
 		admin: 1
 	},
-	users: [
-	{
-		name: 'Mike'
-	}]
+	users: [2]
 }
 
 export default function houseReducer(state = initialState, action) {
@@ -32,13 +29,14 @@ export default function houseReducer(state = initialState, action) {
 				users: [...state.users].filter(user => user.id !== action.payload)
 			};
 
-		case UPDATE_HOUSE_INFO: 
+		case UPDATE_HOUSE_INFO:
+			const update = {}
+			update[action.payload.item] = action.payload.value
 			return {
 				...state,
 				info: {
 					...state.info,
-					item: action.payload.item,
-					value: action.payload.value	
+					...update
 				}
 			};
 

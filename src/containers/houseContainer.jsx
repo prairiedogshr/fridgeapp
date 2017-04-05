@@ -6,11 +6,16 @@ import User from '../components/user.jsx';
 
 class House extends Component {
 
-	updateHouse: function(item, value) {
+	updateHouse(item, value) {
+		console.log('getting called')
 		this.props.updateHouseInfo({
 			item,
 			value 
 		})
+	};
+
+	addUser(user) {
+		this.props.addUser(user);
 	}
 
 	render() {
@@ -19,7 +24,9 @@ class House extends Component {
 
 		return (
 			<div>
-				<p>Hey!</p>
+				<p onClick={() => {
+					this.updateHouse('address', 'here')
+				}}>{this.props.house.info.address}</p>
 			</div>
 		)
 	}

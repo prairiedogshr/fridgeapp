@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 // import different reducers here
-import homelessReducer from './test.js';
-import choresReducer from './chores.js';
-import houseReducer from './house.js';
-import userReducer from './user.js';
-import authReducer from './auth.js';
+import homelessReducer from './test';
+import choresReducer from './chores';
+import houseReducer from './house';
+import userReducer from './user';
+import authReducer from './auth';
 import tasksReducer from './tasks';
 import settingsReducer from './settings';
 

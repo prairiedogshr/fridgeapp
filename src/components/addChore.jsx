@@ -10,8 +10,16 @@ export default function AddChore(props) {
         type="text"
         placeholder=""
         autoFocus="true"
-        onKeyDown={props.handleSubmit}
+        onKeyUp={props.handleKeyUp}
+        ref={(input) => { this.textInput = input; }}
       />
+      <button
+        onClick={() => {
+          props.buttonSubmit();
+          this.textInput.value = '';
+        }
+        }
+      >Submit</button>
     </div>
   );
 }

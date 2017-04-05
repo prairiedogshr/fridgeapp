@@ -27,4 +27,17 @@ const createHouse = (house, callback) => {
 	callback(err));
 };
 
-module.exports = { getHouse, createHouse }
+const updateHouse = (update, callback) => {
+	console.log('getting here')
+		db('house').where('idhouse', update.id)
+		.update({
+			[update.key]: update.value
+		})
+		.then(updated => {
+			callback(null, true)
+		}).catch((err) => {
+			callback(err);
+		})
+	}
+
+module.exports = { getHouse, createHouse, updateHouse }

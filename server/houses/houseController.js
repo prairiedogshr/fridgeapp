@@ -21,4 +21,15 @@ const createHouse = (req, res, next) => {
 	})
 };
 
-module.exports = { getHouse, createHouse }
+const updateHouse = (req, res, next) => {
+	console.log('got into update House')
+	House.updateHouse(req.body, (err, house) => {
+		if (err) {
+			next(new Error(err));
+		} else {
+			res.send(house);
+		}
+	})
+}
+
+module.exports = { getHouse, createHouse, updateHouse }

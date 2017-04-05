@@ -19,7 +19,7 @@ module.exports = (app, passport) => {
   app.get('/api/houses/:house', houseController.getHouse);
   app.post('/api/houses/', houseController.createHouse);
   app.put('/api/users/', userController.updateUser);
-  // app.put('/houses/:id', houseController.updateHouse);
+  app.put('/api/houses/', houseController.updateHouse);
 }
 
 

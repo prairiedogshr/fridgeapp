@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   EDIT_PROFILE
 } from '../actions/actionTypes';
@@ -6,7 +5,6 @@ import {
 const initialState = {
   text: 'Thing'
 };
-
 
 export default function userReducer(state={}, action) {
   console.log('action type outer: ', action.type);
@@ -20,19 +18,3 @@ export default function userReducer(state={}, action) {
   }
   return state;
 }
-=======
-// const initialState = {firstname:"Kyle" , lastname:"GREENE"};
-//
-//
-// export default function userReducer(state = initialState, action){
-//   switch(action.type){
-//     case: 'CHANGE_NAME'
-//
-//
-//
-// 
-//
-//   }
-//
-//   }
->>>>>>> merge conflicts

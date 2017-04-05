@@ -66,6 +66,7 @@ export const removeUser = (user) => {
     payload: user
   }
 }
+
 // Task actions
 export const addTask = (taskText) => {
   console.log('ACTION - adding chore: ', taskText);
@@ -91,6 +92,7 @@ export const undoCompleteTask = (taskId) => {
   }
 };
 
+
 export const updateProfile = (field, data) => {
   console.log(field, data);
   return {
@@ -101,6 +103,7 @@ export const updateProfile = (field, data) => {
     }
   }
 };
+
 
 //login actions
 
@@ -149,7 +152,6 @@ export const logoutUser=()=>{
     window.location.href = CLIENT_ROOT_URL + '/login';
   }
 }
-
 
 
   export const registerUser = ({ email, first, last, username, password }) => {

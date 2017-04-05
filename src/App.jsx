@@ -3,7 +3,6 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 // import actions here and then add the to mapStateToProps
 import { isHomeless } from './actions'
-import Chores from './components/chores.jsx';
 
 // main react app component
 class App extends Component {

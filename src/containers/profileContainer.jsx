@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react'
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
@@ -11,17 +11,15 @@ class User extends Component {
   };
 
   render() {
-    <form>
+    return <form>
       <label>
         <div className="formField">First Name:</div>
-        <input type="text" value="Jarett" name="firstName" />
-      </label>
-      <input
-        type="text"
+        <input type="text"
         placeholder=""
         autoFocus="true"
-        onSubmit={this.OnSubmit}
-       /><br />
+        onSubmit={this.OnSubmit} />
+      </label>
+      <inpu/><br />
     </form>
   }
 }
@@ -36,3 +34,14 @@ export default connect(
     updateProfile,
   },
 )(User);
+
+// App.propTypes = {
+//   //define destructured proptypes here
+// }
+
+// const mapDispatchToProps = dispatch => ({
+//   // someKey: (someArg) => {dispatch(someFunc(someArg))}
+// })
+
+
+// export default App;

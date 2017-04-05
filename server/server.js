@@ -4,9 +4,9 @@ const app = express();
 const passport = require('passport');	
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-require('dotenv').config();
+const db = require('./config/config.js');
 
-//parsing middleware
+// parsing middleware
 require('./config/middleware.js')(app, express);
 
 //passport
@@ -27,8 +27,7 @@ app.use(passport.session());
 require('./config/routes.js')(app, passport);
 
 app.listen(port, () => {
-  console.log('Server is on '+ port)
-})
-
+  console.log('Server is listening on ', port);
+});
 
 module.exports = app;

@@ -14,11 +14,10 @@ module.exports = (app, passport) => {
   //   failureRedirect: '/signup',
   //   failureFlash: false
   // }));
-  app.post('/api/users/signup', userController.signup);
+  app.post('/api/users/', userController.signup);
   app.get('/api/users/:id', userController.getUser);
   app.get('/api/houses/:house', houseController.getHouse);
-  // app.post('/api/users/:id', userController.createUser);
-  // app.post('/api/houses/:id', houseController.createHouse);
+  app.post('/api/houses/', houseController.createHouse);
   // app.put('/users/:id', userController.updateUser);
   // app.put('/houses/:id', houseController.updateHouse);
 }

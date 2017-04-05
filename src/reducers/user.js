@@ -6,15 +6,15 @@ const initialState = {
   text: 'Thing'
 };
 
-
-export default function userReducer(state, action) {
+export default function userReducer(state={}, action) {
   console.log('action type outer: ', action.type);
 
   switch (action.type) {
     case EDIT_PROFILE:
       console.log('action payload inner: ', action.payload);
       return { ...state,
-        action.payload.field: action.payload.data,
+        [action.payload.field]: action.payload.data,
       };
   }
+  return state;
 }

@@ -84,18 +84,21 @@ export const completeTask = (taskId) => {
 };
 
 export const undoCompleteTask = (taskId) => {
-    console.log(`ACTION - undo complete: ${taskId}`);
-    return {
-      type: UNDO_COMPLETE_TASK,
-      payload: taskId,
+  console.log(`ACTION - undo complete: ${taskId}`);
+  return {
+    type: UNDO_COMPLETE_TASK,
+    payload: taskId,
+  }
+};
 
-      export const updateProfile = (field, data) => {
-        console.log(field, data);
-        return {
-          type: EDIT_PROFILE,
-          payload: {
-            field,
-            data,
-          },
-        };
-      };
+
+export const updateProfile = (field, data) => {
+  console.log(field, data);
+  return {
+    type: EDIT_PROFILE,
+    payload: {
+      field,
+      data,
+    }
+  }
+}

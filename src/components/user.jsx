@@ -5,7 +5,7 @@ import { updateProfile } from '../actions';
 
 class User extends Component {
 
-  OnSubmit ( field, data ) => {
+  OnSubmit = ( field, data ) => {
     console.log(field, data)
     this.props.updateProfile(field,data)
   };
@@ -16,7 +16,7 @@ class User extends Component {
         <div className="formField">First Name:</div>
         <input type="text" value="Jarett" name="firstName" />
       </label>
-      <input <input
+      <input
         type="text"
         placeholder=""
         autoFocus="true"

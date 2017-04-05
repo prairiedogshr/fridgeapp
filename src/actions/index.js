@@ -4,8 +4,14 @@ import {
   ADD_CHORE,
   COMPLETE_CHORE,
   UNDO_COMPLETE,
+  ADD_TASK,
+  COMPLETE_TASK,
+  UNDO_COMPLETE_TASK,
   EDIT_PROFILE,
-} from './actionTypes.js';
+  ADD_USER,
+  REMOVE_USER,
+  UPDATE_HOUSE_INFO,
+} from './actionTypes';
 
 // example action
 export const isHomeless = (user) => {
@@ -13,10 +19,10 @@ export const isHomeless = (user) => {
   return {
     type: CHECK_HOME,
     payload: {
-      check: `${user} is homeless`
-    }
-  }
-}
+      check: `${user} is homeless`,
+    },
+  };
+};
 
 // Chore actions
 export const addChore = (choreText) => {
@@ -43,29 +49,23 @@ export const undoComplete = (choreId) => {
   };
 };
 
-export const updateHouseInfo = (updateInfo) => {
-  return {
-    type: UPDATE_HOUSE_INFO,
-    payload: {
-      item: updateInfo.item,
-      value: updateInfo.value
-    }
-  }
-};
+export const updateHouseInfo = updateInfo => ({
+  type: UPDATE_HOUSE_INFO,
+  payload: {
+    item: updateInfo.item,
+    value: updateInfo.value,
+  },
+});
 
-export const addUser = (user) => {
-  return {
-    type: ADD_USER,
-    payload: user
-  }
-};
+export const addUser = user => ({
+  type: ADD_USER,
+  payload: user,
+});
 
-export const removeUser = (user) => {
-  return {
-    type: REMOVE_USER,
-    payload: user
-  }
-}
+export const removeUser = user => ({
+  type: REMOVE_USER,
+  payload: user,
+});
 // Task actions
 export const addTask = (taskText) => {
   console.log('ACTION - adding chore: ', taskText);
@@ -88,7 +88,7 @@ export const undoCompleteTask = (taskId) => {
   return {
     type: UNDO_COMPLETE_TASK,
     payload: taskId,
-  }
+  };
 };
 
 
@@ -99,6 +99,6 @@ export const updateProfile = (field, data) => {
     payload: {
       field,
       data,
-    }
-  }
-}
+    },
+  };
+};

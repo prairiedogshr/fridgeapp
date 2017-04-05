@@ -91,7 +91,6 @@ export const undoCompleteTask = (taskId) => {
   }
 };
 
-
 export const updateProfile = (field, data) => {
   console.log(field, data);
   return {
@@ -102,9 +101,6 @@ export const updateProfile = (field, data) => {
     }
   }
 };
-
-
-
 
 //login actions
 
@@ -132,7 +128,6 @@ export const errorHandler = (dispatch, error, type) => {
   }
 }
 
-
 export const loginUser = ({ email, password })  => {
   return (dispatch) => {
     axios.post(`${API_URL}/auth/login`, { email, password })
@@ -154,6 +149,7 @@ export const logoutUser=()=>{
     window.location.href = CLIENT_ROOT_URL + '/login';
   }
 }
+
 
 
   export const registerUser = ({ email, first, last, username, password }) => {

@@ -10,9 +10,6 @@ export const UNDO_COMPLETE = 'UNDO_COMPLETE';
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const UPDATE_HOUSE_INFO = 'UPDATE_HOUSE_INFO';
-
-
-// Task actions
 export const ADD_TASK = 'ADD_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
 export const UNDO_COMPLETE_TASK = 'UNDO_COMPLETE_TASK';

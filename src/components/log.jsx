@@ -1,10 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-=======
-import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router';
->>>>>>> fixed the login
 import { loginUser } from '../actions/index.js';
 
 class Login extends Component {

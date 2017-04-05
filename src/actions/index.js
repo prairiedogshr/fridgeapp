@@ -1,5 +1,5 @@
 // add verb into actionTypes.js and then import here
-import { CHECK_HOME, ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK } from './actionTypes';
+import { CHECK_HOME, ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, UPDATE_HOUSE_INFO, REMOVE_USER, ADD_USER, ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK } from './actionTypes';
 
 // example action
 export const isHomeless = (user) => {
@@ -35,6 +35,29 @@ export const undoComplete = (choreId) => {
   };
 };
 
+export const updateHouseInfo = (updateInfo) => {
+  return {
+    type: UPDATE_HOUSE_INFO,
+    payload: {
+      item: updateInfo.item,
+      value: updateInfo.value
+    }
+  }
+};
+
+export const addUser = (user) => {
+  return {
+    type: ADD_USER,
+    payload: user
+  }
+};
+
+export const removeUser = (user) => {
+  return {
+    type: REMOVE_USER,
+    payload: user
+  }
+}
 // Task actions
 export const addTask = (taskText) => {
   console.log('ACTION - adding chore: ', taskText);

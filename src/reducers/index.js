@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
+
 // import different reducers here
 import homelessReducer from './test';
 import choresReducer from './chores';
@@ -9,6 +10,7 @@ import userReducer from './user';
 import authReducer from './auth';
 import tasksReducer from './tasks';
 import settingsReducer from './settings';
+import userReducer from './user';
 
 const rootReducer = combineReducers({
   homelessReducer,
@@ -21,3 +23,4 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+ucer;

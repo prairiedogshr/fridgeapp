@@ -6,7 +6,8 @@ const initialState = {
   text: 'Thing'
 };
 
-export default function userReducer(state={}, action) {
+
+export default function userReducer(state = {}, action) {
   console.log('action type outer: ', action.type);
 
   switch (action.type) {
@@ -16,5 +17,6 @@ export default function userReducer(state={}, action) {
         [action.payload.field]: action.payload.data,
       };
   }
+
   return state;
 }

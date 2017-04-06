@@ -19,28 +19,28 @@ class House extends Component {
     this.props.addUser(user);
   }
 
-  render() {
-    const users = this.props.house.users;
-    console.log('users! ', users);
-    const houseInfo = this.props.houseInfo;
+	render() {
+		const users = this.props.house.users;
+		console.log('users! ', users)
+		const houseInfo = this.props.houseInfo;
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <HouseInfo info={this.props.house.info} onClick={() => {
-              this.updateHouse('address', 'here');
-            }}/>
-          </div>
-          <div className="col-md-6">
-            {this.props.house.users.map(user =>
-              <p key={user}>{user}</p>,
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
+		return (
+			<div className="container">
+				<div className="row">
+					<div className="col-md-6">
+						<HouseInfo info={this.props.house.info} onClick={() => {
+							this.updateHouse('address', 'here')
+						}} />
+					</div>
+					<div className="col-md-6">
+						{this.props.house.users.map(user => 
+							<p key={user}>{user}</p>
+						)}
+				</div>
+			</div>
+		</div>
+		)
+	}
 }
 
 const mapStateToProps = ({ houseReducer }) => ({

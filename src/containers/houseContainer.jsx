@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateHouseInfo, removeUser, addUser } from '../actions/house/house';
 import User from '../components/user.jsx';
 import HouseInfo from '../components/houseInfo.jsx';
+import { Col, Panel } from 'react-bootstrap';
 
 class House extends Component {
 
@@ -27,16 +28,21 @@ class House extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="col-md-6">
-						<HouseInfo info={this.props.house.info} onClick={() => {
-							this.updateHouse('address', 'here')
-						}} />
-					</div>
-					<div className="col-md-6">
+					<Col xs={6}>
+						<Panel header="Address">
+							<HouseInfo info={this.props.house.info.address} onClick={() => {
+								this.updateHouse('address', 'here')
+							}} />
+						</Panel>
+						<Panel>
+							<HouseInfo info={this.props.house.info.city} />
+						</Panel>
+					</Col>
+					<Col xs={6}>
 						{this.props.house.users.map(user => 
 							<p key={user}>{user}</p>
 						)}
-				</div>
+				</Col>
 			</div>
 		</div>
 		)

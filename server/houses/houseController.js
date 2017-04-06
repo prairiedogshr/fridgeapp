@@ -16,7 +16,7 @@ const createHouse = (req, res, next) => {
 		if (err) {
 			next(new Error(err));
 		} else {
-			res.redirect('/dashboard');
+			res.redirect('/#/dashboard');
 		}
 	})
 };

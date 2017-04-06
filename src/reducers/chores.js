@@ -10,14 +10,14 @@ export default function choresReducer(state = initialState, action) {
   let value;
 
   switch (action.type) {
-    case ADD_CHORE:
+    case ADD_CHORE: {
       console.log('action payload inner: ', action.payload);
       return {
         ...state,
         incomplete: [...state.incomplete, { id: idCount++, value: action.payload }],
       };
-
-    case COMPLETE_CHORE:
+    }
+    case COMPLETE_CHORE: {
       console.log('action payload inner: ', action.payload);
       const complete = state.complete.filter((val) => {
         if (val.id === action.payload) {
@@ -31,8 +31,9 @@ export default function choresReducer(state = initialState, action) {
         complete,
         incomplete: [...state.incomplete, { id: action.payload, value }],
       };
+    }
 
-    case UNDO_COMPLETE:
+    case UNDO_COMPLETE: {
       console.log('action payload inner: ', action.payload);
       const incomplete = state.incomplete.filter((val) => {
         if (val.id === action.payload) {
@@ -44,8 +45,9 @@ export default function choresReducer(state = initialState, action) {
       return {
         ...state,
         incomplete,
-        complete: [...state.complete, { id: action.payload, value }],
+        complete: [...state.complete, {id: action.payload, value}],
       };
+    }
 
     case INCREASE_GROUPS:
       return {

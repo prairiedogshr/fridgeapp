@@ -13,15 +13,15 @@ class Tasks extends Component {
       this.props.addTask(e.target.value);
       e.target.value = '';
     }
-  }
+  };
 
   completeTask = taskId => {
     this.props.completeTask(taskId);
-  }
+  };
 
   undoCompleteTask = taskId => {
     this.props.undoCompleteTask(taskId);
-  }
+  };
 
   render() {
     console.log('++++++++', this.props);
@@ -48,7 +48,7 @@ class Tasks extends Component {
 
 const mapStateToProps = ({ tasksReducer }) => ({
   tasks: tasksReducer
-})
+});
 
 export default connect(
   mapStateToProps,
@@ -57,4 +57,4 @@ export default connect(
     completeTask,
     undoCompleteTask
   }
-)(Tasks)
+)(Tasks);

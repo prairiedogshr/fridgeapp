@@ -1,7 +1,7 @@
 // don't forget to add action dispatches here
-import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE } from '../actions/actionTypes';
+import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS } from '../actions/actionTypes';
 
-const initialState = { complete: [{ id: 1, value: 'chore 1' }, { id: 2, value: 'chore 2' }, { id: 3, value: 'chore 3' }], incomplete: [{ id: 4, value: 'chore 4' }] };
+const initialState = { complete: [{ id: 1, value: 'chore 1' }, { id: 2, value: 'chore 2' }, { id: 3, value: 'chore 3' }], incomplete: [{ id: 4, value: 'chore 4' }], groups: 0 };
 
 let idCount = 5;
 
@@ -45,6 +45,18 @@ export default function choresReducer(state = initialState, action) {
         ...state,
         incomplete,
         complete: [...state.complete, { id: action.payload, value }],
+      };
+
+    case INCREASE_GROUPS:
+      return {
+        ...state,
+        groups: state.groups + 1,
+      };
+
+    case DECREASE_GROUPS:
+      return {
+        ...state,
+        groups: state.groups - 1,
       };
 
     default:

@@ -5,8 +5,8 @@ const houseController = require('../houses/houseController.js');
 
 module.exports = (app, passport) => {
   app.post('/api/users/signin', passport.authenticate('local-login', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
+    successRedirect: '/#/dashboard',
+    failureRedirect: '/#/login',
     failureFlash: false
   }));
   // app.post('/api/users/signup', passport.authenticate('local-signup', {

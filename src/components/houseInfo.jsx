@@ -6,8 +6,7 @@ export default function HouseInfo({ info }) {
   return (
     <div>
       <form>
-        <p>Address: </p>
-        <p>{info.address}</p>
+        <p>{info}</p>
       </form>
     </div>
   )

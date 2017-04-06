@@ -11,13 +11,13 @@ const getHouse = (req, res, next) => {
 };
 
 const createHouse = (req, res, next) => {
-  House.createHouse(req.body, (err, ok) => {
-    if (err) {
-      next(new Error(err));
-    } else {
-      res.redirect('/#/dashboard');
-    }
-  });
+	House.createHouse(req.body, (err, ok) => {
+		if (err) {
+			next(new Error(err));
+		} else {
+			res.redirect('/#/dashboard');
+		}
+	})
 };
 
 const updateHouse = (req, res, next) => {

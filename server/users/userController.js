@@ -13,13 +13,13 @@ const getUser = (req, res, next) => {
 };
 
 const signup = (req, res, next) => {
-  User.signup(req.body, (err, user) => {
-    if (err) {
-      console.log('err: ', err)
-      next(new Error(err));
-    }
-    res.redirect('/#/dashboard');
-  });
+	User.signup(req.body, (err, user) => {
+		if (err) {
+			console.log('err: ', err)
+			next(new Error(err));
+		}
+		res.redirect('/#/dashboard');
+	});
 };
 
 const updateUser = (req, res, next) => {

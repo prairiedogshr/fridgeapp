@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
-import { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 // import actions here and then add the to mapStateToProps
-import { isHomeless } from './actions'
+import { isHomeless } from './actions';
 
 // main react app component
 class App extends Component {
@@ -13,13 +13,15 @@ class App extends Component {
         <div>
           {this.props.homelessReducer[this.props.homelessReducer.length - 1]}
         </div>
-        <button onClick={()=>{
-          console.log('this.props: ', this.props);
-          this.props.isHomeless('Kyle')
-          }}>click
+        <button
+          onClick={() => {
+            console.log('this.props: ', this.props);
+            this.props.isHomeless('Kyle');
+          }}
+        >click
         </button>
       </div>
-    )
+    );
   }
 }
 
@@ -28,8 +30,8 @@ class App extends Component {
 // }
 
 const mapStateToProps = state => ({
-  homelessReducer: state.homelessReducer
-})
+  homelessReducer: state.homelessReducer,
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   // someKey: (someArg) => {dispatch(someFunc(someArg))}
@@ -38,7 +40,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    isHomeless
-  }
-)(App)
+    isHomeless,
+  },
+)(App);
 // export default App;

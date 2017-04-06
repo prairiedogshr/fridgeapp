@@ -1,9 +1,12 @@
 // add verb into actionTypes.js and then import here
 
-import { CHECK_HOME,
+import {
+  CHECK_HOME,
   ADD_CHORE,
   COMPLETE_CHORE,
   UNDO_COMPLETE,
+  INCREASE_GROUPS,
+  DECREASE_GROUPS,
   ADD_TASK,
   COMPLETE_TASK,
   UNDO_COMPLETE_TASK,
@@ -14,8 +17,9 @@ import { CHECK_HOME,
   PROTECTED_TEST,
   ADD_USER,
   REMOVE_USER,
-  UPDATE_HOUSE_INFO,} from './actionTypes';
-  
+  UPDATE_HOUSE_INFO,
+} from './actionTypes';
+
 import axios from 'axios';
 import cookie from 'cookie';
 import {browserhistory} from 'react-router';
@@ -57,6 +61,22 @@ export const undoComplete = (choreId) => {
     payload: choreId,
   };
 };
+
+export const increaseGroups = () => {
+  console.log(`ACTION - increaseGroups:`);
+  return {
+    type: INCREASE_GROUPS,
+    payload: null,
+  };
+}
+
+export const decreaseGroups = () => {
+  console.log(`ACTION - decreaseGroups:`);
+  return {
+    type: DECREASE_GROUPS,
+    payload: null,
+  };
+}
 
 export const updateHouseInfo = updateInfo => ({
   type: UPDATE_HOUSE_INFO,

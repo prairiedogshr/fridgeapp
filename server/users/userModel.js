@@ -65,6 +65,7 @@ signup: (user, callback) => {
 	},
 
 	findUserById: (id, callback) => {
+		console.log('trying to find by id: ', id)
 		db.select().from('user').where('user_id', id)
 		.then(user => callback(null, user));
 	},

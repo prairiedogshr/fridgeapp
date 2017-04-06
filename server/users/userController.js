@@ -7,9 +7,13 @@ const localPassport = require('../config/passport.js')(passport);
 
 const getUser = (req, res, next) => {
 	console.log('getting user');
-	User.getUserByEmail(req.params, (err, user) => {
+	User.findUserById(req.params.id, (err, user) => {
 		if (err) next(err);
-		res.send('ok');
+		if(user.length) {
+			res.send(user[0]);
+		} else {
+			next(new Error('no user'));
+		}
 	})
 };
 

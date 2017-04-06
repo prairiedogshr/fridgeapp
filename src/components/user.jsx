@@ -10,7 +10,7 @@ class Form extends Component {
     this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
     // interact with database here
-  };
+  }
 
 
   render() {

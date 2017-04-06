@@ -1,16 +1,18 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import CompleteChore from '../components/completeChore.jsx';
-import IncompleteChore from '../components/incompleteChore.jsx';
-import AddChore from '../components/addChore.jsx';
-import { addChore, completeChore, undoComplete } from '../actions';
+import CompleteChore from '../components/completeChore';
+import IncompleteChore from '../components/incompleteChore';
+import AddChore from '../components/addChore';
+import GroupChores from '../components/groupChores';
+import { addChore, completeChore, undoComplete, increaseGroups, decreaseGroups } from '../actions';
 
 class Chores extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputField: '',
+      choreGroups: 0,
     }
   }
 
@@ -38,12 +40,24 @@ class Chores extends Component {
     this.props.undoComplete(choreId);
   }
 
+  // increaseGroups = () => {
+  //   this.state.choreGroups++;
+  // }
+
+  // decreaseGroups = () => {
+  //   this.state.choreGroups--;
+  // }
+
   render() {
     const complete = this.props.chores.complete;
     const incomplete = this.props.chores.incomplete;
 
     return (
       <div>
+        <AddChore
+          handleKeyUp={this.handleKeyUp}
+          buttonSubmit={this.buttonSubmit}
+        />
         <CompleteChore
           chores={this.props.chores}
           completeChore={this.completeChore}
@@ -52,9 +66,10 @@ class Chores extends Component {
           chores={this.props.chores}
           undoComplete={this.undoComplete}
         />
-        <AddChore
-          handleKeyUp={this.handleKeyUp}
-          buttonSubmit={this.buttonSubmit}
+        <GroupChores
+          chores={this.props.chores}
+          increaseGroups={this.props.increaseGroups}
+          decreaseGroups={this.props.decreaseGroups}
         />
       </div>
     )
@@ -71,5 +86,7 @@ export default connect(
     addChore,
     completeChore,
     undoComplete,
+    increaseGroups,
+    decreaseGroups,
   }
 )(Chores);

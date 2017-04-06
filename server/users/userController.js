@@ -23,7 +23,7 @@ const signup = (req, res, next) => {
 			console.log('err: ', err)
 			next(new Error(err));
 		}
-		res.redirect('/dashboard');
+		res.redirect('/#/dashboard');
 	});
 };
 

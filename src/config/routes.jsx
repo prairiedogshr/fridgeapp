@@ -3,16 +3,16 @@ import { render } from 'react-dom';
 import { HashRouter, Route, Link, Switch } from 'react-router-dom';
 import SignIn from '../containers/loginContainer.jsx';
 import Log from '../components/log.jsx';
-import Auth from '../components/login.jsx'
+import Auth from '../components/login.jsx';
 import Dashboard from '../containers/dashboardContainer.jsx';
 import Tasks from '../containers/tasksContainer.jsx';
 import Profile from '../containers/profileContainer.jsx';
 import App from '../App.jsx';
-import Register from '../components/register.jsx'
+import Register from '../components/register.jsx';
 import Chores from '../containers/choresContainer.jsx';
 import Settings from '../containers/settingsContainer.jsx';
 import House from '../containers/houseContainer.jsx';
-import User from '../components/user.jsx'
+import User from '../components/user.jsx';
 
 const Home = () => (
   <div>

@@ -24,21 +24,21 @@ class Chores extends Component {
     } else {
       this.state.inputField = e.target.value;
     }
-  }
+  };
 
   buttonSubmit = () => {
     this.props.addChore(this.state.inputField);
     this.state.inputField = '';
     console.log(AddChore.inputField);
-  }
+  };
 
   completeChore = choreId => {
     this.props.completeChore(choreId);
-  }
+  };
 
   undoComplete = choreId => {
     this.props.undoComplete(choreId);
-  }
+  };
 
   // increaseGroups = () => {
   //   this.state.choreGroups++;
@@ -72,13 +72,13 @@ class Chores extends Component {
           decreaseGroups={this.props.decreaseGroups}
         />
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = ({ choresReducer }) => ({
   chores: choresReducer
-})
+});
 
 export default connect(
   mapStateToProps,

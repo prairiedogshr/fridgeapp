@@ -1,5 +1,7 @@
 // add verb into actionTypes.js and then import here
-
+import axios from 'axios';
+import cookie from 'cookie';
+import { browserhistory } from 'react-router';
 import {
   CHECK_HOME,
   ADD_CHORE,
@@ -20,13 +22,9 @@ import {
   UPDATE_HOUSE_INFO,
 } from './actionTypes';
 
-import axios from 'axios';
-import cookie from 'cookie';
-import {browserhistory} from 'react-router';
+const API_URL = 'http://localhost:8080/api';
 
-const API_URL = 'http://localhost:8080/api'
-
-// example action
+// Example action
 export const isHomeless = (user) => {
   console.log('ACTION - checking if homeless');
   return {
@@ -68,7 +66,7 @@ export const increaseGroups = () => {
     type: INCREASE_GROUPS,
     payload: null,
   };
-}
+};
 
 export const decreaseGroups = () => {
   console.log(`ACTION - decreaseGroups:`);
@@ -76,7 +74,7 @@ export const decreaseGroups = () => {
     type: DECREASE_GROUPS,
     payload: null,
   };
-}
+};
 
 export const updateHouseInfo = updateInfo => ({
   type: UPDATE_HOUSE_INFO,
@@ -91,13 +89,12 @@ export const addUser = user => ({
   payload: user,
 });
 
-
 export const removeUser = (user) => {
   return {
     type: REMOVE_USER,
-    payload: user
-  }
-}
+    payload: user,
+  };
+};
 
 // Task actions
 export const addTask = (taskText) => {
@@ -124,7 +121,6 @@ export const undoCompleteTask = (taskId) => {
   };
 };
 
-
 export const updateProfile = (field, data) => {
   console.log(field, data);
   return {
@@ -132,88 +128,84 @@ export const updateProfile = (field, data) => {
     payload: {
       field,
       data,
-
-    }
-  }
+    },
+  };
 };
 
-
-//login actions
+// Login actions
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch({ type: UNAUTH_USER });
+    cookie.remove('token', { path: '/' });
+    window.location.href = CLIENT_ROOT_URL + '/login';
+  };
+};
 
 export const errorHandler = (dispatch, error, type) => {
   let errorMessage = '';
-  if(error.data.error) {
+  if (error.data.error) {
     errorMessage = error.data.error;
-  } else if(error.data){
+  } else if (error.data) {
     errorMessage = error.data;
   } else {
     errorMessage = error;
   }
 
-  if(error.status === 401) {
+  if (error.status === 401) {
     dispatch({
-      type: type,
-      payload: 'You are not authorized to do this. Please login and try again.'
+      type,
+      payload: 'You are not authorized to do this. Please login and try again.',
     });
     logoutUser();
   } else {
     dispatch({
-      type: type,
-      payload: errorMessage
+      type,
+      payload: errorMessage,
     });
   }
-}
+};
 
-export const loginUser = ({ email, password })  => {
+export const loginUser = ({ email, password }) => {
   return (dispatch) => {
     axios.post(`${API_URL}/auth/login`, { email, password })
-    .then(response => {
-      cookie.save('token', response.data.token, { path: '/' });
-      dispatch({ type: AUTH_USER });
-      window.location.href = CLIENT_ROOT_URL + '/dashboard';
-    })
-    .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR)
-    });
-    }
-  }
-
-export const logoutUser=()=>{
-  return (dispatch) => {
-    dispatch({ type: UNAUTH_USER });
-    cookie.remove('token', { path: '/' });
-    window.location.href = CLIENT_ROOT_URL + '/login';
-  }
-}
-
-
-  export const registerUser = ({ email, first, last, username, password }) => {
-    return (dispatch) => {
-      axios.post(`${API_URL}/auth/register`, { email, first, last,username, password })
-      .then(response => {
+      .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
         window.location.href = CLIENT_ROOT_URL + '/dashboard';
       })
       .catch((error) => {
-        errorHandler(dispatch, error.response, AUTH_ERROR)
+        errorHandler(dispatch, error.response, AUTH_ERROR);
       });
-    }
-  }
+  };
+};
+
+export const registerUser = ({ email, first, last, username, password }) => {
+  return (dispatch) => {
+    axios.post(`${API_URL}/auth/register`, { email, first, last, username, password })
+      .then((response) => {
+        cookie.save('token', response.data.token, { path: '/' });
+        dispatch({ type: AUTH_USER });
+        window.location.href = CLIENT_ROOT_URL + '/dashboard';
+      })
+      .catch((error) => {
+        errorHandler(dispatch, error.response, AUTH_ERROR);
+      });
+  };
+};
 
 export const protectedTest = () => {
   return (dispatch) => {
     axios.get(`${API_URL}/protected`, {
-      headers: { 'Authorization': cookie.load('token') }
+      headers: { Authorization: cookie.load('token') },
     })
-    .then(response => {
-      dispatch({
-        type: PROTECTED_TEST,
-        payload: response.data.content
+      .then((response) => {
+        dispatch({
+          type: PROTECTED_TEST,
+          payload: response.data.content,
+        });
+      })
+      .catch((error) => {
+        errorHandler(dispatch, error.response, AUTH_ERROR);
       });
-    })
-    .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR)
-    });
-  }
-}
+  };
+};

@@ -26,7 +26,7 @@ class App extends Component {
 }
 
 // App.propTypes = {
-//   //define destructured proptypes here
+//   define destructured proptypes here
 // }
 
 const mapStateToProps = state => ({

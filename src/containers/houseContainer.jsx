@@ -1,9 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateHouseInfo, removeUser, addUser } from '../actions/house/house';
-import User from '../components/user.jsx';
+import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house.js';
 import HouseInfo from '../components/houseInfo.jsx';
+import { Col, Panel } from 'react-bootstrap';
+import Roommate from '../components/roommate.jsx';
 
 class House extends Component {
 
@@ -15,43 +16,62 @@ class House extends Component {
     });
   }
 
-  addUser(user) {
-    this.props.addUser(user);
-  }
+	addUser(user) {
+		this.props.addUser(user);
+	};
 
-  render() {
-    const users = this.props.house.users;
-    console.log('users! ', users);
-    const houseInfo = this.props.houseInfo;
+	componentWillMount() {
+		console.log('getting house')
+		this.props.getHouse(3)
+		console.log('will mount, after getHouse call ', this.props.house)
+	}
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <HouseInfo info={this.props.house.info} onClick={() => {
-              this.updateHouse('address', 'here');
-            }}/>
-          </div>
-          <div className="col-md-6">
-            {this.props.house.users.map(user =>
-              <p key={user}>{user}</p>,
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		if (this.props.house.loaded === true) {
+			console.log('loaded! ', this.props.house)
+			return (
+				<div className="container">
+					<div className="row">
+						<Col xs={6}>
+							<Panel header="HOUSE INFO">
+								<HouseInfo info={this.props.house.info} onClick={() => {
+									this.updateHouse('address', 'here')
+								}} />
+							</Panel>
+						</Col>
+						<Col xs={6}>
+							<Panel header="Roommates!">
+								{this.props.house.users.map(user => 
+									<Roommate info={user} />
+								)}
+							</Panel>
+					</Col>
+				</div>
+			</div>
+		)
+	} else {
+		console.log('not loaded...', this.props.house.info)
+		return (
+			<div className="container">
+				<h1>LOADING...</h1>
+			</div>
+			)
+		}
+	}
 }
 
 const mapStateToProps = ({ houseReducer }) => ({
-  house: houseReducer,
-});
+	house: houseReducer,
+})
 
 export default connect(
-  mapStateToProps,
-  {
-    addUser,
-    removeUser,
-    updateHouseInfo
-  },
-)(House);
+	mapStateToProps,
+	{
+		addUser,
+		removeUser,
+		updateHouseInfo,
+		getHouse
+	}
+	)(House)
+
+// export default connect(mapStateToProps, mapDispatchToProps)(House);

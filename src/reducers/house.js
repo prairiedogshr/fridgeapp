@@ -1,18 +1,22 @@
-import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO } from '../actions/actionTypes.js';
+import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO, RECEIVE_HOUSE } from '../actions/actionTypes.js';
+
+
 
 const initialState = {
-  info: {
-    idHouse: 1,
-    address: '1600 Pennsylvania Ave NW',
-    unit_number: 0,
-    city: 'Washington, DC',
-    zip: 20500,
-    info: 'white house',
-    created_at: new Date(),
-    updated_at: new Date(),
-    admin: 1,
-  },
-  users: [2],
+	info: {
+		idHouse: 1,
+		address: '1600 Pennsylvania Ave NW',
+		unit_number: 0,
+		city: 'Washington, DC',
+		state: 'District of Columbia',
+		zip: 20500,
+		info: 'white house',
+		created_at: new Date(),
+		updated_at: new Date(),
+		admin: 1
+	},
+	users: [2],
+  loaded: false
 };
 
 export default function houseReducer(state = initialState, action) {
@@ -39,6 +43,19 @@ export default function houseReducer(state = initialState, action) {
           ...update,
         },
       };
+    }
+
+    case RECEIVE_HOUSE: {
+      console.log('hello? inside receive house with action: ', action)
+      const newState = {...state,...action.payload,loaded:true}
+      console.log('heres the new state: ', newState)
+      return {
+        ...state,
+        info: {
+          ...action.payload
+        },
+        loaded: true
+      }
     }
     default:
       return state;

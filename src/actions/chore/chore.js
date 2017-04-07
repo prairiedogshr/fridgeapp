@@ -1,11 +1,11 @@
-import{
+import {
   ADD_CHORE,
   COMPLETE_CHORE,
   UNDO_COMPLETE,
   INCREASE_GROUPS,
   DECREASE_GROUPS,
-  ASSIGN_GROUP
-} from '../actionTypes'
+  ASSIGN_GROUP,
+} from '../actionTypes';
 
 export const addChore = (choreText) => {
   console.log('ACTION - adding chore: ', choreText);

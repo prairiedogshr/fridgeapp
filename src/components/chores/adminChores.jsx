@@ -1,18 +1,18 @@
 import React from 'react';
 
-export default function UncompletedChore(props) {
+export default function AdminChores(props) {
   const incomplete = props.chores.incomplete;
   return (
     <div>
       <h1>
         Chores
       </h1>
-      <ul>
+      <ol>
         {incomplete.map(chore => (
           <li key={chore.id}>{chore.value}</li>
           ), this)
         }
-      </ul>
+      </ol>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function CompletedChore(props) {
       </h1>
       <ul>
         {complete.map(chore => (
-          <li key={chore.id} onClick={() => { props.completeChore(chore.id); }}>{chore.value}</li>
+          <li key={chore.id} onClick={() => { props.undoComplete(chore.id); }}>{chore.value}</li>
           ), this)
         }
       </ul>

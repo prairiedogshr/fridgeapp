@@ -18,6 +18,7 @@ export default function GroupingOfChores(props) {
               }
               }
             >
+              <option>&nbsp;</option>
               {props.chores.groups.map(val => (
                 <option
                   key={`dropDown: ${val}`}

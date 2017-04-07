@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CompletedChore(props) {
+export default function UncompletedChore(props) {
   const incomplete = props.chores.incomplete;
   return (
     <div>

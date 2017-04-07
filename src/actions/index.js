@@ -7,6 +7,7 @@ import {
   UNDO_COMPLETE,
   INCREASE_GROUPS,
   DECREASE_GROUPS,
+  ASSIGN_GROUP,
   ADD_TASK,
   COMPLETE_TASK,
   UNDO_COMPLETE_TASK,
@@ -63,20 +64,28 @@ export const undoComplete = (choreId) => {
 };
 
 export const increaseGroups = () => {
-  console.log(`ACTION - increaseGroups:`);
+  console.log('ACTION - increaseGroups:');
   return {
     type: INCREASE_GROUPS,
     payload: null,
   };
-}
+};
 
 export const decreaseGroups = () => {
-  console.log(`ACTION - decreaseGroups:`);
+  console.log('ACTION - decreaseGroups:');
   return {
     type: DECREASE_GROUPS,
     payload: null,
   };
-}
+};
+
+export const assignGroup = (choreId, group) => {
+  console.log('ACTION - assignGroups:');
+  return {
+    type: ASSIGN_GROUP,
+    payload: { choreId, group },
+  };
+};
 
 export const updateHouseInfo = updateInfo => ({
   type: UPDATE_HOUSE_INFO,

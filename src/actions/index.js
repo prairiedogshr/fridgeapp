@@ -40,14 +40,26 @@ export const isHomeless = (user) => {
 };
 
 //init actions
+// export const getHouse = (id) => {
+//   console.log('calling get house!')
+//   return (dispatch) => {
+//     console.log('here')
+//     axios.get(`/api/houses/${id}`)
+//     .then(resp => {
+//       console.log('inside get house with: ', resp)
+//       dispatch(receiveHouse(resp.data))
+//     });
+//   }
+// };
+
 export const getHouse = (id) => {
-  console.log('calling get house!')
   return (dispatch) => {
-    console.log('here')
-    axios.get(`/api/houses/${id}`)
+    return axios.get(`/api/houses/${id}`)
     .then(resp => {
-      console.log('inside get house with: ', resp)
-      dispatch(receiveHouse(resp.data))
+      return dispatch({
+        type: RECEIVE_HOUSE,
+        payload: resp.data
+      })
     });
   }
 };

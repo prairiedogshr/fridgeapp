@@ -8,7 +8,7 @@ export default function GroupChores(props) {
       </h3>
       <div>
         <button onClick={props.decreaseGroups}>-</button>
-          <span>{props.chores.groups[props.chores.groups.length - 1]}</span>
+        <span>{props.chores.groups[props.chores.groups.length - 1]}</span>
         <button onClick={props.increaseGroups}>+</button>
       </div>
     </div>

@@ -68,11 +68,11 @@ class Chores extends Component {
         />
         <CompleteChore
           chores={this.props.chores}
-          completeChore={this.completeChore}
+          undoComplete={this.undoComplete}
         />
         <IncompleteChore
           chores={this.props.chores}
-          undoComplete={this.undoComplete}
+          completeChore={this.completeChore}
         />
         <GroupChores
           chores={this.props.chores}

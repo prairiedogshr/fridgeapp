@@ -24,22 +24,6 @@ export default function choresReducer(state = initialState, action) {
     }
     case COMPLETE_CHORE: {
       console.log('action payload inner: ', action.payload);
-      const complete = state.complete.filter((val) => {
-        if (val.id === action.payload) {
-          item = val;
-          return false;
-        }
-        return true;
-      });
-      return {
-        ...state,
-        complete,
-        incomplete: [...state.incomplete, { id: action.payload, value: item.value, group: item.group || null }],
-      };
-    }
-
-    case UNDO_COMPLETE: {
-      console.log('action payload inner: ', action.payload);
       const incomplete = state.incomplete.filter((val) => {
         if (val.id === action.payload) {
           item = val;
@@ -50,7 +34,27 @@ export default function choresReducer(state = initialState, action) {
       return {
         ...state,
         incomplete,
-        complete: [...state.complete, { id: action.payload, value: item.value, group: item.group || null }],
+        complete: [
+          ...state.complete, { id: action.payload, value: item.value, group: item.group || null },
+        ],
+      };
+    }
+
+    case UNDO_COMPLETE: {
+      console.log('action payload inner: ', action.payload);
+      const complete = state.complete.filter((val) => {
+        if (val.id === action.payload) {
+          item = val;
+          return false;
+        }
+        return true;
+      });
+      return {
+        ...state,
+        complete,
+        incomplete: [
+          ...state.incomplete, { id: action.payload, value: item.value, group: item.group || null },
+        ],
       };
     }
 
@@ -82,7 +86,7 @@ export default function choresReducer(state = initialState, action) {
         incomplete: [
           ...state.incomplete.slice(0, index),
           newItem,
-          ...state.incomplete.slice(index + 1, state.incomplete.length)
+          ...state.incomplete.slice(index + 1, state.incomplete.length),
         ],
       };
 

@@ -53,6 +53,7 @@ export const getHouse = (id) => {
   return (dispatch) => {
     return axios.get(`/api/houses/${id}`)
     .then(resp => {
+      console.log('house!! ', resp)
       return dispatch({
         type: RECEIVE_HOUSE,
         payload: resp.data
@@ -61,13 +62,13 @@ export const getHouse = (id) => {
   }
 };
 
-export const receiveHouse = (house) => {
-  console.log('received house: ', house)
-  return {
-    type: RECEIVE_HOUSE,
-    payload: house
-  }
-};
+// export const receiveHouse = (house) => {
+//   console.log('received house: ', house)
+//   return {
+//     type: RECEIVE_HOUSE,
+//     payload: house
+//   }
+// };
 
 // Chore actions
 export const addChore = (choreText) => {

@@ -1,4 +1,4 @@
-import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO } from '../actions/actionTypes.js';
+import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO, RECEIVE_HOUSE } from '../actions/actionTypes.js';
 
 
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
 		updated_at: new Date(),
 		admin: 1
 	},
-	users: [2]
+	users: [2],
+  loaded: false
 };
 
 export default function houseReducer(state = initialState, action) {
@@ -41,6 +42,19 @@ export default function houseReducer(state = initialState, action) {
           ...update,
         },
       };
+    }
+
+    case RECEIVE_HOUSE: {
+      console.log('hello? inside receive house with action: ', action)
+      const newState = {...state,...action.payload,loaded:true}
+      console.log('heres the new state: ', newState)
+      return {
+        ...state,
+        info: {
+          ...action.payload
+        },
+        loaded: true
+      }
     }
     default:
       return state;

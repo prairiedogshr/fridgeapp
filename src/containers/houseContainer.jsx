@@ -68,13 +68,14 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-// export default connect(
-// 	mapStateToProps,
-// 	{
-// 		addUser,
-// 		removeUser,
-// 		updateHouseInfo
-// 	}
-// 	)(House)
+export default connect(
+	mapStateToProps,
+	{
+		addUser,
+		removeUser,
+		updateHouseInfo,
+		getHouse
+	}
+	)(House)
 
-export default connect(mapStateToProps, mapDispatchToProps)(House);
+// export default connect(mapStateToProps, mapDispatchToProps)(House);

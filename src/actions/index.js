@@ -25,16 +25,6 @@ import {
   RECEIVE_HOUSE
 } from './actionTypes';
 
-<<<<<<< HEAD
-const API_URL = 'http://localhost:8080/api';
-=======
-import axios from 'axios';
-import cookie from 'cookie';
-import {browserhistory} from 'react-router';
-
-// const API_URL = 'http://localhost:8080/api'
->>>>>>> house-profile
-
 // Example action
 export const isHomeless = (user) => {
   console.log('ACTION - checking if homeless');
@@ -47,14 +37,26 @@ export const isHomeless = (user) => {
 };
 
 //init actions
+// export const getHouse = (id) => {
+//   console.log('calling get house!')
+//   return (dispatch) => {
+//     console.log('here')
+//     axios.get(`/api/houses/${id}`)
+//     .then(resp => {
+//       console.log('inside get house with: ', resp)
+//       dispatch(receiveHouse(resp.data))
+//     });
+//   }
+// };
+
 export const getHouse = (id) => {
-  console.log('calling get house!')
   return (dispatch) => {
-    console.log('here')
-    axios.get(`/api/houses/${id}`)
+    return axios.get(`/api/houses/${id}`)
     .then(resp => {
-      console.log('inside get house with: ', resp)
-      dispatch(receiveHouse(resp.data))
+      return dispatch({
+        type: RECEIVE_HOUSE,
+        payload: resp.data
+      })
     });
   }
 };

@@ -28,7 +28,7 @@ import {browserhistory} from 'react-router';
 
 // const API_URL = 'http://localhost:8080/api'
 
-// example action
+// Example action
 export const isHomeless = (user) => {
   console.log('ACTION - checking if homeless');
   return {
@@ -56,19 +56,12 @@ export const getHouse = (id) => {
   return (dispatch) => {
     return axios.get(`/api/houses/${id}`)
     .then(resp => {
+      console.log('house!! ', resp)
       return dispatch({
         type: RECEIVE_HOUSE,
         payload: resp.data
       })
     });
-  }
-};
-
-export const receiveHouse = (house) => {
-  console.log('received house: ', house)
-  return {
-    type: RECEIVE_HOUSE,
-    payload: house
   }
 };
 

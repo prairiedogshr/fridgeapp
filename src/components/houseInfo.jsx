@@ -12,21 +12,21 @@ export default function HouseInfo({ info }) {
         }}>
           <ControlLabel>Address</ControlLabel>
           <FormControl type="text"
-          placeholder={info.address}
+          placeholder={info.house_address}
           />
           <FormControl type="text"
-          placeholder={info.unit_number}
+          placeholder={info.house_unit_number}
           />
           <FormControl type="text"
-          placeholder={`${info.city},  ${info.state}`}
+          placeholder={`${info.house_city},  ${info.state}`}
           />
           <FormControl type="text"
-          placeholder={info.zip}
+          placeholder={info.house_zip}
           />
           <br/>
           <ControlLabel>Info</ControlLabel>
           <FormControl type="text"
-          placeholder={info.info}
+          placeholder={info.house_info}
           />
         </FormGroup>
       </form>

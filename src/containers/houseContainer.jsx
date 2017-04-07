@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions';
+import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house.js';
 import HouseInfo from '../components/houseInfo.jsx';
 import { Col, Panel } from 'react-bootstrap';
 import Roommate from '../components/roommate.jsx';

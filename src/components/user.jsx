@@ -11,10 +11,17 @@ class Form extends Component {
     console.log(this.props.dbField)
     this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
-    // interact with database here
     // "/api/users/1"
   }
 
+  // componentWillMount() {
+  //   axios.get('/api/users/1')
+  //   .then(data => {
+  //     //console.log(data)
+  //     this.setState(data)
+  //     console.log("STATE",this.state)
+  //   })
+  // }
 
   render() {
     return <form>
@@ -28,7 +35,8 @@ class Form extends Component {
                 placeholder={this.props.data}
                 autoFocus="true"
                  />
-               <button className={this.props.dbField} onClick={() => { this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
+               <button className={this.props.dbField} onClick={() => {
+                    this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
              <br />
            </form>
   }

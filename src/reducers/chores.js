@@ -50,11 +50,7 @@ export default function choresReducer(state = initialState, action) {
       return {
         ...state,
         incomplete,
-<<<<<<< HEAD
-        complete: [...state.complete, {id: action.payload, value}],
-=======
         complete: [...state.complete, { id: action.payload, value: item.value, group: item.group || null }],
->>>>>>> chores8_groupChores
       };
     }
 

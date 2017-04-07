@@ -76,8 +76,6 @@ export const decreaseGroups = () => {
     payload: null,
   };
 };
-<<<<<<< HEAD
-=======
 
 export const assignGroup = (choreId, group) => {
   console.log('ACTION - assignGroups:');
@@ -86,7 +84,6 @@ export const assignGroup = (choreId, group) => {
     payload: { choreId, group },
   };
 };
->>>>>>> chores8_groupChores
 
 export const updateHouseInfo = updateInfo => ({
   type: UPDATE_HOUSE_INFO,

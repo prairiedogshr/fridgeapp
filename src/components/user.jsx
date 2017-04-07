@@ -9,27 +9,24 @@ class Form extends Component {
     console.log(field, data);
     this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
-  }
+    // interact with database here
+  };
+
+
   render() {
-    return (
-      <form>
-        <label>
-          <div className="formField">{this.props.field}</div>
-        </label>
-        <input
-          ref="newData"
-          type="text"
-          placeholder={this.props.data}
-          autoFocus="true"
-        />
-        <button onClick={() => {
-          this.OnSubmit(this.props.field, this.refs.newData.value);
-        }} type="Submit"
-        >Submit
-        </button>
-        <br />
-      </form>
-    );
+    return <form>
+              <label>
+                <div className="formField">{this.props.field}</div>
+              </label><br />
+              <input
+                ref="newData"
+                type="text"
+                placeholder={this.props.data}
+                autoFocus="true"
+                 />
+               <button onClick={() => { this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
+             <br />
+           </form>
   }
 }
 

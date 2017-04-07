@@ -12,6 +12,7 @@ class Form extends Component {
     this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
     // interact with database here
+    // "/api/users/1"
   }
 
 
@@ -28,7 +29,6 @@ class Form extends Component {
                 autoFocus="true"
                  />
                <button className={this.props.dbField} onClick={() => { this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
-               <button onClick={() => { this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
              <br />
            </form>
   }

@@ -5,7 +5,15 @@ import CompleteChore from '../components/completeChore';
 import IncompleteChore from '../components/incompleteChore';
 import AddChore from '../components/addChore';
 import GroupChores from '../components/groupChores';
-import { addChore, completeChore, undoComplete, increaseGroups, decreaseGroups } from '../actions';
+import GroupingOfChores from '../components/groupingOfChores';
+import {
+  addChore,
+  completeChore,
+  undoComplete,
+  increaseGroups,
+  decreaseGroups,
+  assignGroup,
+} from '../actions';
 
 class Chores extends Component {
   constructor(props) {
@@ -71,6 +79,10 @@ class Chores extends Component {
           increaseGroups={this.props.increaseGroups}
           decreaseGroups={this.props.decreaseGroups}
         />
+        <GroupingOfChores
+          chores={this.props.chores}
+          assignGroup={this.props.assignGroup}
+        />
       </div>
     );
   }
@@ -88,5 +100,6 @@ export default connect(
     undoComplete,
     increaseGroups,
     decreaseGroups,
+    assignGroup,
   }
 )(Chores);

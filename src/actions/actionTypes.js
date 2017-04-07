@@ -7,6 +7,7 @@ export const COMPLETE_CHORE = 'COMPLETE_CHORE';
 export const UNDO_COMPLETE = 'UNDO_COMPLETE';
 export const INCREASE_GROUPS = 'INCREASE_GROUPS';
 export const DECREASE_GROUPS = 'DECREASE_GROUPS';
+export const ASSIGN_GROUP = 'ASSIGN_GROUP';
 
 // House actions
 export const ADD_USER = 'ADD_USER';

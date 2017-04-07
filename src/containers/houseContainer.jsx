@@ -1,9 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateHouseInfo, removeUser, addUser } from '../actions';
-import User from '../components/user.jsx';
+import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions';
 import HouseInfo from '../components/houseInfo.jsx';
+import { Col, Panel } from 'react-bootstrap';
+import Roommate from '../components/roommate.jsx';
 
 class House extends Component {
 
@@ -15,43 +16,65 @@ class House extends Component {
     });
   }
 
-  addUser(user) {
-    this.props.addUser(user);
-  }
+	addUser(user) {
+		this.props.addUser(user);
+	};
 
-  render() {
-    const users = this.props.house.users;
-    console.log('users! ', users);
-    const houseInfo = this.props.houseInfo;
+	componentWillMount() {
+		console.log('getting house')
+		this.props.getHouse(4)
+	}
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <HouseInfo info={this.props.house.info} onClick={() => {
-              this.updateHouse('address', 'here');
-            }}/>
-          </div>
-          <div className="col-md-6">
-            {this.props.house.users.map(user =>
-              <p key={user}>{user}</p>,
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		// const users = this.props.house.users;
+		// const houseInfo = this.props.houseInfo;
+
+		return (
+			<div className="container">
+				<div className="row">
+					<Col xs={6}>
+						<Panel header="HOUSE INFO">
+							<HouseInfo info={this.props.house.info} onClick={() => {
+								this.updateHouse('address', 'here')
+							}} />
+						</Panel>
+					</Col>
+					<Col xs={6}>
+						<Panel header="Roommates!">
+							{this.props.house.users.map(user => 
+								<Roommate info={user} />
+							)}
+						</Panel>
+				</Col>
+			</div>
+		</div>
+		)
+	}
 }
 
 const mapStateToProps = ({ houseReducer }) => ({
-  house: houseReducer,
-});
+	house: houseReducer,
+})
 
-export default connect(
-  mapStateToProps,
-  {
-    addUser,
-    removeUser,
-    updateHouseInfo
-  },
-)(House);
+const mapDispatchToProps = (dispatch) => {
+	console.log('trying')
+	return {
+		getHouse: (id) => dispatch(getHouse(id)),
+		addUser: (user) => dispatch(getUser(user)),
+		updateHouseInfo: (item, value) => dispatch(updateHouseInfo({
+			item,
+			value
+		}))
+	}
+}
+
+// export default connect(
+// 	mapStateToProps,
+// 	{
+// 		addUser,
+// 		removeUser,
+// 		updateHouseInfo
+// 	}
+// 	)(House)
+
+export default connect(mapStateToProps, mapDispatchToProps)(House);

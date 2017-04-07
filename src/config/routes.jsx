@@ -42,21 +42,34 @@ const SignInHold = () => <div className="centered">
 </div>;
 
 
-const Routes = () => (
-  <HashRouter>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/login" component={Auth} />
-      <Route path="/signup" component={SignInHold} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/chores" component={Chores} />
-      <Route path="/tasks" component={Tasks} />
-      <Route path="/signin" component={Auth} />
-      <Route path="/app" component={App} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/house" component={House} />
-    </Switch>
-  </HashRouter>
-);
+class Routes extends Component {
+
+  componentWillMount() {
+
+  };
+
+  componentDidMount() {
+
+  }
+
+  render() {
+    return (
+    <HashRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Auth} />
+        <Route path="/signup" component={SignInHold} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/chores" component={Chores} />
+        <Route path="/tasks" component={Tasks} />
+        <Route path="/signin" component={Auth} />
+        <Route path="/app" component={App} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/house" component={House} />
+      </Switch>
+    </HashRouter>
+    )
+  }
+};
 export default Routes;

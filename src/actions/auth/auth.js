@@ -44,10 +44,10 @@ export const errorHandler = (dispatch, error, type) => {
   }
 };
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = (e) => {
   console.log("hey youre here")
   return (dispatch) => {
-    axios.post(`${API_URL}/auth/login`, { email, password })
+    axios.post(`${API_URL}/auth/login`, e)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
@@ -62,7 +62,7 @@ export const loginUser = ({ email, password }) => {
 export const registerUser = (e) => {
   console.log(e)
   return (dispatch) => {
-    axios.post(`${API_URL}/auth/register`, { email, first, last, username, password })
+    axios.post(`${API_URL}/auth/register`, e)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });

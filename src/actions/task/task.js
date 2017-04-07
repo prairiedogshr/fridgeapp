@@ -1,7 +1,3 @@
-import axios from 'axios';
-import cookie from 'cookie';
-import { browserhistory } from 'react-router';
-
 import{
   ADD_TASK,
   COMPLETE_TASK,

@@ -1,18 +1,20 @@
 import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO } from '../actions/actionTypes.js';
 
+
 const initialState = {
-  info: {
-    idHouse: 1,
-    address: '1600 Pennsylvania Ave NW',
-    unit_number: 0,
-    city: 'Washington, DC',
-    zip: 20500,
-    info: 'white house',
-    created_at: new Date(),
-    updated_at: new Date(),
-    admin: 1,
-  },
-  users: [2],
+	info: {
+		idHouse: 1,
+		address: '1600 Pennsylvania Ave NW',
+		unit_number: 0,
+		city: 'Washington, DC',
+		state: 'District of Columbia',
+		zip: 20500,
+		info: 'white house',
+		created_at: new Date(),
+		updated_at: new Date(),
+		admin: 1
+	},
+	users: [2]
 };
 
 export default function houseReducer(state = initialState, action) {

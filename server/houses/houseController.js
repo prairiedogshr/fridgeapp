@@ -1,13 +1,14 @@
 const House = require('./houseModel.js');
 
 const getHouse = (req, res, next) => {
-  House.getHouse(req.params.house, (err, house) => {
-    if (err) {
-      next(new Error(err));
-    } else {
-      res.send(house);
-    }
-  });
+	console.log('getting house!!')
+	House.getHouse(req.params.house, (err, house) => {
+		if (err) {
+			next(new Error(err));
+		} else {
+			res.send(house);
+		}
+	})
 };
 
 const createHouse = (req, res, next) => {

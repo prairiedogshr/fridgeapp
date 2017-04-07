@@ -14,10 +14,6 @@ import {
   COMPLETE_TASK,
   UNDO_COMPLETE_TASK,
   EDIT_PROFILE,
-  AUTH_USER,
-  AUTH_ERROR,
-  UNAUTH_USER,
-  PROTECTED_TEST,
   ADD_USER,
   REMOVE_USER,
   UPDATE_HOUSE_INFO,
@@ -175,6 +171,7 @@ export const errorHandler = (dispatch, error, type) => {
 };
 
 export const loginUser = ({ email, password }) => {
+  console.log("hey youre here")
   return (dispatch) => {
     axios.post(`${API_URL}/auth/login`, { email, password })
       .then((response) => {
@@ -188,7 +185,8 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
-export const registerUser = ({ email, first, last, username, password }) => {
+export const registerUser = (e) => {
+  console.log(e)
   return (dispatch) => {
     axios.post(`${API_URL}/auth/register`, { email, first, last, username, password })
       .then((response) => {

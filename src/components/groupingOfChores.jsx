@@ -1,4 +1,17 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
+const Button = withRouter(({ history }) => (
+  <button
+    type="button"
+    onClick={() => {
+      // save the groups to the database
+      history.push('/dashboard');
+    }}
+  >
+    Done!
+  </button>
+));
 
 export default function GroupingOfChores(props) {
   const incomplete = props.chores.incomplete;
@@ -13,7 +26,6 @@ export default function GroupingOfChores(props) {
             <li key={chore.id}>{chore.value}</li>
             <select
               onChange={(e) => {
-                console.log('+++++++', e.target.value);
                 props.assignGroup(chore.id, e.target.value);
               }
               }
@@ -32,6 +44,7 @@ export default function GroupingOfChores(props) {
         }
 
       </ul>
+      <Button />
     </div>
   );
 }

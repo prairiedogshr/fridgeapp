@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateHouseInfo, removeUser, addUser } from '../actions';
+import { updateHouseInfo, removeUser, addUser } from '../actions/house/house';
 import User from '../components/user.jsx';
 import HouseInfo from '../components/houseInfo.jsx';
 

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 // import actions here and then add the to mapStateToProps
-import { isHomeless } from './actions';
+import { isHomeless } from './actions/example/example.js';
 
 // main react app component
 class App extends Component {

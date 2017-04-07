@@ -47,13 +47,15 @@ export const errorHandler = (dispatch, error, type) => {
 export const loginUser = (e) => {
   console.log("hey youre here")
   return (dispatch) => {
-    axios.post(`${API_URL}/auth/login`, e)
+    axios.post(`${API_URL}/api/login`, e)
       .then((response) => {
+        console.log("Good work!!!")
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
         window.location.href = CLIENT_ROOT_URL + '/dashboard';
       })
       .catch((error) => {
+        console.log("We goofed")
         errorHandler(dispatch, error.response, AUTH_ERROR);
       });
   };

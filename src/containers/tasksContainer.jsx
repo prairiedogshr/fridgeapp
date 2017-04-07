@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask, completeTask, undoCompleteTask } from '../actions';
+import { addTask, completeTask, undoCompleteTask } from '../actions/task/task';
 import CompleteTask from '../components/completeTask.jsx';
 import IncompleteTask from '../components/incompleteTask.jsx';
 import AddTask from '../components/addTask.jsx';

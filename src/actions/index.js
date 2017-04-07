@@ -18,13 +18,15 @@ import {
   ADD_USER,
   REMOVE_USER,
   UPDATE_HOUSE_INFO,
+  GET_HOUSE_REQUEST,
+  RECEIVE_HOUSE
 } from './actionTypes';
 
 import axios from 'axios';
 import cookie from 'cookie';
 import {browserhistory} from 'react-router';
 
-const API_URL = 'http://localhost:8080/api'
+// const API_URL = 'http://localhost:8080/api'
 
 // example action
 export const isHomeless = (user) => {
@@ -35,6 +37,27 @@ export const isHomeless = (user) => {
       check: `${user} is homeless`,
     },
   };
+};
+
+//init actions
+export const getHouse = (id) => {
+  console.log('calling get house!')
+  return (dispatch) => {
+    console.log('here')
+    axios.get(`/api/houses/${id}`)
+    .then(resp => {
+      console.log('inside get house with: ', resp)
+      dispatch(receiveHouse(resp.data))
+    });
+  }
+};
+
+export const receiveHouse = (house) => {
+  console.log('received house: ', house)
+  return {
+    type: RECEIVE_HOUSE,
+    payload: house
+  }
 };
 
 // Chore actions

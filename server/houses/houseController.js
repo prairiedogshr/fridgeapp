@@ -2,6 +2,7 @@ const db = require('../config/config.js');
 const House = require('./houseModel.js');
 
 const getHouse = (req, res, next) => {
+	console.log('getting house!!')
 	House.getHouse(req.params.house, (err, house) => {
 		if (err) {
 			next(new Error(err));

@@ -6,7 +6,7 @@ import Log from './log.jsx'
 import {  loginUser,
   logoutUser,
   registerUser,
-  protectedTest} from '../actions'
+  protectedTest} from '../actions/auth/auth'
 
 class Auth extends Component{
   constructor(props){

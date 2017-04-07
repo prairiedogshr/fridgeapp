@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import Field from '../components/user.jsx';
-import { updateProfile } from '../actions';
+import { updateProfile } from '../actions/profile/profile';
 
 class User extends Component {
   render() {

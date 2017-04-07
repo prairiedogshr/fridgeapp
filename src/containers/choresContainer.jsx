@@ -13,7 +13,7 @@ import {
   increaseGroups,
   decreaseGroups,
   assignGroup,
-} from '../actions';
+} from '../actions/chore/chore';
 
 class Chores extends Component {
   constructor(props) {

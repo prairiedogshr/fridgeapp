@@ -5,11 +5,11 @@ export default function UncompletedChore(props) {
   return (
     <div>
       <h1>
-        Incomplete Chores
+        Chores
       </h1>
       <ul>
         {incomplete.map(chore => (
-          <li key={chore.id} onClick={() => { props.completeChore(chore.id); }}>{chore.value}</li>
+          <li key={chore.id}>{chore.value}</li>
           ), this)
         }
       </ul>

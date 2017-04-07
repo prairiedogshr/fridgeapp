@@ -20,7 +20,7 @@ class Chores extends Component {
     super(props);
     this.state = {
       inputField: '',
-      choreGroups: 0,
+      nextClicked: false,
     }
   }
 
@@ -48,43 +48,45 @@ class Chores extends Component {
     this.props.undoComplete(choreId);
   };
 
-  // increaseGroups = () => {
-  //   this.state.choreGroups++;
-  // }
-
-  // decreaseGroups = () => {
-  //   this.state.choreGroups--;
-  // }
-
   render() {
     const complete = this.props.chores.complete;
     const incomplete = this.props.chores.incomplete;
 
-    return (
-      <div>
-        <AddChore
-          handleKeyUp={this.handleKeyUp}
-          buttonSubmit={this.buttonSubmit}
-        />
+/*
         <CompleteChore
           chores={this.props.chores}
           undoComplete={this.undoComplete}
-        />
-        <IncompleteChore
-          chores={this.props.chores}
-          completeChore={this.completeChore}
-        />
-        <GroupChores
-          chores={this.props.chores}
-          increaseGroups={this.props.increaseGroups}
-          decreaseGroups={this.props.decreaseGroups}
-        />
-        <GroupingOfChores
-          chores={this.props.chores}
-          assignGroup={this.props.assignGroup}
-        />
-      </div>
-    );
+        />*/
+    if (this.state.nextClicked === false) {
+      return (
+        <div>
+          <AddChore
+            handleKeyUp={this.handleKeyUp}
+            buttonSubmit={this.buttonSubmit}
+          />
+
+          <IncompleteChore
+            chores={this.props.chores}
+            completeChore={this.completeChore}
+          />
+          <GroupChores
+            chores={this.props.chores}
+            increaseGroups={this.props.increaseGroups}
+            decreaseGroups={this.props.decreaseGroups}
+          />
+          <button onClick={() => {this.state.nextClicked = true; this.forceUpdate(); console.log(this.state.nextClicked);}}>Next</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <GroupingOfChores
+            chores={this.props.chores}
+            assignGroup={this.props.assignGroup}
+          />
+        </div>
+      )
+    }
   }
 }
 

@@ -7,7 +7,6 @@ import axios from 'axios';
 class Form extends Component {
 
   OnSubmit(field, data) {
-    //this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
     // "/api/users/1"
   }

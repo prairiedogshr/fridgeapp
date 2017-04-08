@@ -7,21 +7,6 @@ import { Col, Panel } from 'react-bootstrap';
 import Roommate from '../components/roommate.jsx';
 
 class House extends Component {
-	constructor() {
-		super()
-		
-	}
-
-
-	componentWillMount() {
-		console.log('getting state')
-		this.setState(this.props.house);
-		console.log(this.state)
-	}
-
-	handleSubmit(e) {
-		console.log('eeeeeeeeee ', e)
-	}
 
 	render() {
 		return (
@@ -29,10 +14,8 @@ class House extends Component {
 				<div className="row">
 					<Col xs={6}>
 						<Panel header="HOUSE INFO">
-							<HouseInfo state={this.state} 
-							info={this.props.house.info} 
-							update={this.props.updateHouseInfo} 
-							handleSubmit={this.handleSubmit.bind(this)} />
+							<HouseInfo info={this.props.house.info} 
+							update={this.props.updateHouseInfo} />
 						</Panel>
 					</Col>
 					<Col xs={6}>

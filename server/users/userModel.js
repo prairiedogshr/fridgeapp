@@ -68,7 +68,7 @@ module.exports = {
   },
 
   updateUser: (update, callback) => {
-    console.log("put by ID: ", update)
+    console.log('put by ID: ', update)
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,
@@ -79,5 +79,28 @@ module.exports = {
       .catch((err) => {
         callback(err);
       });
+  },
+
+  getAppState: (id, callback) => {
+    db.select().from('user').where('user_id', id)
+    .then((data) => {
+      const user = db.select().from('user').where('user_id', id);
+      const house = db.select().from('house').where('house_id', data[0].house_in_user);
+      const tasks = db.select().from('task').where('claimed_by_user_in_task', id);
+      const chores = db.select().from('chore').where('assigned_to_user_in_chore', id);
+      Promise.all([user, house, tasks, chores])
+      .then((dataa) => {
+        const formedData = {
+          user: dataa[0],
+          house: dataa[1],
+          tasks: dataa[2],
+          chores: dataa[3],
+        };
+        callback(null, formedData);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+    });
   },
 };

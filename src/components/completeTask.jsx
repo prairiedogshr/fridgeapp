@@ -16,3 +16,4 @@ export default function CompletedTask(props) {
     </div>
   );
 }
+ 

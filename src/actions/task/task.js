@@ -1,14 +1,13 @@
-import{
-  ADD_TASK,
-  COMPLETE_TASK,
-  UNDO_COMPLETE_TASK
-} from '../actionTypes'
+import { ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK } from '../actionTypes'
 
 export const addTask = (taskText) => {
   console.log('ACTION - adding chore: ', taskText);
-  return {
-    type: ADD_TASK,
-    payload: taskText,
+  return (dispatch, getState) => {
+    const state = getState()
+    return {
+      type: ADD_TASK,
+      payload: taskText,
+    };
   };
 };
 

@@ -14,6 +14,7 @@ module.exports = (app, passport) => {
   //   failureRedirect: '/signup',
   //   failureFlash: false
   // }));
+  app.get('/api/users/appstate/:id', userController.getAppState);
   app.post('/api/users/', userController.signup);
   app.get('/api/users/:id', userController.getUser);
   app.get('/api/houses/:house', houseController.getHouse);

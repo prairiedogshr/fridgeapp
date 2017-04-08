@@ -79,8 +79,27 @@ export default function choresReducer(state = initialState, action) {
       return state;
 
     case ASSIGN_GROUP:
-      const index = state.incomplete.findIndex(val => val.id === action.payload.choreId);
-      const newItem = Object.assign({}, state.incomplete[index], { group: action.payload.group });
+      const completeIndex = state.complete.findIndex(val => val.id === action.payload.choreId);
+      const incompleteIndex = state.incomplete.findIndex(val => val.id === action.payload.choreId);
+      let index;
+      let newItem;
+
+      if (completeIndex !== -1) {
+        console.log(completeIndex);
+        index = completeIndex;
+        newItem = Object.assign({}, state.complete[index], { group: action.payload.group });
+        return {
+          ...state,
+          complete: [
+            ...state.complete.slice(0, index),
+            newItem,
+            ...state.complete.slice(index + 1, state.complete.length),
+          ],
+        };
+      }
+      console.log(incompleteIndex);
+      index = incompleteIndex;
+      newItem = Object.assign({}, state.incomplete[index], { group: action.payload.group });
       return {
         ...state,
         incomplete: [

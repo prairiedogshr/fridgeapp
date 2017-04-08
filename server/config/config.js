@@ -1,4 +1,3 @@
-
 // =============================================================
 // LOCAL DATABASE CONFIGURATION
 // =============================================================
@@ -33,6 +32,7 @@ const knex = require('knex')({
 
 const db = require('bookshelf')(knex);
 
+console.log(process.env.DB_SERVER);
 
 // =============================================================
 // USER TABLE

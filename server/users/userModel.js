@@ -91,10 +91,10 @@ module.exports = {
       Promise.all([user, house, tasks, chores])
       .then((dataa) => {
         const formedData = {
-          user: dataa[0],
-          house: dataa[1],
-          tasks: dataa[2],
-          chores: dataa[3],
+          user: dataa[0] || undefined,
+          house: dataa[1] || undefined,
+          tasks: dataa[2] || undefined,
+          chores: dataa[3] || undefined,
         };
         callback(null, formedData);
       })

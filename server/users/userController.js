@@ -33,7 +33,19 @@ const updateUser = (req, res, next) => {
   });
 };
 
+const getAppState = (req, res, next) => {
+  console.log("almost")
+  User.getAppState(req.params.id, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user);
+    }
+  });
+};
+
 module.exports = {
+  getAppState,
   getUser,
   signup,
   updateUser,

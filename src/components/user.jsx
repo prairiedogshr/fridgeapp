@@ -7,13 +7,19 @@ import axios from 'axios';
 class Form extends Component {
 
   OnSubmit(field, data) {
-    console.log(field, data);
-    console.log(this.props.dbField)
     this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
     // "/api/users/1"
   }
 
+  profileSubmit(id, field, add) {
+    axios.put('/api/users/', {
+      key: field,
+      value: add,
+      id,
+    },
+  );
+  }
   // componentWillMount() {
   //   axios.get('/api/users/1')
   //   .then(data => {
@@ -24,25 +30,28 @@ class Form extends Component {
   // }
 
   render() {
-    return <form>
-              <label>
-                <div className="formField">{this.props.field}</div>
-              </label><br />
-              <input
-                className={this.props.dbField}
-                ref="newData"
-                type="text"
-                placeholder={this.props.data}
-                autoFocus="true"
-                 />
-               <button className={this.props.dbField} onClick={() => {
-                    this.OnSubmit(this.props.field, this.refs.newData.value)}} type="Submit">Edit</button>
-             <br />
-           </form>
+    return (
+      <form>
+        <label>
+          <div className="formField">{this.props.field}</div>
+        </label><br />
+        <input
+          className={this.props.dbField}
+          ref='newData'
+          type="text"
+          placeholder={this.props.data}
+          autoFocus="true"
+        />
+        <button
+          className={this.props.dbField} onClick={() => {
+            this.OnSubmit(this.profileSubmit(1, this.props.dbField, this.refs.newData.value));}} type="Submit">Edit</button>
+        <br />
+      </form>);
   }
 }
 
 Form.propTypes = {
+  profileSubmit: React.PropTypes.func,
   OnSubmit: React.PropTypes.func,
   updateProfile: React.PropTypes.func,
   field: React.PropTypes.string,

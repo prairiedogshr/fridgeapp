@@ -68,6 +68,7 @@ module.exports = {
   },
 
   updateUser: (update, callback) => {
+    console.log("put by ID: ", update)
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,

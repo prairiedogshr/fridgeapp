@@ -16,10 +16,6 @@ class User extends Component {
   componentWillMount() {
     axios.get('/api/users/1')
     .then((data) => {
-      // this.setState({
-      //   data
-      //   // loaded: true
-      // })
       this.setState(data);
       this.state.loaded = true;
       this.forceUpdate();

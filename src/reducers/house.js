@@ -15,7 +15,34 @@ const initialState = {
 		updated_at: new Date(),
 		admin: 1
 	},
-	users: [2],
+	users: [{
+  "user_id": 1,
+  "user_first_name": "David",
+  "user_last_name": "",
+  "user_email": "",
+  "user_username": "kblanda",
+  "user_password": "$2a$10$RO2OQG.c14K2iy74//vYMO2AxURxMbx5WOmLap1XhkI.TQa02AVnS",
+  "user_phone": "",
+  "house_in_user": 20,
+  "user_is_admin": 0,
+  "user_info": "",
+  "created_at": null,
+  "updated_at": null
+},
+{
+  "user_id": 2,
+  "user_first_name": "Celestine",
+  "user_last_name": "Hyatt",
+  "user_email": "oral.batz@example.com",
+  "user_username": "adonis29",
+  "user_password": "$2a$10$RO2OQG.c14K2iy74//vYMO2AxURxMbx5WOmLap1XhkI.TQa02AVnS",
+  "user_phone": "3114783052",
+  "house_in_user": 20,
+  "user_is_admin": 0,
+  "user_info": "Pariatur expedita omnis qui dolore. Occaecati et rerum veritatis dolor. Quasi et optio omnis aliquam et sed.",
+  "created_at": null,
+  "updated_at": null
+}],
   loaded: false
 };
 

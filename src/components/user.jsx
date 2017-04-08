@@ -1,25 +1,17 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile } from '../actions/profile/profile.js';
+import { updateProfile, submitProfile } from '../actions/profile/profile.js';
 import axios from 'axios';
 
 class Form extends Component {
 
   OnSubmit(field, data) {
-    this.props.updateProfile(field, data);
+    //this.props.updateProfile(field, data);
     this.refs.newData.placeholder = this.refs.newData.value;
     // "/api/users/1"
   }
 
-  profileSubmit(id, field, add) {
-    axios.put('/api/users/', {
-      key: field,
-      value: add,
-      id,
-    },
-  );
-  }
   // componentWillMount() {
   //   axios.get('/api/users/1')
   //   .then(data => {
@@ -44,13 +36,14 @@ class Form extends Component {
         />
         <button
           className={this.props.dbField} onClick={() => {
-            this.OnSubmit(this.profileSubmit(1, this.props.dbField, this.refs.newData.value));}} type="Submit">Edit</button>
+            this.OnSubmit(this.props.submitProfile(this.props.dbField, this.refs.newData.value));}} type="Submit">Edit</button>
         <br />
       </form>);
   }
 }
 
 Form.propTypes = {
+  submitProfile: React.PropTypes.func,
   profileSubmit: React.PropTypes.func,
   OnSubmit: React.PropTypes.func,
   updateProfile: React.PropTypes.func,
@@ -66,6 +59,7 @@ const mapStateToProps = ({ userReducer }) => ({
 export default connect(
   mapStateToProps,
   {
+    submitProfile,
     updateProfile,
   },
 )(Form);

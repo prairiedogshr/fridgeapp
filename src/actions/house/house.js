@@ -6,15 +6,27 @@ import{
 } from '../actionTypes'
 import axios from 'axios';
 
-export const updateHouseInfo = updateInfo => ({
-  type: UPDATE_HOUSE_INFO,
-  payload: {
-    item: updateInfo.item,
-    value: updateInfo.value,
-  },
-});
+export const updateHouseInfo = (updateInfo) => {
+  return (dispatch, getState) => {
+    console.log('getting state ', getState())
+    return axios.put('/api/houses/', {
+      id: 1,
+      key: updateInfo.key,
+      value: updateInfo.value
+    })
+    .then(resp => {
+      dispatch({
+        type: UPDATE_HOUSE_INFO,
+        payload: {
+          item: updateInfo.item,
+          value: updateInfo.value,
+        }
+      })
+    })
+  }
+}
 
-export const addUser = user => ({
+export const addUser = (user) => ({
   type: ADD_USER,
   payload: user,
 });
@@ -27,7 +39,8 @@ export const removeUser = (user) => {
 };
 
 export const getHouse = (id) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
     .then(resp => {
       console.log('house!! ', resp)

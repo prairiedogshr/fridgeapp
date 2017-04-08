@@ -67,7 +67,6 @@ class Chores extends Component {
 
           <AdminChores
             chores={this.props.chores}
-            completeChore={this.completeChore}
           />
           <GroupChores
             chores={this.props.chores}

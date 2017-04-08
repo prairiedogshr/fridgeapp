@@ -14,6 +14,7 @@ const Button = withRouter(({ history }) => (
 ));
 
 export default function GroupingOfChores(props) {
+  const complete = props.chores.complete;
   const incomplete = props.chores.incomplete;
   return (
     <div>
@@ -21,7 +22,7 @@ export default function GroupingOfChores(props) {
         Assign Chore Groups
       </h3>
       <ul>
-        {incomplete.map(chore => (
+        {complete.concat(incomplete).map(chore => (
           <div key={chore.id}>
             <li key={chore.id}>{chore.value}</li>
             <select
@@ -42,7 +43,6 @@ export default function GroupingOfChores(props) {
           </div>
           ), this)
         }
-
       </ul>
       <Button />
     </div>

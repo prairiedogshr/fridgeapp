@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { ControlLabel, FormControl, FormGroup, InputGroup } from 'react-bootstrap'
 
-export default function HouseInfo({ info, update, handleSubmit, state }) {
-  console.log('state? ', state)
+export default function HouseInfo({ info, update }) {
   return (
     <div>
       <form>
@@ -16,24 +15,24 @@ export default function HouseInfo({ info, update, handleSubmit, state }) {
         }}>
         <ControlLabel>Address</ControlLabel>
         <FormControl  id="house_address" onClick={(e) => {}} type="text"
-        defaultValue={state.info.address} placeholder="Street Address"
+        defaultValue={info.address} placeholder="Street Address"
         />
         <FormControl id="house_unit_number" type="text"
-        defaultValue={state.info.unit_number} placeholder = "Unit Number"
+        defaultValue={info.unit_number} placeholder = "Unit Number"
         />
         <FormControl id="house_city" type="text"
-        defaultValue={state.info.city} placeholder = "City"
+        defaultValue={info.city} placeholder = "City"
         />
         <FormControl id="house_state" type="text"
-        defaultValue={state.info.state} placeholder = "State"
+        defaultValue={info.state} placeholder = "State"
         />
         <FormControl id="house_zip" type="text"
-        defaultValue={state.info.zip} placeholder = "Zipcode"
+        defaultValue={info.zip} placeholder = "Zipcode"
         />
         <br/>
         <ControlLabel>Info</ControlLabel>
         <FormControl id="house_info" type="text"
-        defaultValue={state.info.info} placeholder = "House Info"
+        defaultValue={info.info} placeholder = "House Info"
         />
         </FormGroup>
       </form>

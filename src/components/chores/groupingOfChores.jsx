@@ -22,7 +22,7 @@ export default function GroupingOfChores(props) {
       </h3>
       <ul>
         {incomplete.map(chore => (
-          <div>
+          <div key={chore.id}>
             <li key={chore.id}>{chore.value}</li>
             <select
               onChange={(e) => {

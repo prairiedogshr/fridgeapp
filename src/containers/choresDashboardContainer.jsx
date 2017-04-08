@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import CompleteChore from '../components/chores/completeChore';
-import AdminChores from '../components/chores/adminChores';
+import IncompleteChore from '../components/chores/incompleteChore';
 import AddChore from '../components/chores/addChore';
 import GroupChores from '../components/chores/groupChores';
 import GroupingOfChores from '../components/chores/groupingOfChores';
@@ -15,7 +15,7 @@ import {
   assignGroup,
 } from '../actions/chore/chore';
 
-class Chores extends Component {
+class ChoresDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,41 +52,21 @@ class Chores extends Component {
     const complete = this.props.chores.complete;
     const incomplete = this.props.chores.incomplete;
 
-/*
+    return (
+      <div>
+        <h1>
+          Your Chores
+        </h1>
+        <IncompleteChore
+          chores={this.props.chores}
+          completeChore={this.completeChore}
+        />
         <CompleteChore
           chores={this.props.chores}
           undoComplete={this.undoComplete}
-        />*/
-    if (this.state.nextClicked === false) {
-      return (
-        <div>
-          <AddChore
-            handleKeyUp={this.handleKeyUp}
-            buttonSubmit={this.buttonSubmit}
-          />
-
-          <AdminChores
-            chores={this.props.chores}
-            completeChore={this.completeChore}
-          />
-          <GroupChores
-            chores={this.props.chores}
-            increaseGroups={this.props.increaseGroups}
-            decreaseGroups={this.props.decreaseGroups}
-          />
-          <button onClick={() => {this.state.nextClicked = true; this.forceUpdate(); console.log(this.state.nextClicked);}}>Next</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <GroupingOfChores
-            chores={this.props.chores}
-            assignGroup={this.props.assignGroup}
-          />
-        </div>
-      )
-    }
+        />
+      </div>
+    );
   }
 }
 
@@ -104,4 +84,4 @@ export default connect(
     decreaseGroups,
     assignGroup,
   }
-)(Chores);
+)(ChoresDashboard);

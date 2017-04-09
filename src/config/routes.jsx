@@ -32,8 +32,11 @@ const Home = () => (
     <Link to="/dashboard">Dashboard</Link>
     <br />
     <Link to="/settings">Settings</Link>
+    <br />
     <Link to="/house">House</Link>
+    <br />
     <Link to="/profile">profile</Link>
+    <br />
   </div>
 );
 

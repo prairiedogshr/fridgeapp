@@ -86,15 +86,20 @@ module.exports = {
     .then((data) => {
       const user = db.select().from('user').where('user_id', id);
       const house = db.select().from('house').where('house_id', data[0].house_in_user);
-      const tasks = db.select().from('task').where('claimed_by_user_in_task', id);
-      const chores = db.select().from('chore').where('assigned_to_user_in_chore', id);
-      Promise.all([user, house, tasks, chores])
+      const userTasks = db.select().from('task').where('claimed_by_user_in_task', id);
+      const userChores = db.select().from('chore').where('assigned_to_user_in_chore', id);
+      const houseTasks = db.select().from('task').where('house_in_task', data[0].house_in_user);
+      const houseChores = db.select().from('chore').where('house_in_chore', data[0].house_in_user);
+
+      Promise.all([user, house, userTasks, userChores, houseTasks, houseChores])
       .then((dataa) => {
         const formedData = {
-          user: dataa[0],
-          house: dataa[1],
-          tasks: dataa[2],
-          chores: dataa[3],
+          user: dataa[0] || undefined,
+          house: dataa[1] || undefined,
+          userTasks: dataa[2] || undefined,
+          userChores: dataa[3] || undefined,
+          houseTasks: dataa[4] || undefined,
+          houseChores: dataa[5] || undefined,
         };
         callback(null, formedData);
       })

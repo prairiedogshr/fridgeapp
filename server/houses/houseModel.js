@@ -31,6 +31,7 @@ const createHouse = (house, callback) => {
 };
 
 const updateHouse = (update, callback) => {
+  console.log('~~~~~~~~~` ', update)
   db('house').where('house_id', update.id)
     .update({
       [update.key]: update.value,

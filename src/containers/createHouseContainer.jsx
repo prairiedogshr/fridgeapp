@@ -1,18 +1,19 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { createHouse } from '../actions/house/house';
 
 class CreateHouse extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
-      unit: '',
-      city: '',
-      state: '',
-      zip: '',
-      info: '',
+      address: undefined,
+      unit: undefined,
+      city: undefined,
+      state: undefined,
+      zip: undefined,
+      info: undefined,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,7 +25,20 @@ class CreateHouse extends Component {
   }
 
   handleSubmit(event) {
+    console.log('Ayyo');
+    console.log(createHouse);
+    const a = this.state.address;
+    const c = this.state.city;
+    const s = this.state.state;
+    const z = this.state.zip;
+
     event.preventDefault();
+    if (a && c && s && z) {
+      console.log('ok');
+      this.props.createHouse(this.state);
+    } else {
+      console.log('enter all fields');
+    }
   }
 
   render() {
@@ -77,4 +91,17 @@ class CreateHouse extends Component {
 
 }
 
-export default connect()(CreateHouse);
+const mapStateToProps = ({ createHouseReducer }) => ({
+  create: createHouseReducer,
+});
+
+CreateHouse.propTypes = {
+  createHouse: React.PropTypes.func,
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    createHouse,
+  },
+)(CreateHouse);

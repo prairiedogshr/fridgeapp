@@ -13,6 +13,8 @@ export const ASSIGN_GROUP = 'ASSIGN_GROUP';
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const UPDATE_HOUSE_INFO = 'UPDATE_HOUSE_INFO';
+export const CREATE_HOUSE = 'CREATE_HOUSE';
+
 
 // Task actions
 export const ADD_TASK = 'ADD_TASK';
@@ -34,4 +36,3 @@ export const AUTH_USER = 'auth_user',
 //House Init
 export const GET_HOUSE_REQUEST = 'GET_HOUSE_REQUEST';
 export const RECEIVE_HOUSE = 'RECEIVE_HOUSE';
-

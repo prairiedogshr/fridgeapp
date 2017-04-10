@@ -15,7 +15,8 @@ const createChore = (req, res, next) => {
     if (err) {
       next(new Error(err));
     } else {
-      res.redirect('/#/dashboard');
+      // res.redirect('/#/dashboard');
+      res.sendStatus(200);
     }
   });
 };
@@ -31,4 +32,27 @@ const updateChore = (req, res, next) => {
   });
 };
 
-module.exports = { getChore, createChore, updateChore };
+
+const getHouseChores = (req, res, next) => {
+  Chore.getHouseChores(req.params.house, (err, chores) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(chores);
+    }
+  });
+};
+
+const getUserChores = (req, res, next) => {
+  Chore.getUserChores(req.params.user, (err, chores) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(chores);
+    }
+  });
+}
+
+
+
+module.exports = { getChore, createChore, updateChore, getHouseChores, getUserChores, };

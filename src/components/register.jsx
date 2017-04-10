@@ -25,7 +25,6 @@ class Register extends Component {
           <input type='password' ref='password' className="form-control" placeholder='Password'/>
           <input type='text' ref='username' className="form-control" placeholder='username'/>
           <input type='text' ref='phone' className="form-control" placeholder='phone'/>
-          <input type='text' ref='birthday' className="form-control" placeholder='birthday'/>
           <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
             SignUp
           </button>
@@ -42,11 +41,9 @@ class Register extends Component {
       const password = this.refs.password
       const username = this.refs.username
       const phone = this.refs.phone
-      const birthday = this.refs.birthday
-      const creds = {user_phone: phone.value,
+      const creds = { user_phone: phone.value,
         user_username: username.value,
         user_first_name: first.value,
-        user_birthday: birthday.value,
         user_last_name: last.value,
         user_email: email.value.trim(),
         user_password: password.value.trim()}

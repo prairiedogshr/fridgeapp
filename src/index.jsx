@@ -13,8 +13,13 @@ import thunk from 'redux-thunk'
 const history = createHistory();
 const middleware = applyMiddleware(thunk);
 
+const mainReducer = (state = {}, action) => {
+  return action.type === 'HYDRATE' ? action.payload : reducer(state, action);
+}
+
+
 const store = createStore(
-  reducer,
+  mainReducer,
   compose(middleware,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 

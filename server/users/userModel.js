@@ -92,18 +92,32 @@ module.exports = {
     .then((data) => {
       const user = db.select().from('user').where('user_id', id);
       const house = db.select().from('house').where('house_id', data[0].house_in_user);
+      const roommates = db.select().from('user').where('house_in_user', data[0].house_in_user);
       const userTasks = db.select().from('task').where('claimed_by_user_in_task', id);
       const userChores = db.select().from('chore').where('assigned_to_user_in_chore', id);
       const houseTasks = db.select().from('task').where('house_in_task', data[0].house_in_user);
       const houseChores = db.select().from('chore').where('house_in_chore', data[0].house_in_user);
 
-      Promise.all([user, house, userTasks, userChores, houseTasks, houseChores])
+      Promise.all([user, house, userTasks, userChores, houseTasks, houseChores, roommates])
       .then((dataa) => {
+        console.log('tasks: ', dataa[3])
         const formedData = {
-          user: dataa[0] || undefined,
-          house: dataa[1] || undefined,
-          userTasks: dataa[2] || undefined,
-          userChores: dataa[3] || undefined,
+          userReducer: dataa[0][0] || undefined,
+          houseReducer: dataa[1][0],
+          houseReducer: Object.assign({}, 
+            dataa[1][0],
+            {users: dataa[6]} 
+            ),
+          // houseReducer: dataa[1] || undefined,
+          tasksReducer: {
+            complete: dataa[2].filter(item => item.task_is_done === 1),
+            incomplete: dataa[2].filter(item => item.task_is_done === 0)
+          },
+          choresReducer: {
+            complete: dataa[3].filter(chore => chore.chore_is_done === 1),
+            incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
+            groups: [1]
+          },
           houseTasks: dataa[4] || undefined,
           houseChores: dataa[5] || undefined,
         };

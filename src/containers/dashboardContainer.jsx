@@ -3,11 +3,16 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import ChoresDashboard from './choresDashboardContainer.jsx';
 import Tasks from './tasksContainer.jsx';
+import { getAppState } from '../actions/init/init.js';
 
 // import actions here and then add the to mapStateToProps
 
 // main react app component
 class Dashboard extends Component {
+
+  componentWillMount() {
+    this.props.getAppState()
+  }
   render() {
     return (
       <div className="dashboardCont">
@@ -30,5 +35,5 @@ class Dashboard extends Component {
 //   someKey: (someArg) => {dispatch(someFunc(someArg))}
 // })
 
-export default connect()(Dashboard);
+export default connect(null, { getAppState })(Dashboard);
 // export default App;

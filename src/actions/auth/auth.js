@@ -9,7 +9,7 @@ import{
   PROTECTED_TEST
 } from '../actionTypes'
 
-const API_URL = 'http://localhost:8080/api';
+const API_URL = 'http://localhost:1337/api';
 
 // Login actions
 export const logoutUser = () => {
@@ -45,9 +45,9 @@ export const errorHandler = (dispatch, error, type) => {
 };
 
 export const loginUser = (e) => {
-  console.log("hey youre here")
+  console.log("hey youre here with: ",  e)
   return (dispatch) => {
-    axios.post(`${API_URL}/api/login`, e)
+    axios.post(`${API_URL}/users/signin`, e)
       .then((response) => {
         console.log("Good work!!!")
         cookie.save('token', response.data.token, { path: '/' });

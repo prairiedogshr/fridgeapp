@@ -1,4 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../users/userModel.js');
 
 // module.exports = () => {
@@ -35,6 +36,7 @@ module.exports = (passport) => {
     session: true,
     passReqToCallback: true,
   }, (req, user, done) => {
+    console.log('hello?')
     process.nextTick(() => {
       User.signup(req.body, (err, newUser) => {
         if (err) return done(err);
@@ -42,6 +44,21 @@ module.exports = (passport) => {
       });
     });
   }));
+
+  //google
+  passport.use('google', new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "localhost:1337/#/dashboard"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log('hello?');
+    return cb(null, 'hi!')
+    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+  }
+));
   // log in
   passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
@@ -49,6 +66,7 @@ module.exports = (passport) => {
     session: true,
     passReqToCallback: true,
   }, (req, email, password, done) => {
+    console.log('inside local login with req');
     User.signin(email, password, (err, match) => {
       if (err) {
         console.log('error ', err);

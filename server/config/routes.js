@@ -9,6 +9,12 @@ module.exports = (app, passport) => {
     failureRedirect: '/#/login',
     failureFlash: false
   }));
+
+  // app.post('/api/users/signin', passport.authenticate('google', {
+  //   successRedirect: '/#/dashboard',
+  //   failureRedirect: '/#/login',
+  //   failureFlash: false    
+  // }))
   // app.post('/api/users/signup', passport.authenticate('local-signup', {
   //   successRedirect: '/dashboard',
   //   failureRedirect: '/signup',

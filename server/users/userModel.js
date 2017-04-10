@@ -52,11 +52,17 @@ module.exports = {
   },
 
   signin: (email, password, callback) => {
+    console.log('~~~~~~~~` ', email, password)
     helpers.checkPass(email, password, (err, match) => {
       if (err) {
+        console.log('error inside pass')
         callback(err);
+      } else if (!match) {
+        console.log('wrong pass');
+        callback('wrong pass');
       } else {
-        callback(null, match);
+        console.log('pass all good');
+        callback(null, true);
       }
     });
   },

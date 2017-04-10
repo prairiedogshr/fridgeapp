@@ -1,11 +1,16 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.use(new GoogleStrategy({
-	clientID: 'adlfkj',
-	clientSecret: 'lfkdjf',
-	callbackURL: 'fill in'
-},
-(accessToken, refreshToken, profile, cb) => {
-	//find or create user // (err, user) => cb(err, user)
-}));
+passport.use('google', new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://www.hugequickly.com"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log('hello?');
+    return cb(null, 'hi!')
+    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+  }
+));

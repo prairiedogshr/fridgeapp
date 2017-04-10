@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask, completeTask, undoCompleteTask } from '../actions';
+import { addTask, completeTask, undoCompleteTask } from '../actions/task/task';
 import CompleteTask from '../components/completeTask.jsx';
 import IncompleteTask from '../components/incompleteTask.jsx';
 import AddTask from '../components/addTask.jsx';
@@ -13,15 +13,15 @@ class Tasks extends Component {
       this.props.addTask(e.target.value);
       e.target.value = '';
     }
-  }
+  };
 
   completeTask = taskId => {
     this.props.completeTask(taskId);
-  }
+  };
 
   undoCompleteTask = taskId => {
     this.props.undoCompleteTask(taskId);
-  }
+  };
 
   render() {
     console.log('++++++++', this.props);
@@ -48,7 +48,7 @@ class Tasks extends Component {
 
 const mapStateToProps = ({ tasksReducer }) => ({
   tasks: tasksReducer
-})
+});
 
 export default connect(
   mapStateToProps,
@@ -57,4 +57,4 @@ export default connect(
     completeTask,
     undoCompleteTask
   }
-)(Tasks)
+)(Tasks);

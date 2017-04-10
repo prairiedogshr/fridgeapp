@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/index.js';
+import { loginUser } from '../actions/auth/auth.js';
 
 class Login extends Component {
   constructor(props){
@@ -31,7 +31,7 @@ class Login extends Component {
       const email = this.refs.email
       const password = this.refs.password
       const creds = { email: email.value.trim(), password: password.value.trim()}
-      loginUser(creds)
+      this.props.loginUser(creds)
     }
   }
 

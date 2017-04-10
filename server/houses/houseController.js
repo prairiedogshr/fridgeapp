@@ -1,7 +1,7 @@
-const db = require('../config/config.js');
 const House = require('./houseModel.js');
 
 const getHouse = (req, res, next) => {
+	console.log('getting house!!')
 	House.getHouse(req.params.house, (err, house) => {
 		if (err) {
 			next(new Error(err));
@@ -16,20 +16,20 @@ const createHouse = (req, res, next) => {
 		if (err) {
 			next(new Error(err));
 		} else {
-			res.redirect('/dashboard');
+			res.redirect('/#/dashboard');
 		}
 	})
 };
 
 const updateHouse = (req, res, next) => {
-	console.log('got into update House')
-	House.updateHouse(req.body, (err, house) => {
-		if (err) {
-			next(new Error(err));
-		} else {
-			res.send(house);
-		}
-	})
-}
+  console.log('got into update House');
+  House.updateHouse(req.body, (err, house) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(house);
+    }
+  });
+};
 
-module.exports = { getHouse, createHouse, updateHouse }
+module.exports = { getHouse, createHouse, updateHouse };

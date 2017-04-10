@@ -38,7 +38,7 @@ class Register extends Component {
       const email = this.refs.email
       const password = this.refs.password
       const creds = { first: first.value , last: last.value, email: email.value.trim(), password: password.value.trim()}
-      registerUser(creds)
+      this.props.registerUser(creds)
     }
   }
 

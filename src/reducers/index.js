@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   houseReducer,
   userReducer,
   authReducer,
-  initReducer
+  initReducer,
 });
 
 export default rootReducer;

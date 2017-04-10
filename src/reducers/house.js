@@ -46,7 +46,7 @@ const initialState = {
   loaded: false
 };
 
-export default function houseReducer(state = initialState, action) {
+export default function houseReducer(state = {}, action) {
   switch (action.type) {
     case ADD_USER:
       return {
@@ -85,6 +85,7 @@ export default function houseReducer(state = initialState, action) {
       }
     }
     default:
+    console.log('house reducer running default: ', state)
       return state;
   }
 }

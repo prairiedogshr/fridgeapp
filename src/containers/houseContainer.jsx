@@ -14,7 +14,7 @@ class House extends Component {
 				<div className="row">
 					<Col xs={6}>
 						<Panel header="HOUSE INFO">
-							<HouseInfo info={this.props.house.info} 
+							<HouseInfo info={this.props.house} 
 							update={this.props.updateHouseInfo} />
 						</Panel>
 					</Col>

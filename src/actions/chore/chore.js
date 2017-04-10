@@ -7,12 +7,29 @@ import {
   ASSIGN_GROUP,
 } from '../actionTypes';
 
-export const addChore = (choreText) => {
-  console.log('ACTION - adding chore: ', choreText);
-  return {
-    type: ADD_CHORE,
-    payload: choreText,
-  };
+import axios from 'axios';
+
+// export const addChore = (choreText) => {
+//   console.log('ACTION - adding chore: ', choreText);
+//   return {
+//     type: ADD_CHORE,
+//     payload: choreText,
+//   };
+// };
+
+export const addChore = (chore) => {
+  console.log('chore+++++', chore);
+  return (dispatch) => {
+    return axios.post('/api/chores', chore)
+    .then(choreText => {
+      console.log('choreText+++++', choreText);
+      console.log('chore.chore_name+++++', chore.chore_name);
+      return dispatch({
+        type: ADD_CHORE,
+        payload: chore.chore_name,
+      });
+    }); // catch?
+  }
 };
 
 export const completeChore = (choreId) => {

@@ -31,7 +31,7 @@ class Login extends Component {
       const email = this.refs.email
       const password = this.refs.password
       const creds = { email: email.value.trim(), password: password.value.trim()}
-      loginUser(creds)
+      this.props.loginUser(creds)
     }
   }
 

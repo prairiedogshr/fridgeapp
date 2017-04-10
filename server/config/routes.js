@@ -32,8 +32,8 @@ module.exports = (app, passport) => {
   app.post('/api/houses/', houseController.createHouse);
 
   app.get('/api/chores/:chore', choreController.getChore);
-  app.put('/api/chores/', choreController.updateChore);
-  app.post('/api/chores/', choreController.createChore);
+  app.put('/api/chores', choreController.updateChore);
+  app.post('/api/chores', choreController.createChore);
 
   app.get('/api/chores/house/:house', choreController.getHouseChores);
   app.get('/api/chores/user/:user', choreController.getUserChores);

@@ -10,6 +10,7 @@ import userReducer from './user';
 import authReducer from './auth';
 import tasksReducer from './tasks';
 import settingsReducer from './settings';
+import createHouseReducer from './createHouse';
 import initReducer from './init';
 
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   userReducer,
   authReducer,
   initReducer,
+  createHouseReducer,
 });
 
 export default rootReducer;

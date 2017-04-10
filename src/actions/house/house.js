@@ -2,7 +2,8 @@ import{
   ADD_USER,
   REMOVE_USER,
   UPDATE_HOUSE_INFO,
-  RECEIVE_HOUSE
+  RECEIVE_HOUSE,
+  CREATE_HOUSE,
 } from '../actionTypes'
 import axios from 'axios';
 
@@ -40,7 +41,7 @@ export const removeUser = (user) => {
 
 export const getHouse = (id) => {
   return (dispatch, getState) => {
-    console.log('does this work? ', getState())
+  //  console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
     .then(resp => {
       console.log('house!! ', resp)
@@ -50,4 +51,12 @@ export const getHouse = (id) => {
       })
     });
   }
+};
+
+export const createHouse = (house) => {
+  console.log("In the action", house)
+  return {
+    type: CREATE_HOUSE,
+    payload: house,
+  };
 };

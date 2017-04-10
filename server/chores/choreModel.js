@@ -19,7 +19,7 @@ const createChore = (chore, callback) => {
     chore_group: chore.chore_group,
     chore_parent: chore.chore_parent,
     chore_is_done: chore.chore_is_done,
-    assigned_user_in_chore: chore.assigned_user_in_chore,
+    assigned_to_user_in_chore: chore.assigned_user_in_chore,
   })
     .then((newChore) => {
       callback(null, newChore);
@@ -41,4 +41,64 @@ const updateChore = (update, callback) => {
     });
 };
 
-module.exports = { getChore, createChore, updateChore };
+
+const getHouseChores = (houseId, callback) => {
+  db.select().from('chore').where('house_in_chore', houseId)
+    .then(chores => {
+      callback(null, chores);
+    })
+    .catch(err => {
+      callback(err);
+    });
+};
+
+const getUserChores = (userId, callback) => {
+  db.select().from('chore').where('assigned_to_user_in_chore', userId)
+    .then(chores => {
+      callback(null, chores);
+    })
+    .catch(err => {
+      callback(err);
+    });
+};
+
+// const getUserCompleteChores = (userId) => {
+
+// }
+
+// const getUserIncompleteChores = (userId) => {
+
+// }
+
+// const deleteChore = (choreId) => {
+
+// }
+
+
+
+
+// these are frontend functions that need to be built out
+
+// const setHouseChoreDueDate = (choreId) => {
+
+// }
+
+// const groupHouseChore = (choreId) => {
+
+// }
+
+// const completeUserChore = (choreId) => {
+
+// }
+
+// const undoCompleteUserChore = (choreId) => {
+
+// }
+
+// const assignChorestoUsers = (choreId) => {
+
+// }
+
+
+
+module.exports = { getChore, createChore, updateChore, getHouseChores, getUserChores, };

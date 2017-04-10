@@ -15,24 +15,24 @@ export default function HouseInfo({ info, update }) {
         }}>
         <ControlLabel>Address</ControlLabel>
         <FormControl  id="house_address" onClick={(e) => {}} type="text"
-        defaultValue={info.address} placeholder="Street Address"
+        defaultValue={info.house_address} placeholder="Street Address"
         />
         <FormControl id="house_unit_number" type="text"
-        defaultValue={info.unit_number} placeholder = "Unit Number"
+        defaultValue={info.house_unit_number} placeholder = "Unit Number"
         />
         <FormControl id="house_city" type="text"
-        defaultValue={info.city} placeholder = "City"
+        defaultValue={info.house_city} placeholder = "City"
         />
         <FormControl id="house_state" type="text"
-        defaultValue={info.state} placeholder = "State"
+        defaultValue={info.house_state} placeholder = "State"
         />
         <FormControl id="house_zip" type="text"
-        defaultValue={info.zip} placeholder = "Zipcode"
+        defaultValue={info.house_zip} placeholder = "Zipcode"
         />
         <br/>
         <ControlLabel>Info</ControlLabel>
         <FormControl id="house_info" type="text"
-        defaultValue={info.info} placeholder = "House Info"
+        defaultValue={info.house_info} placeholder = "House Info"
         />
         </FormGroup>
       </form>

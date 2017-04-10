@@ -35,3 +35,5 @@ export const AUTH_USER = 'auth_user',
 export const GET_HOUSE_REQUEST = 'GET_HOUSE_REQUEST';
 export const RECEIVE_HOUSE = 'RECEIVE_HOUSE';
 
+//App state
+export const HYDRATE = 'HYDRATE';

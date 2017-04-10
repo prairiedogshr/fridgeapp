@@ -12,7 +12,6 @@ import { EDIT_PROFILE } from '../actions/actionTypes';
 
 export default function userReducer(state = {}, action) {
   console.log('action type outer: ', action.type);
-
   switch (action.type) {
     case EDIT_PROFILE:
       console.log('action payload inner: ', action.payload);

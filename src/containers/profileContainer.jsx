@@ -7,14 +7,14 @@ import { updateProfile } from '../actions/profile/profile';
 class User extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loaded: false,
     };
   }
 
   componentWillMount() {
-    axios.get('/api/users/1')
+    
+    axios.get('/api/users/90')
     .then((data) => {
       this.setState(data);
       this.state.loaded = true;

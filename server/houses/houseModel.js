@@ -11,7 +11,7 @@ const getHouse = (houseId, callback) => {
 };
 
 const createHouse = (house, callback) => {
-  console.log(house);
+  console.log("AYE BUD", house);
   db('house').insert({
     admin_user_in_house: house.admin_user_in_house,
     house_address: house.house_address,

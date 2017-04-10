@@ -25,8 +25,8 @@ class CreateHouse extends Component {
   }
 
   handleSubmit(event) {
-    console.log('Ayyo');
-    console.log(createHouse);
+    // console.log('Ayyo');
+    // console.log(createHouse);
     const a = this.state.address;
     const c = this.state.city;
     const s = this.state.state;

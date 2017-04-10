@@ -54,9 +54,20 @@ export const getHouse = (id) => {
 };
 
 export const createHouse = (house) => {
-  console.log("In the action", house)
-  return {
-    type: CREATE_HOUSE,
-    payload: house,
-  };
+  console.log('In the action', house);
+  axios.post('/api/houses/', {
+    admin_user_in_house: 1,
+    house_address: house.address,
+    house_unit_number: house.unit,
+    house_city: house.city,
+    house_state: house.state,
+    house_zip: house.zip,
+    house_info: house.info,
+  }).then((data) => {
+    console.log("in the THEN",data);
+    return {
+      type: CREATE_HOUSE,
+      payload: data.data,
+    };
+  });
 };

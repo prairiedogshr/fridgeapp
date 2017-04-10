@@ -24,6 +24,8 @@ class Chores extends Component {
     }
   }
 
+
+  // this is not working
   handleKeyUp = (e) => {
     if (e.which === 13) {
       this.props.addChore(this.state.inputField);
@@ -35,7 +37,17 @@ class Chores extends Component {
   };
 
   buttonSubmit = () => {
-    this.props.addChore(this.state.inputField);
+    console.log(this.state.inputField);
+    let chore = {
+        "house_in_chore": 1,
+        "chore_name": this.state.inputField,
+        "chore_due": "1491850731064",
+        "chore_group": 1,
+        "chore_parent": null,
+        "chore_is_done": 0,
+        "assigned_user_in_chore": "1"
+    }
+    this.props.addChore(chore);
     this.state.inputField = '';
     console.log(AddChore.inputField);
   };

@@ -65,9 +65,21 @@ export const decreaseGroups = () => {
 };
 
 export const assignGroup = (choreId, group) => {
-  console.log('ACTION - assignGroups:');
-  return {
-    type: ASSIGN_GROUP,
-    payload: { choreId, group },
+  console.log(`ACTION - assignGroups: choreId:${choreId} group:${group}`);
+
+  return (dispatch) => {
+    return axios.put('/api/chores',
+      {
+        "id": choreId,
+        "key": "chore_group",
+        "value": group,
+      }
+    )
+      .then(result => {
+        return dispatch({
+          type: ASSIGN_GROUP,
+          payload: { choreId, group },
+        });
+      });
   };
 };

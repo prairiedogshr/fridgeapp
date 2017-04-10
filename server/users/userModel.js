@@ -20,7 +20,7 @@ module.exports = {
     console.log('user being created: ', user);
     db.select().from('user').where('user_email', user.user_email)
       .then((foundUser) => {
-        console.log('~~~~~~~~~~~~ ', user);
+        console.log('user:  ', user);
         if (foundUser.length) {
           callback('email already exists', null);
         } else {
@@ -32,12 +32,12 @@ module.exports = {
               user_username: user.user_username,
               user_password: result,
               user_phone: user.user_phone,
+              user_birthday: user.user_birthday,
               user_is_admin: user.user_admin,
               user_info: user.user_info,
-              created_at: new Date(),
-              updated_at: new Date(),
+              house_in_user: user.house_in_user,
             }).then((inserted) => {
-              console.log('+++++++++++ ', inserted);
+              console.log('inserted:  ', inserted);
               db.select().from('user').where('user_email', user.user_email)
                 .then((newUser) => {
                   callback(null, newUser[0]);

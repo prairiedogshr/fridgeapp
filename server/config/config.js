@@ -48,6 +48,7 @@ db.knex.schema.hasTable('user').then((exists) => {
       user.string('user_username', 16).notNullable();
       user.string('user_password', 255).notNullable();
       user.string('user_phone', 10).notNullable();
+      user.date('user_birthday').nullable();
       user.integer('house_in_user').nullable().unsigned();
       user.foreign('house_in_user').references('house.idhouse');
       user.boolean('user_is_admin').defaultTo(0);
@@ -75,6 +76,7 @@ db.knex.schema.hasTable('house').then((exists) => {
       house.string('house_city', 100).notNullable();
       house.string('house_state', 2).notNullable();
       house.string('house_zip', 5).notNullable();
+      house.string('house_account', 255).nullable();
       house.text('house_info').nullable();
       house.timestamps();
     }).then((table) => {
@@ -94,6 +96,7 @@ db.knex.schema.hasTable('chore').then((exists) => {
       chore.increments('chore_id').primary();
       chore.integer('house_in_chore').notNullable().unsigned();
       chore.foreign('house_in_chore').references('house.house_id');
+      chore.string('chore_name', 255).notNullable();
       chore.date('chore_due').nullable();
       chore.integer('chore_group').nullable().unsigned();
       chore.integer('chore_parent').nullable().unsigned();
@@ -118,9 +121,12 @@ db.knex.schema.hasTable('task').then((exists) => {
       task.increments('task_id').primary();
       task.integer('house_in_task').notNullable().unsigned();
       task.foreign('house_in_task').references('house.house_id');
+      task.string('task_name', 255).notNullable();
       task.integer('claimed_by_user_in_task').nullable().unsigned();
       task.foreign('claimed_by_user_in_task').references('user.user_id');
       task.boolean('task_is_done').defaultTo(0);
+      task.integer('expense_in_task').nullable().unsigned();
+      task.foreign('expense_in_task').references('expense.expense_id');
       task.timestamps();
     }).then((table) => {
       console.log('Created task table: \n', table);
@@ -137,13 +143,14 @@ db.knex.schema.hasTable('expense').then((exists) => {
   if (!exists) {
     db.knex.schema.createTable('expense', (expense) => {
       expense.increments('expense_id').primary();
+      expense.integer('house_in_expense').notNullable().unsigned();
+      expense.foreign('house_in_expense').references('house.house_id');
       expense.string('expense_name', 255).notNullable();
       expense.decimal('expense_balance', 10, 2).notNullable();
       expense.integer('expense_billing_month').notNullable();
       expense.date('expense_due').nullable();
       expense.boolean('expense_is_paid').defaultTo(0);
-      expense.integer('house_in_expense').notNullable().unsigned();
-      expense.foreign('house_in_expense').references('house.house_id');
+      expense.boolean('expense_is_one_time').defaultTo(0);
       expense.timestamps();
     }).then((table) => {
       console.log('Created expense table: \n', table);

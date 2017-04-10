@@ -13,14 +13,13 @@ const getExpense = (expenseId, callback) => {
 const createExpense = (expense, callback) => {
   console.log('expense: ', expense);
   db('expense').insert({
+    house_in_expense: expense.house_in_expense,
     expense_name: expense.expense_name,
     expense_balance: expense.expense_balance,
     expense_billing_month: expense.expense_billing_month,
     expense_due: expense.expense_due,
     expense_is_paid: expense.expense_is_paid,
-    house_in_expense: expense.house_in_expense,
-    created_at: new Date(),
-    updated_at: new Date(),
+    expense_is_one_time: expense.expense_is_one_time,
   })
     .then((newExpense) => {
       callback(null, newExpense);

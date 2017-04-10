@@ -19,9 +19,8 @@ const createHouse = (house, callback) => {
     house_city: house.house_city,
     house_state: house.house_state,
     house_zip: house.house_zip,
+    house_account: house.house_account,
     house_info: house.house_info,
-    created_at: new Date(),
-    updated_at: new Date(),
   })
     .then((newHouse) => {
       callback(null, newHouse);

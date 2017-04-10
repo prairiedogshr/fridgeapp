@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'cookie';
+import cookie from 'react-cookie';
 import { browserhistory } from 'react-router';
 
 import{
@@ -9,14 +9,12 @@ import{
   PROTECTED_TEST
 } from '../actionTypes'
 
-const API_URL = 'http://localhost:1337/api';
-
 // Login actions
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({ type: UNAUTH_USER });
     cookie.remove('token', { path: '/' });
-    window.location.href = CLIENT_ROOT_URL + '/login';
+    window.location.href = '/login';
   };
 };
 
@@ -45,33 +43,30 @@ export const errorHandler = (dispatch, error, type) => {
 };
 
 export const loginUser = (e) => {
-  console.log("hey youre here with: ",  e)
+  console.log(e)
   return (dispatch) => {
-    axios.post(`${API_URL}/users/signin`, e)
+     axios.post(`/api/users/signin`, e)
       .then((response) => {
-        console.log("Good work!!!")
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
+        window.location.href = '#/profile';
       })
       .catch((error) => {
-        console.log("We goofed")
-        errorHandler(dispatch, error.response, AUTH_ERROR);
+        console.log(error)
       });
   };
 };
 
 export const registerUser = (e) => {
-  console.log(e)
   return (dispatch) => {
-    axios.post(`${API_URL}/auth/register`, e)
+    axios.post(`/api/users/`, e)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
+        window.location.href = '#/profile';
       })
       .catch((error) => {
-        errorHandler(dispatch, error.response, AUTH_ERROR);
+        console.log(error)
       });
   };
 };

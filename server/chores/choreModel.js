@@ -19,7 +19,6 @@ const createChore = (chore, callback) => {
     chore_group: chore.chore_group,
     chore_parent: chore.chore_parent,
     chore_is_done: chore.chore_is_done,
-    assigned_to_user_in_chore: chore.assigned_user_in_chore,
   })
     .then((newChore) => {
       callback(null, newChore);

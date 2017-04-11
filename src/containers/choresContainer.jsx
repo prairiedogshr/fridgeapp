@@ -46,7 +46,6 @@ class Chores extends Component {
         "chore_group": 1,
         "chore_parent": null,
         "chore_is_done": 0,
-        "assigned_user_in_chore": "1"
     }
     this.props.addChore(chore);
     this.state.inputField = '';

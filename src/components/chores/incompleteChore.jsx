@@ -5,7 +5,7 @@ export default function IncompletedChore(props) {
   return (
     <ol>
       {incomplete.map(chore => (
-        <li key={chore.id} onClick={() => { props.completeChore(chore.id); }}>{chore.value}</li>
+        <li key={`incompleteChore:${chore.chore_id}`} onClick={() => { props.completeChore(chore.chore_id); }}>{chore.chore_name}</li>
         ), this)
       }
     </ol>

@@ -2,12 +2,15 @@
 import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP } from '../actions/actionTypes';
 
 const initialState = {
-  complete: [{ id: 1, value: 'chore 1' }, { id: 2, value: 'chore 2' }, { id: 3, value: 'chore 3' }],
-  incomplete: [{ id: 4, value: 'chore 4' }],
+  houseChores: [{ chore_id: 1, chore_name: 'chore 1' }, { id: 2, chore_name: 'chore 2' }, { id: 3, chore_name: 'chore 3' },
+    { id: 4, chore_name: 'chore 4' },
+  ],
+  complete: [{ chore_id: 1, chore_name: 'chore 1' }, { id: 2, chore_name: 'chore 2' }, { id: 3, chore_name: 'chore 3' }],
+  incomplete: [{ id: 4, chore_name: 'chore 4' }],
   groups: [1],
 };
 
-let idCount = 5;
+// let idCount = 5;
 let last;
 
 export default function choresReducer(state = initialState, action) {
@@ -19,23 +22,25 @@ export default function choresReducer(state = initialState, action) {
       console.log('action payload inner: ', action.payload);
       return {
         ...state,
-        incomplete: [...state.incomplete, { id: idCount++, value: action.payload }],
+        incomplete: [...state.incomplete, { chore_id: Date.now(), chore_name: action.payload }],
+        houseChores: [...state.houseChores, { chore_id: Date.now(), chore_name: action.payload }]
       };
     }
     case COMPLETE_CHORE: {
       console.log('action payload inner: ', action.payload);
       const incomplete = state.incomplete.filter((val) => {
-        if (val.id === action.payload) {
+        if (val.chore_id === action.payload) {
           item = val;
           return false;
         }
         return true;
       });
+
       return {
         ...state,
         incomplete,
         complete: [
-          ...state.complete, { id: action.payload, value: item.value, group: item.group || null },
+          ...state.complete, { chore_id: action.payload, chore_name: item.chore_name, chore_group: item.chore_group || null },
         ],
       };
     }
@@ -53,7 +58,7 @@ export default function choresReducer(state = initialState, action) {
         ...state,
         complete,
         incomplete: [
-          ...state.incomplete, { chore_id: action.payload, chore_name: item.chore_name, group: item.chore_group || null },
+          ...state.incomplete, { chore_id: action.payload, chore_name: item.chore_name, chore_group: item.chore_group || null },
         ],
       };
     }
@@ -79,8 +84,17 @@ export default function choresReducer(state = initialState, action) {
       return state;
 
     case ASSIGN_GROUP:
-      const completeIndex = state.complete.findIndex(val => val.id === action.payload.choreId);
-      const incompleteIndex = state.incomplete.findIndex(val => val.id === action.payload.choreId);
+      // payload: { choreId, group }
+      const completeIndex = state.complete.findIndex(val => val.chore_id === action.payload.choreId);
+      const incompleteIndex = state.incomplete.findIndex(val => val.chore_id === action.payload.choreId);
+
+      const houseChores = state.houseChores.map(item => {
+        if (item.chore_id === action.payload.choreId) {
+          return Object.assign({}, item, { chore_group: action.payload.group })
+        }
+        return item;
+      });
+
       let index;
       let field;
       if (completeIndex !== -1) {
@@ -90,7 +104,7 @@ export default function choresReducer(state = initialState, action) {
         index = incompleteIndex;
         field = 'incomplete';
       }
-      const newItem = Object.assign({}, state[field][index], { group: action.payload.group });
+      const newItem = Object.assign({}, state[field][index], { chore_group: action.payload.group });
       return {
         ...state,
         [field]: [
@@ -98,6 +112,7 @@ export default function choresReducer(state = initialState, action) {
           newItem,
           ...state[field].slice(index + 1, state[field].length),
         ],
+        houseChores,
       };
 
     default:

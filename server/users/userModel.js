@@ -98,7 +98,7 @@ module.exports = {
       const house = db.select().from('house').where('house_id', data[0].house_in_user);
       const roommates = db.select().from('user').where('house_in_user', data[0].house_in_user);
       const userTasks = db.select().from('task').where('claimed_by_user_in_task', id);
-      const userChores = db.select().from('user').where('user_id', id).innerJoin('chore', 'user.user_chore_rotation', 'chore.chore_group');
+      const userChores = db.select().from('chore').innerJoin('user', 'user.user_chore_rotation', 'chore.chore_group').where('user.user_id', id).andWhere('chore.house_in_chore', data[0].house_in_user);
       const houseTasks = db.select().from('task').where('house_in_task', data[0].house_in_user);
       const houseChores = db.select().from('chore').where('house_in_chore', data[0].house_in_user);
 

@@ -32,7 +32,7 @@ module.exports = (app, passport) => {
   // }));
   app.get('/api/users/appstate/:id', userController.getAppState);
   app.get('/api/users/:id', userController.getUser);
-  app.put('/api/users/:id', userController.updateUser);
+  app.put('/api/users/', userController.updateUser);
   app.post('/api/users/', userController.signup);
 
   app.get('/api/houses/:house', houseController.getHouse);

@@ -33,13 +33,13 @@ export const addChore = (chore) => {
   }
 };
 
-export const completeChore = (choreId) => {
-  console.log(`ACTION - completing chore: ${choreId}`);
-  return {
-    type: COMPLETE_CHORE,
-    payload: choreId,
-  };
-};
+// export const completeChore = (choreId) => {
+//   console.log(`ACTION - completing chore: ${choreId}`);
+//   return {
+//     type: COMPLETE_CHORE,
+//     payload: choreId,
+//   };
+// };
 
 // export const undoComplete = (choreId) => {
 //   console.log(`ACTION - undo complete: ${choreId}`);
@@ -48,6 +48,24 @@ export const completeChore = (choreId) => {
 //     payload: choreId,
 //   };
 // };
+
+export const completeChore = (choreId) => {
+  return (dispatch) => {
+    return axios.put('api/chores',
+      {
+        "id": choreId,
+        "key": "chore_is_done",
+        "value": 1
+      }
+    )
+      .then(result => {
+        return dispatch({
+          type: COMPLETE_CHORE,
+          payload: choreId,
+        });
+      });
+  }
+}
 
 export const undoComplete = (choreId) => {
   return (dispatch) => {

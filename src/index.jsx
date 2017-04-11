@@ -14,7 +14,10 @@ const history = createHistory();
 const middleware = applyMiddleware(thunk);
 
 const mainReducer = (state = {}, action) => {
-  return action.type === 'HYDRATE' ? action.payload : reducer(state, action);
+  return action.type === 'HYDRATE' ? {
+    ...state,
+    ...action.payload
+    } : reducer(state, action);
 }
 
 

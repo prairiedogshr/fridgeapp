@@ -1,13 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const Button = withRouter(({ history }) => (
+const Button = withRouter(({ history, roomies, rotateGroups }) => (
   <button
     type="button"
     onClick={() => {
       // save the groups to the database
       history.push('/dashboard');
       // add function here to make initial assignment of users to chore groups
+      rotateGroups(roomies);
     }}
   >
     Done!
@@ -46,7 +47,7 @@ export default function GroupingOfChores(props) {
           ), this)
         }
       </ul>
-      <Button />
+      <Button roomies={props.roomies} rotateGroups={props.rotateGroups} />
     </div>
   );
 }

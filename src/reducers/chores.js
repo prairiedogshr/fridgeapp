@@ -43,7 +43,7 @@ export default function choresReducer(state = initialState, action) {
     case UNDO_COMPLETE: {
       console.log('action payload inner: ', action.payload);
       const complete = state.complete.filter((val) => {
-        if (val.id === action.payload) {
+        if (val.chore_id === action.payload) {
           item = val;
           return false;
         }
@@ -53,7 +53,7 @@ export default function choresReducer(state = initialState, action) {
         ...state,
         complete,
         incomplete: [
-          ...state.incomplete, { id: action.payload, value: item.value, group: item.group || null },
+          ...state.incomplete, { chore_id: action.payload, chore_name: item.chore_name, group: item.chore_group || null },
         ],
       };
     }

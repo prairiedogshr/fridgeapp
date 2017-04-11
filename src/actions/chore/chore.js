@@ -5,6 +5,7 @@ import {
   INCREASE_GROUPS,
   DECREASE_GROUPS,
   ASSIGN_GROUP,
+  ROTATE_GROUPS,
 } from '../actionTypes';
 
 import axios from 'axios';
@@ -40,13 +41,31 @@ export const completeChore = (choreId) => {
   };
 };
 
+// export const undoComplete = (choreId) => {
+//   console.log(`ACTION - undo complete: ${choreId}`);
+//   return {
+//     type: UNDO_COMPLETE,
+//     payload: choreId,
+//   };
+// };
+
 export const undoComplete = (choreId) => {
-  console.log(`ACTION - undo complete: ${choreId}`);
-  return {
-    type: UNDO_COMPLETE,
-    payload: choreId,
-  };
-};
+  return (dispatch) => {
+    return axios.put('api/chores',
+      {
+        "id": choreId,
+        "key": "chore_is_done",
+        "value": 0
+      }
+    )
+      .then(result => {
+        return dispatch({
+          type: UNDO_COMPLETE,
+          payload: choreId,
+        });
+      });
+  }
+}
 
 export const increaseGroups = () => {
   console.log('ACTION - increaseGroups:');
@@ -83,3 +102,17 @@ export const assignGroup = (choreId, group) => {
       });
   };
 };
+
+export const rotateGroups = (houseId) => {
+  // for each user in the house
+    // find which chore group they are assigned to
+
+
+  // Grab houseId from redux store
+  // Find highest group number in house's chores
+  // increment each chore's group by 1 if not at max
+    // else reset back to group 1
+
+  // would be easire to assign roomies to a group number to have that cycle through.
+
+}

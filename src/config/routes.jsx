@@ -15,6 +15,7 @@ import CreateHouse from '../containers/createHouseContainer.jsx';
 import Homeless from '../containers/homelessContainer.jsx';
 import House from '../containers/houseContainer.jsx';
 import User from '../components/user.jsx';
+import { persistStore } from 'redux-persist';
 
 
 const Home = () => (

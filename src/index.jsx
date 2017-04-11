@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import Routes from './config/routes.jsx';
 import reducer from './reducers';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
+import { persistStore, autoRehydrate } from 'redux-persist'
 
 
 
@@ -24,11 +25,39 @@ const mainReducer = (state = {}, action) => {
 const store = createStore(
   mainReducer,
   compose(middleware,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+  autoRehydrate(),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+)
+persistStore(store);
 
-render(
-  <Provider store={store}>
-    <Routes />
-  </Provider>,
-  document.getElementById('root'),
-);
+export default class AppProvider extends Component {
+  constructor() {
+    super()
+    this.state = { rehydrated: false }
+  }
+
+  componentWillMount() {
+    console.log('hello? ')
+    persistStore(store, {}, () => {
+      this.setState({ rehydrated: true })
+    })
+  }
+
+  render() {
+    if (this.state.rehydrated) {
+      return (
+        <Provider store={store}>
+          <Routes />
+        </Provider>
+      )
+    } else {
+      return (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      )
+    }
+  }
+}
+render(<AppProvider />, document.getElementById('root'))
+

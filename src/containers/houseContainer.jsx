@@ -8,6 +8,10 @@ import Roommate from '../components/roommate.jsx';
 
 class House extends Component {
 
+	componentWillMount() {
+		console.log('rendering with props: ', this.props)
+	}
+
 	render() {
 		return (
 			<div className="container">

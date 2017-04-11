@@ -6,17 +6,29 @@ const passport = require('passport');
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 // parsing middleware
 require('./config/middleware.js')(app, express);
 // passport
 require('./config/passport.js')(passport);
 
-app.use(cookieParser());
+//mysqlstore setup 
+const options = {
+  host: process.env.DB_SERVER,
+  port: port,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+};
+
+const sessionStore = new MySQLStore(options);
+
+// app.use(cookieParser());
 app.use(session({
   secret: 'our secret',
   name: 'cookie name',
-  // store: ,
+  // store: sessionStore,
   // proxy: true,
   resave: true,
   saveUninitialized: true,

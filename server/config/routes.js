@@ -3,15 +3,17 @@ const houseController = require('../houses/houseController.js');
 const taskController = require('../tasks/taskController.js');
 const choreController = require('../chores/choreController.js');
 const expenseController = require('../expenses/expenseController.js');
+
 // const passport = require('passport')
 // const passportLocal = require('./passport.js')(passport)
 
 module.exports = (app, passport) => {
-  app.post('/api/users/signin', passport.authenticate('local-login', {
+  app.post('/api/users/signin', 
+    passport.authenticate('local-login', {
     successRedirect: '/#/dashboard',
     failureRedirect: '/#/login',
     failureFlash: false,
-  }));
+    }));
   // app.post('/api/users/signin', passport.authenticate('google', {
   //   successRedirect: '/#/dashboard',
   //   failureRedirect: '/#/login',

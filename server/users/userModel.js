@@ -62,7 +62,8 @@ module.exports = {
         callback('wrong pass');
       } else {
         console.log('pass all good');
-        callback(null, true);
+        db.select('user_id').from('user').where('user_email', email)
+        .then(resp => callback(null, resp[0]));
       }
     });
   },

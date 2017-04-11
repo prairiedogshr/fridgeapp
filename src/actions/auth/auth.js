@@ -1,8 +1,9 @@
 import axios from 'axios';
 import cookie from 'cookie';
 import { browserhistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
-import{
+import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
@@ -10,13 +11,14 @@ import{
 } from '../actionTypes'
 
 const API_URL = 'http://localhost:1337/api';
+const CLIENT_ROOT_URL = 'http://localhost:1337';
 
 // Login actions
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({ type: UNAUTH_USER });
     cookie.remove('token', { path: '/' });
-    window.location.href = CLIENT_ROOT_URL + '/login';
+    window.location.href = CLIENT_ROOT_URL + '/#/login';
   };
 };
 
@@ -49,13 +51,13 @@ export const loginUser = (e) => {
   return (dispatch) => {
     axios.post(`${API_URL}/users/signin`, e)
       .then((response) => {
-        console.log("Good work!!!")
-        cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
-      })
+        console.log("Good work!!! ", response)
+        window.location.href = CLIENT_ROOT_URL + '/#/dashboard';
+        
+        })
+
       .catch((error) => {
-        console.log("We goofed")
+        console.log("We goofed", error)
         errorHandler(dispatch, error.response, AUTH_ERROR);
       });
   };

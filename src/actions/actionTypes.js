@@ -14,6 +14,7 @@ export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const UPDATE_HOUSE_INFO = 'UPDATE_HOUSE_INFO';
 export const CREATE_HOUSE = 'CREATE_HOUSE';
+export const JOIN_HOUSE = 'JOIN_HOUSE'
 
 
 // Task actions

@@ -1,5 +1,5 @@
 // don't forget to add action dispatches here
-import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP } from '../actions/actionTypes';
+import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP, } from '../actions/actionTypes';
 
 const initialState = {
   houseChores: [{ chore_id: 1, chore_name: 'chore 1' }, { id: 2, chore_name: 'chore 2' }, { id: 3, chore_name: 'chore 3' },
@@ -64,8 +64,9 @@ export default function choresReducer(state = initialState, action) {
     }
 
     case INCREASE_GROUPS:
+      // payload: roomies.length
       last = state.groups.length - 1;
-      if (state.groups[last] < 7) {
+      if (state.groups[last] < action.payload) {
         return {
           ...state,
           groups: [...state.groups, state.groups[last] + 1],

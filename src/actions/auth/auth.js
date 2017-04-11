@@ -1,13 +1,14 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
-import { browserhistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
 import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  PROTECTED_TEST
+  PROTECTED_TEST,
+  INIT_USER
 } from '../actionTypes'
 
 const API_URL = 'http://localhost:1337/api';
@@ -49,11 +50,15 @@ export const errorHandler = (dispatch, error, type) => {
 export const loginUser = (e) => {
   console.log(e)
   return (dispatch) => {
-     axios.post(`/api/users/signin`, e)
+    return axios.post(`/api/users/signin`, e)
       .then((response) => {
         console.log("Good work!!! ", response)
-        window.location.href = CLIENT_ROOT_URL + '/#/dashboard';
+        dispatch({
+          type: INIT_USER,
+          payload: response.data.id
         })
+      })
+      .then(() => true)
       .catch((error) => {
         console.log("We goofed", error)
         errorHandler(dispatch, error.response, AUTH_ERROR);

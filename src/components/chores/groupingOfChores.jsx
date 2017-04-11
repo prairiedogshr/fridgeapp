@@ -5,6 +5,7 @@ const Button = withRouter(({ history }) => (
   <button
     type="button"
     onClick={() => {
+      console.log('history: ', history)
       // save the groups to the database
       history.push('/dashboard');
       // add function here to make initial assignment of users to chore groups

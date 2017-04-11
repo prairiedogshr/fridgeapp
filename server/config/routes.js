@@ -8,12 +8,18 @@ const expenseController = require('../expenses/expenseController.js');
 // const passportLocal = require('./passport.js')(passport)
 
 module.exports = (app, passport) => {
+  // app.post('/api/users/signin', 
+  //   passport.authenticate('local-login', {
+  //   successRedirect: '/#/dashboard',
+  //   failureRedirect: '/#/login',
+  //   failureFlash: false,
+  //   }));
   app.post('/api/users/signin', 
-    passport.authenticate('local-login', {
-    successRedirect: '/#/dashboard',
-    failureRedirect: '/#/login',
-    failureFlash: false,
-    }));
+    passport.authenticate('local-login'),
+      ((req, res) => res.send({
+        id: req.user
+      }))
+    );
   // app.post('/api/users/signin', passport.authenticate('google', {
   //   successRedirect: '/#/dashboard',
   //   failureRedirect: '/#/login',

@@ -63,7 +63,10 @@ module.exports = {
       } else {
         console.log('pass all good');
         db.select('user_id').from('user').where('user_email', email)
-        .then(resp => callback(null, resp[0]));
+        .then(resp => {
+          console.log('shoudl be user id: ', resp)
+          callback(null, resp[0].user_id);
+        })
       }
     });
   },
@@ -101,7 +104,6 @@ module.exports = {
 
       Promise.all([user, house, userTasks, userChores, houseTasks, houseChores, roommates])
       .then((dataa) => {
-        console.log('tasks: ', dataa[3])
         const formedData = {
           userReducer: dataa[0][0] || undefined,
           houseReducer: dataa[1][0],

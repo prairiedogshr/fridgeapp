@@ -40,3 +40,4 @@ export const RECEIVE_HOUSE = 'RECEIVE_HOUSE';
 
 //App state
 export const HYDRATE = 'HYDRATE';
+export const INIT_USER = 'INIT_USER';

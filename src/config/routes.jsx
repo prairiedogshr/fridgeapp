@@ -12,6 +12,7 @@ import Register from '../components/register.jsx';
 import Chores from '../containers/choresContainer.jsx';
 import Settings from '../containers/settingsContainer.jsx';
 import CreateHouse from '../containers/createHouseContainer.jsx';
+import HouseExpenses from '../containers/expensesContainer.jsx';
 import Homeless from '../containers/homelessContainer.jsx';
 import House from '../containers/houseContainer.jsx';
 import User from '../components/user.jsx';
@@ -43,6 +44,8 @@ const Home = () => (
     <br />
     <Link to="/homeless">homeless</Link>
     <br />
+    <Link to="/houseexpenses">Expenses</Link>
+    <br />
   </div>
 );
 
@@ -73,6 +76,7 @@ class Routes extends Component {
           <Route path="/house" component={House} />
           <Route path="/homeless" component={Homeless} />
           <Route path="/createhouse" component={CreateHouse} />
+          <Route path="/houseexpenses" component={HouseExpenses} />
         </Switch>
       </HashRouter>
     );

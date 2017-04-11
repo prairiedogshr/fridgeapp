@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth/auth.js';
+import { withRouter } from 'react-router-dom';
+import { getAppState } from '../actions/init/init.js';
 
 class Login extends Component {
   constructor(props){
@@ -12,7 +14,6 @@ class Login extends Component {
   }
 
   render() {
-      const { errorMessage } = this.props
 
       return (
         <div>
@@ -32,6 +33,9 @@ class Login extends Component {
       const password = this.refs.password
       const creds = { email: email.value.trim(), password: password.value.trim()}
       this.props.loginUser(creds)
+      .then(resp => {
+        this.props.history.push('/dashboard')
+      })
     }
   }
 
@@ -42,4 +46,4 @@ class Login extends Component {
     };
   }
 
-export default connect(mapStateToProps, {loginUser})(Login);
+export default withRouter(connect(mapStateToProps, {loginUser, getAppState})(Login));

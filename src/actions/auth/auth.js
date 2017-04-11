@@ -1,20 +1,25 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
-import { browserhistory } from 'react-router';
+import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
-import{
+import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  PROTECTED_TEST
+  PROTECTED_TEST,
+  INIT_USER
 } from '../actionTypes'
+
+const API_URL = 'http://localhost:1337/api';
+const CLIENT_ROOT_URL = 'http://localhost:1337';
 
 // Login actions
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch({ type: UNAUTH_USER });
     cookie.remove('token', { path: '/' });
-    window.location.href = '/login';
+    window.location.href = CLIENT_ROOT_URL + '/#/login';
   };
 };
 
@@ -45,14 +50,18 @@ export const errorHandler = (dispatch, error, type) => {
 export const loginUser = (e) => {
   console.log(e)
   return (dispatch) => {
-     axios.post(`/api/users/signin`, e)
+    return axios.post(`/api/users/signin`, e)
       .then((response) => {
-        cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
-        window.location.href = '#/profile';
+        console.log("Good work!!! ", response)
+        dispatch({
+          type: INIT_USER,
+          payload: response.data.id
+        })
       })
+      .then(() => true)
       .catch((error) => {
-        console.log(error)
+        console.log("We goofed", error)
+        errorHandler(dispatch, error.response, AUTH_ERROR);
       });
   };
 };

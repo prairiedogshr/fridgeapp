@@ -8,30 +8,20 @@ class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
+      loaded: true,
     };
-  }
-
-  componentWillMount() {
-    
-    axios.get('/api/users/90')
-    .then((data) => {
-      this.setState(data);
-      this.state.loaded = true;
-      this.forceUpdate();
-    });
   }
 
   render() {
     if (this.state.loaded === true) {
       return (
         <div className="centered">
-          <Field dbField={'user_first_name'} field={'First Name: '} data={this.state.data.user_first_name} />
-          <Field dbField={'user_last_name'} field={'Last Name: '} data={this.state.data.user_last_name} />
-          <Field dbField={'user_email'} field={'Email: '} data={this.state.data.user_email} />
-          <Field dbField={'user_phone'} field={'Phone Number: '} data={this.state.data.user_phone} />
-          <Field dbField={'user_birthday'} field={'Birthday: '} data={this.state.data.user_birthday} />
-          <Field dbField={'user_info'} field={'Info: '} data={this.state.data.user_data} />
+          <Field dbField={'user_first_name'} field={'First Name: '} data={this.props.user.user_first_name} />
+          <Field dbField={'user_last_name'} field={'Last Name: '} data={this.props.user.user_last_name} />
+          <Field dbField={'user_email'} field={'Email: '} data={this.props.user.user_email} />
+          <Field dbField={'user_phone'} field={'Phone Number: '} data={this.props.user.user_phone} />
+          <Field dbField={'user_birthday'} field={'Birthday: '} data={this.props.user.user_birthday} />
+          <Field dbField={'user_info'} field={'Info: '} data={this.props.user.user_data} />
         </div>
       );
     }

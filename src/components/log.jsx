@@ -49,7 +49,7 @@ class Login extends Component {
 }
 
 
-  function mapStateToProps(authReducer) {
+const mapStateToProps = ({authReducer}) => {
     return {
       user: authReducer
     };

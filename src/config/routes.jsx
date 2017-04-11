@@ -17,6 +17,8 @@ import Homeless from '../containers/homelessContainer.jsx';
 import House from '../containers/houseContainer.jsx';
 import User from '../components/user.jsx';
 import { persistStore } from 'redux-persist';
+import Join from '../containers/joinHouseContainer.jsx'
+
 
 
 const Home = () => (
@@ -45,6 +47,7 @@ const Home = () => (
     <Link to="/homeless">homeless</Link>
     <br />
     <Link to="/houseexpenses">Expenses</Link>
+    <Link to="/join">join</Link>
     <br />
   </div>
 );
@@ -76,7 +79,11 @@ class Routes extends Component {
           <Route path="/house" component={House} />
           <Route path="/homeless" component={Homeless} />
           <Route path="/createhouse" component={CreateHouse} />
+<<<<<<< HEAD
           <Route path="/houseexpenses" component={HouseExpenses} />
+=======
+          <Route path="/join" component={Join} />
+>>>>>>> join page
         </Switch>
       </HashRouter>
     );

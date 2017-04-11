@@ -9,7 +9,7 @@ class JoinHouse extends Component{
   constructor(props){
     super(props);
     this.state ={
-      house: undefined
+      house: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,71 +21,41 @@ class JoinHouse extends Component{
 
   handleSubmit(event){
     console.log("Here we are!")
+    console.log("this.props", this.props)
     const house = this.state.house;
+    console.log("house",house)
   }
 
+  render(){
+    const state = this.state;
+    const change = this.handleChange;
+    return(
+      <div className = "centered">
+          <label htmlFor = "house code">
+            *Enter the House Code:
+            <br/>
+            </label>
+            <input type="text" name = "house" value ={state.house} onChange={change} />
+            <button onClick={(event) => this.handleSubmit(event)} className="btn btn-primary">
+              Submit
+            </button>
+      </div>
+    );
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 const mapStateToProps = ({joinHouseReducer}) => ({
   join: joinHouseReducer
 });
 
 JoinHouse.proptypes = {
-  joinHouse: React.PropTypes.func;
+  joinHouse: React.PropTypes.func,
 };
 
 export default connect(
   mapStateToProps,
   {
-
+    joinHouse,
   }
 )(JoinHouse)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

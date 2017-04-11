@@ -95,7 +95,7 @@ module.exports = {
       const house = db.select().from('house').where('house_id', data[0].house_in_user);
       const roommates = db.select().from('user').where('house_in_user', data[0].house_in_user);
       const userTasks = db.select().from('task').where('claimed_by_user_in_task', id);
-      const userChores = db.select().from('chore').where('assigned_to_user_in_chore', id);
+      const userChores = db.select().from('user').where('user_id', id).innerJoin('chore', 'user.user_chore_rotation', 'chore_group');
       const houseTasks = db.select().from('task').where('house_in_task', data[0].house_in_user);
       const houseChores = db.select().from('chore').where('house_in_chore', data[0].house_in_user);
 
@@ -105,9 +105,9 @@ module.exports = {
         const formedData = {
           userReducer: dataa[0][0] || undefined,
           houseReducer: dataa[1][0],
-          houseReducer: Object.assign({}, 
+          houseReducer: Object.assign({},
             dataa[1][0],
-            {users: dataa[6]} 
+            {users: dataa[6]}
             ),
           // houseReducer: dataa[1] || undefined,
           tasksReducer: {
@@ -115,12 +115,11 @@ module.exports = {
             incomplete: dataa[2].filter(item => item.task_is_done === 0)
           },
           choresReducer: {
+            houseChores: dataa[5],
             complete: dataa[3].filter(chore => chore.chore_is_done === 1),
             incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
             groups: [1]
           },
-          houseTasks: dataa[4] || undefined,
-          houseChores: dataa[5] || undefined,
         };
         callback(null, formedData);
       })

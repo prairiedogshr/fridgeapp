@@ -8,6 +8,7 @@ export const UNDO_COMPLETE = 'UNDO_COMPLETE';
 export const INCREASE_GROUPS = 'INCREASE_GROUPS';
 export const DECREASE_GROUPS = 'DECREASE_GROUPS';
 export const ASSIGN_GROUP = 'ASSIGN_GROUP';
+export const ROTATE_GROUPS = 'ROTATE_GROUPS';
 
 // House actions
 export const ADD_USER = 'ADD_USER';

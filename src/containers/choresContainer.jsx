@@ -13,6 +13,7 @@ import {
   increaseGroups,
   decreaseGroups,
   assignGroup,
+  rotateGroups,
 } from '../actions/chore/chore';
 
 class Chores extends Component {
@@ -69,6 +70,8 @@ class Chores extends Component {
           chores={this.props.chores}
           undoComplete={this.undoComplete}
         />*/
+
+    console.log('=-=-=-=-=-=-=-', this.props.chores);
     if (this.state.nextClicked === false) {
       return (
         <div>
@@ -85,7 +88,9 @@ class Chores extends Component {
             increaseGroups={this.props.increaseGroups}
             decreaseGroups={this.props.decreaseGroups}
           />
-          <button onClick={() => {this.state.nextClicked = true; this.forceUpdate(); console.log(this.state.nextClicked);}}>Next</button>
+          <button onClick={() => { this.state.nextClicked = true; this.forceUpdate(); }}>Next</button>
+
+          {/*<button onClick={() => { () => {  }; }}>Next</button>*/}
         </div>
       );
     } else {

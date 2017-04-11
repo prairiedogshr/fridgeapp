@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'cookie';
+import cookie from 'react-cookie';
 import { browserhistory } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
@@ -47,15 +47,13 @@ export const errorHandler = (dispatch, error, type) => {
 };
 
 export const loginUser = (e) => {
-  console.log("hey youre here with: ",  e)
+  console.log(e)
   return (dispatch) => {
-    axios.post(`${API_URL}/users/signin`, e)
+     axios.post(`/api/users/signin`, e)
       .then((response) => {
         console.log("Good work!!! ", response)
         window.location.href = CLIENT_ROOT_URL + '/#/dashboard';
-        
         })
-
       .catch((error) => {
         console.log("We goofed", error)
         errorHandler(dispatch, error.response, AUTH_ERROR);
@@ -64,16 +62,15 @@ export const loginUser = (e) => {
 };
 
 export const registerUser = (e) => {
-  console.log(e)
   return (dispatch) => {
-    axios.post(`${API_URL}/auth/register`, e)
+    axios.post(`/api/users/`, e)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
+        window.location.href = '#/profile';
       })
       .catch((error) => {
-        errorHandler(dispatch, error.response, AUTH_ERROR);
+        console.log(error)
       });
   };
 };

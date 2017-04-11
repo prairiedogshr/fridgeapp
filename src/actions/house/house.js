@@ -4,6 +4,7 @@ import{
   UPDATE_HOUSE_INFO,
   RECEIVE_HOUSE,
   CREATE_HOUSE,
+  JOIN_HOUSE,
 } from '../actionTypes'
 import axios from 'axios';
 
@@ -70,4 +71,12 @@ export const createHouse = (house) => {
       payload: data.data,
     };
   });
+};
+
+export const joinHouse = (house) => {
+  console.log("Inside the joinHouse action", house)
+  return {
+    type: JOIN_HOUSE,
+    payload: house,
+  };
 };

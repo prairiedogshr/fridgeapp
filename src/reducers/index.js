@@ -12,6 +12,7 @@ import tasksReducer from './tasks';
 import settingsReducer from './settings';
 import createHouseReducer from './createHouse';
 import initReducer from './init';
+import joinHouseReducer from './joinHouse'
 
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   authReducer,
   initReducer,
   createHouseReducer,
+  joinHouseReducer,
 });
 
 export default rootReducer;

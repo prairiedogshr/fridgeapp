@@ -8,8 +8,6 @@ import GroupChores from '../components/chores/groupChores';
 import GroupingOfChores from '../components/chores/groupingOfChores';
 import {
   addChore,
-  completeChore,
-  undoComplete,
   increaseGroups,
   decreaseGroups,
   assignGroup,
@@ -50,14 +48,6 @@ class Chores extends Component {
     this.props.addChore(chore);
     this.state.inputField = '';
     console.log(AddChore.inputField);
-  };
-
-  completeChore = choreId => {
-    this.props.completeChore(choreId);
-  };
-
-  undoComplete = choreId => {
-    this.props.undoComplete(choreId);
   };
 
   render() {
@@ -113,8 +103,6 @@ export default connect(
   mapStateToProps,
   {
     addChore,
-    completeChore,
-    undoComplete,
     increaseGroups,
     decreaseGroups,
     assignGroup,

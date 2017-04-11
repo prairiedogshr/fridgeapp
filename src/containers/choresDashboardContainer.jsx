@@ -3,16 +3,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import CompleteChore from '../components/chores/completeChore';
 import IncompleteChore from '../components/chores/incompleteChore';
-import AddChore from '../components/chores/addChore';
-import GroupChores from '../components/chores/groupChores';
-import GroupingOfChores from '../components/chores/groupingOfChores';
 import {
-  addChore,
   completeChore,
   undoComplete,
-  increaseGroups,
-  decreaseGroups,
-  assignGroup,
 } from '../actions/chore/chore';
 
 class ChoresDashboard extends Component {
@@ -23,22 +16,6 @@ class ChoresDashboard extends Component {
       nextClicked: false,
     }
   }
-
-  handleKeyUp = (e) => {
-    if (e.which === 13) {
-      this.props.addChore(this.state.inputField);
-      e.target.value = '';
-      this.state.inputField = '';
-    } else {
-      this.state.inputField = e.target.value;
-    }
-  };
-
-  buttonSubmit = () => {
-    this.props.addChore(this.state.inputField);
-    this.state.inputField = '';
-    console.log(AddChore.inputField);
-  };
 
   completeChore = choreId => {
     this.props.completeChore(choreId);
@@ -77,11 +54,7 @@ const mapStateToProps = ({ choresReducer }) => ({
 export default connect(
   mapStateToProps,
   {
-    addChore,
     completeChore,
     undoComplete,
-    increaseGroups,
-    decreaseGroups,
-    assignGroup,
   }
 )(ChoresDashboard);

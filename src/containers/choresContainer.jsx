@@ -76,6 +76,7 @@ class Chores extends Component {
             chores={this.props.chores}
             increaseGroups={this.props.increaseGroups}
             decreaseGroups={this.props.decreaseGroups}
+            roomies={this.props.house.users}
           />
           <button onClick={() => { this.state.nextClicked = true; this.forceUpdate(); }}>Next</button>
 
@@ -88,6 +89,8 @@ class Chores extends Component {
           <GroupingOfChores
             chores={this.props.chores}
             assignGroup={this.props.assignGroup}
+            roomies={this.props.house.users}
+            rotateGroups={this.props.rotateGroups}
           />
         </div>
       )
@@ -95,8 +98,9 @@ class Chores extends Component {
   }
 }
 
-const mapStateToProps = ({ choresReducer }) => ({
-  chores: choresReducer
+const mapStateToProps = ({ choresReducer, houseReducer }) => ({
+  chores: choresReducer,
+  house: houseReducer,
 });
 
 export default connect(
@@ -106,5 +110,6 @@ export default connect(
     increaseGroups,
     decreaseGroups,
     assignGroup,
+    rotateGroups,
   }
 )(Chores);

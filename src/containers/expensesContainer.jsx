@@ -18,7 +18,6 @@ class houseExpenses extends Component {
     console.log(this.props)
     return (
       <div>
-      <p>Hey</p>
         <ExpensesGraph expenses={this.props.expenses}/>
       </div>
     );

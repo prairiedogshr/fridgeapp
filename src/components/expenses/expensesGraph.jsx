@@ -21,7 +21,7 @@ class ExpensesGraph extends Component {
       .attr('height', 600)  
 
     let map = d3.select('svg'),
-      margin = {top: 50, right: 50, bottom: 50, left: 50},
+      margin = {top: 50, right: 50, bottom: 150, left: 150},
       width = +svg.attr('width') - margin.left - margin.right,
       height = +svg.attr('height') - margin.top - margin.bottom;
 
@@ -31,8 +31,8 @@ class ExpensesGraph extends Component {
     const g = svg.append('g')
       .attr('transform', "translate(" + margin.left + "," + margin.top + ")");
 
-      x.domain(expensesData.map(d => d.expense_name))
-      y.domain([0, d3.max(expensesData, (d) => d.expense_balance)])
+      x.domain(expensesData.map(d => d.expense_name));
+      y.domain([0, d3.max(expensesData, (d) => d.expense_balance)]);
 
       g.append('g')
         .attr('class', 'axis axis--x')
@@ -42,17 +42,31 @@ class ExpensesGraph extends Component {
         .selectAll('text')
         .attr('transform', 'rotate(45)')
         .attr('y', 10)
-        .attr('text-anchor', 'start');
+        .attr('text-anchor', 'start')
+
+      g.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -60)
+        .attr('x', ((-height-margin.top)/2))
+        .attr('dy', '1em')
+        .style('text-anchor', 'middle')
+        .text('Expense $');
 
       g.append('g')
         .attr('class', 'axis axis--y')
-        .call(d3.axisLeft(y).ticks(10, '$'))
+        .call(d3.axisLeft(y))
         .append('text')
         .attr('transform', "rotate(-90)")
         .attr('y', 6)
         .attr('dy', '1.0em')
-        .attr('text-anchor', 'end')
-        .text('Amount');
+        .attr('text-anchor', 'end');
+
+      g.append('text')
+        .attr('y', height + 50)
+        .attr('x', (width/2))
+        .attr('dy', '1.0em')
+        .attr('text-anchor', 'middle')
+        .text('Expense');
 
       g.selectAll('.bar')
         .data(expensesData)
@@ -80,7 +94,7 @@ class ExpensesGraph extends Component {
   render () {
     return (
 
-      <div id="map">hi</div>
+      <div id="map"></div>
       )
   }
 }

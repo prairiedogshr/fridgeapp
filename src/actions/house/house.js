@@ -85,6 +85,6 @@ export const joinHouse = (house, user) => {
   })
   return {
     type: JOIN_HOUSE,
-    payload: house,
+    payload: user,
   };
 };

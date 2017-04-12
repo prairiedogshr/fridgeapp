@@ -21,28 +21,36 @@ class ExpensesGraph extends Component {
       .attr('height', 600)  
 
     let map = d3.select('svg'),
-      margin = {top: 20, right: 20, bottom: 30, left: 20},
+      margin = {top: 50, right: 50, bottom: 50, left: 50},
       width = +svg.attr('width') - margin.left - margin.right,
       height = +svg.attr('height') - margin.top - margin.bottom;
 
     const x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-      y = d3.scaleLinear().rangeRound([height, 0]);
+      y = d3.scaleLinear().range([height, 0]);
+
     const g = svg.append('g')
       .attr('transform', "translate(" + margin.left + "," + margin.top + ")");
 
-      x.domain(expensesData.length)
+      x.domain(expensesData.map(d => d.expense_name))
       y.domain([0, d3.max(expensesData, (d) => d.expense_balance)])
 
       g.append('g')
-        .attr('class', 'axis axis-x')
+        .attr('class', 'axis axis--x')
         .attr('transform', 'translate(0,' + height + ')')
-        .call(d3.axisBottom(x));
+        // .attr('transform', 'rotate(-45)')
+        .call(d3.axisBottom(x))
+        .selectAll('text')
+        .attr('transform', 'rotate(45)')
+        .attr('y', 10)
+        .attr('text-anchor', 'start');
 
       g.append('g')
-        .attr('class', 'axis axis-y')
+        .attr('class', 'axis axis--y')
+        .call(d3.axisLeft(y).ticks(10, '$'))
+        .append('text')
         .attr('transform', "rotate(-90)")
         .attr('y', 6)
-        .attr('dy', '0.71em')
+        .attr('dy', '1.0em')
         .attr('text-anchor', 'end')
         .text('Amount');
 
@@ -50,7 +58,7 @@ class ExpensesGraph extends Component {
         .data(expensesData)
         .enter().append('rect')
         .attr('class', 'bar')
-        .attr('x', (d) => x(d.expense_balance))
+        .attr('x', (d) => x(d.expense_name))
         .attr('y', (d) => y(d.expense_balance))
         .attr('width', x.bandwidth())
         .attr('height', (d) => height-y(d.expense_balance));
@@ -71,6 +79,7 @@ class ExpensesGraph extends Component {
 
   render () {
     return (
+
       <div id="map">hi</div>
       )
   }

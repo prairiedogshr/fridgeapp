@@ -3,13 +3,11 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import { BrowserRouter as Router } from 'react-router';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import Routes from './routes';
 import reducer from './reducers';
+import Routes from './routes';
 
-const history = createHistory();
 const middleware = applyMiddleware(thunk);
 
 const mainReducer = (state = {}, action) => {
@@ -43,7 +41,7 @@ export default class AppProvider extends Component {
     if (this.state.rehydrated) {
       return (
         <Provider store={store}>
-          <Router history={history} routes={Routes} />
+          <Routes />
         </Provider>
       );
     }

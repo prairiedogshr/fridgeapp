@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import SignIn from '../containers/loginContainer.jsx';
-import Log from '../components/log.jsx';
-import Auth from '../components/login.jsx';
-import Dashboard from '../containers/dashboardContainer.jsx';
-import Tasks from '../containers/tasksContainer.jsx';
-import Profile from '../containers/profileContainer.jsx';
-import App from '../app.jsx';
-import Register from '../components/register.jsx';
-import Chores from '../containers/choresContainer.jsx';
-import Settings from '../containers/settingsContainer.jsx';
-import CreateHouse from '../containers/createHouseContainer.jsx';
+import App from '../app';
+import Auth from '../components/login';
+import Chores from '../containers/choresContainer';
+import CreateHouse from '../containers/createHouseContainer';
+import Dashboard from '../containers/dashboardContainer';
+import Homeless from '../containers/homelessContainer';
+import House from '../containers/houseContainer';
 import HouseExpenses from '../containers/expensesContainer.jsx';
-import Homeless from '../containers/homelessContainer.jsx';
-import House from '../containers/houseContainer.jsx';
+import Log from '../components/log.jsx';
+import Profile from '../containers/profileContainer';
+import Register from '../components/register.jsx';
+import Settings from '../containers/settingsContainer';
+import SignIn from '../containers/loginContainer.jsx';
+import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
 
 class Routes extends Component {

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import Routes from './routes';
+import Routes from './config/routes';
 
 const middleware = applyMiddleware(thunk);
 

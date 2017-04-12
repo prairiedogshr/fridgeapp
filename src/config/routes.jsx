@@ -29,11 +29,11 @@ class Routes extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/chores" component={Chores} />
             <Route path="/tasks" component={Tasks} />
-            <Route path="/app" component={App} />
             <Route path="/settings" component={Settings} />
             <Route path="/house" component={House} />
             <Route path="/homeless" component={Homeless} />
             <Route path="/createhouse" component={CreateHouse} />
+            {/* <Route path="/joinhouse" component={JoinHouse} /> */}
             <Route path="/houseexpenses" component={HouseExpenses} />
           </App>
         </Switch>

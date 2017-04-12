@@ -5,7 +5,7 @@ export const getAppState = () => {
   return (dispatch, getState) => {
     const user = getState().initReducer.user_id
     console.log('~~~~~~~~~~ ', user);
-    axios.get(`/api/users/appstate/${1}`)
+    axios.get(`/api/users/appstate/${user}`)
     .then(resp => {
       console.log('response! ', resp.data);
       dispatch({

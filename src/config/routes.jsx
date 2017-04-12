@@ -16,6 +16,7 @@ import Settings from '../containers/settingsContainer';
 import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
+import { logoutUser } from '../actions/auth/auth.js';
 import { persistStore } from 'redux-persist';
 import Join from '../containers/joinHouseContainer.jsx'
 import { logoutUser } from '../actions/auth/auth.js';

@@ -34,10 +34,19 @@ class Login extends Component {
       const creds = { email: email.value.trim(), password: password.value.trim()}
       this.props.loginUser(creds)
       .then(resp => {
+        console.log('in here with')
+        if (resp) {
         this.props.history.push('/dashboard')
-      })
-    }
+      } else {
+        console.log('didnt work')
+        this.setState({
+          password: ''
+        })
+        this.forceUpdate()
+      }
+    })
   }
+}
 
 
   function mapStateToProps(authReducer) {

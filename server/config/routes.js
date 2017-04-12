@@ -16,9 +16,10 @@ module.exports = (app, passport) => {
   //   }));
   app.post('/api/users/signin', 
     passport.authenticate('local-login'),
-      ((req, res) => res.send({
-        id: req.user
-      }))
+      ((req, res) => {
+        console.log('authenticated user')
+        res.send({ id: req.user})
+      })
     );
   // app.post('/api/users/signin', passport.authenticate('google', {
   //   successRedirect: '/#/dashboard',

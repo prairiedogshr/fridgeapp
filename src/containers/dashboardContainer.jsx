@@ -11,7 +11,7 @@ import { getAppState } from '../actions/init/init.js';
 class Dashboard extends Component {
 
   componentWillMount() {
-    console.log('dashboard will mount')
+    console.log('dashboard will mount',this.props)
     this.props.getAppState()
   }
   render() {

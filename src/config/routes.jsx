@@ -16,11 +16,14 @@ import HouseExpenses from '../containers/expensesContainer.jsx';
 import Homeless from '../containers/homelessContainer.jsx';
 import House from '../containers/houseContainer.jsx';
 import User from '../components/user.jsx';
+import { logoutUser } from '../actions/auth/auth.js';
 import { persistStore } from 'redux-persist';
 
 
 const Home = () => (
   <div>
+    <h1><a onClick={logoutUser}>Logout</a></h1>
+    <br />
     <h1>hold page</h1>
     <Link to="/app">App</Link>
     <br />

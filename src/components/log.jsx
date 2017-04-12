@@ -26,7 +26,7 @@ class Login extends Component {
 
         </div>
       )
-    }
+    } 
 
     handleClick = (event) => {
       const email = this.refs.email

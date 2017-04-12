@@ -53,8 +53,7 @@ const Home = () => (
 
 
 class Routes extends Component {
-<<<<<<< HEAD
-=======
+
 
   componentWillMount() {
 
@@ -64,7 +63,6 @@ class Routes extends Component {
 
   }
 
->>>>>>> rebasing
   render() {
     return (
       <Router>

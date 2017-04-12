@@ -16,9 +16,8 @@ const CLIENT_ROOT_URL = 'http://localhost:1337';
 
 // Login actions
 export const logoutUser = () => {
-  console.log("IN auth.js LOGOUT")
-  return (dispatch) => {
-    console.log(dispatch);
+  return dispatch => {
+    console.log("In dispatch");
     dispatch({ type: UNAUTH_USER });
     cookie.remove('token', { path: '/' });
     window.location.href = CLIENT_ROOT_URL + '/#/login';

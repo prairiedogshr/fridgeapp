@@ -16,13 +16,12 @@ import Settings from '../containers/settingsContainer';
 import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
-import { logoutUser } from '../actions/auth/auth.js';
 import { persistStore } from 'redux-persist';
 
 
 const Home = () => (
   <div>
-    <h1><a onClick={logoutUser}>Logout</a></h1>
+    <h1><a href="/#/login">Logout</a></h1>
     <br />
     <h1>hold page</h1>
     <Link to="/app">App</Link>
@@ -54,6 +53,18 @@ const Home = () => (
 
 
 class Routes extends Component {
+<<<<<<< HEAD
+=======
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
+>>>>>>> rebasing
   render() {
     return (
       <Router>

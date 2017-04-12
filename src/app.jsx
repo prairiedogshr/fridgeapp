@@ -21,7 +21,7 @@ class App extends Component {
                   <a href="#/dashboard">Home</a>
                 </div>
                 <div className="pull-right navItem">
-                  <a href="#/login">Login</a>
+                  <Link to="/login">Login</Link>
                 </div>
                 <div className="pull-right navItem">
                   <a href="#/settings">

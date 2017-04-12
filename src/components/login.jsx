@@ -6,7 +6,8 @@ import Log from './log.jsx'
 import {  loginUser,
   logoutUser,
   registerUser,
-  protectedTest} from '../actions/auth/auth'
+  // protectedTest,
+} from '../actions/auth/auth'
 
 
 class Auth extends Component{
@@ -28,8 +29,8 @@ class Auth extends Component{
       <div>
         {this.state.signup ? <Register/> : null}
         {this.state.login ? <Log /> : null}
-        <div id= "buttons">
-          <p id= "loginButton" onClick = {this.switch}>{word}</p>
+        <div>
+          <p onClick = {this.switch}>{word}</p>
         </div>
       </div>
     )
@@ -46,6 +47,6 @@ export default connect(
     loginUser,
     logoutUser,
     registerUser,
-    protectedTest
+    // protectedTest,
   }
 )(Auth)

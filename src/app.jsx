@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <div className="container-fixed header-padding">
+          <div className="navbar navbar-inverse navbar-fixed-top">
+            <div className="container fullWidth">
+              <div className="navbar-header">
+                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+                <a className="navbar-brand" href="/">Fridge.xyz</a>
+              </div>
+              <div className="collapse navbar-collapse">
+                <div className="pull-right navItem">
+                  <a href="#/dashboard">Home</a>
+                </div>
+                <div className="pull-right navItem">
+                  <a href="#/login">Login</a>
+                </div>
+                <div className="pull-right navItem">
+                  <a href="#/settings">
+                    <img src="assets/vectorstash-gear.svg" height="20" width="30" alt="Settings" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="navbar-default sidebar" role="navigation">
           <div className="sidebar-nav navbar-collapse collapse">
             <ul className="nav in" id="side-menu">

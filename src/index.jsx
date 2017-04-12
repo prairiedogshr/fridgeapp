@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import Routes from './routes';
@@ -52,4 +51,4 @@ export default class AppProvider extends Component {
     );
   }
 }
-render(<AppProvider />, document.getElementById('app-container'));
+render(<AppProvider />, document.getElementById('app-wrapper'));

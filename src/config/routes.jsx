@@ -16,6 +16,42 @@ import Settings from '../containers/settingsContainer';
 import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
+import { logoutUser } from '../actions/auth/auth.js';
+import { persistStore } from 'redux-persist';
+
+
+const Home = () => (
+  <div>
+    <h1><a onClick={logoutUser}>Logout</a></h1>
+    <br />
+    <h1>hold page</h1>
+    <Link to="/app">App</Link>
+    <br />
+    <Link to="/chores">Chores</Link>
+    <br />
+    <Link to="/login">login</Link>
+    <br />
+    <Link to="/signin">Signup</Link>
+    <br />
+    <Link to="/tasks">Tasks</Link>
+    <br />
+    <Link to="/dashboard">Dashboard</Link>
+    <br />
+    <Link to="/settings">Settings</Link>
+    <br />
+    <Link to="/house">House</Link>
+    <br />
+    <Link to="/profile">profile</Link>
+    <br />
+    <Link to="/createhouse">Create House</Link>
+    <br />
+    <Link to="/homeless">homeless</Link>
+    <br />
+    <Link to="/houseexpenses">Expenses</Link>
+    <br />
+  </div>
+);
+
 
 class Routes extends Component {
   render() {

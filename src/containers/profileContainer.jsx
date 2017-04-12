@@ -11,8 +11,8 @@ class User extends Component {
       loaded: true,
     };
   }
-
   render() {
+    console.log(this.props)
     if (this.state.loaded === true) {
       return (
         <div className="centered">

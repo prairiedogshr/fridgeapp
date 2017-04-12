@@ -7,6 +7,7 @@ import axios from 'axios';
 class Form extends Component {
 
   OnSubmit(field, data) {
+    
     this.refs.newData.placeholder = this.refs.newData.value;
     // "/api/users/1"
   }
@@ -21,6 +22,7 @@ class Form extends Component {
   // }
 
   render() {
+    console.log(this.props)
     return (
       <form>
         <label>
@@ -35,7 +37,7 @@ class Form extends Component {
         />
         <button
           className={this.props.dbField} onClick={() => {
-            this.OnSubmit(this.props.submitProfile(this.props.dbField, this.refs.newData.value));}} type="Submit">Edit</button>
+            this.OnSubmit(this.props.submitProfile(this.props.dbField, this.refs.newData.value, this.props.user.user_id));}} type="Submit">Edit</button>
         <br />
       </form>);
   }

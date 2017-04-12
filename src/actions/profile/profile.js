@@ -4,15 +4,19 @@ import{
 } from '../actionTypes';
 
 
-export const submitProfile = (field, data) => {
+export const submitProfile = (field, data, id) => {
   return (dispatch, getState) => {
     const state = getState()
     return axios.put('/api/users/', {
           key: field,
           value: data,
-          id: 90,
+          id,
         })
         .then((res)=>{
+          return dispatch({
+            type: EDIT_PROFILE,
+            payload: { field, data },
+          })
           console.log(res)
         })
 

@@ -10,7 +10,7 @@ export const submitProfile = (field, data) => {
     return axios.put('/api/users/', {
           key: field,
           value: data,
-          id: 90,
+          id: this.props.user.user_id,
         })
         .then((res)=>{
           console.log(res)

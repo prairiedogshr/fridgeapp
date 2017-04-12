@@ -5,12 +5,12 @@ import { joinHouse } from '../actions/house/house'
 
 
 class JoinHouse extends Component{
-
   constructor(props){
     super(props);
     this.state ={
       house: ''
     };
+    console.log("this.props", this.props.user)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
@@ -20,10 +20,7 @@ class JoinHouse extends Component{
   }
 
   handleSubmit(event){
-    console.log("Here we are!")
-    console.log("this.props", this.props)
     const house = this.state.house;
-    console.log("house",house)
   }
 
   render(){

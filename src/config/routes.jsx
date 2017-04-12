@@ -79,11 +79,8 @@ class Routes extends Component {
           <Route path="/house" component={House} />
           <Route path="/homeless" component={Homeless} />
           <Route path="/createhouse" component={CreateHouse} />
-<<<<<<< HEAD
           <Route path="/houseexpenses" component={HouseExpenses} />
-=======
           <Route path="/join" component={Join} />
->>>>>>> join page
         </Switch>
       </HashRouter>
     );

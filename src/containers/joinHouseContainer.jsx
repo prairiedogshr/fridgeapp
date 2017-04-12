@@ -2,15 +2,16 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { joinHouse } from '../actions/house/house'
+import { getAppState } from '../actions/init/init.js';
 
 
 class JoinHouse extends Component{
   constructor(props){
     super(props);
-    this.state ={
+    this.state = {
       house: ''
     };
-    console.log("this.props", this.props.user)
+    console.log("this.props", this.props.user.user_id)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
@@ -42,8 +43,8 @@ class JoinHouse extends Component{
 
 }
 
-const mapStateToProps = ({joinHouseReducer}) => ({
-  join: joinHouseReducer
+const mapStateToProps = ({userReducer}) => ({
+  user: userReducer
 });
 
 JoinHouse.proptypes = {
@@ -53,6 +54,6 @@ JoinHouse.proptypes = {
 export default connect(
   mapStateToProps,
   {
-    joinHouse,
+    joinHouse
   }
 )(JoinHouse)

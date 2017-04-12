@@ -8,18 +8,32 @@ import {
   AUTH_ERROR,
   UNAUTH_USER,
   PROTECTED_TEST,
-  INIT_USER
+  INIT_USER,
+  LOG_OUT,
 } from '../actionTypes'
 
 const API_URL = 'http://localhost:1337/api';
 const CLIENT_ROOT_URL = 'http://localhost:1337';
 
 // Login actions
+
+// export const logOut = () => {
+//   console.log('________----------______________--------');
+//   return (dispatch) => {
+//     console.log("DISPATCH", dispatch)
+//     dispatch({
+//       type: LOG_OUT,
+//       payload: true
+//     })
+//   }
+// }
+
 export const logoutUser = () => {
-  return (dispatch) => {
+  return dispatch => {
+    console.log("In dispatch");
     dispatch({ type: UNAUTH_USER });
     cookie.remove('token', { path: '/' });
-    window.location.href = CLIENT_ROOT_URL + '/#/login';
+    //window.location.href = CLIENT_ROOT_URL + '/#/login';
   };
 };
 

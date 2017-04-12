@@ -16,9 +16,10 @@ import Settings from '../containers/settingsContainer';
 import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
+import { logoutUser } from '../actions/auth/auth.js';
 import { persistStore } from 'redux-persist';
 import Join from '../containers/joinHouseContainer.jsx'
-
+import { logoutUser } from '../actions/auth/auth.js';
 
 
 const Home = () => (
@@ -47,13 +48,21 @@ const Home = () => (
     <Link to="/homeless">homeless</Link>
     <br />
     <Link to="/houseexpenses">Expenses</Link>
-    <Link to="/join">join</Link>
     <br />
   </div>
 );
 
 
 class Routes extends Component {
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <Router>

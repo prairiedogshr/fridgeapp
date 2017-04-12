@@ -1,4 +1,5 @@
 import { CREATE_HOUSE } from '../actions/actionTypes';
+import {UNAUTH_USER} from '../actions/actionTypes';
 
 // userFirstName: 'Todd',
 // userLastName: 'MacIntyre',
@@ -14,6 +15,8 @@ export default function createHouseReducer(state = {}, action) {
   console.log('action type outer: ', action.type);
 
   switch (action.type) {
+    case UNAUTH_USER:
+      return { ...{} };
     case CREATE_HOUSE:
       console.log('WE IN IT! ', action.payload);
       return { ...state,

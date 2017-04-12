@@ -1,4 +1,5 @@
 import { EDIT_PROFILE } from '../actions/actionTypes';
+import { UNAUTH_USER } from '../actions/actionTypes';
 
 // userFirstName: 'Todd',
 // userLastName: 'MacIntyre',
@@ -9,10 +10,11 @@ import { EDIT_PROFILE } from '../actions/actionTypes';
 // const initialState = {
 //   text: 'Thing',
 // };
-
 export default function userReducer(state = {}, action) {
   console.log('action type outer: ', action.type);
   switch (action.type) {
+    case UNAUTH_USER:
+      return { ...{} };
     case EDIT_PROFILE:
       console.log('action payload inner: ', action.payload);
       return { ...state,

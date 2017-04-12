@@ -13,9 +13,11 @@ import settingsReducer from './settings';
 import createHouseReducer from './createHouse';
 import initReducer from './init';
 import joinHouseReducer from './joinHouse'
+import logoutReducer from './logout'
 
 
 const rootReducer = combineReducers({
+  logoutReducer,
   homelessReducer,
   choresReducer,
   tasksReducer,

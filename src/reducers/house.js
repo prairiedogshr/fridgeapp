@@ -1,5 +1,5 @@
 import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO, RECEIVE_HOUSE, ROTATE_GROUPS, } from '../actions/actionTypes.js';
-
+import {UNAUTH_USER} from '../actions/actionTypes';
 
 
 const initialState = {
@@ -48,6 +48,9 @@ const initialState = {
 
 export default function houseReducer(state = {hello: true}, action) {
   switch (action.type) {
+    case UNAUTH_USER:
+      return { ...{} };
+
     case ADD_USER:
       return {
         ...state,

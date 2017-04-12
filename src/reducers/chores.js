@@ -1,5 +1,6 @@
 // don't forget to add action dispatches here
 import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP, } from '../actions/actionTypes';
+import {UNAUTH_USER} from '../actions/actionTypes';
 
 const initialState = {
   houseChores: [{ chore_id: 1, chore_name: 'chore 1' }, { id: 2, chore_name: 'chore 2' }, { id: 3, chore_name: 'chore 3' },
@@ -12,12 +13,13 @@ const initialState = {
 
 // let idCount = 5;
 let last;
-
 export default function choresReducer(state = initialState, action) {
   console.log('action type outer: ', action.type);
   let item;
 
   switch (action.type) {
+    case UNAUTH_USER:
+      return { ...{} };
     case ADD_CHORE: {
       console.log('action payload inner: ', action.payload);
       return {

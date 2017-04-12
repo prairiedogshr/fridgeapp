@@ -12,7 +12,7 @@ export default function (state = INITIAL_STATE, action) {
     case AUTH_USER:
       return { ...state, error: '', message: '', authenticated: true };
     case UNAUTH_USER:
-      return { ...state, authenticated: false };
+      return { ...{} };
     case AUTH_ERROR:
       return { ...state, error: action.payload };
     case PROTECTED_TEST:
@@ -21,3 +21,7 @@ export default function (state = INITIAL_STATE, action) {
       return state;
   }
 }
+
+// import {AUTH_USER} from '../actions/actionTypes';
+// case UNAUTH_USER:
+//   return { ...{} };

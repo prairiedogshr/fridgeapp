@@ -6,7 +6,9 @@ import Log from './log.jsx'
 import {  loginUser,
   logoutUser,
   registerUser,
-  protectedTest} from '../actions/auth/auth'
+  protectedTest,
+  logOut,
+} from '../actions/auth/auth'
 
 class Auth extends Component{
   constructor(props){
@@ -18,8 +20,8 @@ class Auth extends Component{
   }
 
   componentWillMount() {
-    console.log("CWM", logoutUser)
-    logoutUser()
+    console.log("CWM", logOut)
+    this.props.logoutUser()
   }
 
   switch = (word) =>{
@@ -54,6 +56,7 @@ const mapStateToProps = ({authReducer}) => ({
 export default connect(
   mapStateToProps,
   {
+    logOut,
     loginUser,
     logoutUser,
     registerUser,

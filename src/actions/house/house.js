@@ -7,6 +7,7 @@ import{
   JOIN_HOUSE,
 } from '../actionTypes'
 import axios from 'axios';
+import {isEmpty} from 'underscore'
 
 export const updateHouseInfo = (updateInfo) => {
   return (dispatch, getState) => {
@@ -73,8 +74,15 @@ export const createHouse = (house) => {
   });
 };
 
-export const joinHouse = (house) => {
-  console.log("Inside the joinHouse action", house)
+export const joinHouse = (house, user) => {
+//have to hash the house varible that comes in.
+  axios.get('api/houses/'+house).then((data) =>{
+    if (data.data.house_account === null || data.data.house_account === undefined ){
+      alert("Invalid Code!")
+    }else{
+      user.house_in_user = house;
+    };
+  })
   return {
     type: JOIN_HOUSE,
     payload: house,

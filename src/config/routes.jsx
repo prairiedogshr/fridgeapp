@@ -16,6 +16,42 @@ import Settings from '../containers/settingsContainer';
 import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user.jsx';
+import { persistStore } from 'redux-persist';
+import Join from '../containers/joinHouseContainer.jsx'
+
+
+
+const Home = () => (
+  <div>
+    <h1>hold page</h1>
+    <Link to="/app">App</Link>
+    <br />
+    <Link to="/chores">Chores</Link>
+    <br />
+    <Link to="/login">login</Link>
+    <br />
+    <Link to="/signin">Signup</Link>
+    <br />
+    <Link to="/tasks">Tasks</Link>
+    <br />
+    <Link to="/dashboard">Dashboard</Link>
+    <br />
+    <Link to="/settings">Settings</Link>
+    <br />
+    <Link to="/house">House</Link>
+    <br />
+    <Link to="/profile">profile</Link>
+    <br />
+    <Link to="/createhouse">Create House</Link>
+    <br />
+    <Link to="/homeless">homeless</Link>
+    <br />
+    <Link to="/houseexpenses">Expenses</Link>
+    <Link to="/join">join</Link>
+    <br />
+  </div>
+);
+
 
 class Routes extends Component {
   render() {
@@ -35,6 +71,7 @@ class Routes extends Component {
             <Route path="/homeless" component={Homeless} />
             <Route path="/createhouse" component={CreateHouse} />
             <Route path="/houseexpenses" component={HouseExpenses} />
+            <Route path="/join" component={Join} />
           </App>
         </Switch>
       </Router>

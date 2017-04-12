@@ -1,4 +1,4 @@
-import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO, RECEIVE_HOUSE } from '../actions/actionTypes.js';
+import { ADD_USER, REMOVE_USER, UPDATE_HOUSE_INFO, RECEIVE_HOUSE, ROTATE_GROUPS, } from '../actions/actionTypes.js';
 
 
 
@@ -84,6 +84,20 @@ export default function houseReducer(state = {hello: true}, action) {
         loaded: true
       }
     }
+
+    case ROTATE_GROUPS:
+      // payload: { roomie, newRotation }
+      newRoomie = Object.assign({}, action.payload.roomie, { user_chore_rotation: action.payload.newRotation });
+      return {
+        ...state,
+        users: state.users.map(user => {
+          if (user.user_id === action.payload.roomie.user_id) {
+            return newRoomie;
+          }
+          return user;
+        }),
+      }
+
     default:
     console.log('house reducer running default: ', state)
       return state;

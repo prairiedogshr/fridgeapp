@@ -85,19 +85,20 @@ export const undoComplete = (choreId) => {
   }
 }
 
-export const increaseGroups = () => {
+export const increaseGroups = (roomies) => {
   console.log('ACTION - increaseGroups:');
+  console.log(roomies.length);
   return {
     type: INCREASE_GROUPS,
-    payload: null,
+    payload: roomies.length,
   };
 };
 
-export const decreaseGroups = () => {
+export const decreaseGroups = (roomies) => {
   console.log('ACTION - decreaseGroups:');
   return {
     type: DECREASE_GROUPS,
-    payload: null,
+    payload: roomies.length,
   };
 };
 
@@ -121,7 +122,88 @@ export const assignGroup = (choreId, group) => {
   };
 };
 
-export const rotateGroups = (houseId) => {
+export const rotateGroups = (roomies) => {
+  let max = roomies.length;
+  let allAssigned = roomies.every(roomie => {
+    return roomie.user_chore_rotation;
+  });
+
+  return (dispatch) => {
+    roomies.forEach((roomie, ind) => {
+      let newRotation;
+      if (allAssigned) {
+        console.log('all assigned');
+        newRotation = roomie.user_chore_rotation + 1;
+        if (newRotation > max) {
+          newRotation = 1;
+        }
+      } else {
+        console.log('not all assigned');
+        newRotation = ind + 1;
+      }
+
+      return axios.put('/api/users',
+        {
+          "id": roomie.user_id,
+          "key": "user_chore_rotation",
+          "value": newRotation,
+        }
+      )
+      .then(result => {
+        return dispatch({
+          type: ROTATE_GROUPS,
+          payload: { roomie, newRotation },
+        });
+      });
+    });
+  };
+
+
+  // // iterate through roommates
+
+  // console.log(`roomies: ${roomies}`);
+  // console.log(roomies);
+
+  // let groupsTaken = {};
+
+  // let notAssignedRoomies = [];
+  // let assignedRoomies = roomies.filter(roomie => {
+  //   if (roomie.user_chore_rotation) {
+  //     return true;
+  //   }
+  //   notAssignedRoomies.push(roomie);
+  //   return false;
+  // });
+
+  // promiseFunc = new Promise((resolve, reject) => {
+  //   assignedRoomies.forEach((roomie, ind) => {
+  //     let newRotation = roomie.user_chore_rotation + 1
+  //     groupsTaken[newRotation] = null;
+  //     return (dispatch) => {
+  //       return axios.put('/api/users',
+  //         {
+  //           "id": roomie.user_id,
+  //           "key": "user_chore_rotation",
+  //           "value": newRotation,
+  //         }
+  //       )
+  //       .then(result => {
+  //         return dispatch({
+  //           type: ROTATE_GROUPS,
+  //           payload: {roomie, newRotation},
+  //         });
+  //       });
+  //     }
+  //   });
+  // });
+
+  // promiseFunc.then(() => {
+
+  // })
+
+
+
+
   // for each user in the house
     // find which chore group they are assigned to
 
@@ -133,4 +215,4 @@ export const rotateGroups = (houseId) => {
 
   // would be easire to assign roomies to a group number to have that cycle through.
 
-}
+};

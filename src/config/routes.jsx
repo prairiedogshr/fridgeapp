@@ -48,7 +48,6 @@ const Home = () => (
     <Link to="/homeless">homeless</Link>
     <br />
     <Link to="/houseexpenses">Expenses</Link>
-    <Link to="/join">join</Link>
     <br />
   </div>
 );

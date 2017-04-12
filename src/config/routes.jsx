@@ -55,6 +55,15 @@ const Home = () => (
 
 
 class Routes extends Component {
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <Router>

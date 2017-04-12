@@ -123,51 +123,40 @@ export const assignGroup = (choreId, group) => {
 };
 
 export const rotateGroups = (roomies) => {
-
+  let max = roomies.length;
   let allAssigned = roomies.every(roomie => {
     return roomie.user_chore_rotation;
   });
 
-  if (allAssigned) {
+  return (dispatch) => {
+    roomies.forEach((roomie, ind) => {
+      let newRotation;
+      if (allAssigned) {
+        console.log('all assigned');
+        newRotation = roomie.user_chore_rotation + 1;
+        if (newRotation > max) {
+          newRotation = 1;
+        }
+      } else {
+        console.log('not all assigned');
+        newRotation = ind + 1;
+      }
 
-    return (dispatch) => {
-      roomies.forEach((roomie, ind) => {
-        let newRotation = roomie.user_chore_rotation + 1
-        return axios.put('/api/users',
-          {
-            "id": roomie.user_id,
-            "key": "user_chore_rotation",
-            "value": newRotation,
-          }
-        )
-        .then(result => {
-          return dispatch({
-            type: ROTATE_GROUPS,
-            payload: { roomie, newRotation },
-          });
+      return axios.put('/api/users',
+        {
+          "id": roomie.user_id,
+          "key": "user_chore_rotation",
+          "value": newRotation,
+        }
+      )
+      .then(result => {
+        return dispatch({
+          type: ROTATE_GROUPS,
+          payload: { roomie, newRotation },
         });
       });
-    };
-  } else {
-    return (dispatch) => {
-      roomies.forEach((roomie, ind) => {
-        let newRotation = ind + 1;
-        return axios.put('/api/users',
-          {
-            "id": roomie.user_id,
-            "key": "user_chore_rotation",
-            "value": newRotation,
-          }
-        )
-        .then(result => {
-          return dispatch({
-            type: ROTATE_GROUPS,
-            payload: {roomie, newRotation},
-          });
-        });
-      });
-    };
-  }
+    });
+  };
 
 
   // // iterate through roommates

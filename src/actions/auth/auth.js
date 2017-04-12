@@ -52,16 +52,21 @@ export const loginUser = (e) => {
   return (dispatch) => {
     return axios.post(`/api/users/signin`, e)
       .then((response) => {
-        console.log("Good work!!! ", response)
-        dispatch({
-          type: INIT_USER,
-          payload: response.data.id
-        })
+        if (response) {
+          console.log("Good work!!! ", response)
+          dispatch({
+            type: INIT_USER,
+            payload: response.data.id
+          })
+          return true
+        } else {
+          return false
+        }
       })
-      .then(() => true)
       .catch((error) => {
         console.log("We goofed", error)
-        errorHandler(dispatch, error.response, AUTH_ERROR);
+        return false;
+        // errorHandler(dispatch, error.response, AUTH_ERROR);
       });
   };
 };

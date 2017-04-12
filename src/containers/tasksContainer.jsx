@@ -24,7 +24,6 @@ class Tasks extends Component {
   };
 
   render() {
-    console.log('++++++++', this.props);
     const complete = this.props.tasks.complete;
     const incomplete = this.props.tasks.incomplete;
 

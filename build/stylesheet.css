@@ -11,10 +11,12 @@
   height: 100px;
   border-radius: 33px;
 }
+
 .user_info {
   height:50px;
 }
 
+<<<<<<< HEAD
 /*
  NEW
  */
@@ -198,4 +200,16 @@ body {
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
   color: #fff;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
 }

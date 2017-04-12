@@ -102,8 +102,9 @@ module.exports = {
       const userChores = db.select().from('chore').innerJoin('user', 'user.user_chore_rotation', 'chore.chore_group').where('user.user_id', id).andWhere('chore.house_in_chore', data[0].house_in_user);
       const houseTasks = db.select().from('task').where('house_in_task', data[0].house_in_user);
       const houseChores = db.select().from('chore').where('house_in_chore', data[0].house_in_user);
+      const expenses = db.select().from('expense').where('house_in_expense', data[0].house_in_user);
 
-      Promise.all([user, house, userTasks, userChores, houseTasks, houseChores, roommates])
+      Promise.all([user, house, userTasks, userChores, houseTasks, houseChores, roommates, expenses])
       .then((dataa) => {
         const formedData = {
           userReducer: dataa[0][0] || undefined,
@@ -123,6 +124,7 @@ module.exports = {
             incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
             groups: [1]
           },
+          expensesReducer: dataa[7],
         };
         callback(null, formedData);
       })

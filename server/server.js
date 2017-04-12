@@ -1,10 +1,10 @@
 const express = require('express');
+const path = require('path');
 
 const port = process.env.PORT || 1337;
 const app = express();
 const passport = require('passport');
 
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
@@ -13,7 +13,7 @@ require('./config/middleware.js')(app, express);
 // passport
 require('./config/passport.js')(passport);
 
-//mysqlstore setup 
+// mysqlstore setup
 const options = {
   host: process.env.DB_SERVER,
   port: port,
@@ -24,7 +24,6 @@ const options = {
 
 const sessionStore = new MySQLStore(options);
 
-// app.use(cookieParser());
 app.use(session({
   secret: 'our secret',
   name: 'cookie name',
@@ -36,8 +35,14 @@ app.use(session({
 app.use(passport.initialize());
 // passport.use('local-login', localLoginStrategy)
 app.use(passport.session());
+
 // routes
 require('./config/routes.js')(app, passport);
+
+app.use(express.static(path.join(__dirname, '/../build')));
+app.get('/*', (request, response) => {
+  response.sendFile(path.resolve(__dirname, '../build/index.html'));
+});
 
 app.listen(port, () => {
   console.log('Server is listening on ', port);

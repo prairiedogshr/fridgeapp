@@ -11,7 +11,6 @@ class JoinHouse extends Component{
     this.state = {
       house: ''
     };
-    console.log("this.props", this.props.user.user_id)
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
@@ -21,7 +20,9 @@ class JoinHouse extends Component{
   }
 
   handleSubmit(event){
+    const user = this.props.user;
     const house = this.state.house;
+    joinHouse(house, user);
   }
 
   render(){
@@ -43,7 +44,7 @@ class JoinHouse extends Component{
 
 }
 
-const mapStateToProps = ({userReducer}) => ({
+const mapStateToProps = ({ userReducer }) => ({
   user: userReducer
 });
 

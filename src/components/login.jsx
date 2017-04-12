@@ -8,41 +8,35 @@ import {  loginUser,
   registerUser,
   protectedTest} from '../actions/auth/auth'
 
+
 class Auth extends Component{
   constructor(props){
     super(props);
     this.state={
-      signup:false,
-      login:true
+      signup: false,
+      login: true,
     }
   }
 
-  switch = (word) =>{
-    var signup;
-    var login;
-    if(word === "signup"){signup = true; login = false;}
-    else{login = true; signup= false;}
-    return this.setState({login:login, signup:signup})
+  switch = (word) => {
+    return this.setState({login: !this.state.login, signup: !this.state.signup})
   }
 
   render(){
-    var self = this;
+    let word = this.state.signup ? "login" : "signup"
     return(
       <div>
+        {this.state.signup ? <Register/> : null}
+        {this.state.login ? <Log /> : null}
         <div id= "buttons">
-          <p id ="signupButton" onClick ={self.switch.bind(null,"signup")}
-            className={self.state.signup ? "yellow": "blue"}> Sign Up </p>
-          <p id= "loginButton" onClick = {self.switch.bind(null, "login")}
-            className={self.state.login ? "yellow": "blue"}>Login</p>
+          <p id= "loginButton" onClick = {this.switch}>{word}</p>
         </div>
-        {self.state.signup?<Register/> : null}
-        {self.state.login? <Log /> : null}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({authReducer}) => ({
+const mapStateToProps = ({ authReducer }) => ({
   auth: authReducer
 })
 

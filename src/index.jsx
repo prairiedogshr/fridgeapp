@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Router } from 'react-router';
-import thunk from 'redux-thunk';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { BrowserRouter as Router } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
+import thunk from 'redux-thunk';
 import Routes from './routes';
 import reducer from './reducers';
-import { persistStore, autoRehydrate } from 'redux-persist'
-
 
 const history = createHistory();
 const middleware = applyMiddleware(thunk);
@@ -33,14 +30,13 @@ persistStore(store);
 export default class AppProvider extends Component {
   constructor() {
     super();
-    this.state = { rehydrated: false }
+    this.state = { rehydrated: false };
   }
 
   componentWillMount() {
-    console.log('hello? ');
     persistStore(store, {}, () => {
-      this.setState({ rehydrated: true })
-    })
+      this.setState({ rehydrated: true });
+    });
   }
 
   render() {
@@ -49,14 +45,13 @@ export default class AppProvider extends Component {
         <Provider store={store}>
           <Router history={history} routes={Routes} />
         </Provider>
-      )
-    } else {
-      return (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )
+      );
     }
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 }
-render(<AppProvider />, document.getElementById('root'));
+render(<AppProvider />, document.getElementById('app-container'));

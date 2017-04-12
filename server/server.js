@@ -13,7 +13,7 @@ require('./config/middleware.js')(app, express);
 // passport
 require('./config/passport.js')(passport);
 
-//mysqlstore setup 
+// mysqlstore setup
 const options = {
   host: process.env.DB_SERVER,
   port: port,

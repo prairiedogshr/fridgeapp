@@ -15,11 +15,11 @@ import Tasks from './containers/tasksContainer';
 export default (
   <Route path="/" component={App} >
     <Route path="login" component={Auth} />
+    <Route path="signin" component={Auth} />
     <Route path="profile" component={Profile} />
     <Route path="dashboard" component={Dashboard} />
     <Route path="chores" component={Chores} />
     <Route path="tasks" component={Tasks} />
-    <Route path="signin" component={Auth} />
     <Route path="settings" component={Settings} />
     <Route path="house" component={House} />
     <Route path="homeless" component={Homeless} />

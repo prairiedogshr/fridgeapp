@@ -19,7 +19,6 @@ import User from '../components/user.jsx';
 import { persistStore } from 'redux-persist';
 import Join from '../containers/joinHouseContainer.jsx'
 import { logoutUser } from '../actions/auth/auth.js';
-import { persistStore } from 'redux-persist';
 
 
 const Home = () => (

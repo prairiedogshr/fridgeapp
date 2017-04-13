@@ -25,18 +25,20 @@ class Auth extends Component{
     this.props.logoutUser()
   }
 
-  switch = (word) => {
+  switch = () => {
     return this.setState({login: !this.state.login, signup: !this.state.signup})
   }
 
   render(){
-    let word = this.state.signup ? "login" : "signup"
+    let word = this.state.signup ? "signup" : "login";
+    let inverse = !this.state.signup ? "signup" : "login";
     return(
       <div>
+        <h2>{word}</h2>
         {this.state.signup ? <Register/> : null}
         {this.state.login ? <Log /> : null}
         <div id= "buttons">
-          <p id= "loginButton" onClick = {this.switch}>{word}</p>
+          <a href="#" onClick = {e => {e.preventDefault(); this.switch()}}>{inverse}</a>
         </div>
       </div>
     )

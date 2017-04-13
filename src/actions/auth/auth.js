@@ -1,7 +1,5 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
-import { browserHistory } from 'react-router';
-import { withRouter } from 'react-router-dom';
 
 import {
   AUTH_USER,
@@ -67,11 +65,13 @@ export const loginUser = (e) => {
 };
 
 export const registerUser = creds => (dispatch) => {
-  axios.post('/api/users/', creds)
+  return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
-        window.location.href = '#/profile';
+        // window.location.href = '#/profile';
+        // history.push('/dashboard');
+        return true;
       })
       .catch((error) => {
         console.log(error);

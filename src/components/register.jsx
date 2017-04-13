@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, } from 'react-router-dom';
 import { registerUser } from '../actions/auth/auth.js';
 import axios from 'axios';
 
@@ -51,8 +52,12 @@ class Register extends Component {
   }
 
   handleRegistration = (e) => {
-    this.state.creds
     this.props.registerUser(this.state.creds)
+      .then(response => {
+        if (response === true) {
+          return this.props.history.push('/homeless');
+        }
+      });
   }
 
   handleKeyUp = (e) => {
@@ -88,4 +93,8 @@ function mapStateToProps(authReducer) {
   };
 }
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default withRouter(connect(mapStateToProps,
+  {
+    registerUser,
+  }
+)(Register));

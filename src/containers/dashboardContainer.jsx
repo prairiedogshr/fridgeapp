@@ -18,11 +18,11 @@ class Dashboard extends Component {
     return (
       <div className="dashboardCont">
 
-        <div className="col-md-6"><ChoresDashboard /></div>
-        <div className="col-md-6"><Tasks /></div>
-        <div className="col-md-6">Dashboard</div>
-        <div className="col-md-6">Dashboard</div>
-        <div className="col-md-6">Dashboard</div>
+        <div><ChoresDashboard /></div>
+        <div><Tasks /></div>
+        <div>Dashboard</div>
+        <div>Dashboard</div>
+        <div>Dashboard</div>
       </div>
     );
   }

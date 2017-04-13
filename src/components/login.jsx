@@ -22,7 +22,7 @@ class Auth extends Component{
 
   componentWillMount() {
     console.log("CWM", logOut)
-    this.props.logoutUser()
+    // this.props.logoutUser()
   }
 
   switch = () => {

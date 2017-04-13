@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../users/userModel.js');
+const PayPalStrategy = require('passport-paypal-oauth').Strategy;
 
 // module.exports = () => {
 //   passport.use(new LocalStrategy(
@@ -76,4 +77,15 @@ module.exports = (passport) => {
       return done(null, id);
     });
   }));
+
+  //paypal
+  passport.use('paypal', new PayPalStrategy({
+    clientID: process.env.PAYPAL_CLIENT_ID,
+    clientSecret: process.env.PAYPAL_CLIENT_SECRET,
+    callbackURL: 'http://localhost:1337/dashboard'
+  },
+  (accessToken, refreshToken, profile, done) => {
+    console.log('got in paypal here');
+    return done(null, 1)
+  }))
 };

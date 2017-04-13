@@ -10,6 +10,7 @@ class CurrentMonthExpense extends Component {
   }
 
   componentWillMount() {
+    console.log('hhhmmm ', this.props)
     axios.get(`/api/expenses/${this.props.id}`)
     .then((data) => {
       console.log(data);

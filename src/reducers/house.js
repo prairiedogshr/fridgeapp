@@ -46,7 +46,7 @@ const initialState = {
   loaded: false
 };
 
-export default function houseReducer(state = {hello: true}, action) {
+export default function houseReducer(state = {}, action) {
   switch (action.type) {
     case UNAUTH_USER:
       return { ...{} };

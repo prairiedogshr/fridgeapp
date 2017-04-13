@@ -77,7 +77,7 @@ class Routes extends Component {
             <Route path="/homeless" component={Homeless} />
             <Route path="/createhouse" component={CreateHouse} />
             {/* <Route path="/joinhouse" component={JoinHouse} /> */}
-            <Route path="/houseexpenses" component={HouseExpenses} />
+            <Route path="/bills" component={HouseExpenses} />
             <Route path="/join" component={Join} />
           </App>
         </Switch>

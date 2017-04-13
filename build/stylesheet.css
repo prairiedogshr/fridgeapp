@@ -11,6 +11,7 @@
   height: 100px;
   border-radius: 33px;
 }
+
 .user_info {
   height:50px;
 }
@@ -197,5 +198,17 @@ body {
 .btn-info.btn-outline:hover,
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
-  color: #fff;
+  color: #fff
 }
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+};

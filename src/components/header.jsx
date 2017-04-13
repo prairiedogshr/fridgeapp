@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar, { Brand } from 'react-bootstrap/lib/Navbar';
 import Sidenav from './sidenav';
 
-// const logo = require('../../build/assets/fridge-logo-white.png');
+const logo = require('../assets/fridge-logo.svg');
 
 class Header extends Component {
   render() {
@@ -12,12 +12,13 @@ class Header extends Component {
         <Navbar fluid={true} style={{ margin: 0 }}>
           <Brand>
             <span>
-              {/* <img src={logo} alt="Fridge" /> */}
+              <img src={logo} alt="Fridge" />
               <button type="button" className="navbar-toggle" onClick={() => {
-                toggleMenu();
-              }} style={{ position: 'absolute', right: 0, top: 0 }}>
+                toggleMenu();}}>
                 <span className="sr-only">Toggle navigation</span>
-                <i className="fa fa-bars" aria-hidden="true" />
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
               </button>
             </span>
           </Brand>

@@ -4,8 +4,11 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducer from './reducers';
 import Routes from './config/routes';
+
+injectTapEventPlugin();
 
 const middleware = applyMiddleware(thunk);
 

@@ -17,7 +17,6 @@ import { logoutUser } from '../actions/auth/auth';
 import Profile from '../containers/profileContainer';
 import Register from '../components/register';
 import Settings from '../containers/settingsContainer';
-import SignIn from '../containers/loginContainer';
 import Tasks from '../containers/tasksContainer';
 import User from '../components/user';
 

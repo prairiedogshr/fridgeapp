@@ -67,7 +67,6 @@ class Routes extends Component {
       <Router>
         <Switch>
           <Route path="/login" component={Auth} />
-          <Route path="/signin" component={Auth} />
           <App>
             <Route path="/profile" component={Profile} />
             <Route path="/dashboard" component={Dashboard} />

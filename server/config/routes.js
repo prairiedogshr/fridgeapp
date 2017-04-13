@@ -8,13 +8,13 @@ const expenseController = require('../expenses/expenseController.js');
 // const passportLocal = require('./passport.js')(passport)
 
 module.exports = (app, passport) => {
-  // app.post('/api/users/signin', 
+  // app.post('/api/users/signin',
   //   passport.authenticate('local-login', {
   //   successRedirect: '/#/dashboard',
   //   failureRedirect: '/#/login',
   //   failureFlash: false,
   //   }));
-  app.post('/api/users/signin', 
+  app.post('/api/users/signin',
     passport.authenticate('local-login'),
       ((req, res) => {
         console.log('authenticated user')
@@ -33,6 +33,7 @@ module.exports = (app, passport) => {
   // }));
   app.get('/api/users/appstate/:id', userController.getAppState);
   app.get('/api/users/:id', userController.getUser);
+  app.get('/api/users/exists/:email', userController.findUserByEmail);
   app.put('/api/users/', userController.updateUser);
   app.post('/api/users/', userController.signup);
 

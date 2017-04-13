@@ -10,14 +10,9 @@ import Dashboard from '../containers/dashboardContainer';
 import Homeless from '../containers/homelessContainer';
 import House from '../containers/houseContainer';
 import HouseExpenses from '../containers/expensesContainer';
-<<<<<<< HEAD
-import Join from '../containers/joinHouseContainer'
-import Log from '../components/log';
-=======
 import Join from '../containers/joinHouseContainer';
 import Log from '../components/log';
 import Login from '../components/login';
->>>>>>> fix(routes): Fix login routing
 import { logoutUser } from '../actions/auth/auth';
 import Profile from '../containers/profileContainer';
 import Register from '../components/register';

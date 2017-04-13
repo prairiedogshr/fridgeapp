@@ -19,7 +19,7 @@ const CLIENT_ROOT_URL = 'http://localhost:1337';
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: UNAUTH_USER });
   cookie.remove('token', { path: '/' });
-  window.location.href = `${CLIENT_ROOT_URL}/#/login`;
+  // window.location.href = `${CLIENT_ROOT_URL}/#/login`;
 };
 
 export const errorHandler = (dispatch, error, type) => {

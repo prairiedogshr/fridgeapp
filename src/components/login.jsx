@@ -20,10 +20,10 @@ class Auth extends Component{
     }
   }
 
-  // componentWillMount() {
-  //   console.log("CWM", logOut)
-  //   this.props.logoutUser()
-  // }
+  componentWillMount() {
+    console.log("CWM", logOut)
+    this.props.logoutUser()
+  }
 
   switch = (word) => {
     return this.setState({login: !this.state.login, signup: !this.state.signup})

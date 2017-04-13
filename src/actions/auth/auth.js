@@ -47,7 +47,7 @@ export const errorHandler = (dispatch, error, type) => {
 
 export const loginUser = (e) => {
   console.log(e);
-  return dispatch => axios.post('/api/users/signin', e)
+  return (dispatch) => axios.post('/api/users/signin', e)
       .then((response) => {
         if (response) {
           console.log('Good work!!! ', response);

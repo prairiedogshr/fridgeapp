@@ -9,8 +9,8 @@ class User extends Component {
     this.state = {
       loaded: true,
     };
-    console.log(this.props.user);
   }
+
   render() {
     console.log(this.props);
     if (this.state.loaded === true) {

@@ -4,7 +4,6 @@ import { withRouter, } from 'react-router-dom';
 import { registerUser } from '../actions/auth/auth.js';
 import axios from 'axios';
 
-
 const CompleteRegistration = ({ handleRegistration, handleKeyUp, }) => {
   return (
     <div>
@@ -17,8 +16,7 @@ const CompleteRegistration = ({ handleRegistration, handleKeyUp, }) => {
       </button>
     </div>
   );
-}
-
+};
 
 class Register extends Component {
   constructor(props) {
@@ -49,7 +47,7 @@ class Register extends Component {
           this.setState({complete_signup: true});
         }
       });
-  }
+  };
 
   handleRegistration = (e) => {
     this.props.registerUser(this.state.creds)
@@ -58,7 +56,7 @@ class Register extends Component {
           return this.props.history.push('/homeless');
         }
       });
-  }
+  };
 
   handleKeyUp = (e) => {
     console.log(e.target.dataset.field);
@@ -85,7 +83,6 @@ class Register extends Component {
     )
   }
 }
-
 
 function mapStateToProps(authReducer) {
   return {

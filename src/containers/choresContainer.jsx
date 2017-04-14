@@ -23,7 +23,6 @@ class Chores extends Component {
     }
   }
 
-
   // this is not working
   handleKeyUp = (e) => {
     if (e.which === 13) {
@@ -54,7 +53,7 @@ class Chores extends Component {
     const complete = this.props.chores.complete;
     const incomplete = this.props.chores.incomplete;
 
-/*
+      /*
         <CompleteChore
           chores={this.props.chores}
           undoComplete={this.undoComplete}

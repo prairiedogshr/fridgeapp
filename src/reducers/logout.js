@@ -5,7 +5,7 @@ export default function logoutReducer(state = {}, action) {
 
   switch (action.type) {
     case LOG_OUT:
-      console.log("IN THE LOGOUT SWITCH", action.payload)
+      console.log('IN THE LOGOUT SWITCH', action.payload);
       return {
         ...state,
       };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth/auth.js';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init.js';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,9 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import {grey500, white} from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
-import { Link } from 'react-router-dom';
 import ThemeDefault from '../styles/theme-default';
 
 class Login extends Component {
@@ -99,7 +97,7 @@ class Login extends Component {
         } else {
           this.setState({
             password: ''
-          })
+          });
           this.forceUpdate()
         }
       });

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import Field from '../components/user';
 import { updateProfile } from '../actions/profile/profile';
@@ -10,10 +9,10 @@ class User extends Component {
     this.state = {
       loaded: true,
     };
-    console.log(this.props.user)
+    console.log(this.props.user);
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     if (this.state.loaded === true) {
       return (
         <div className="centered">
@@ -33,7 +32,6 @@ class User extends Component {
     );
   }
 }
-
 
 const mapStateToProps = ({ userReducer }) => ({
   user: userReducer,

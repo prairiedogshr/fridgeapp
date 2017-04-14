@@ -65,13 +65,10 @@ export default function houseReducer(state = {}, action) {
 
     case UPDATE_HOUSE_INFO: {
       const update = {};
-      update[action.payload.item] = action.payload.value;
+      update[action.payload.key] = action.payload.value;
       return {
         ...state,
-        info: {
-          ...state.info,
-          ...update,
-        },
+        ...update,
       };
     }
 

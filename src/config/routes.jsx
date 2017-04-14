@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { persistStore } from 'redux-persist';
 
 import App from '../app';
 import Auth from '../components/login';
@@ -8,60 +9,18 @@ import CreateHouse from '../containers/createHouseContainer';
 import Dashboard from '../containers/dashboardContainer';
 import Homeless from '../containers/homelessContainer';
 import House from '../containers/houseContainer';
-import HouseExpenses from '../containers/expensesContainer.jsx';
-import Log from '../components/log.jsx';
+import HouseExpenses from '../containers/expensesContainer';
+import Join from '../containers/joinHouseContainer';
+import Log from '../components/log';
+import Login from '../components/login';
+import { logoutUser } from '../actions/auth/auth';
 import Profile from '../containers/profileContainer';
-import Register from '../components/register.jsx';
+import Register from '../components/register';
 import Settings from '../containers/settingsContainer';
-import SignIn from '../containers/loginContainer.jsx';
 import Tasks from '../containers/tasksContainer';
-import User from '../components/user.jsx';
-import { logoutUser } from '../actions/auth/auth.js';
-import { persistStore } from 'redux-persist';
-import Join from '../containers/joinHouseContainer.jsx'
-
-
-const Home = () => (
-  <div>
-    <h1>hold page</h1>
-    <Link to="/app">App</Link>
-    <br />
-    <Link to="/chores">Chores</Link>
-    <br />
-    <Link to="/login">login</Link>
-    <br />
-    <Link to="/signin">Signup</Link>
-    <br />
-    <Link to="/tasks">Tasks</Link>
-    <br />
-    <Link to="/dashboard">Dashboard</Link>
-    <br />
-    <Link to="/settings">Settings</Link>
-    <br />
-    <Link to="/house">House</Link>
-    <br />
-    <Link to="/profile">profile</Link>
-    <br />
-    <Link to="/createhouse">Create House</Link>
-    <br />
-    <Link to="/homeless">homeless</Link>
-    <br />
-    <Link to="/houseexpenses">Expenses</Link>
-    <br />
-  </div>
-);
-
+import User from '../components/user';
 
 class Routes extends Component {
-
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
-
   render() {
     return (
       <Router>

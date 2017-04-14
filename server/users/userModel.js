@@ -53,10 +53,10 @@ module.exports = {
   },
 
   signin: (email, password, callback) => {
-    console.log('~~~~~~~~` ', email, password)
+    console.log('~~~~~~~~` ', email, password);
     helpers.checkPass(email, password, (err, match) => {
       if (err) {
-        console.log('error inside pass')
+        console.log('error inside pass');
         callback(err);
       } else if (!match) {
         console.log('wrong pass');
@@ -64,27 +64,27 @@ module.exports = {
       } else {
         console.log('pass all good');
         db.select('user_id').from('user').where('user_email', email)
-        .then(resp => {
-          console.log('shoudl be user id: ', resp)
+        .then((resp) => {
+          console.log('shoudl be user id: ', resp);
           callback(null, resp[0].user_id);
-        })
+        });
       }
     });
   },
 
   findUserById: (id, callback) => {
-    console.log('trying to find by id: ', id)
+    console.log('trying to find by id: ', id);
     db.select().from('user').where('user_id', id)
       .then(user => callback(null, user));
   },
 
   updateUser: (update, callback) => {
-    console.log('put by ID: ', update)
+    console.log('put by ID: ', update);
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,
       })
-      .then((updated) => {
+      .then(() => {
         callback(null, true);
       })
       .catch((err) => {

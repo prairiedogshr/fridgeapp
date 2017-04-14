@@ -39,6 +39,9 @@ app.use(passport.session());
 // routes
 require('./config/routes.js')(app, passport);
 
+// chores webworker
+require('./choresWorker.js');
+
 app.use(express.static(path.join(__dirname, '/../build')));
 app.get('/*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../build/index.html'));

@@ -18,16 +18,21 @@ class Login extends Component {
     const password = this.refs.password
     const creds = { email: email.value.trim(), password: password.value.trim()}
     this.props.loginUser(creds)
-    .then(resp => {
-      if (resp) {
-      this.props.history.push('/dashboard')
-      } else {
-        this.setState({
-          password: ''
-        })
-        this.forceUpdate()
-      }
-    });
+      .then(resp => {
+        if (resp || resp === null) {
+        // check if user has a house
+          if (resp === null) {
+            this.props.history.push('/homeless');
+          } else {
+            this.props.history.push('/dashboard');
+          }
+        } else {
+          this.setState({
+            password: ''
+          })
+          this.forceUpdate()
+        }
+      });
   };
 
   render() {

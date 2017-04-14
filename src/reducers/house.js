@@ -64,14 +64,13 @@ export default function houseReducer(state = {}, action) {
       };
 
     case UPDATE_HOUSE_INFO: {
+      console.log('hello??')
       const update = {};
-      update[action.payload.item] = action.payload.value;
+      update[action.payload.key] = action.payload.value;
+      console.log('heres the update: ', update)
       return {
         ...state,
-        info: {
-          ...state.info,
-          ...update,
-        },
+        ...update,
       };
     }
 

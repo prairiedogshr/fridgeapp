@@ -21,7 +21,7 @@ export const updateHouseInfo = (updateInfo) => {
       dispatch({
         type: UPDATE_HOUSE_INFO,
         payload: {
-          item: updateInfo.item,
+          key: updateInfo.key,
           value: updateInfo.value,
         }
       })

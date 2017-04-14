@@ -53,7 +53,12 @@ export const loginUser = (e) => {
             type: INIT_USER,
             payload: response.data.id,
           });
-          return true;
+          // check if user has a house
+          return axios.get(`/api/users/${response.data.id}`)
+            .then((user) => {
+              console.log('92836-24376;aslkhg', user.data.house_in_user);
+              return user.data.house_in_user;
+            });
         }
         return false;
       })

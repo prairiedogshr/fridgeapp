@@ -12,6 +12,7 @@ export default function tasksReducer(state = initialState, action) {
   switch (action.type) {
     case UNAUTH_USER:
       return { ...{} };
+
     case ADD_TASK:
       console.log('action payload inner: ', action.payload);
       return {

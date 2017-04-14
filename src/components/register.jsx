@@ -47,7 +47,6 @@ class Register extends Component {
           creds.user_password = this.refs.password.value.trim();
 
           this.setState({complete_signup: true});
-          this.props.history.push('/profile')
         }
       });
   }

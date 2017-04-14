@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth/auth.js';
 import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init.js';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
-import {grey500, white} from 'material-ui/styles/colors';
+import { grey500, white } from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import TextField from 'material-ui/TextField';
 import ThemeDefault from '../styles/theme-default';
@@ -22,16 +23,6 @@ class Login extends Component {
       password: '',
     };
     this.styles = {
-      loginContainer: {
-        minWidth: 320,
-        maxWidth: 400,
-        height: 'auto',
-        position: 'absolute',
-        top: '20%',
-        left: 0,
-        right: 0,
-        margin: 'auto'
-      },
       paper: {
         padding: 20,
         overflow: 'auto'
@@ -70,7 +61,7 @@ class Login extends Component {
         fontSize: 13
       },
       btnPayPal: {
-        background: '#4f81e9'
+        background: '#009cde'
       },
       btnGoogle: {
         background: '#e14441'
@@ -115,61 +106,67 @@ class Login extends Component {
           {/*</button>*/}
         {/*</div>*/}
 
-        <div>
-          <div style={this.styles.loginContainer}>
-            <Paper style={this.styles.paper}>
-              <form>
-                <TextField
-                  ref="email"
-                  hintText="E-mail"
-                  floatingLabelText="E-mail"
-                  fullWidth={true}
-                />
-                <TextField
-                  ref="password"
-                  hintText="Password"
-                  floatingLabelText="Password"
-                  fullWidth={true}
-                  type="password"
-                />
-                <div>
-                  <Checkbox
-                    label="Remember me"
-                    style={this.styles.checkRemember.style}
-                    labelStyle={this.styles.checkRemember.labelStyle}
-                    iconStyle={this.styles.checkRemember.iconStyle}
-                  />
-                  {/*<Link to="/dashboard">*/}
-                    <RaisedButton
-                      label="Login"
-                      primary={true}
-                      style={this.styles.loginBtn}
-                      onClick={event => this.handleClick(event)}
+        <Grid fluid>
+          <Row>
+            <Col xs={12}>
+              <Row center="xs">
+                <Col md={4}>
+                  <Paper style={this.styles.paper}>
+                    <form>
+                      <TextField
+                        ref="email"
+                        hintText="E-mail"
+                        floatingLabelText="E-mail"
+                        fullWidth={true}
+                      />
+                      <TextField
+                        ref="password"
+                        hintText="Password"
+                        floatingLabelText="Password"
+                        fullWidth={true}
+                        type="password"
+                      />
+                      <div>
+                        <Checkbox
+                          label="Remember me"
+                          style={this.styles.checkRemember.style}
+                          labelStyle={this.styles.checkRemember.labelStyle}
+                          iconStyle={this.styles.checkRemember.iconStyle}
+                        />
+                        {/*<Link to="/dashboard">*/}
+                        <RaisedButton
+                          label="Login"
+                          primary={true}
+                          style={this.styles.loginBtn}
+                          onClick={event => this.handleClick(event)}
+                        />
+                        {/*</Link>*/}
+                      </div>
+                    </form>
+                  </Paper>
+                  <div style={this.styles.buttonsDiv}>
+                    <FlatButton
+                      label="Register"
+                      href="/"
+                      style={this.styles.flatButton}
+                      icon={<PersonAdd />}
                     />
-                  {/*</Link>*/}
-                </div>
-              </form>
-            </Paper>
-            <div style={this.styles.buttonsDiv}>
-              <FlatButton
-                label="Register"
-                href="/"
-                style={this.styles.flatButton}
-                icon={<PersonAdd />}
-              />
-            </div>
-            {/*<div style={this.styles.buttonsDiv}>*/}
-              {/*<Link to="/" style={{...this.styles.btn, ...this.styles.btnPayPal}}>*/}
-                {/*<i className="fa fa-paypal fa-lg"/>*/}
-                {/*<span style={this.styles.btnSpan}>Log in with PayPal</span>*/}
-              {/*</Link>*/}
-              {/*<Link to="/" style={{...this.styles.btn, ...this.styles.btnGoogle}}>*/}
-                {/*<i className="fa fa-google-plus fa-lg"/>*/}
-                {/*<span style={this.styles.btnSpan}>Log in with Google</span>*/}
-              {/*</Link>*/}
-            {/*</div>*/}
-          </div>
-        </div>
+                  </div>
+                  <div style={this.styles.buttonsDiv}>
+                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnPayPal}}>
+                      <i className="fa fa-paypal fa-lg"/>
+                      <span style={this.styles.btnSpan}>Log in with PayPal</span>
+                    </Link>
+                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnGoogle}}>
+                      <i className="fa fa-google-plus fa-lg"/>
+                      <span style={this.styles.btnSpan}>Log in with Google</span>
+                    </Link>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
       </MuiThemeProvider>
     );
   }

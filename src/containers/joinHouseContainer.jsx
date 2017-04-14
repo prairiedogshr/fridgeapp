@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { joinHouse } from '../actions/house/house'
-import { getAppState } from '../actions/init/init.js';
 
 
 class JoinHouse extends Component{
@@ -21,8 +20,8 @@ class JoinHouse extends Component{
 
   handleSubmit(event){
     const user = this.props.user;
-    const house = this.state.house;
-    joinHouse(house, user);
+    const house = parseInt(this.state.house);
+    this.props.joinHouse(house, user);
   }
 
   render(){
@@ -34,7 +33,7 @@ class JoinHouse extends Component{
             *Enter the House Code:
             <br/>
             </label>
-            <input type="text" name = "house" value ={state.house} onChange={change} />
+            <input type="number" name = "house" value ={state.house} onChange={change} />
             <button onClick={(event) => this.handleSubmit(event)} className="btn btn-primary">
               Submit
             </button>

@@ -35,7 +35,7 @@ class CreateHouse extends Component {
     event.preventDefault();
     if (a && c && s && z) {
       console.log('ok');
-      this.props.createHouse(this.state);
+      this.props.createHouse(this.state)
     } else {
       console.log('enter all fields');
     }

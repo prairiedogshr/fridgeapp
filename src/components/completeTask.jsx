@@ -10,7 +10,7 @@ export default function CompletedTask(props) {
         </h1>
         <ul>
           {complete.map(task => (
-            <li key={task.id} onClick={() => { props.completeTask(task.id); }}>{task.value}</li>
+            <li key={task.task_id} onClick={() => { props.undoCompleteTask(task); }}>{task.task_name} ${task.expense_in_task}</li>
             ), this)
           }
         </ul>

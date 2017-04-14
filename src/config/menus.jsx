@@ -6,8 +6,6 @@ import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Home from 'material-ui/svg-icons/action/home';
 import Announcement from 'material-ui/svg-icons/action/announcement';
 
-// import {cyan600, pink600, purple600} from 'material-ui/styles/colors';
-
 const menus = {
   sideMenu: [
     { text: 'DashBoard', icon: <Dashboard />, link: '/dashboard' },

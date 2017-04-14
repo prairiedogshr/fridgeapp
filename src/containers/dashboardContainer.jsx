@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import ChoresDashboard from './choresDashboardContainer.jsx';
-import Tasks from './tasksContainer.jsx';
-import { getAppState } from '../actions/init/init.js';
+import ChoresDashboard from './choresDashboardContainer';
+import Tasks from './tasksContainer';
+import { getAppState } from '../actions/init/init';
 
 // import actions here and then add the to mapStateToProps
 
@@ -11,8 +11,8 @@ import { getAppState } from '../actions/init/init.js';
 class Dashboard extends Component {
 
   componentWillMount() {
-    console.log('dashboard will mount',this.props)
-    this.props.getAppState()
+    console.log('dashboard will mount', this.props);
+    this.props.getAppState();
   }
   render() {
     return (

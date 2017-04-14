@@ -1,13 +1,22 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile, submitProfile } from '../actions/profile/profile.js';
+import { updateProfile, submitProfile } from '../actions/profile/profile';
 import axios from 'axios';
+
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Checkbox from 'material-ui/Checkbox';
+import {grey500, white} from 'material-ui/styles/colors';
+import PersonAdd from 'material-ui/svg-icons/social/person-add';
+import Help from 'material-ui/svg-icons/action/help';
+import TextField from 'material-ui/TextField';
+import { Link } from 'react-router-dom';
+import ThemeDefault from '../styles/theme-default';
 
 class Form extends Component {
 
   OnSubmit(field, data) {
-    
     this.refs.newData.placeholder = this.refs.newData.value;
     // "/api/users/1"
   }
@@ -22,7 +31,7 @@ class Form extends Component {
   // }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <form>
         <label>
@@ -30,14 +39,24 @@ class Form extends Component {
         </label><br />
         <input
           className={this.props.dbField}
-          ref='newData'
+          ref="newData"
           type="text"
           placeholder={this.props.data}
           autoFocus="true"
         />
         <button
-          className={this.props.dbField} onClick={() => {
-            this.OnSubmit(this.props.submitProfile(this.props.dbField, this.refs.newData.value, this.props.user.user_id));}} type="Submit">Edit</button>
+          className={this.props.dbField}
+          onClick={() => {
+            this.OnSubmit(this.props.submitProfile(
+              this.props.dbField,
+              this.refs.newData.value,
+              this.props.user.user_id,
+            ));
+          }}
+          type="Submit"
+        >
+          Edit
+        </button>
         <br />
       </form>);
   }

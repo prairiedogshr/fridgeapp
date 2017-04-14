@@ -7,7 +7,6 @@ import MenuItem from 'material-ui/MenuItem';
 import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import { white } from 'material-ui/styles/colors';
-// const logo = require('../assets/fridge-logo-white.svg');
 
 class Header extends Component {
 

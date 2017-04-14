@@ -1,6 +1,5 @@
 // don't forget to add action dispatches here
-import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP, } from '../actions/actionTypes';
-import {UNAUTH_USER} from '../actions/actionTypes';
+import { ADD_CHORE, COMPLETE_CHORE, UNDO_COMPLETE, INCREASE_GROUPS, DECREASE_GROUPS, ASSIGN_GROUP, UNAUTH_USER } from '../actions/actionTypes';
 
 const initialState = {
   houseChores: [{ chore_id: 1, chore_name: 'chore 1' }, { id: 2, chore_name: 'chore 2' }, { id: 3, chore_name: 'chore 3' },
@@ -25,7 +24,7 @@ export default function choresReducer(state = initialState, action) {
       return {
         ...state,
         incomplete: [...state.incomplete, { chore_id: Date.now(), chore_name: action.payload }],
-        houseChores: [...state.houseChores, { chore_id: Date.now(), chore_name: action.payload }]
+        houseChores: [...state.houseChores, { chore_id: Date.now(), chore_name: action.payload }],
       };
     }
     case COMPLETE_CHORE: {

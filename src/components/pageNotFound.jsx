@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-class NotAvaiable extends Component{
+class NotAvailable extends Component {
 
-  render(){
-    return({
+  render() {
+    return (
       <div>
-        <h1> 404- Page Not Found</h1>
-        <p> I'm sorry, the page you are looking for isn't available.</p>
+        <h1>404 - Page Not Found</h1>
+        <p>Sorry, the page you are looking for is not available.</p>
       </div>
-    })
+    );
   }
 }
 
-export default NotAvaiable
+export default NotAvailable;

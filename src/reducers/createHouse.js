@@ -1,5 +1,4 @@
-import { CREATE_HOUSE } from '../actions/actionTypes';
-import {UNAUTH_USER} from '../actions/actionTypes';
+import { CREATE_HOUSE, UNAUTH_USER } from '../actions/actionTypes';
 
 // userFirstName: 'Todd',
 // userLastName: 'MacIntyre',

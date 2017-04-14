@@ -1,5 +1,4 @@
-import { EDIT_PROFILE } from '../actions/actionTypes';
-import { UNAUTH_USER } from '../actions/actionTypes';
+import { EDIT_PROFILE, UNAUTH_USER } from '../actions/actionTypes';
 
 // userFirstName: 'Todd',
 // userLastName: 'MacIntyre',

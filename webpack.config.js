@@ -39,6 +39,11 @@ const config = {
           name: 'assets/[name].[ext]',
         },
       },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?modules',
+        include: /flexboxgrid/,
+      },
     ],
   },
   devServer: {

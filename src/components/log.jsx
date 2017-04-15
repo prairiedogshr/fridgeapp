@@ -84,25 +84,29 @@ class Login extends Component {
   }
 
   handleClick = (event) => {
-    const email = this.refs.email;
-    const password = this.refs.password;
-    const creds = { email: email.value.trim(), password: password.value.trim()};
-    this.props.loginUser(creds)
-      .then(resp => {
-        if (resp || resp === null) {
-        // check if user has a house
-          if (resp === null) {
-            this.props.history.push('/homeless');
-          } else {
-            this.props.history.push('/dashboard');
-          }
-        } else {
-          this.setState({
-            password: ''
-          })
-          this.forceUpdate()
-        }
-      });
+    event.preventDefault()
+
+    this.props.login(document.getElementById("emailInput").value, document.getElementById("passwordInput").value)
+
+    // const email = this.refs.email;
+    // const password = this.refs.password;
+    // const creds = { email: email.value.trim(), password: password.value.trim()};
+    // this.props.loginUser(creds)
+    //   .then(resp => {
+    //     if (resp || resp === null) {
+    //     // check if user has a house
+    //       if (resp === null) {
+    //         this.props.history.push('/homeless');
+    //       } else {
+    //         this.props.history.push('/dashboard');
+    //       }
+    //     } else {
+    //       this.setState({
+    //         password: ''
+    //       })
+    //       this.forceUpdate()
+    //     }
+    //   });
   };
 
   render() {
@@ -120,14 +124,14 @@ class Login extends Component {
         <div>
           <div style={this.styles.loginContainer}>
             <Paper style={this.styles.paper}>
-              <form>
-                <TextField
+              <form onSubmit={(e) => {this.handleClick(e)}}>
+                <TextField id="emailInput"
                   ref="email"
                   hintText="E-mail"
                   floatingLabelText="E-mail"
                   fullWidth={true}
                 />
-                <TextField
+                <TextField id="passwordInput"
                   ref="password"
                   hintText="Password"
                   floatingLabelText="Password"
@@ -146,7 +150,7 @@ class Login extends Component {
                       label="Login"
                       primary={true}
                       style={this.styles.loginBtn}
-                      onClick={event => this.handleClick(event)}
+                      type="submit"
                     />
                   {/*</Link>*/}
                 </div>

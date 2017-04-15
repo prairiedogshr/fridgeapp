@@ -3,8 +3,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house.js';
 import HouseInfo from '../components/houseInfo.jsx';
-import { Col, Panel } from 'react-bootstrap';
+// import { Col, Panel } from 'react-bootstrap';
 import Roommate from '../components/roommate.jsx';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 class House extends Component {
 
@@ -14,28 +15,25 @@ class House extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
+			<Grid fluid>
+				<Row>
 					<Col xs={6}>
-						<Panel header="HOUSE INFO">
-							<HouseInfo info={this.props.house} 
-							update={this.props.updateHouseInfo} />
-						</Panel>
+						<HouseInfo info={this.props.house} 
+						update={this.props.updateHouseInfo} />
 					</Col>
 					<Col xs={6}>
-						<Panel header="Roommates!">
-							{this.props.house.users.map(user => 
-								<Roommate roommate={user} />
-							)}
-						</Panel>
+						{this.props.house.users.map(user => 
+							<Roommate roommate={user} admin={this.props.admin} />
+						)}
 				</Col>
-			</div>
-		</div>
+			</Row>
+		</Grid>
 	)}
 }
 
-const mapStateToProps = ({ houseReducer }) => ({
+const mapStateToProps = ({ houseReducer, userReducer }) => ({
 	house: houseReducer,
+	admin: userReducer.user_is_admin === 1,
 })
 
 export default connect(

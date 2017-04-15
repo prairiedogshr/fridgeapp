@@ -14,7 +14,7 @@ export default function HouseInfo({ info, update }) {
           })
         }}>
         <ControlLabel>Address</ControlLabel>
-        <FormControl  id="house_address" onClick={(e) => {}} type="text"
+        <FormControl  id="house_address" type="text"
         defaultValue={info.house_address} placeholder="Street Address"
         />
         <FormControl id="house_unit_number" type="text"

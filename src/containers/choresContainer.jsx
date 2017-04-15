@@ -22,20 +22,24 @@ class Chores extends Component {
       inputField: '',
       nextClicked: false,
     }
+    this.buttonSubmit = this.buttonSubmit.bind(this);
   }
 
   // this is not working
   handleKeyUp = (e) => {
     if (e.which === 13) {
-      this.props.addChore(this.state.inputField);
-      e.target.value = '';
-      this.state.inputField = '';
+      // this.props.addChore(this.state.inputField);
+      // e.target.value = '';
+      // this.state.inputField = '';
+      this.buttonSubmit();
+      return true;
     } else {
       this.state.inputField = e.target.value;
+      return false;
     }
   };
 
-  buttonSubmit = () => {
+  buttonSubmit () {
     console.log(this.state.inputField);
     const today = new Date();
     const year = today.getUTCFullYear().toString();
@@ -61,7 +65,7 @@ class Chores extends Component {
         "chore_is_done": 0,
     }
     this.props.addChore(chore);
-    this.state.inputField = '';
+    this.setState({inputField: ''});
     console.log(AddChore.inputField);
   };
 

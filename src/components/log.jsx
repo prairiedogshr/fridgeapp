@@ -75,7 +75,19 @@ class Login extends Component {
   handleClick = (event) => {
     event.preventDefault()
 
-    this.props.login(document.getElementById("emailInput").value, document.getElementById("passwordInput").value)
+    this.props.login({
+      email: document.getElementById("emailInput").value,
+      password: document.getElementById("passwordInput").value
+    }).then(resp => {
+      if (resp) {
+        console.log('found house!')
+        this.props.history.push('/dashboard');
+      } else {
+        console.log('no house?')
+        this.props.history.push('/homeless')
+      }
+    }).catch(err => { console.log('err: ', err)});
+  }
 
     // const email = this.refs.email;
     // const password = this.refs.password;
@@ -96,7 +108,7 @@ class Login extends Component {
     //       this.forceUpdate()
     //     }
     //   });
-  };
+  
 
   render() {
     return (

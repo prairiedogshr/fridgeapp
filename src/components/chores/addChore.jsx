@@ -10,7 +10,9 @@ export default function AddChore(props) {
         type="text"
         placeholder=""
         autoFocus="true"
-        onKeyUp={props.handleKeyUp}
+        onKeyUp={(e) => {
+          props.handleKeyUp(e) && (this.textInput.value = '');
+        }}
         ref={(input) => {
           this.textInput = input;
         }}

@@ -73,101 +73,33 @@ class Login extends Component {
   }
 
   handleClick = (event) => {
-    const email = this.refs.email;
-    const password = this.refs.password;
-    const creds = { email: email.value.trim(), password: password.value.trim()};
-    this.props.loginUser(creds)
-      .then(resp => {
-        if (resp || resp === null) {
-        // check if user has a house
-          if (resp === null) {
-            this.props.history.push('/homeless');
-          } else {
-            this.props.history.push('/dashboard');
-          }
-        } else {
-          this.setState({
-            password: ''
-          });
-          this.forceUpdate()
-        }
-      });
+    event.preventDefault()
+
+    this.props.login(document.getElementById("emailInput").value, document.getElementById("passwordInput").value)
+
+    // const email = this.refs.email;
+    // const password = this.refs.password;
+    // const creds = { email: email.value.trim(), password: password.value.trim()};
+    // this.props.loginUser(creds)
+    //   .then(resp => {
+    //     if (resp || resp === null) {
+    //     // check if user has a house
+    //       if (resp === null) {
+    //         this.props.history.push('/homeless');
+    //       } else {
+    //         this.props.history.push('/dashboard');
+    //       }
+    //     } else {
+    //       this.setState({
+    //         password: ''
+    //       })
+    //       this.forceUpdate()
+    //     }
+    //   });
   };
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={ThemeDefault}>
-
-        {/*<div>*/}
-          {/*<input type="text" ref="email" className="form-control" placeholder="email"  />*/}
-          {/*<input type="password" ref="password" className="form-control" placeholder="Password"  />*/}
-          {/*<button onClick={event => this.handleClick(event)} className="btn btn-primary">*/}
-            {/*Login*/}
-          {/*</button>*/}
-        {/*</div>*/}
-
-        <Grid fluid>
-          <Row>
-            <Col xs={12}>
-              <Row center="xs">
-                <Col md={4}>
-                  <Paper style={this.styles.paper}>
-                    <form>
-                      <TextField
-                        ref="email"
-                        hintText="E-mail"
-                        floatingLabelText="E-mail"
-                        fullWidth={true}
-                      />
-                      <TextField
-                        ref="password"
-                        hintText="Password"
-                        floatingLabelText="Password"
-                        fullWidth={true}
-                        type="password"
-                      />
-                      <div>
-                        <Checkbox
-                          label="Remember me"
-                          style={this.styles.checkRemember.style}
-                          labelStyle={this.styles.checkRemember.labelStyle}
-                          iconStyle={this.styles.checkRemember.iconStyle}
-                        />
-                        {/*<Link to="/dashboard">*/}
-                        <RaisedButton
-                          label="Login"
-                          primary={true}
-                          style={this.styles.loginBtn}
-                          onClick={event => this.handleClick(event)}
-                        />
-                        {/*</Link>*/}
-                      </div>
-                    </form>
-                  </Paper>
-                  <div style={this.styles.buttonsDiv}>
-                    <FlatButton
-                      label="Register"
-                      href="/"
-                      style={this.styles.flatButton}
-                      icon={<PersonAdd />}
-                    />
-                  </div>
-                  <div style={this.styles.buttonsDiv}>
-                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnPayPal}}>
-                      <i className="fa fa-paypal fa-lg"/>
-                      <span style={this.styles.btnSpan}>Log in with PayPal</span>
-                    </Link>
-                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnGoogle}}>
-                      <i className="fa fa-google-plus fa-lg"/>
-                      <span style={this.styles.btnSpan}>Log in with Google</span>
-                    </Link>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
-      </MuiThemeProvider>
     );
   }
 }

@@ -40,10 +40,10 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules',
-        include: /flexboxgrid/,
-      },
+       test: /\.css$/,
+       loader: 'style-loader!css-loader?modules',
+       include: /flexboxgrid/,
+     },
     ],
   },
   devServer: {

@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { persistStore } from 'redux-persist';
 
 import App from '../app';
-import Auth from '../components/login';
+import Login from '../components/login';
+import Signin from '../components/register.jsx';
 import Chores from '../containers/choresContainer';
 import CreateHouse from '../containers/createHouseContainer';
 import Dashboard from '../containers/dashboardContainer';
@@ -20,7 +21,8 @@ class Routes extends Component {
     return (
       <Router>
         <Switch>
-          <Route path="/login" component={Auth} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component = {Signin} />
           <App>
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/profile" component={Profile} />

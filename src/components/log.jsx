@@ -89,29 +89,71 @@ class Login extends Component {
     }).catch(err => { console.log('err: ', err)});
   }
 
-    // const email = this.refs.email;
-    // const password = this.refs.password;
-    // const creds = { email: email.value.trim(), password: password.value.trim()};
-    // this.props.loginUser(creds)
-    //   .then(resp => {
-    //     if (resp || resp === null) {
-    //     // check if user has a house
-    //       if (resp === null) {
-    //         this.props.history.push('/homeless');
-    //       } else {
-    //         this.props.history.push('/dashboard');
-    //       }
-    //     } else {
-    //       this.setState({
-    //         password: ''
-    //       })
-    //       this.forceUpdate()
-    //     }
-    //   });
-  
-
   render() {
     return (
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <Grid fluid>
+          <Row>
+            <Col xs={12}>
+              <Row center="xs">
+                <Col md={4}>
+                  <Paper style={this.styles.paper}>
+                    <form onSubmit={event => this.handleClick(event)}>
+                      <TextField
+                        id="emailInput"
+                        hintText="E-mail"
+                        floatingLabelText="E-mail"
+                        fullWidth={true}
+                      />
+                      <TextField
+                        id="passwordInput"
+                        hintText="Password"
+                        floatingLabelText="Password"
+                        fullWidth={true}
+                        type="password"
+                      />
+                      <div>
+                        <Checkbox
+                          label="Remember me"
+                          style={this.styles.checkRemember.style}
+                          labelStyle={this.styles.checkRemember.labelStyle}
+                          iconStyle={this.styles.checkRemember.iconStyle}
+                        />
+                        {/*<Link to="/dashboard">*/}
+                        <RaisedButton
+                          label="Login"
+                          primary={true}
+                          style={this.styles.loginBtn}
+                          type="submit"
+                        />
+                        {/*</Link>*/}
+                      </div>
+                    </form>
+                  </Paper>
+                  <div style={this.styles.buttonsDiv}>
+                    <FlatButton
+                      label="Register"
+                      href="/"
+                      style={this.styles.flatButton}
+                      icon={<PersonAdd />}
+                    />
+                  </div>
+                  <div style={this.styles.buttonsDiv}>
+                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnPayPal}}>
+                      <i className="fa fa-paypal fa-lg"/>
+                      <span style={this.styles.btnSpan}>Log in with PayPal</span>
+                    </Link>
+                    <Link to="/" style={{...this.styles.btn, ...this.styles.btnGoogle}}>
+                      <i className="fa fa-google-plus fa-lg"/>
+                      <span style={this.styles.btnSpan}>Log in with Google</span>
+                    </Link>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </MuiThemeProvider>
     );
   }
 }

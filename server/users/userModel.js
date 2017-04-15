@@ -7,14 +7,16 @@ module.exports = {
     console.log('inside with emailL ', email)
     db.select().from('user').where('user_email', email)
       .then((user) => {
-        if (user.length) {
-          console.log('found user: ', user);
-          callback(null, user[0]);
-        } else {
-          console.log('no user');
-          callback('no user found');
-        }
-      });
+        callback(null, user);
+      }).catch(err => console.log('err: ', err))
+      //   if (user.length) {
+      //     console.log('found user: ', user);
+      //     callback(null, user[0]);
+      //   } else {
+      //     console.log('no user');
+      //     callback('no user found');
+      //   }
+      // });
   },
 
   signup: (user, callback) => {

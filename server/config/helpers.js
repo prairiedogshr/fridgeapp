@@ -5,8 +5,10 @@ const SALT_WORK_FACTOR = 10;
 
 module.exports = {
   checkPass: (email, password, callback) => {
+    console.log('trying to check pass...', email, password)
     db.select().from('user').where('user_email', email)
       .then((user) => {
+        console.log('user!! ', user)
         if (user.length) {
           console.log('found user!! ', user);
           bcrypt.compare(password, user[0].user_password, (err, isMatch) => {
@@ -20,9 +22,12 @@ module.exports = {
             }
           });
         } else {
+          console.log('nope')
           callback('no user');
         }
-      });
+      }).catch((err) => {
+        console.log('err ', err)
+      })
   },
 
   hashPass: (password, callback) => {

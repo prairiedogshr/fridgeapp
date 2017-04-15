@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Col, Panel } from 'react-bootstrap';
-import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house';
-import HouseInfo from '../components/houseInfo';
-import Roommate from '../components/roommate';
+import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house.js';
+import HouseInfo from '../components/houseInfo.jsx';
+import Roommate from '../components/roommate.jsx';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 class House extends Component {
 
@@ -11,34 +11,28 @@ class House extends Component {
     console.log('rendering with props: ', this.props);
   }
 
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <Col xs={6}>
-            <Panel header="HOUSE INFO">
-              <HouseInfo
-                info={this.props.house}
-                update={this.props.updateHouseInfo}
-              />
-            </Panel>
-          </Col>
-          <Col xs={6}>
-            <Panel header="Roommates!">
-              {this.props.house.users.map(user =>
-                <Roommate roommate={user} />
-              )}
-            </Panel>
-          </Col>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<Grid fluid>
+				<Row>
+					<Col xs={6}>
+						<HouseInfo info={this.props.house} 
+						update={this.props.updateHouseInfo} />
+					</Col>
+					<Col xs={6}>
+						{this.props.house.users.map(user => 
+							<Roommate roommate={user} admin={this.props.admin} />
+						)}
+				</Col>
+			</Row>
+		</Grid>
+	)}
 }
 
-const mapStateToProps = ({ houseReducer }) => ({
-  house: houseReducer,
-});
+const mapStateToProps = ({ houseReducer, userReducer }) => ({
+	house: houseReducer,
+	admin: userReducer.user_is_admin === 1,
+})
 
 export default connect(
   mapStateToProps,

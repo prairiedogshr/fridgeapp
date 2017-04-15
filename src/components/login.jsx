@@ -36,7 +36,7 @@ class Auth extends Component{
       <div>
         <h2>{word}</h2>
         {this.state.signup ? <Register/> : null}
-        {this.state.login ? <Log /> : null}
+        {this.state.login ? <Log login={this.props.loginUser}/> : null}
         <div id= "buttons">
           <a href="#" onClick = {e => {e.preventDefault(); this.switch()}}>{inverse}</a>
         </div>

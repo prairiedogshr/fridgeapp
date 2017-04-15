@@ -73,54 +73,40 @@ class Login extends Component {
   }
 
   handleClick = (event) => {
-    const email = this.refs.email;
-    const password = this.refs.password;
-    const creds = { email: email.value.trim(), password: password.value.trim()};
-    this.props.loginUser(creds)
-      .then(resp => {
-        if (resp || resp === null) {
-        // check if user has a house
-          if (resp === null) {
-            this.props.history.push('/homeless');
-          } else {
-            this.props.history.push('/dashboard');
-          }
-        } else {
-          this.setState({
-            password: ''
-          });
-          this.forceUpdate()
-        }
-      });
-  };
+    event.preventDefault()
+
+    this.props.login({
+      email: document.getElementById("emailInput").value,
+      password: document.getElementById("passwordInput").value
+    }).then(resp => {
+      if (resp) {
+        console.log('found house!')
+        this.props.history.push('/dashboard');
+      } else {
+        console.log('no house?')
+        this.props.history.push('/homeless')
+      }
+    }).catch(err => { console.log('err: ', err)});
+  }
 
   render() {
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
-
-        {/*<div>*/}
-          {/*<input type="text" ref="email" className="form-control" placeholder="email"  />*/}
-          {/*<input type="password" ref="password" className="form-control" placeholder="Password"  />*/}
-          {/*<button onClick={event => this.handleClick(event)} className="btn btn-primary">*/}
-            {/*Login*/}
-          {/*</button>*/}
-        {/*</div>*/}
-
         <Grid fluid>
           <Row>
             <Col xs={12}>
               <Row center="xs">
                 <Col md={4}>
                   <Paper style={this.styles.paper}>
-                    <form>
+                    <form onSubmit={event => this.handleClick(event)}>
                       <TextField
-                        ref="email"
+                        id="emailInput"
                         hintText="E-mail"
                         floatingLabelText="E-mail"
                         fullWidth={true}
                       />
                       <TextField
-                        ref="password"
+                        id="passwordInput"
                         hintText="Password"
                         floatingLabelText="Password"
                         fullWidth={true}
@@ -138,7 +124,7 @@ class Login extends Component {
                           label="Login"
                           primary={true}
                           style={this.styles.loginBtn}
-                          onClick={event => this.handleClick(event)}
+                          type="submit"
                         />
                         {/*</Link>*/}
                       </div>

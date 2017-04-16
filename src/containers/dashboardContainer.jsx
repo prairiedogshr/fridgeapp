@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ChoresDashboard from './choresDashboardContainer';
 import Tasks from './tasksContainer';
 import { getAppState } from '../actions/init/init';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 // import actions here and then add the to mapStateToProps
 
@@ -11,6 +12,14 @@ import { getAppState } from '../actions/init/init';
 class Dashboard extends Component {
   constructor(props) {
     super(props)
+
+    this.style = {
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+      }
+    };
+
     this.state = {
       loading: true
     }
@@ -31,9 +40,14 @@ class Dashboard extends Component {
   render() {
     if (this.state.loading) {
       return (
-        <div>
-          <h1>Loading...</h1>
-        </div>
+        <RefreshIndicator
+          size={50}
+          left={70}
+          top={0}
+          loadingColor="#FF9800"
+          status="loading"
+          style={this.style.refresh}
+          />      
         )
     } else {
     return (

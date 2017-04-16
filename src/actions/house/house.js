@@ -12,17 +12,19 @@ import {isEmpty} from 'underscore'
 export const updateHouseInfo = (updateInfo) => {
   return (dispatch, getState) => {
     console.log('getting state ', getState())
+    const currHouse = getState().houseReducer;
+    const newHouse = {
+      ...currHouse,
+      ...updateInfo
+    }
     return axios.put('/api/houses/', {
-      id: 1,
-      key: updateInfo.key,
-      value: updateInfo.value
+      update: updateInfo
     })
     .then(resp => {
       dispatch({
         type: UPDATE_HOUSE_INFO,
         payload: {
-          key: updateInfo.key,
-          value: updateInfo.value,
+          update: updateInfo
         }
       })
     })

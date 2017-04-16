@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CompletedChore(props) {
   const complete = props.chores.complete;
-  if (complete) {
+  if (complete.length) {
     return (
       <ul>
         {complete.map(chore => (
@@ -10,7 +10,7 @@ export default function CompletedChore(props) {
           ), this)
         }
       </ul>
-    );
+    )
   }
   return null;
 }

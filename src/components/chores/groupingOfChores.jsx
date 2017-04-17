@@ -5,11 +5,8 @@ const Button = withRouter(({ history, roomies, rotateGroups }) => (
   <button
     type="button"
     onClick={() => {
-      console.log('history: ', history);
-      // save the groups to the database
       history.push('/dashboard');
-      // add function here to make initial assignment of users to chore groups
-      rotateGroups(roomies);
+      {/*rotateGroups(roomies);*/}
     }}
   >
     Done!
@@ -17,8 +14,6 @@ const Button = withRouter(({ history, roomies, rotateGroups }) => (
 ));
 
 export default function GroupingOfChores(props) {
-  // const complete = props.chores.complete;
-  // const incomplete = props.chores.incomplete;
   const houseChores = props.chores.houseChores;
   return (
     <div>

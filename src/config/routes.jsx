@@ -15,25 +15,27 @@ import Join from '../containers/joinHouseContainer';
 import Profile from '../containers/profileContainer';
 import Settings from '../containers/settingsContainer';
 import Tasks from '../containers/tasksContainer';
+import requireAuth from '../components/require-auth.jsx'
 
 class Routes extends Component {
   render() {
     return (
       <Router>
         <Switch>
+          <Route path = '/' component= {Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component = {Signin} />
           <App>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/house" component={House} />
-            <Route path="/chores" component={Chores} />
-            <Route path="/tasks" component={Tasks} />
-            <Route path="/bills" component={HouseExpenses} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/homeless" component={Homeless} />
-            <Route path="/createhouse" component={CreateHouse} />
-            <Route path="/join" component={Join} />
+            <Route path="/dashboard" component={requireAuth(Dashboard)} />
+            <Route path="/profile" component={requireAuth(Profile)} />
+            <Route path="/house" component={requireAuth(House)} />
+            <Route path="/chores" component={requireAuth(Chores)} />
+            <Route path="/tasks" component={requireAuth(Tasks)} />
+            <Route path="/bills" component={requireAuth(HouseExpenses)} />
+            <Route path="/settings" component={requireAuth(Settings)} />
+            <Route path="/homeless" component={requireAuth(Homeless)} />
+            <Route path="/createhouse" component={requireAuth(CreateHouse)} />
+            <Route path="/join" component={requireAuth(Join)} />
           </App>
         </Switch>
       </Router>

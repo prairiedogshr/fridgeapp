@@ -19,7 +19,31 @@ export default class HouseInfo extends Component {
         fontSize: 14,
         margin: 0,
       }
+    }
+    this.houseUpdateParams = {
+      house_address: '',
+      house_unit: '',
+      house_city: '',
+      house_state: '',
+      house_zip: '',
+      house_info: ''
     }    
+  }
+
+  handleSubmit(event) {
+    console.log('handling submit');
+    let update = {};
+    for (let key in this.houseUpdateParams) {
+      if (this.houseUpdateParams[key]) {
+        update[key] = this.houseUpdateParams[key]
+      }
+    };
+    this.props.update(update)
+    .then(() => {
+      this.setState({
+        editing: false
+      })
+    })
   }
 
   render() {
@@ -37,30 +61,45 @@ export default class HouseInfo extends Component {
               floatingLabelText={this.props.info.house_address}
               hintText="Address"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_address = e.target.value
+              }}
               />
               <TextField
               id="houseAddress2Edit"
               floatingLabelText={this.props.info.house_unit_number}
               hintText="Unit"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_unit = e.target.value
+              }}
               />
               <TextField
               id="houseCityEdit"
               floatingLabelText={this.props.info.house_city}
               hintText="City"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_city = e.target.value
+              }}
               />
               <TextField
               id="houseStateEdit"
               floatingLabelText={this.props.info.house_state}
               hintText="State"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_state = e.target.value
+              }}
               /> 
               <TextField
               id="houseZipEdit"
               floatingLabelText={this.props.info.house_zip}
               hintText="Zip"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_zip = e.target.value
+              }}
               />
               <br />
               <TextField
@@ -68,6 +107,9 @@ export default class HouseInfo extends Component {
               floatingLabelText={this.props.info.house_info}
               hintText="Info"
               style={this.styles.textField}
+              onKeyUp={(e) => {
+                this.houseUpdateParams.house_info = e.target.value
+              }}
               />
               <CardMedia>
                 <FlatButton
@@ -75,22 +117,9 @@ export default class HouseInfo extends Component {
                   backgroundColor={"grey"} 
                   hoverColor="tomato"
                   fullWidth={false}
-                  onClick={() => {
-                    console.log('hi')
-                    this.props.update({
-                    house_address: document.getElementById("houseAddressEdit").value,
-                    house_unit_number: document.getElementById("houseAddress2Edit").value,
-                    house_city: document.getElementById("houseCityEdit").value,
-                    house_state: document.getElementById("houseStateEdit").value,
-                    house_zip: document.getElementById("houseZipEdit").value,
-                    house_info: document.getElementById("houseInfoEdit").value,      
-                    }).then(() => {
-                      this.setState({
-                        editing: false
-                      })
-                    }).catch(err  => {
-                      console.log('err: ', err);
-                    });
+                  onClick={(event) => {
+                    console.log('hi')  
+                    this.handleSubmit(event);
                   }}
                   >Save</FlatButton>
                 </CardMedia>

@@ -1,27 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function AddTask(props) {
-  // <h3>
-  //   Add Task
-  // </h3>
-  // <input
-  //   type="text"
-  //   placeholder=""
-  //   autoFocus="true"
-  //   onKeyDown={props.handleSubmit}
-  // />
+export default class AddTask extends Component {
+  constructor(props) {
+    super(props)
+    this.taskName = '';
+    this.taskCost = 0;
+  }
 
-  this.cost = 0;
-  this.task = '';
-  return (
-    <div>
-      <form>
-        Task:<br />
-      <input type="text" name="task" onKeyUp={function(e){this.task = e.target.value; console.log(task,cost)}}></input><br />
-        Cost:<br />
-      <input type="text" name="cost" onKeyUp={function(f){this.cost = f.target.value; console.log(cost)}}></input><br />
-      <button type="submit" value="Submit" onClick={props.handleSubmit(this.task, this.cost) }>Submit</button>
-      </form>
-    </div>
-  );
+  handleOnKeyUp(event) {
+    this[event.target.id] = event.target.value
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    let task = {
+      house_in_task: this.props.house,
+      task_name: this.taskName,
+    }
+    this.props.addTask(task); 
+    this.taskName = '';
+    return true;   
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={(event) => {this.handleSubmit(event)}}>
+          Task:<br />
+        <input id="taskName" type="text" onKeyUp={(event) => {
+          this.handleOnKeyUp(event)
+        }}></input><br />
+        <button type="submit">Submit</button>
+        </form>      
+      </div>
+    );
+  }
 }
+

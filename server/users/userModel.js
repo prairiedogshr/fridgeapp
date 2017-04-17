@@ -137,8 +137,8 @@ module.exports = {
             ),
           // houseReducer: dataa[1] || undefined,
           tasksReducer: {
-            complete: dataa[2].filter(item => item.task_is_done === 1),
-            incomplete: dataa[2].filter(item => item.task_is_done === 0)
+            complete: dataa[4].filter(item => item.task_is_done === 1),
+            incomplete: dataa[4].filter(item => item.task_is_done === 0)
           },
           choresReducer: {
             houseChores: dataa[5],

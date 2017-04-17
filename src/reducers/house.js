@@ -63,14 +63,14 @@ export default function houseReducer(state = {}, action) {
       };
 
     case REMOVE_USER:
+    console.log('removing with payload: ', action.payload)
       return {
         ...state,
-        users: [...state.users].filter(user => user.id !== action.payload),
+        users: [...state.users].filter(user => user.user_id !== action.payload),
       };
 
     case UPDATE_HOUSE_INFO: {
-      // const update = {};
-      // update[action.payload.key] = action.payload.value;
+      console.log('update house payload!', action.payload)
       return {
         ...state,
         ...action.payload,

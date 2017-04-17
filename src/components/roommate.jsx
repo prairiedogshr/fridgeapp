@@ -30,11 +30,17 @@ export default class Roommate extends Component {
     this.setState({expanded: false});
   };
 
+  handleRemove(event) {
+    console.log('remove target: ', this.roommate.user_id);
+    this.props.remove(this.roommate.user_id);
+    this.forceUpdate();
+
+  }
+
   render() {
-    console.log(this.props.admin)
     return (
       <div className="roommateCard">
-        <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+        <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
           <CardHeader
             title={this.roommate.user_first_name + ' ' + this.roommate.user_last_name}
             avatar="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAYiAAAAJGYzZGYxOTkwLTM0NjAtNDEwMC05ZWUzLWZkNGJmYjM5M2VlYg.jpg"
@@ -46,18 +52,17 @@ export default class Roommate extends Component {
           <p><strong>Phone: </strong>{'(' + this.phone.slice(0,3) + ') ' + this.phone.slice(3,6) + '-' + this.phone.slice(6)}</p>
           </CardText>
           <CardText expandable={true}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+            <p><strong>Birthday! </strong>{this.roommate.user_birthday}</p>
+            <p><strong>Info: </strong>{this.roommate.user_info}</p>
           </CardText>
-          {this.props.admin &&
+          {this.props.user.admin && this.roommate.user_id !== this.props.user.id &&
             <CardActions expandable={true}>
               <FlatButton
                 style={{color: 'white'}} 
                 backgroundColor='tomato' 
                 hoverColor="grey"
                 fullWidth={true}
+                onClick={(event) => {this.handleRemove(event)}}
                 >Remove</FlatButton>
             </CardActions>              
           }

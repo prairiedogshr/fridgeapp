@@ -11,19 +11,29 @@ import {isEmpty} from 'underscore'
 import { HYDRATE } from '../actionTypes.js';
 
 export const updateHouseInfo = (updateInfo) => {
+  console.log('here with update house: ', updateInfo)
   return (dispatch, getState) => {
-    console.log('getting state ', getState())
+    const currHouseState = getState().houseReducer;
+    const currHouse = {
+      id: currHouseState.house_id,
+      admin_user_in_house: currHouseState.admin_user_in_house,
+      house_address: currHouseState.house_address,
+      house_unit_number: currHouseState.house_unit_number,
+      house_city: currHouseState.house_city,
+      house_state: currHouseState.house_state,
+      house_zip: currHouseState.house_zip,
+      house_account: currHouseState.house_account,
+      house_info: currHouseState.house_info,      
+    };
     return axios.put('/api/houses/', {
-      id: 1,
-      key: updateInfo.key,
-      value: updateInfo.value
+        ...currHouse,
+        ...updateInfo
     })
     .then(resp => {
       dispatch({
         type: UPDATE_HOUSE_INFO,
         payload: {
-          key: updateInfo.key,
-          value: updateInfo.value,
+          ...updateInfo
         }
       })
     })
@@ -36,9 +46,20 @@ export const addUser = (user) => ({
 });
 
 export const removeUser = (user) => {
-  return {
-    type: REMOVE_USER,
-    payload: user,
+  return (dispatch, getState) => {
+    return axios.put('/api/users/', {
+      id: user,
+      key: 'house_in_user',
+      value: null
+    })
+    .then(resp => {
+      return dispatch({
+        type: REMOVE_USER,
+        payload: user,
+      })
+    }).catch(err => {
+      console.log('err! ', err)
+    })
   };
 };
 

@@ -15,11 +15,9 @@ const createTask = (task, callback) => {
   db('task').insert({
     house_in_task: task.house_in_task,
     task_name: task.task_name,
-    claimed_by_user_in_task: task.claimed_by_user_in_task,
-    task_is_done: task.task_is_done,
-    expense_in_task: task.expense_in_task,
   })
     .then((newTask) => {
+      console.log('new task? ', newTask)
       callback(null, newTask);
     })
     .catch((err) => {

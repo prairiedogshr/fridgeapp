@@ -71,7 +71,9 @@ export const createHouse = (house) => {
     return {
       type: CREATE_HOUSE,
       payload: data.data,
-    };
+    }.then(() =>{
+      return true;
+    });
   });
 };
 
@@ -87,12 +89,8 @@ export const houseExist = (number) => {
 
 
 export const joinHouse = (house, user) => {
-    if(!houseExist(house)){
-      alert("Wrong house number")
-    }else{
-      return(dispatch,getState) =>{
+      return (dispatch,getState) =>{
         const id = getState().initReducer.user_id
-        console.log(id)
         return axios.put('/api/users', {
           key: 'house_in_user',
           value: house,
@@ -112,7 +110,7 @@ export const joinHouse = (house, user) => {
         })
       };
     }
-};
+
 
 // return(dispatch,getState) =>{
 //   const id = getState().initReducer.user_id

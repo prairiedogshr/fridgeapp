@@ -20,12 +20,8 @@ class Header extends Component {
         overflow: 'hidden',
         maxHeight: 57,
       },
-      logo: {
-        height: 40,
-        width: 'auto',
-      },
       menuButton: {
-        marginLeft: 10,
+        marginLeft: 20,
       },
       iconsRightContainer: {
         marginLeft: 20,

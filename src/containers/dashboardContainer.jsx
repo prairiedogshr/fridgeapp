@@ -9,22 +9,44 @@ import { getAppState } from '../actions/init/init';
 
 // main react app component
 class Dashboard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: true
+    }
+  }
 
   componentWillMount() {
-    console.log('dashboard will mount', this.props);
-    this.props.getAppState();
+    this.setState({
+      loading: true
+    });
+
+    this.props.getAppState()
+    .then(() => {
+      this.setState({
+        loading: false
+      })
+    })
   }
   render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+        )
+    } else {
     return (
-      <div className="dashboardCont">
+        <div className="dashboardCont">
 
-        <div><ChoresDashboard /></div>
-        <div><Tasks /></div>
-        <div>Dashboard</div>
-        <div>Dashboard</div>
-        <div>Dashboard</div>
-      </div>
-    );
+          <div><ChoresDashboard /></div>
+          <div><Tasks /></div>
+          <div>Dashboard</div>
+          <div>Dashboard</div>
+          <div>Dashboard</div>
+        </div>
+      )
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import ChoresDashboardContainer from './choresDashboardContainer';
 import CompleteChore from '../components/chores/completeChore';
 import AdminChores from '../components/chores/adminChores';
 import AddChore from '../components/chores/addChore';
@@ -21,31 +22,50 @@ class Chores extends Component {
       inputField: '',
       nextClicked: false,
     }
+    this.buttonSubmit = this.buttonSubmit.bind(this);
   }
 
   // this is not working
   handleKeyUp = (e) => {
     if (e.which === 13) {
-      this.props.addChore(this.state.inputField);
-      e.target.value = '';
-      this.state.inputField = '';
+      // this.props.addChore(this.state.inputField);
+      // e.target.value = '';
+      // this.state.inputField = '';
+      this.buttonSubmit();
+      return true;
     } else {
       this.state.inputField = e.target.value;
+      return false;
     }
   };
 
-  buttonSubmit = () => {
+  buttonSubmit () {
     console.log(this.state.inputField);
+    const today = new Date();
+    const year = today.getUTCFullYear().toString();
+    let month = today.getUTCMonth() + 1;
+    let day = today.getUTCDate();
+    if (month < 10) {
+      month = `0${month}`;
+    } else {
+      month = month.toString();
+    }
+    if (day < 10) {
+      day = `0${day}`;
+    } else {
+      day = day.toString();
+    }
+    const date = `${year}-${month}-${day}`;
     let chore = {
         "house_in_chore": 1,
         "chore_name": this.state.inputField,
-        "chore_due": "1491850731064",
+        "chore_due": date,
         "chore_group": 1,
         "chore_parent": null,
         "chore_is_done": 0,
     }
     this.props.addChore(chore);
-    this.state.inputField = '';
+    this.setState({inputField: ''});
     console.log(AddChore.inputField);
   };
 
@@ -53,33 +73,30 @@ class Chores extends Component {
     const complete = this.props.chores.complete;
     const incomplete = this.props.chores.incomplete;
 
-      /*
-        <CompleteChore
-          chores={this.props.chores}
-          undoComplete={this.undoComplete}
-        />*/
 
-    console.log('=-=-=-=-=-=-=-', this.props.chores);
     if (this.state.nextClicked === false) {
       return (
         <div>
-          <AddChore
-            handleKeyUp={this.handleKeyUp}
-            buttonSubmit={this.buttonSubmit}
-          />
+          <ChoresDashboardContainer />
+          {this.props.admin &&
+            <div>
+              <AddChore
+                handleKeyUp={this.handleKeyUp}
+                buttonSubmit={this.buttonSubmit}
+              />
 
-          <AdminChores
-            chores={this.props.chores}
-          />
-          <GroupChores
-            chores={this.props.chores}
-            increaseGroups={this.props.increaseGroups}
-            decreaseGroups={this.props.decreaseGroups}
-            roomies={this.props.house.users}
-          />
-          <button onClick={() => { this.state.nextClicked = true; this.forceUpdate(); }}>Next</button>
-
-          {/*<button onClick={() => { () => {  }; }}>Next</button>*/}
+              <AdminChores
+                chores={this.props.chores}
+              />
+              <GroupChores
+                chores={this.props.chores}
+                increaseGroups={this.props.increaseGroups}
+                decreaseGroups={this.props.decreaseGroups}
+                roomies={this.props.house.users}
+              />
+              <button onClick={() => { this.state.nextClicked = true; this.forceUpdate(); }}>Next</button>
+            </div>
+          }
         </div>
       );
     } else {
@@ -97,9 +114,10 @@ class Chores extends Component {
   }
 }
 
-const mapStateToProps = ({ choresReducer, houseReducer }) => ({
+const mapStateToProps = ({ choresReducer, houseReducer, userReducer }) => ({
   chores: choresReducer,
   house: houseReducer,
+  admin: userReducer.user_is_admin === 1,
 });
 
 export default connect(

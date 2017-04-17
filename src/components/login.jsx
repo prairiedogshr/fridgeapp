@@ -13,7 +13,11 @@ import { grey500, white } from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import TextField from 'material-ui/TextField';
 import ThemeDefault from '../styles/theme-default';
+
+import NoUserAlert from './loginNoUserAlert';
+
 const logo = require('../assets/fridge-logo-black.svg');
+
 
 class Login extends Component {
   constructor(props) {
@@ -63,7 +67,14 @@ class Login extends Component {
       email: document.getElementById("emailInput").value,
       password: document.getElementById("passwordInput").value
     }).then(resp => {
-      if (resp) {
+      if (resp === 'no user') {
+        console.log('no user found!');
+        document.getElementById("emailInput").value = '';
+        document.getElementById("passwordInput").value = '';
+        // pop up aert for user
+        NoUserAlert.handleOpen();
+
+      } else if (resp) {
         console.log('found house!');
         this.props.history.push('/dashboard');
       } else {
@@ -77,6 +88,7 @@ class Login extends Component {
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <Grid fluid>
+          <NoUserAlert />
           <Row>
             <Col xs={12}>
               <Row center="xs">
@@ -142,3 +154,6 @@ export default withRouter(connect(
     getAppState
   }
 )(Login));
+
+
+

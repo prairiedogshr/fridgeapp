@@ -21,7 +21,7 @@ class House extends Component {
 					</Col>
 					<Col xs={6}>
 						{this.props.house.users.map(user => 
-							<Roommate roommate={user} admin={this.props.admin} />
+							<Roommate roommate={user} user={this.props.admin} remove={this.props.removeUser} />
 						)}
 				</Col>
 			</Row>
@@ -31,7 +31,10 @@ class House extends Component {
 
 const mapStateToProps = ({ houseReducer, userReducer }) => ({
 	house: houseReducer,
-	admin: userReducer.user_is_admin === 1,
+	admin: {
+    admin: userReducer.user_is_admin === 1,
+    id: userReducer.user_id
+  }
 })
 
 export default connect(

@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       navDrawerOpen: false,
     };
+    this.handleChangeRequestNavDrawer = this.handleChangeRequestNavDrawer.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,11 +52,12 @@ class App extends Component {
         <div>
           <Header
             styles={styles.header}
-            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
           />
           <LeftDrawer
             navDrawerOpen={navDrawerOpen}
             menus={menus.sideMenu}
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
             // username="Rich"
           />
           <div style={styles.container}>

@@ -68,7 +68,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.array,
   width: PropTypes.number,
 };
 

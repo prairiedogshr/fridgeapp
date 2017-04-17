@@ -16,11 +16,11 @@ class House extends Component {
 			<Grid fluid>
 				<Row>
 					<Col xs={6}>
-						<HouseInfo info={this.props.house} 
+						<HouseInfo info={this.props.house}
 						update={this.props.updateHouseInfo} />
 					</Col>
 					<Col xs={6}>
-						{this.props.house.users.map(user => 
+						{this.props.house.users.map(user =>
 							<Roommate roommate={user} admin={this.props.admin} />
 						)}
 				</Col>

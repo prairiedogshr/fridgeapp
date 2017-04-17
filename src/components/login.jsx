@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { getAppState } from '../actions/init/init.js';
 import { loginUser, logoutUser } from '../actions/auth/auth.js';
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import { grey500, white } from 'material-ui/styles/colors';
+import { grey500 } from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import TextField from 'material-ui/TextField';
 import ThemeDefault from '../styles/theme-default';
@@ -83,7 +83,7 @@ class Login extends Component {
                 <Col md={4}>
                   <img src={logo} style={this.styles.logo} alt="Fridge" />
                   <Paper style={this.styles.paper}>
-                    <h1>Login</h1>
+                    <h2>Login</h2>
                     <form onSubmit={event => this.handleClick(event)}>
                       <TextField
                         id="emailInput"

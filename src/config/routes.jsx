@@ -24,7 +24,7 @@ class Routes extends Component {
     return (
       <Router>
         <Switch>
-          <Route path = '/' component= {Login} />
+          <Route path= '/' component= {Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <App>
@@ -33,9 +33,8 @@ class Routes extends Component {
             <Route path="/house" component={requireAuth(House)} />
             <Route path="/chores" component={requireAuth(Chores)} />
             <Route path="/tasks" component={requireAuth(Tasks)} />
-            <Route path="/bills" component={requireAuth(HouseExpenses)} />
+            <Route path="/bills" component={requireAuth(Bills)} />
             <Route path="/settings" component={requireAuth(Settings)} />
-            <Route path="/homeless" component={requireAuth(Homeless)} />
             <Route path="/createhouse" component={requireAuth(CreateHouse)} />
             <Route path="/join" component={requireAuth(Join)} />
             <Route path="/welcome" component={requireAuth(Welcome)} />

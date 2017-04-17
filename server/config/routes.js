@@ -3,15 +3,24 @@ const houseController = require('../houses/houseController.js');
 const taskController = require('../tasks/taskController.js');
 const choreController = require('../chores/choreController.js');
 const expenseController = require('../expenses/expenseController.js');
+
 // const passport = require('passport')
 // const passportLocal = require('./passport.js')(passport)
 
 module.exports = (app, passport) => {
-  app.post('/api/users/signin', passport.authenticate('local-login', {
-    successRedirect: '/#/dashboard',
-    failureRedirect: '/#/login',
-    failureFlash: false,
-  }));
+  // app.post('/api/users/signin',
+  //   passport.authenticate('local-login', {
+  //   successRedirect: '/#/dashboard',
+  //   failureRedirect: '/#/login',
+  //   failureFlash: false,
+  //   }));
+  app.post('/api/users/signin',
+    passport.authenticate('local-login'),
+      ((req, res) => {
+        console.log('authenticated user')
+        res.send({ id: req.user})
+      })
+    );
   // app.post('/api/users/signin', passport.authenticate('google', {
   //   successRedirect: '/#/dashboard',
   //   failureRedirect: '/#/login',
@@ -24,7 +33,8 @@ module.exports = (app, passport) => {
   // }));
   app.get('/api/users/appstate/:id', userController.getAppState);
   app.get('/api/users/:id', userController.getUser);
-  app.put('/api/users/:id', userController.updateUser);
+  app.get('/api/users/exists/:email', userController.findUserByEmail);
+  app.put('/api/users/', userController.updateUser);
   app.post('/api/users/', userController.signup);
 
   app.get('/api/houses/:house', houseController.getHouse);
@@ -32,8 +42,14 @@ module.exports = (app, passport) => {
   app.post('/api/houses/', houseController.createHouse);
 
   app.get('/api/chores/:chore', choreController.getChore);
-  app.put('/api/chores/:chore', choreController.updateChore);
-  app.post('/api/chores/', choreController.createChore);
+  app.put('/api/chores', choreController.updateChore);
+  app.post('/api/chores', choreController.createChore);
+
+  app.get('/api/chores/house/:house', choreController.getHouseChores);
+  app.get('/api/chores/user/:user', choreController.getUserChores);
+  // app.get('/api/chores/user/:user/complete', choreController.getUserCompleteChores);
+  // app.get('/api/chores/user/:user/incomplete', choreController.getUserIncompleteChores);
+  // app.delete('/api/chores/:chore', choreController.deleteChore);
 
   app.get('/api/tasks/:task', taskController.getTask);
   app.put('/api/tasks/:task', taskController.updateTask);

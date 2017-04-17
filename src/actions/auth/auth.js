@@ -1,23 +1,22 @@
 import axios from 'axios';
-import cookie from 'cookie';
-import { browserhistory } from 'react-router';
+import cookie from 'react-cookie';
 
-import{
+import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  PROTECTED_TEST
+  PROTECTED_TEST,
+  INIT_USER,
+  LOG_OUT,
 } from '../actionTypes'
 
 const API_URL = 'http://localhost:1337/api';
+const CLIENT_ROOT_URL = 'http://localhost:1337';
 
 // Login actions
-export const logoutUser = () => {
-  return (dispatch) => {
-    dispatch({ type: UNAUTH_USER });
-    cookie.remove('token', { path: '/' });
-    window.location.href = CLIENT_ROOT_URL + '/login';
-  };
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: UNAUTH_USER });
+  cookie.remove('token', { path: '/' });
 };
 
 export const errorHandler = (dispatch, error, type) => {
@@ -44,51 +43,52 @@ export const errorHandler = (dispatch, error, type) => {
   }
 };
 
-export const loginUser = (e) => {
-  console.log("hey youre here with: ",  e)
-  return (dispatch) => {
-    axios.post(`${API_URL}/users/signin`, e)
+export const loginUser = creds => dispatch => axios.post('/api/users/signin', creds)
       .then((response) => {
-        console.log("Good work!!!")
+        if (response) {
+          console.log('Good work!!! ', response);
+          dispatch({
+            type: INIT_USER,
+            payload: response.data.id,
+          });
+          // check if user has a house
+          return axios.get(`/api/users/${response.data.id}`)
+            .then(user => user.data.house_in_user);
+        }
+        return false;
+      })
+      .catch((error) => {
+        // user not found in system
+        console.log('no user: ', error);
+        return 'no user';
+        // errorHandler(dispatch, error.response, AUTH_ERROR);
+      });
+
+export const registerUser = creds => (dispatch) => {
+  return axios.post('/api/users/', creds)
+      .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
+        // window.location.href = '#/profile';
+        // history.push('/dashboard');
+        return true;
       })
       .catch((error) => {
-        console.log("We goofed")
-        errorHandler(dispatch, error.response, AUTH_ERROR);
+        console.log(error);
       });
-  };
 };
 
-export const registerUser = (e) => {
-  console.log(e)
-  return (dispatch) => {
-    axios.post(`${API_URL}/auth/register`, e)
-      .then((response) => {
-        cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
-        window.location.href = CLIENT_ROOT_URL + '/dashboard';
-      })
-      .catch((error) => {
-        errorHandler(dispatch, error.response, AUTH_ERROR);
-      });
-  };
-};
-
-export const protectedTest = () => {
-  return (dispatch) => {
-    axios.get(`${API_URL}/protected`, {
-      headers: { Authorization: cookie.load('token') },
-    })
-      .then((response) => {
-        dispatch({
-          type: PROTECTED_TEST,
-          payload: response.data.content,
-        });
-      })
-      .catch((error) => {
-        errorHandler(dispatch, error.response, AUTH_ERROR);
-      });
-  };
-};
+// export const protectedTest = () => (dispatch) => {
+//   axios.get(`${API_URL}/protected`, {
+//     headers: { Authorization: cookie.load('token') },
+//   })
+//       .then((response) => {
+//         dispatch({
+//           type: PROTECTED_TEST,
+//           payload: response.data.content,
+//         });
+//       })
+//       .catch((error) => {
+//         errorHandler(dispatch, error.response, AUTH_ERROR);
+//       });
+// };

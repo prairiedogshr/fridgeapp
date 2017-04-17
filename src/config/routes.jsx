@@ -1,80 +1,49 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { HashRouter, Route, Link, Switch } from 'react-router-dom';
-import SignIn from '../containers/loginContainer.jsx';
-import Log from '../components/log.jsx';
-import Auth from '../components/login.jsx';
-import Dashboard from '../containers/dashboardContainer.jsx';
-import Tasks from '../containers/tasksContainer.jsx';
-import Profile from '../containers/profileContainer.jsx';
-import App from '../App.jsx';
-import Register from '../components/register.jsx';
-import Chores from '../containers/choresContainer.jsx';
-import Settings from '../containers/settingsContainer.jsx';
-import House from '../containers/houseContainer.jsx';
-import User from '../components/user.jsx';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { persistStore } from 'redux-persist';
 
+import App from '../app';
+import Bills from '../containers/expensesContainer';
+import Chores from '../containers/choresContainer';
+import CreateHouse from '../containers/createHouseContainer';
+import Dashboard from '../containers/dashboardContainer';
+import House from '../containers/houseContainer';
+import Join from '../containers/joinHouseContainer';
+import Login from '../components/login';
+import Profile from '../containers/profileContainer';
+import Signup from '../components/signup';
+import Settings from '../containers/settingsContainer';
+import Tasks from '../containers/tasksContainer';
+import requireAuth from '../components/require-auth.jsx'
 
-
-const Home = () => (
-  <div>
-    <h1>hold page</h1>
-    <Link to="/app">App</Link>
-    <br />
-    <Link to="/chores">Chores</Link>
-    <br />
-    <Link to="/login">login</Link>
-    <br />
-    <Link to="/signin">Signup</Link>
-    <br />
-    <Link to="/tasks">Tasks</Link>
-    <br />
-    <Link to="/dashboard">Dashboard</Link>
-    <br />
-    <Link to="/settings">Settings</Link>
-    <br />
-    <Link to="/house">House</Link>
-    <br />
-    <Link to="/profile">profile</Link>
-    <br />
-  </div>
-);
-
-const SignInHold = () => <div className="centered">
-  <h3>LOGIN PAGE</h3>
-  <a href="/#/dashboard"><h4>LOGIN SUCCESS</h4></a>
-  <a href="/#/profile"><h4>SIGNUP SUCCESS</h4></a>
-</div>;
+import Welcome from '../containers/welcomeContainer';
 
 
 class Routes extends Component {
-
-  componentWillMount() {
-
-  };
-
-  componentDidMount() {
-
-  }
-
   render() {
     return (
-    <HashRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Auth} />
-        <Route path="/signup" component={SignInHold} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/chores" component={Chores} />
-        <Route path="/tasks" component={Tasks} />
-        <Route path="/signin" component={Auth} />
-        <Route path="/app" component={App} />
-        <Route path="/settings" component={Settings} />
-        <Route path="/house" component={House} />
-      </Switch>
-    </HashRouter>
-    )
+      <Router>
+        <Switch>
+          <Route path= '/' component= {Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <App>
+            <Route path="/dashboard" component={requireAuth(Dashboard)} />
+            <Route path="/profile" component={requireAuth(Profile)} />
+            <Route path="/house" component={requireAuth(House)} />
+            <Route path="/chores" component={requireAuth(Chores)} />
+            <Route path="/tasks" component={requireAuth(Tasks)} />
+            <Route path="/bills" component={requireAuth(Bills)} />
+            <Route path="/settings" component={requireAuth(Settings)} />
+            <Route path="/createhouse" component={requireAuth(CreateHouse)} />
+            <Route path="/join" component={requireAuth(Join)} />
+            <Route path="/welcome" component={requireAuth(Welcome)} />
+
+          </App>
+        </Switch>
+      </Router>
+    );
   }
-};
+}
+
 export default Routes;

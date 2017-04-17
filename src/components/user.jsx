@@ -1,8 +1,19 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile, submitProfile } from '../actions/profile/profile.js';
-import axios from 'axios';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { updateProfile, submitProfile } from '../actions/profile/profile';
+// import axios from 'axios';
+
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
+import Toggle from 'material-ui/Toggle';
+import DatePicker from 'material-ui/DatePicker';
+import { grey400 } from 'material-ui/styles/colors';
+import Divider from 'material-ui/Divider';
+import ThemeDefault from '../styles/theme-default';
 
 class Form extends Component {
 
@@ -21,23 +32,44 @@ class Form extends Component {
   // }
 
   render() {
+    console.log(this.props);
     return (
-      <form>
-        <label>
-          <div className="formField">{this.props.field}</div>
-        </label><br />
-        <input
-          className={this.props.dbField}
-          ref='newData'
-          type="text"
-          placeholder={this.props.data}
-          autoFocus="true"
-        />
-        <button
-          className={this.props.dbField} onClick={() => {
-            this.OnSubmit(this.props.submitProfile(this.props.dbField, this.refs.newData.value));}} type="Submit">Edit</button>
-        <br />
-      </form>);
+      <Grid fluid>
+        <Row>
+          <Col xs={12}>
+            <Row center="xs">
+              <Col md={6}>
+                <Paper>
+                  <form>
+                    <TextField
+                      hintText={this.props.data}
+                      floatingLabelText={this.props.data}
+                      fullWidth={true}
+                      className={this.props.dbField}
+                      ref="newData"
+                      autoFocus="true"
+                    />
+                    <RaisedButton
+                      label="Update"
+                      primary={true}
+                      className={this.props.dbField}
+                      onClick={() => {
+                        this.OnSubmit(this.props.submitProfile(
+                          this.props.dbField,
+                          this.refs.newData.value,
+                          this.props.user.user_id,
+                        ));
+                      }}
+                      type="Submit"
+                    />
+                  </form>
+                </Paper>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
 }
 

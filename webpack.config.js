@@ -32,6 +32,18 @@ const config = {
         exclude: /node_modules/,
         // include: APP_DIR,
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'url-loader',
+        options: {
+          name: 'assets/[name].[ext]',
+        },
+      },
+      {
+       test: /\.css$/,
+       loader: 'style-loader!css-loader?modules',
+       include: /flexboxgrid/,
+     },
     ],
   },
   devServer: {

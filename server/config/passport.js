@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../users/userModel.js');
+const PayPalStrategy = require('passport-paypal-oauth').Strategy;
 
 // module.exports = () => {
 //   passport.use(new LocalStrategy(
@@ -23,7 +24,7 @@ const User = require('../users/userModel.js');
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
-    done(null, user.user_id);
+    done(null, user);
   });
 
   passport.deserializeUser((id, done) => {
@@ -66,23 +67,25 @@ module.exports = (passport) => {
     session: true,
     passReqToCallback: true,
   }, (req, email, password, done) => {
-    console.log('inside local login with req');
-    User.signin(email, password, (err, match) => {
+    console.log('inside local login with email: ', email);
+    User.signin(email, password, (err, id) => {
       if (err) {
         console.log('error ', err);
         return done(err);
       }
-      if (!match) {
-        console.log('wrong pass!');
-        return done(null, false);
-      }
-      console.log('got in here with: ', email);
-      return User.findUserByEmail(email, (findUserErr, user) => {
-        if (findUserErr) {
-          return done(findUserErr);
-        }
-        return done(null, user);
-      });
+      console.log('got in here with: ', id);
+      return done(null, id);
     });
   }));
+
+  //paypal
+  passport.use('paypal', new PayPalStrategy({
+    clientID: process.env.PAYPAL_CLIENT_ID,
+    clientSecret: process.env.PAYPAL_CLIENT_SECRET,
+    callbackURL: 'http://localhost:1337/dashboard'
+  },
+  (accessToken, refreshToken, profile, done) => {
+    console.log('got in paypal here');
+    return done(null, 1)
+  }))
 };

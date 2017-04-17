@@ -12,14 +12,28 @@ const getUser = (req, res, next) => {
   });
 };
 
+const findUserByEmail = (req, res, next) => {
+  User.findUserByEmail(req.params.email, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      if (user.length) {
+        res.send('true');
+      } else {
+        res.send('false');
+      }
+    }
+  });
+};
+
 const signup = (req, res, next) => {
-	User.signup(req.body, (err, user) => {
-		if (err) {
-			console.log('err: ', err)
-			next(new Error(err));
-		}
-		res.redirect('/#/dashboard');
-	});
+  User.signup(req.body, (err, user) => {
+    if (err) {
+      console.log('err: ', err);
+      next(new Error(err));
+    }
+    res.redirect('/#/dashboard');
+  });
 };
 
 const updateUser = (req, res, next) => {
@@ -34,7 +48,7 @@ const updateUser = (req, res, next) => {
 };
 
 const getAppState = (req, res, next) => {
-  console.log("almost")
+  console.log('almost');
   User.getAppState(req.params.id, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -47,6 +61,7 @@ const getAppState = (req, res, next) => {
 module.exports = {
   getAppState,
   getUser,
+  findUserByEmail,
   signup,
   updateUser,
 };

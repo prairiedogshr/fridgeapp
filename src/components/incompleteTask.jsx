@@ -2,17 +2,21 @@ import React from 'react';
 
 export default function IncompletedTask(props) {
   const incomplete = props.tasks.incomplete;
-  return (
-    <div>
-      <h1>
-        Incomplete Tasks
-      </h1>
-      <ul>
-        {incomplete.map(task => (
-          <li key={task.id} onClick={() => { props.undoCompleteTask(task.id); }}>{task.value}</li>
-          ), this)
-        }
-      </ul>
-    </div>
-  );
+  if (incomplete) {
+    console.log('inc!!!',incomplete)
+    return (
+      <div>
+        <h1>
+          Incomplete Tasks
+        </h1>
+        <ul>
+          {incomplete.map(task => (
+            <li key={task.task_id} onClick={() => { props.completeTask(task); }}>{task.task_name} ${task.expense_in_task || 0}</li>
+            ), this)
+          }
+        </ul>
+      </div>
+    );
+  }
+  return null;
 }

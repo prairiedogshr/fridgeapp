@@ -1,29 +1,27 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 
 export default function AddChore(props) {
   return (
     <div>
-      <h3>
-        Add Chore
-      </h3>
-      <input
-        type="text"
-        placeholder=""
-        autoFocus="true"
+      <TextField
+        id="addChoreInput"
+        hintText="chore description"
+        floatingLabelText="Add Chore"
+        fullWidth={false}
         onKeyUp={(e) => {
-          props.handleKeyUp(e) && (this.textInput.value = '');
-        }}
-        ref={(input) => {
-          this.textInput = input;
+          props.handleKeyUp(e) && (document.getElementById('addChoreInput').value = '');
         }}
       />
-      <button
+      <FlatButton
+        label="Submit"
+        primary
         onClick={() => {
           props.buttonSubmit();
-          this.textInput.value = '';
+          document.getElementById('addChoreInput').value = '';
         }}
-      >Submit
-      </button>
+      />
     </div>
   );
 }

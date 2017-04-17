@@ -1,4 +1,7 @@
 import React from 'react';
+import IconButton from 'material-ui/IconButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
 
 export default function GroupChores(props) {
   return (
@@ -7,10 +10,28 @@ export default function GroupChores(props) {
         Group Chores
       </h3>
       <div>
-        <button onClick={() => { props.decreaseGroups(props.roomies)} }>-</button>
+        <IconButton tooltip="decrease groups" touch tooltipPosition="top-right">
+          <ContentRemove
+            onTouchTap={() => {
+              props.decreaseGroups(props.roomies);
+            }}
+          />
+        </IconButton>
         <span>{props.chores.groups[props.chores.groups.length - 1]}</span>
-        <button onClick={() => { props.increaseGroups(props.roomies)} }>+</button>
+        <IconButton tooltip="increase groups" touch tooltipPosition="top-right">
+          <ContentAdd
+            onTouchTap={() => {
+              props.increaseGroups(props.roomies);
+            }}
+          />
+        </IconButton>
       </div>
     </div>
   );
 }
+
+
+
+
+
+

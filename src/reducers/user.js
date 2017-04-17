@@ -16,9 +16,7 @@ export default function userReducer(state = {}, action) {
       return { ...{} };
     case EDIT_PROFILE:
       console.log('action payload inner: ', action.payload);
-      return { ...state,
-        [action.payload.field]: action.payload.data,
-      };
+      return { ...state,  };
     default:
       return state;
   }

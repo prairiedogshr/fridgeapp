@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.16.0",
+    "babel-eslint": "^7.2.2",
     "babel-polyfill": "^6.23.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",

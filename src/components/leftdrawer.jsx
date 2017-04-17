@@ -70,13 +70,15 @@ const LeftDrawer = (props) => {
       <div>
         {props.menus.map((menu, index) =>
           <MenuItem
-            key={index}
+            key={`menuIndex${index}`}
             style={styles.menuItem}
             primaryText={menu.text}
             leftIcon={menu.icon}
             containerElement={<Link to={menu.link} />}
-            // onTouchTap={navDrawerOpen = false}
-          />
+            onTouchTap={() => {
+              props.handleChangeRequestNavDrawer();
+            }}
+          />,
         )}
       </div>
     </Drawer>

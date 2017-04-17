@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+import Dialog from 'material-ui/Dialog';
 
 export default class Roommate extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Roommate extends Component {
     this.phone = props.roommate.user_phone;
     this.state = {
       expanded: false,
+      open: false
     };
   }
 
@@ -30,14 +32,35 @@ export default class Roommate extends Component {
     this.setState({expanded: false});
   };
 
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };  
+
   handleRemove(event) {
-    console.log('remove target: ', this.roommate.user_id);
+    console.log('remove target: ', this)
     this.props.remove(this.roommate.user_id);
     this.forceUpdate();
+    this.setState({open: false});
 
   }
 
   render() {
+    const removeActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose.bind(this)}
+        />,
+      <FlatButton
+        label="Remove Roommate"
+        backgroundColor='tomato'
+        onTouchTap={this.handleRemove.bind(this)}
+        />
+      ];
     return (
       <div className="roommateCard">
         <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -55,15 +78,24 @@ export default class Roommate extends Component {
             <p><strong>Birthday! </strong>{this.roommate.user_birthday}</p>
             <p><strong>Info: </strong>{this.roommate.user_info}</p>
           </CardText>
-          {this.props.user.admin && this.roommate.user_id !== this.props.user.id &&
+          {this.props.currentUser.admin && this.roommate.user_id !== this.props.currentUser.id &&
             <CardActions expandable={true}>
               <FlatButton
                 style={{color: 'white'}} 
                 backgroundColor='tomato' 
                 hoverColor="grey"
                 fullWidth={true}
-                onClick={(event) => {this.handleRemove(event)}}
-                >Remove</FlatButton>
+                label="Remove"
+                onTouchTap={this.handleOpen}
+              />
+              <Dialog
+                title="Remove User"
+                actions={removeActions}
+                modal={true}
+                open={this.state.open}
+              >
+                Would you like to remove {this.roommate.user_first_name} ?
+              </Dialog>
             </CardActions>              
           }
         </Card>

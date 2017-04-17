@@ -49,14 +49,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
-        <div
-          onTouchTap={(e) => {
-            console.log(e.target.classList);
-            if (this.state.navDrawerOpen && !e.target.classList.contains('LeftDrawer')) {
-              this.handleChangeRequestNavDrawer();
-            }
-          }}
-        >
+        <div>
           <Header
             styles={styles.header}
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
@@ -65,7 +58,6 @@ class App extends Component {
             navDrawerOpen={navDrawerOpen}
             menus={menus.sideMenu}
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
-            className={'LeftDrawer'}
             // username="Rich"
           />
           <div style={styles.container}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ExpenseMonth from '../components/expenses/currentMonth';
 import CurrentMonthExpense from '../components/expenses/currentMonthExpenses';
-import ExpensesGraph from '../components/expenses/expensesGraph';
+import ExpensesGraph from '../components/expenses/expensesGraphRechart';
 import PaypalButton from '../components/expenses/paypalButton';
 
 class houseExpenses extends Component {

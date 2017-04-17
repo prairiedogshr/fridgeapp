@@ -91,14 +91,13 @@ export const houseExist = (number) => {
 
 
 export const joinHouse = (house, user) => {
-      return (dispatch,getState) =>{
+      return (dispatch,getState) => {
         const id = getState().initReducer.user_id
         return axios.put('/api/users', {
           key: 'house_in_user',
           value: house,
           id,
-        })
-        .then(resp => {
+        }).then(resp => {
           console.log('response! ', resp.data);
           dispatch({
             type: HYDRATE,

@@ -33,7 +33,7 @@ Authenticate.contextTypes ={
 
 function mapStateToProps(state){
   return{
-  authenticated : state.authReducer.authenticated
+  authenticated : state.initReducer.authenticated
 };
 }
 

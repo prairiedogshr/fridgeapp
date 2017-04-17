@@ -68,7 +68,7 @@ export const registerUser = creds => (dispatch) => {
   return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: INIT_USER });
         // window.location.href = '#/profile';
         // history.push('/dashboard');
         return true;

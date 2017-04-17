@@ -96,7 +96,7 @@ class Register extends Component {
     this.props.registerUser(this.state.creds)
       .then(response => {
         if (response === true) {
-          return this.props.history.push('/homeless');
+          return this.props.history.push('/welcome');
         }
       });
   };

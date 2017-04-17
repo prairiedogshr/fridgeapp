@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { submitProfile } from '../actions/profile/profile';
-import axios from 'axios';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -25,11 +24,20 @@ class User extends Component {
         user_info: this.props.user.user_info,
       },
     };
+    this.styles = {
+      paper: {
+        padding: 16,
+        overflow: 'auto'
+      },
+      btn: {
+        marginTop: 15,
+        marginBottom: 6,
+      },
+    };
   }
 
   handleOnChange = (e) => {
-    let field = e.target.dataset.field;
-    this.state.profile[field] = e.target.value;
+    this.state.creds[e.target.dataset.field] = e.target.value.trim();
   };
 
   handleSubmit = (e) => {
@@ -44,7 +52,6 @@ class User extends Component {
   };
 
   render() {
-    console.log(this.props);
     if (this.state.loaded === true) {
       return (
         <MuiThemeProvider muiTheme={ThemeDefault}>
@@ -53,73 +60,47 @@ class User extends Component {
               <Col xs={12}>
                 <Row center="xs">
                   <Col md={4}>
-                    <Paper>
-                      <form>
-
-
-          <input dbField={'user_first_name'} field={'First Name: '} data={this.props.user.user_first_name} />
-          <input dbField={'user_last_name'} field={'Last Name: '} data={this.props.user.user_last_name} />
-          <input dbField={'user_email'} field={'Email: '} data={this.props.user.user_email} />
-          <input dbField={'user_phone'} field={'Phone Number: '} data={this.props.user.user_phone} />
-          <input dbField={'user_birthday'} field={'Birthday: '} data={this.props.user.user_birthday} />
-          <input dbField={'user_info'} field={'Info: '} data={this.props.user.user_data} />
-
-
+                    <Paper style={this.styles.paper}>
+                      <form onSubmit={e => this.handleSubmit(e)}>
                         <TextField
-                          id="user_first_name"
-                          hintText="this.props.user.user_first_name"
                           floatingLabelText="First Name"
+                          defaultValue={this.state.profile.user_first_name}
                           fullWidth={true}
                           data-field="user_first_name"
                           onChange={e => {this.handleOnChange(e)}}
                         />
                         <TextField
-                          id="user_last_name"
-                          hintText="Last Name"
                           floatingLabelText="Last Name"
+                          defaultValue={this.state.profile.user_last_name}
                           fullWidth={true}
                           data-field="user_last_name"
                           onChange={e => {this.handleOnChange(e)}}
                         />
                         <TextField
-                          id="user_email"
-                          hintText="Email"
                           floatingLabelText="Email"
+                          defaultValue={this.state.profile.user_email}
                           fullWidth={true}
                           data-field="user_email"
                           onChange={e => {this.handleOnChange(e)}}
                         />
                         <TextField
-                          id="user_phone"
-                          hintText="Phone"
                           floatingLabelText="Phone"
+                          defaultValue={this.state.profile.user_phone}
                           fullWidth={true}
                           data-field="user_phone"
                           onChange={e => {this.handleOnChange(e)}}
                         />
                         <DatePicker
-                          id="user_birthday"
-                          hintText="Birthday"
+                          floatingLabelText="Birthday"
                           fullWidth={true}
+                          defaultValue={this.state.profile.user_birthday}
                           data-field="user_birthday"
-                          onChange={e => {this.handleOnChange(e)}}
+                          onSubmit={e => {this.handleOnChange(e)}}
                         />
                         <RaisedButton
                           label="Update"
                           primary={true}
-                          type="submit"
-                        />
-                        <RaisedButton
-                          label="Update"
-                          primary={true}
-                          // className={this.props.dbField}
-                          // onClick={() => {
-                          //   this.OnSubmit(this.props.submitProfile(
-                          //     this.props.dbField,
-                          //     this.refs.newData.value,
-                          //     this.props.user.user_id,
-                          //   ));
-                          // }}
+                          style={this.styles.btn}
                           type="Submit"
                         />
                       </form>

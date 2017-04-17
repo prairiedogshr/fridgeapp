@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { houseExist } from '../actions/house/house';
 import { joinHouse } from '../actions/house/house';
 
 
@@ -18,9 +19,11 @@ class JoinHouse extends Component {
   }
 
   handleSubmit(event) {
-    const user = this.props.user;
+    const user = this.props;
     const house = parseInt(this.state.house);
-    this.props.joinHouse(house, user);
+    console.log("USER", user)
+    console.log("House", house)
+    this.props.joinHouse(house,user);
   }
 
   render() {
@@ -52,6 +55,7 @@ JoinHouse.proptypes = {
 export default connect(
   mapStateToProps,
   {
-    joinHouse,
+    houseExist,
+    joinHouse
   },
 )(JoinHouse);

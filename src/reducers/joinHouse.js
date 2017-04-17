@@ -8,8 +8,11 @@ export default function joinHouseReducer(state = {}, action) {
       return { ...{} };
     case JOIN_HOUSE:
       console.log('We are here I think', action.payload);
-      return { ...state,
-        [action.payload.field]: action.payload.data,
+      const update = {};
+      update[action.payload.key] = action.payload.value;
+      return {
+        ...state,
+        ...update,
       };
     default:
       return state;

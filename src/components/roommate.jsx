@@ -32,7 +32,6 @@ export default class Roommate extends Component {
     this.setState({expanded: false});
   };
 
-<<<<<<< HEAD
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -46,13 +45,6 @@ export default class Roommate extends Component {
     this.props.remove(this.roommate.user_id);
     this.forceUpdate();
     this.setState({open: false});
-=======
-  handleRemove(event) {
-    console.log('remove target: ', this.roommate.user_id);
-    this.props.remove(this.roommate.user_id);
-    this.forceUpdate();
->>>>>>> dev
-
   }
 
   render() {

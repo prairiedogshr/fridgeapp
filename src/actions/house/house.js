@@ -47,10 +47,8 @@ export const addUser = (user) => ({
 
 export const removeUser = (user) => {
   return (dispatch, getState) => {
-    return axios.put('/api/users/', {
+    return axios.post('/api/users/remove', {
       id: user,
-      key: 'house_in_user',
-      value: null
     })
     .then(resp => {
       return dispatch({

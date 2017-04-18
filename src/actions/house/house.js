@@ -8,7 +8,7 @@ import{
 } from '../actionTypes'
 import axios from 'axios';
 import {isEmpty} from 'underscore'
-import { HYDRATE } from '../actionTypes.js';
+import {HYDRATE} from '../actionTypes.js';
 
 export const updateHouseInfo = (updateInfo) => {
   return (dispatch, getState) => {
@@ -18,15 +18,15 @@ export const updateHouseInfo = (updateInfo) => {
       key: updateInfo.key,
       value: updateInfo.value
     })
-    .then(resp => {
-      dispatch({
-        type: UPDATE_HOUSE_INFO,
-        payload: {
-          key: updateInfo.key,
-          value: updateInfo.value,
-        }
+      .then(resp => {
+        dispatch({
+          type: UPDATE_HOUSE_INFO,
+          payload: {
+            key: updateInfo.key,
+            value: updateInfo.value,
+          }
+        })
       })
-    })
   }
 }
 
@@ -44,15 +44,15 @@ export const removeUser = (user) => {
 
 export const getHouse = (id) => {
   return (dispatch, getState) => {
-  //  console.log('does this work? ', getState())
+    //  console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
-    .then(resp => {
-      console.log('house!! ', resp)
-      return dispatch({
-        type: RECEIVE_HOUSE,
-        payload: resp.data
-      })
-    });
+      .then(resp => {
+        console.log('house!! ', resp)
+        return dispatch({
+          type: RECEIVE_HOUSE,
+          payload: resp.data
+        })
+      });
   }
 };
 
@@ -80,10 +80,10 @@ export const createHouse = (house) => {
 };
 
 export const houseExist = (number) => {
-  axios.get('api/houses/'+ number). then((data) =>{
-    if(data.data.house_account === null || data.data.house_account === undefined){
+  axios.get('api/houses/' + number).then((data) => {
+    if (data.data.house_account === null || data.data.house_account === undefined) {
       return false;
-    }else{
+    } else {
       return true;
     }
   })
@@ -91,27 +91,27 @@ export const houseExist = (number) => {
 
 
 export const joinHouse = (house, user) => {
-      return (dispatch,getState) =>{
-        const id = getState().initReducer.user_id
-        return axios.put('/api/users', {
-          key: 'house_in_user',
-          value: house,
-          id,
+  return (dispatch, getState) => {
+    const id = getState().initReducer.user_id
+    return axios.put('/api/users', {
+      key: 'house_in_user',
+      value: house,
+      id,
+    })
+      .then(resp => {
+        console.log('response! ', resp.data);
+        dispatch({
+          type: HYDRATE,
+          payload: {
+            ...resp.data
+          }
         })
-        .then(resp => {
-          console.log('response! ', resp.data);
-          dispatch({
-            type: HYDRATE,
-            payload: {
-              ...resp.data
-            }
-          })
-        })
-        .then(() => {
-          return true
-        })
-      };
-    }
+      })
+      .then(() => {
+        return true
+      })
+  };
+}
 
 
 // return(dispatch,getState) =>{
@@ -128,8 +128,6 @@ export const joinHouse = (house, user) => {
 //   return true
 // })
 // }
-
-
 
 
 // axios.get('api/houses/'+house).then((data) =>{

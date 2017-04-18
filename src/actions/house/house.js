@@ -1,4 +1,4 @@
-import{
+import {
   ADD_USER,
   REMOVE_USER,
   UPDATE_HOUSE_INFO,
@@ -7,11 +7,11 @@ import{
   JOIN_HOUSE,
 } from '../actionTypes'
 import axios from 'axios';
-import {isEmpty} from 'underscore'
-import {HYDRATE} from '../actionTypes.js';
+import { isEmpty } from 'underscore'
+import { HYDRATE } from '../actionTypes.js';
 
 export const updateHouseInfo = (updateInfo) => {
-  console.log('here with update house: ', updateInfo)
+  console.log('here with update house: ', updateInfo);
   return (dispatch, getState) => {
     const currHouseState = getState().houseReducer;
     const currHouse = {
@@ -23,21 +23,22 @@ export const updateHouseInfo = (updateInfo) => {
       house_state: currHouseState.house_state,
       house_zip: currHouseState.house_zip,
       house_account: currHouseState.house_account,
-      house_info: currHouseState.house_info,      
+      house_info: currHouseState.house_info,
     };
     return axios.put('/api/houses/', {
-        ...currHouse,
-        ...updateInfo
+      ...currHouse,
+      ...updateInfo,
     })
-    .then(resp => {
-      dispatch({
-        type: UPDATE_HOUSE_INFO,
-        payload: {
-          ...updateInfo
-        }
-      })
-  }
-}
+      .then((resp) => {
+        dispatch({
+          type: UPDATE_HOUSE_INFO,
+          payload: {
+            ...updateInfo,
+          },
+        });
+      });
+  };
+};
 
 export const addUser = (user) => ({
   type: ADD_USER,
@@ -49,14 +50,14 @@ export const removeUser = (user) => {
     return axios.post('/api/users/remove', {
       id: user,
     })
-    .then(resp => {
+    .then((resp) => {
       return dispatch({
         type: REMOVE_USER,
         payload: user,
-      })
-    }).catch(err => {
-      console.log('err! ', err)
-    })
+      });
+    }).catch((err) => {
+      console.log('err! ', err);
+    });
   };
 };
 
@@ -64,14 +65,14 @@ export const getHouse = (id) => {
   return (dispatch, getState) => {
     //  console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
-      .then(resp => {
-        console.log('house!! ', resp)
+      .then((resp) => {
+        console.log('house!! ', resp);
         return dispatch({
           type: RECEIVE_HOUSE,
-          payload: resp.data
-        })
+          payload: resp.data,
+        });
       });
-  }
+  };
 };
 
 export const createHouse = (house) => {
@@ -105,7 +106,6 @@ export const houseExist = (number) => {
     return true;
   });
 };
-
 
 export const joinHouse = (house, user) => {
   return (dispatch, getState) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { submitProfile } from '../actions/profile/profile';
+import { updateUser } from '../actions/profile/profile';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -16,11 +16,13 @@ class User extends Component {
     this.state = {
       loaded: true,
       profile: {
+        user_id: this.props.user.user_id,
+        house_in_user: this.props.user.house_in_admin,
         user_first_name: this.props.user.user_first_name,
         user_last_name: this.props.user.user_last_name,
         user_email: this.props.user.user_email,
         user_phone: this.props.user.user_phone,
-        user_birthday: this.props.user.user_birthday,
+        user_birthday: new Date(this.props.user.user_birthday),
         user_info: this.props.user.user_info,
       },
     };
@@ -37,13 +39,25 @@ class User extends Component {
   }
 
   handleOnChange = (e) => {
-    this.state.creds[e.target.dataset.field] = e.target.value.trim();
+    this.state.profile[e.target.dataset.field] = e.target.value.trim();
+  };
+
+  handleOnDateChange = (e, date) => {
+    this.state.profile.user_birthday = date;
+
+    // this.setState({
+    //   profile: {
+    //     user_birthday: date
+    //   },
+    // });
+    // console.log(this.state);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.submitProfile(this.state.profile)
+    this.state.profile.user_birthday = this.state.profile.user_birthday.toISOString().slice(0,10);
+    this.props.updateUser(this.state.profile)
       .then(response => {
         if (response === true) {
           return this.props.history.push('/profile');
@@ -93,9 +107,16 @@ class User extends Component {
                         <DatePicker
                           floatingLabelText="Birthday"
                           fullWidth={true}
-                          defaultValue={this.state.profile.user_birthday}
+                          defaultDate={this.state.profile.user_birthday}
                           data-field="user_birthday"
-                          onSubmit={e => {this.handleOnChange(e)}}
+                          onChange={(e, date) => {this.handleOnDateChange(e, date)}}
+                        />
+                        <TextField
+                          floatingLabelText="Info"
+                          defaultValue={this.state.profile.user_info}
+                          fullWidth={true}
+                          data-field="user_info"
+                          onChange={e => {this.handleOnChange(e)}}
                         />
                         <RaisedButton
                           label="Update"
@@ -128,6 +149,6 @@ const mapStateToProps = ({ userReducer }) => ({
 export default connect(
   mapStateToProps,
   {
-    submitProfile,
+    updateUser,
   },
 )(User);

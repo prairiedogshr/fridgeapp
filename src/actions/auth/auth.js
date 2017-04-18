@@ -68,7 +68,8 @@ export const registerUser = creds => (dispatch) => {
   return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: INIT_USER });
+        console.log("the data you're lookin for", response, creds)
+        dispatch({ type: INIT_USER, payload: response.data });
         // window.location.href = '#/profile';
         // history.push('/dashboard');
         return true;

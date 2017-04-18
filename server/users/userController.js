@@ -43,12 +43,12 @@ const signup = (req, res, next) => {
       console.log('err: ', err);
       next(new Error(err));
     }
-    res.redirect('/dashboard');
+    res.send(user);
   });
 };
 
 const updateUser = (req, res, next) => {
-  console.log('got into update user');
+  console.log('got into update user',req,res);
   User.updateUser(req.body, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -64,10 +64,19 @@ const removeUser = (req, res, next) => {
     if (err) {
       next(new Error(err));
     } else {
+
+const joinHouse = (req, res, next) => {
+  console.log('got into update user');
+  User.joinHouse(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%',user)
       res.send(user);
     }
   });
 };
+
 
 module.exports = {
   findUserByEmail,
@@ -76,4 +85,5 @@ module.exports = {
   signup,
   updateUser,
   removeUser,
+  joinHouse,
 };

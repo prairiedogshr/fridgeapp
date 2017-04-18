@@ -72,6 +72,7 @@ class Register extends Component {
 
     axios.get(`/api/users/exists/${this.state.creds.user_email}`)
       .then(response => {
+        console.log(response.data)
         if (response.data === true) {
           alert('user already exists!');
         } else {
@@ -86,7 +87,7 @@ class Register extends Component {
 
   handleRegistration = (e) => {
     e.preventDefault();
-
+console.log(this.state.creds);
     this.props.registerUser(this.state.creds)
       .then(response => {
         if (response === true) {

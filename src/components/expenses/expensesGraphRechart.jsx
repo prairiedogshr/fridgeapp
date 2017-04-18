@@ -1,31 +1,82 @@
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponseiveContainer} from 'Recharts';
+import { LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'Recharts';
 import React, { Component } from 'react';
-
-const data = [
-      {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-      {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-      {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-      {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-      {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-      {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-      {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-];
+import {Tabs, Tab} from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 
 class ExpensesGraph extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: this.props.expenses.reduce((all, item) => {
+        all.push({
+          expense_name: item.expense_name,
+          expense_balance: item.expense_balance
+        })
+        return all;
+        },[]).slice(0,10),
+      slideIndex: 0
+      }
+
+    this.styles = {
+      headline: {
+      fontSize: 24,
+      paddingTop: 16,
+      marginBottom: 12,
+      fontWeight: 400,
+      },
+      slide: {
+        padding: 10,
+      },
+    }; 
+    // setInterval(() => {
+    //   console.log(this.state)
+    // },2000)   
+  } 
+
+
+    handleSwipe = (value) => {
+      console.log('hello? with: ', value  )
+      this.setState({
+        slideIndex: value,
+      });
+    };
+
   render() {
-    console.log('props: ', this.props)
     return (
-      <LineChart width={600} height={300} data={data}
-            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-       <XAxis dataKey="name"/>
-       <YAxis/>
-       <CartesianGrid strokeDasharray="3 3"/>
-       <Tooltip/>
-       <Legend />
-       <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{r: 8}}/>
-       <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-      </LineChart>
-      )
+      <div>
+        <Tabs
+          onChange={this.handleSwipe}
+          value={this.state.slideIndex}
+        >
+          <Tab label="Current Month" value={0} />
+          <Tab label="Last Month" value={1} />
+          <Tab label="Yearly Average" value={2} />
+        </Tabs>
+        <SwipeableViews
+          index={this.state.slideIndex}
+          onChangeIndex={this.handleSwipe}
+        >
+          <div>
+            <BarChart width={960} height={600} data={this.state.data}
+                  margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+            <XAxis dataKey="expense_name" />
+            <YAxis/>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip/>
+            <Legend />
+            <Bar dataKey="expense_balance" fill="#8884d8"
+            />
+            </BarChart>
+          </div>
+          <div style={this.styles.slide}>
+            slide n°2
+          </div>
+          <div style={this.styles.slide}>
+            slide n°3
+          </div>
+        </SwipeableViews>
+      </div>
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Homeless extends Component {
+class Welcome extends Component {
 
   render() {
     return (
@@ -13,4 +13,4 @@ class Homeless extends Component {
   }
 }
 
-export default connect()(Homeless);
+export default connect()(Welcome);

@@ -42,7 +42,7 @@ class Register extends Component {
         margin: 20,
       },
       title: {
-        fontSize: 32,
+        fontSize: 24,
       },
       secondBtn: {
         marginTop: 15,
@@ -61,20 +61,20 @@ class Register extends Component {
         color: grey500
       },
     };
-
   }
+
+  handleKeyUp = (e) => {
+    this.state.creds[e.target.dataset.field] = e.target.value.trim();
+  };
 
   handleClick = (e) => {
     e.preventDefault();
 
-    axios.get(`/api/users/exists/${document.getElementById("emailInput").value.trim()}`)
+    axios.get(`/api/users/exists/${this.state.creds.user_email}`)
       .then(response => {
         if (response.data === true) {
           alert('user already exists!');
         } else {
-          let creds = this.state.creds;
-          creds.user_email = document.getElementById("emailInput").value.trim();
-          creds.user_password = document.getElementById("passwordInput").value.trim();
           this.setState({complete_signup: true, expanded: true, firstBtn: {display: 'none'}});
         }
       });
@@ -82,12 +82,6 @@ class Register extends Component {
 
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
-  };
-
-  handleKeyUp = (e) => {
-    console.log(e.target.dataset.field);
-    let field = e.target.dataset.field;
-    this.state.creds[field] = e.target.value;
   };
 
   handleRegistration = (e) => {
@@ -113,19 +107,21 @@ class Register extends Component {
                   <Paper>
                     <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange} style={this.styles.card}>
                       <CardText>
-                        <h1 style={this.styles.title}>Sign Up</h1>
+                        <h2 style={this.styles.title}>Sign Up</h2>
                         <TextField
-                          id="emailInput"
                           hintText="E-mail"
                           floatingLabelText="E-mail"
                           fullWidth={true}
+                          data-field="user_email"
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <TextField
-                          id="passwordInput"
                           hintText="Password"
                           floatingLabelText="Password"
                           fullWidth={true}
                           type="password"
+                          data-field="user_password"
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <RaisedButton
                           label="Sign Up"
@@ -137,36 +133,32 @@ class Register extends Component {
                       <CardText expandable={true}>
                         <h4>Almost there! Last couple things...</h4>
                         <TextField
-                          id="user_first_name"
                           hintText="First Name"
                           floatingLabelText="First Name"
                           fullWidth={true}
                           data-field="user_first_name"
-                          onKeyUp={e => {handleKeyUp(e)}}
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <TextField
-                          id="user_last_name"
                           hintText="Last Name"
                           floatingLabelText="Last Name"
                           fullWidth={true}
                           data-field="user_last_name"
-                          onKeyUp={e => {handleKeyUp(e)}}
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <TextField
-                          id="user_username"
                           hintText="Username"
                           floatingLabelText="Username"
                           fullWidth={true}
                           data-field="user_username"
-                          onKeyUp={e => {handleKeyUp(e)}}
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <TextField
-                          id="user_phone"
                           hintText="Phone"
                           floatingLabelText="Phone"
                           fullWidth={true}
                           data-field="user_phone"
-                          onKeyUp={e => {handleKeyUp(e)}}
+                          onKeyUp={e => {this.handleKeyUp(e)}}
                         />
                         <RaisedButton
                           label="Sign Up"

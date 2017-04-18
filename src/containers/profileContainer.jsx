@@ -8,24 +8,21 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
-// import RefreshIndicator from 'material-ui/RefreshIndicator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import ThemeDefault from '../styles/theme-default';
 
 class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: true,
-      profile: {
-        user_id: this.props.user.user_id,
-        house_in_user: this.props.user.house_in_admin,
-        user_first_name: this.props.user.user_first_name,
-        user_last_name: this.props.user.user_last_name,
-        user_email: this.props.user.user_email,
-        user_phone: this.props.user.user_phone,
-        user_birthday: this.props.user.user_birthday,
-        user_info: this.props.user.user_info,
-      },
+      user_id: this.props.user.user_id,
+      house_in_user: this.props.user.house_in_admin || 'null',
+      user_first_name: this.props.user.user_first_name,
+      user_last_name: this.props.user.user_last_name,
+      user_email: this.props.user.user_email || 'null',
+      user_phone: this.props.user.user_phone || 'null',
+      user_birthday: this.props.user.user_birthday || 'null',
+      user_info: this.props.user.user_info || 'null',
     };
     this.styles = {
       paper: {
@@ -46,30 +43,31 @@ class User extends Component {
     };
   }
 
-  handleOnChange = (e) => {
-    this.state.profile[e.target.dataset.field] = e.target.value.trim();
+  componentWillMount() {
+    ValidatorForm.addValidationRule('isPhone', (value) => {
+      const phonePattern = new RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/);
+
+      return (phonePattern.test(value));
+    });
+  }
+
+  handleChange = (e) => {
+    let field = e.target.name;
+    this.setState({ [field]: e.target.value.trim() });
+    console.log(this.state);
   };
 
-  handleOnDateChange = (e, date) => {
-    console.log('handleOnDateChange1', this.state.profile.user_birthday);
-    this.state.profile.user_birthday = date;
-    console.log('handleOnDateChange2', this.state.profile.user_birthday);
-
-    // let newState = Object.assign({}, this.state, );
-
-    // this.setState({
-    //   profile: {
-    //     user_birthday: date
-    //   },
-    // });
-    // console.log(this.state);
+  handleDateChange = (e, date) => {
+    console.log('handleOnDateChange1', this.state.user_birthday);
+    this.setState({ user_birthday: date });
+    console.log('handleOnDateChange2', this.state.user_birthday);
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    this.state.profile.user_birthday = this.state.profile.user_birthday.toISOString().slice(0,10);
-    this.props.updateUser(this.state.profile)
+    this.state.user_birthday = this.state.user_birthday.toISOString().slice(0,10);
+    this.props.updateUser(this.state)
       .then(response => {
         if (response === true) {
           return this.props.history.push('/profile');
@@ -78,6 +76,8 @@ class User extends Component {
   };
 
   render() {
+    const birthday = this.state.user_birthday;
+
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <Grid fluid>
@@ -86,48 +86,54 @@ class User extends Component {
               <Row center="xs">
                 <Col md={4}>
                   <Paper style={this.styles.paper}>
-                    <form onSubmit={e => this.handleSubmit(e)}>
+                    <ValidatorForm onSubmit={e => {this.handleSubmit(e)}}>
                       <TextField
                         floatingLabelText="First Name"
-                        defaultValue={this.state.profile.user_first_name}
+                        defaultValue={this.state.user_first_name}
                         fullWidth={true}
-                        data-field="user_first_name"
-                        onChange={e => {this.handleOnChange(e)}}
+                        name="user_first_name"
+                        onChange={e => {this.handleChange(e)}}
                       />
                       <TextField
                         floatingLabelText="Last Name"
-                        defaultValue={this.state.profile.user_last_name}
+                        defaultValue={this.state.user_last_name}
                         fullWidth={true}
-                        data-field="user_last_name"
-                        onChange={e => {this.handleOnChange(e)}}
+                        name="user_last_name"
+                        onChange={e => {this.handleChange(e)}}
                       />
-                      <TextField
-                        floatingLabelText="Email"
-                        defaultValue={this.state.profile.user_email}
+                      <TextValidator
+                        hintText="E-mail"
+                        floatingLabelText="E-mail"
                         fullWidth={true}
-                        data-field="user_email"
-                        onChange={e => {this.handleOnChange(e)}}
+                        name="user_email"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.user_email}
+                        validators={['required', 'isEmail']}
+                        errorMessages={['this field is required', 'email is not valid']}
                       />
-                      <TextField
+                      <TextValidator
+                        hintText="Phone"
                         floatingLabelText="Phone"
-                        defaultValue={this.state.profile.user_phone}
                         fullWidth={true}
-                        data-field="user_phone"
-                        onChange={e => {this.handleOnChange(e)}}
+                        name="user_phone"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.user_phone}
+                        validators={['required', 'isPhone']}
+                        errorMessages={['this field is required', 'phone is not valid']}
                       />
                       <DatePicker
                         floatingLabelText="Birthday"
                         fullWidth={true}
-                        defaultDate={new Date(this.state.profile.user_birthday)}
-                        data-field="user_birthday"
-                        onChange={(e, date) => {this.handleOnDateChange(e, date)}}
+                        defaultDate={new Date(this.state.user_birthday)}
+                        name="user_birthday"
+                        onChange={(e, date) => {this.handleDateChange(e, date)}}
                       />
                       <TextField
                         floatingLabelText="Info"
-                        defaultValue={this.state.profile.user_info}
+                        defaultValue={this.state.user_info}
                         fullWidth={true}
-                        data-field="user_info"
-                        onChange={e => {this.handleOnChange(e)}}
+                        name="user_info"
+                        onChange={e => {this.handleChange(e)}}
                       />
                       <RaisedButton
                         label="Update"
@@ -135,7 +141,7 @@ class User extends Component {
                         style={this.styles.btn}
                         type="Submit"
                       />
-                    </form>
+                    </ValidatorForm>
                   </Paper>
                 </Col>
               </Row>

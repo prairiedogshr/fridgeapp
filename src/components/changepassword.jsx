@@ -2,21 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init';
-import { updateUser } from '../actions/profile/profile';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import { grey500, white } from 'material-ui/styles/colors';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import TextField from 'material-ui/TextField';
-import ThemeDefault from '../styles/theme-default';
-
-import NoUserAlert from './loginNoUserAlert';
-
-const logo = require('../assets/fridge-logo-black.svg');
+import { updateUser, changePassword } from '../actions/profile/profile';
 
 class Change extends Component {
   constructor(props){
@@ -31,66 +17,31 @@ class Change extends Component {
     this.state.profile[e.target.dataset.field] = e.target.value.trim();
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = (e) =>{
+    const old = this.refs.oldpass.value;
+    const new1 = this.refs.newpassword.value;
+    const new2 = this.refs.newpassword2.value;
+    if( new1 !== new2){
+      console.log("You entered the word, try again!");
+    }else{
+      changePassword(old,new1,new2);
+    }
 
   };
 
-  render() {
-      return (
-        <MuiThemeProvider muiTheme={ThemeDefault}>
-          <Grid fluid>
-            <NoUserAlert />
-            <Row>
-              <Col xs={12}>
-                <Row center="xs">
-                  <Col md={4}>
-                    <img src={logo} style={this.styles.logo} alt="Fridge" />
-                    <Paper style={this.styles.paper}>
-                      <h1>Login</h1>
-                      <form onSubmit={event => this.handleClick(event)}>
-                        <TextField
-                          id="emailInput"
-                          hintText="E-mail"
-                          floatingLabelText="E-mail"
-                          fullWidth={true}
-                        />
-                        <TextField
-                          id="passwordInput"
-                          hintText="Password"
-                          floatingLabelText="Password"
-                          fullWidth={true}
-                          type="password"
-                        />
-                        <div>
-                          <RaisedButton
-                            label="Login"
-                            primary={true}
-                            style={{...this.styles.loginBtn, ...this.styles.btnSpan}}
-                            type="submit"
-                          />
-                        </div>
-                      </form>
-                    </Paper>
-                    <div style={this.styles.noAcctDiv}>
-                      <div style={this.styles.noAcctQuestion}>
-                        <span>Don't have an account?</span>
-                      </div>
-                        <FlatButton
-                          label="Sign Up"
-                          href="/signup"
-                          style={this.styles.flatButton}
-                          icon={<PersonAdd />}
-                        />
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Grid>
-        </MuiThemeProvider>
-      );
-    }
+  render(){
+    return(
+      <div>
+        <input type='password' ref='oldpass' className="form-control" placeholder='oldpassword'/>
+        <input type='password' ref='newpassword' className="form-control" placeholder='newpassword'/>
+        <input type='password' ref='newpassword2' className="form-control" placeholder='confirm new password'/>
+        <button onClick={(event) => this.handleSubmit(event)} className="btn btn-primary">
+          change!
+        </button>
+      </div>
+    )
   }
+}
 
 function mapStateToProps({ userReducer }){
   user: userReducer

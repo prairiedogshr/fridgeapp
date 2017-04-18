@@ -16,3 +16,19 @@ export const updateUser = (profile) => {
       });
   };
 };
+
+export const changePassword = (old, new1, new2) =>{
+  console.log("parameters",old,new1,new2);
+  return(dispatch) => {
+    return axios.put('api/users/change', old, new1, new2)
+      .then((res) =>{
+        return dispatch({
+          type: EDIT_PROFILE,
+          payload: new1,
+        });
+      })
+      .catch((error) =>{
+        console.log(error)
+      });
+  };
+};

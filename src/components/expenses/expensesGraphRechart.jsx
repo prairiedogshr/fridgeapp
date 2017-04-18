@@ -1,4 +1,4 @@
-import { LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'Recharts';
+import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell } from 'Recharts';
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
@@ -9,11 +9,11 @@ class ExpensesGraph extends Component {
     this.state = {
       data: this.props.expenses.reduce((all, item) => {
         all.push({
-          expense_name: item.expense_name,
-          expense_balance: item.expense_balance
+          name: item.expense_name,
+          value: item.expense_balance
         })
         return all;
-        },[]).slice(0,10),
+        },[]).slice(0,5),
       slideIndex: 0
       }
 
@@ -28,10 +28,12 @@ class ExpensesGraph extends Component {
         padding: 10,
       },
     }; 
-    // setInterval(() => {
-    //   console.log(this.state)
-    // },2000)   
-  } 
+
+    this.COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    this.RADIAN = Math.PI / 180; 
+    this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
+                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}]; 
+  }
 
 
     handleSwipe = (value) => {
@@ -41,41 +43,71 @@ class ExpensesGraph extends Component {
       });
     };
 
+    renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+      console.log('getting called?' , this.state.data[index].name)
+      const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+      const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
+      const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
+     
+      return (
+        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
+          {this.state.data[index].name}
+        </text>
+      );
+    };
+
+    handleOnMouseOver = (event) => {
+      console.log('mouse event? ', event)
+      return (
+          <Tooltip content={this.state.data}></Tooltip>
+      );
+    };
+
   render() {
     return (
-      <div>
-        <Tabs
-          onChange={this.handleSwipe}
-          value={this.state.slideIndex}
-        >
-          <Tab label="Current Month" value={0} />
-          <Tab label="Last Month" value={1} />
-          <Tab label="Yearly Average" value={2} />
-        </Tabs>
-        <SwipeableViews
-          index={this.state.slideIndex}
-          onChangeIndex={this.handleSwipe}
-        >
-          <div>
-            <BarChart width={960} height={600} data={this.state.data}
-                  margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-            <XAxis dataKey="expense_name" />
-            <YAxis/>
-            <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip/>
-            <Legend />
-            <Bar dataKey="expense_balance" fill="#8884d8"
-            />
-            </BarChart>
-          </div>
-          <div style={this.styles.slide}>
-            slide n°2
-          </div>
-          <div style={this.styles.slide}>
-            slide n°3
-          </div>
-        </SwipeableViews>
-      </div>
+        <div>
+          <Tabs
+            onChange={this.handleSwipe}
+            value={this.state.slideIndex}
+          >
+            <Tab label="Current Month" value={0} />
+            <Tab label="Last Month" value={1} />
+            <Tab label="Yearly Average" value={2} />
+          </Tabs>
+          <SwipeableViews
+            index={this.state.slideIndex}
+            onChangeIndex={this.handleSwipe}
+          >
+            <div>
+              <ResponsiveContainer
+                width="100%"
+                  height={400}
+              >
+                <PieChart>
+                  <Pie
+                    data={this.state.data} 
+                    labelLine={false}
+                    label={this.renderCustomizedLabel}
+                    outerRadius={'80%'} 
+                    fill="#8884d8"
+                    onMouseOver={this.handleOnMouseOver}
+                  >
+                    {
+                      this.state.data.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
+                    }
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+            </ResponsiveContainer>
+            </div>
+            <div style={this.styles.slide}>
+              slide n°2
+            </div>
+            <div style={this.styles.slide}>
+              slide n°3
+            </div>
+          </SwipeableViews>
+        </div>
     );
   }
 }

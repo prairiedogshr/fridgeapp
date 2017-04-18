@@ -17,9 +17,9 @@ class PaypalButton extends Component {
         return paypal.rest.payment.create(this.props.env, this.props.client, {
           transactions: [
             {
-              amount: { total: '0.01', currency: 'USD' },
+              amount: { total: this.props.bill, currency: 'USD' },
               payee: {
-                email: 'frank@frank.com',
+                email: this.props.paypalAdmin,
               },
             },
           ],

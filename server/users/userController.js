@@ -60,10 +60,13 @@ const updateUser = (req, res, next) => {
 
 const removeUser = (req, res, next) => {
   console.log('got into update user');
-  User.removeUser(req.body, (err, user) => {
-    if (err) {
-      next(new Error(err));
-    } else {
+      User.removeUser(req.body, (err, user) => {
+        if (err) {
+          next(new Error(err));
+        }
+      }
+  );
+};
 
 const joinHouse = (req, res, next) => {
   console.log('got into update user');
@@ -76,7 +79,6 @@ const joinHouse = (req, res, next) => {
     }
   });
 };
-
 
 module.exports = {
   findUserByEmail,

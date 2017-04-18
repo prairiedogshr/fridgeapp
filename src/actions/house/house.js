@@ -8,7 +8,7 @@ import{
 } from '../actionTypes'
 import axios from 'axios';
 import {isEmpty} from 'underscore'
-import { HYDRATE } from '../actionTypes.js';
+import {HYDRATE} from '../actionTypes.js';
 
 export const updateHouseInfo = (updateInfo) => {
   console.log('here with update house: ', updateInfo)
@@ -36,7 +36,6 @@ export const updateHouseInfo = (updateInfo) => {
           ...updateInfo
         }
       })
-    })
   }
 }
 
@@ -63,15 +62,15 @@ export const removeUser = (user) => {
 
 export const getHouse = (id) => {
   return (dispatch, getState) => {
-  //  console.log('does this work? ', getState())
+    //  console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
-    .then(resp => {
-      console.log('house!! ', resp)
-      return dispatch({
-        type: RECEIVE_HOUSE,
-        payload: resp.data
-      })
-    });
+      .then(resp => {
+        console.log('house!! ', resp)
+        return dispatch({
+          type: RECEIVE_HOUSE,
+          payload: resp.data
+        })
+      });
   }
 };
 
@@ -145,8 +144,6 @@ export const joinHouse = (house, user) => {
 //   return true
 // })
 // }
-
-
 
 
 // axios.get('api/houses/'+house).then((data) =>{

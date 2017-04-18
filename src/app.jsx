@@ -28,12 +28,6 @@ class App extends Component {
     });
   }
 
-  // handleClose() {
-  //   this.setState({
-  //     navDrawerOpen: !this.state.navDrawerOpen,
-  //   });
-  // }
-
   render() {
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
@@ -58,7 +52,6 @@ class App extends Component {
             navDrawerOpen={navDrawerOpen}
             menus={menus.sideMenu}
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
-            // username="Rich"
           />
           <div style={styles.container}>
             {this.props.children}

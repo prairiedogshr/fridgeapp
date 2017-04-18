@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import reducer from './reducers';
 import Routes from './config/routes';
 
@@ -48,9 +50,18 @@ export default class AppProvider extends Component {
       );
     }
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <MuiThemeProvider>
+        <div style={{ position: 'relative' }}>
+          <RefreshIndicator
+            size={200}
+            left={-100}
+            top={200}
+            loadingColor="#26c6da"
+            status="loading"
+            style={{ marginLeft: '50%' }}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getAppState = () => {
   return (dispatch, getState) => {
     const user = getState().initReducer.user_id;
-    return axios.get(`/api/users/appstate/${1}`)
+    return axios.get(`/api/users/appstate/${user}`)
     .then(resp => {
       dispatch({
         type: HYDRATE,

@@ -80,38 +80,36 @@ export const createHouse = (house) => {
 };
 
 export const houseExist = (number) => {
-  axios.get('api/houses/'+ number). then((data) =>{
-    if(data.data.house_account === null || data.data.house_account === undefined){
+  axios.get(`api/houses/${number}`).then((data) => {
+    if (data.data.house_account === null || data.data.house_account === undefined) {
       return false;
-    }else{
-      return true;
     }
-  })
-}
+    return true;
+  });
+};
 
 
 export const joinHouse = (house, user) => {
-      return (dispatch,getState) =>{
-        const id = getState().initReducer.user_id
-        return axios.put('/api/users', {
-          key: 'house_in_user',
-          value: house,
-          id,
-        })
-        .then(resp => {
-          console.log('response! ', resp.data);
-          dispatch({
-            type: HYDRATE,
-            payload: {
-              ...resp.data
-            }
-          })
-        })
-        .then(() => {
-          return true
-        })
-      };
-    }
+  return (dispatch, getState) => {
+    const id = getState().initReducer.user_id;
+    return axios.put('/api/users', {
+      key: 'house_in_user',
+      value: house,
+      id,
+    }).then((resp) => {
+      console.log('response! ', resp.data);
+      dispatch({
+        type: HYDRATE,
+        payload: {
+          ...resp.data,
+        },
+      });
+    })
+    .then(() => {
+      return true;
+    });
+  };
+};
 
 
 // return(dispatch,getState) =>{

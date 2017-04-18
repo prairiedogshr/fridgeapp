@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+// import RefreshIndicator from 'material-ui/RefreshIndicator';
 import ThemeDefault from '../styles/theme-default';
 
 class User extends Component {
@@ -22,7 +23,7 @@ class User extends Component {
         user_last_name: this.props.user.user_last_name,
         user_email: this.props.user.user_email,
         user_phone: this.props.user.user_phone,
-        user_birthday: new Date(this.props.user.user_birthday),
+        user_birthday: this.props.user.user_birthday,
         user_info: this.props.user.user_info,
       },
     };
@@ -35,6 +36,13 @@ class User extends Component {
         marginTop: 15,
         marginBottom: 6,
       },
+      loadContainer: {
+        position: 'relative',
+      },
+      loadRefresh: {
+        display: 'inline-block',
+        position: 'relative',
+      },
     };
   }
 
@@ -43,7 +51,11 @@ class User extends Component {
   };
 
   handleOnDateChange = (e, date) => {
+    console.log('handleOnDateChange1', this.state.profile.user_birthday);
     this.state.profile.user_birthday = date;
+    console.log('handleOnDateChange2', this.state.profile.user_birthday);
+
+    // let newState = Object.assign({}, this.state, );
 
     // this.setState({
     //   profile: {
@@ -66,78 +78,71 @@ class User extends Component {
   };
 
   render() {
-    if (this.state.loaded === true) {
-      return (
-        <MuiThemeProvider muiTheme={ThemeDefault}>
-          <Grid fluid>
-            <Row>
-              <Col xs={12}>
-                <Row center="xs">
-                  <Col md={4}>
-                    <Paper style={this.styles.paper}>
-                      <form onSubmit={e => this.handleSubmit(e)}>
-                        <TextField
-                          floatingLabelText="First Name"
-                          defaultValue={this.state.profile.user_first_name}
-                          fullWidth={true}
-                          data-field="user_first_name"
-                          onChange={e => {this.handleOnChange(e)}}
-                        />
-                        <TextField
-                          floatingLabelText="Last Name"
-                          defaultValue={this.state.profile.user_last_name}
-                          fullWidth={true}
-                          data-field="user_last_name"
-                          onChange={e => {this.handleOnChange(e)}}
-                        />
-                        <TextField
-                          floatingLabelText="Email"
-                          defaultValue={this.state.profile.user_email}
-                          fullWidth={true}
-                          data-field="user_email"
-                          onChange={e => {this.handleOnChange(e)}}
-                        />
-                        <TextField
-                          floatingLabelText="Phone"
-                          defaultValue={this.state.profile.user_phone}
-                          fullWidth={true}
-                          data-field="user_phone"
-                          onChange={e => {this.handleOnChange(e)}}
-                        />
-                        <DatePicker
-                          floatingLabelText="Birthday"
-                          fullWidth={true}
-                          defaultDate={this.state.profile.user_birthday}
-                          data-field="user_birthday"
-                          onChange={(e, date) => {this.handleOnDateChange(e, date)}}
-                        />
-                        <TextField
-                          floatingLabelText="Info"
-                          defaultValue={this.state.profile.user_info}
-                          fullWidth={true}
-                          data-field="user_info"
-                          onChange={e => {this.handleOnChange(e)}}
-                        />
-                        <RaisedButton
-                          label="Update"
-                          primary={true}
-                          style={this.styles.btn}
-                          type="Submit"
-                        />
-                      </form>
-                    </Paper>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Grid>
-        </MuiThemeProvider>
-      );
-    }
     return (
-      <div>
-        <h1>LOADING</h1>
-      </div>
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <Grid fluid>
+          <Row>
+            <Col xs={12}>
+              <Row center="xs">
+                <Col md={4}>
+                  <Paper style={this.styles.paper}>
+                    <form onSubmit={e => this.handleSubmit(e)}>
+                      <TextField
+                        floatingLabelText="First Name"
+                        defaultValue={this.state.profile.user_first_name}
+                        fullWidth={true}
+                        data-field="user_first_name"
+                        onChange={e => {this.handleOnChange(e)}}
+                      />
+                      <TextField
+                        floatingLabelText="Last Name"
+                        defaultValue={this.state.profile.user_last_name}
+                        fullWidth={true}
+                        data-field="user_last_name"
+                        onChange={e => {this.handleOnChange(e)}}
+                      />
+                      <TextField
+                        floatingLabelText="Email"
+                        defaultValue={this.state.profile.user_email}
+                        fullWidth={true}
+                        data-field="user_email"
+                        onChange={e => {this.handleOnChange(e)}}
+                      />
+                      <TextField
+                        floatingLabelText="Phone"
+                        defaultValue={this.state.profile.user_phone}
+                        fullWidth={true}
+                        data-field="user_phone"
+                        onChange={e => {this.handleOnChange(e)}}
+                      />
+                      <DatePicker
+                        floatingLabelText="Birthday"
+                        fullWidth={true}
+                        defaultDate={new Date(this.state.profile.user_birthday)}
+                        data-field="user_birthday"
+                        onChange={(e, date) => {this.handleOnDateChange(e, date)}}
+                      />
+                      <TextField
+                        floatingLabelText="Info"
+                        defaultValue={this.state.profile.user_info}
+                        fullWidth={true}
+                        data-field="user_info"
+                        onChange={e => {this.handleOnChange(e)}}
+                      />
+                      <RaisedButton
+                        label="Update"
+                        primary={true}
+                        style={this.styles.btn}
+                        type="Submit"
+                      />
+                    </form>
+                  </Paper>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </MuiThemeProvider>
     );
   }
 }

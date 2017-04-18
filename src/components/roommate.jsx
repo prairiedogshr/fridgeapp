@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+import Dialog from 'material-ui/Dialog';
 
 export default class Roommate extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Roommate extends Component {
     this.phone = props.roommate.user_phone;
     this.state = {
       expanded: false,
+      open: false
     };
   }
 
@@ -30,11 +32,37 @@ export default class Roommate extends Component {
     this.setState({expanded: false});
   };
 
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };  
+
+  handleRemove(event) {
+    console.log('remove target: ', this)
+    this.props.remove(this.roommate.user_id);
+    this.forceUpdate();
+    this.setState({open: false});
+  }
+
   render() {
-    console.log(this.props.admin)
+    const removeActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose.bind(this)}
+        />,
+      <FlatButton
+        label="Remove Roommate"
+        backgroundColor='tomato'
+        onTouchTap={this.handleRemove.bind(this)}
+        />
+      ];
     return (
       <div className="roommateCard">
-        <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+        <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
           <CardHeader
             title={this.roommate.user_first_name + ' ' + this.roommate.user_last_name}
             avatar="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAYiAAAAJGYzZGYxOTkwLTM0NjAtNDEwMC05ZWUzLWZkNGJmYjM5M2VlYg.jpg"
@@ -46,19 +74,27 @@ export default class Roommate extends Component {
           <p><strong>Phone: </strong>{'(' + this.phone.slice(0,3) + ') ' + this.phone.slice(3,6) + '-' + this.phone.slice(6)}</p>
           </CardText>
           <CardText expandable={true}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+            <p><strong>Birthday! </strong>{this.roommate.user_birthday}</p>
+            <p><strong>Info: </strong>{this.roommate.user_info}</p>
           </CardText>
-          {this.props.admin &&
+          {this.props.currentUser.admin && this.roommate.user_id !== this.props.currentUser.id &&
             <CardActions expandable={true}>
               <FlatButton
                 style={{color: 'white'}} 
                 backgroundColor='tomato' 
                 hoverColor="grey"
                 fullWidth={true}
-                >Remove</FlatButton>
+                label="Remove"
+                onTouchTap={this.handleOpen}
+              />
+              <Dialog
+                title="Remove User"
+                actions={removeActions}
+                modal={true}
+                open={this.state.open}
+              >
+                Would you like to remove {this.roommate.user_first_name} ?
+              </Dialog>
             </CardActions>              
           }
         </Card>

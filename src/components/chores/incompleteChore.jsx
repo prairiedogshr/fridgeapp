@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function IncompletedChore(props) {
   const incomplete = props.chores.incomplete;
-  if (incomplete) {
+  if (incomplete.length) {
     return (
       <ol>
         {incomplete.map(chore => (

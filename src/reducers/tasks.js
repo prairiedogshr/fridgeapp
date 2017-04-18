@@ -5,6 +5,7 @@ const initialState = { complete: [{ id: 1, value: 'task 1' }, { id: 2, value: 't
 
 export default function tasksReducer(state = initialState, action) {
   console.log('action type outer: ', action.type);
+  console.log('with payload: ', action.payload)
   let value;
   switch (action.type) {
     case UNAUTH_USER:
@@ -12,9 +13,14 @@ export default function tasksReducer(state = initialState, action) {
 
     case ADD_TASK:
       console.log('action payload inner: ', state);
+      console.log('new state? ', {...state,incomplete: [...state.incomplete, ...action.payload]})
       return {
         ...state,
-        incomplete: [...state.incomplete, { value: action.payload }],
+        incomplete: [...state.incomplete, 
+        {
+          house_in_task: action.payload.house_in_task,
+          task_name: action.payload.task_name
+        }]
       };
 
     // case COMPLETE_TASK:

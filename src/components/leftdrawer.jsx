@@ -24,8 +24,7 @@ const LeftDrawer = (props) => {
     logo: {
       height: 40,
       width: 'auto',
-      top: -3,
-      position: 'relative',
+      paddingTop: 10,
     },
     menuItem: {
       color: white,
@@ -33,8 +32,8 @@ const LeftDrawer = (props) => {
     },
     avatar: {
       div: {
-        padding: '15px 0 20px 15px',
-        height: 45,
+        padding: 10,
+        height: 20,
       },
       icon: {
         float: 'left',
@@ -71,13 +70,15 @@ const LeftDrawer = (props) => {
       <div>
         {props.menus.map((menu, index) =>
           <MenuItem
-            key={index}
+            key={`menuIndex${index}`}
             style={styles.menuItem}
             primaryText={menu.text}
             leftIcon={menu.icon}
             containerElement={<Link to={menu.link} />}
-            // onTouchTap={navDrawerOpen = false}
-          />
+            onTouchTap={() => {
+              props.handleChangeRequestNavDrawer();
+            }}
+          />,
         )}
       </div>
     </Drawer>

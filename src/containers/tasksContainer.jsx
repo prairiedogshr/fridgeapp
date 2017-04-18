@@ -8,22 +8,6 @@ import AddTask from '../components/addTask';
 
 class Tasks extends Component {
 
-//   handleSubmit = e => {
-//     if (e.which === 13) {
-//       console.log(this.props.user);
-//       let u = this.props.user;
-//       let task = {
-//         house_in_task: u.house_in_user,
-//         task_name: e.target.value,
-//         claimed_by_user_in_task: u.user_id,
-//         task_is_done: false,
-//         expense_in_task: 10,
-//       }
-//       this.props.addTask(task);
-//       e.target.value = '';
-//     }
-//   };
-//
   completeTask = taskId => {
     this.props.completeTask(taskId);
   };
@@ -64,6 +48,8 @@ class Tasks extends Component {
         <CompleteTask
           tasks={this.props.tasks}
           undoCompleteTask={this.undoCompleteTask}
+        />
+        <AddTask addTask={this.props.addTask} house={this.props.user.house_in_user}
         />
       </div>
     );

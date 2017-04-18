@@ -8,6 +8,7 @@ export default function initReducer(state = {}, action) {
       return {
         ...state,
         user_id: action.payload,
+        authenticated: true,
       };
     }
     default:

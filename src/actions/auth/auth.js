@@ -43,10 +43,8 @@ export const errorHandler = (dispatch, error, type) => {
   }
 };
 
-export const loginUser = (e) => {
-  console.log(e);
-  return (dispatch) => axios.post('/api/users/signin', e)
-      .then((response) => {
+export const loginUser = creds => dispatch =>
+axios.post('/api/users/signin', creds).then((response) => {
         if (response) {
           console.log('Good work!!! ', response);
           dispatch({
@@ -55,25 +53,22 @@ export const loginUser = (e) => {
           });
           // check if user has a house
           return axios.get(`/api/users/${response.data.id}`)
-            .then((user) => {
-              console.log('92836-24376;aslkhg', user.data.house_in_user);
-              return user.data.house_in_user;
-            });
+            .then(user => user.data.house_in_user);
         }
         return false;
       })
       .catch((error) => {
-        console.log('We goofed', error);
-        return false;
+        // user not found in system
+        console.log('no user: ', error);
+        return 'no user';
         // errorHandler(dispatch, error.response, AUTH_ERROR);
       });
-};
 
 export const registerUser = creds => (dispatch) => {
   return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: INIT_USER });
         // window.location.href = '#/profile';
         // history.push('/dashboard');
         return true;

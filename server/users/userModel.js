@@ -80,11 +80,31 @@ module.exports = {
       .then(user => callback(null, user));
   },
 
-  updateUser: (update, callback) => {
-    console.log('put by ID: ', update);
-    db('user').where('user_id', update.id)
+  // updateUser: (update, callback) => {
+  //   console.log('put by ID: ', update);
+  //   db('user').where('user_id', update.id)
+  //     .update({
+  //       [update.key]: update.value,
+  //     })
+  //     .then(() => {
+  //       callback(null, true);
+  //     })
+  //     .catch((err) => {
+  //       callback(err);
+  //     });
+  // },
+
+  updateUser: (user, callback) => {
+    console.log(user);
+    db('user').where('user_id', user.user_id)
       .update({
-        [update.key]: update.value,
+        house_in_user: user.house_in_admin,
+        user_first_name: user.user_first_name,
+        user_last_name: user.user_last_name,
+        user_email: user.user_email,
+        user_phone: user.user_phone,
+        user_birthday: user.user_birthday,
+        user_info: user.user_info,
       })
       .then(() => {
         callback(null, true);
@@ -117,8 +137,8 @@ module.exports = {
             ),
           // houseReducer: dataa[1] || undefined,
           tasksReducer: {
-            complete: dataa[2].filter(item => item.task_is_done === 1),
-            incomplete: dataa[2].filter(item => item.task_is_done === 0)
+            complete: dataa[4].filter(item => item.task_is_done === 1),
+            incomplete: dataa[4].filter(item => item.task_is_done === 0)
           },
           choresReducer: {
             houseChores: dataa[5],

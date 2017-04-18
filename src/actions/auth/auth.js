@@ -49,7 +49,7 @@ axios.post('/api/users/signin', creds).then((response) => {
           console.log('Good work!!! ', response);
           dispatch({
             type: INIT_USER,
-            payload: response.data.id,
+            payload: response.data,
           });
           // check if user has a house
           return axios.get(`/api/users/${response.data.id}`)

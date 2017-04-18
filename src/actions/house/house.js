@@ -109,7 +109,7 @@ export const houseExist = (number) => {
 
 export const joinHouse = (house, user) => {
   return (dispatch, getState) => {
-    const id = getState().initReducer.user_id;
+    const id = getState().initReducer.user_id || getState().initReducer.id;
     console.log(id, "@%(@$)%*&@%(&@#()%*@#($*#Y#$!_$*@#))")
     return axios.put('/api/users/joinhouse', {
       key: 'house_in_user',

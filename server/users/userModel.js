@@ -114,6 +114,19 @@ module.exports = {
       });
   },
 
+  removeUser: (user, callback) => {
+    db('user').where('user_id', user.id)
+      .update({
+        house_in_user: null
+      })
+      .then(() => {
+        callback(null, true)
+      })
+      .catch((err) => {
+        callback(err);
+      })
+  },
+
   getAppState: (id, callback) => {
     db.select().from('user').where('user_id', id)
     .then((data) => {

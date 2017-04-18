@@ -58,10 +58,22 @@ const updateUser = (req, res, next) => {
   });
 };
 
+const removeUser = (req, res, next) => {
+  console.log('got into update user');
+  User.removeUser(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user);
+    }
+  });
+};
+
 module.exports = {
   findUserByEmail,
   getAppState,
   getUser,
   signup,
   updateUser,
+  removeUser,
 };

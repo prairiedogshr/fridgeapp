@@ -144,7 +144,7 @@ export default class HouseInfo extends Component {
             <br />
             <p><strong>House Info: </strong>{this.props.info.house_info}</p>
             </CardText>
-            {this.props.admin && 
+            {this.props.currentUser.admin && 
                   <FlatButton
                     style={{color: 'white'}} 
                     backgroundColor={"grey"} 

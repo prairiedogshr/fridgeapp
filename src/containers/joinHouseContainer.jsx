@@ -55,8 +55,7 @@ class JoinHouse extends Component {
                       onKeyUp={e => {this.handleKeyUp(e)}}
                     />
                     <RaisedButton
-                      href="/createhouse"
-                      label="Create a House"
+                      label="Join"
                       primary={true}
                       style={{ display: 'block' }}
                       onClick={(e) => this.handleSubmit(e)}

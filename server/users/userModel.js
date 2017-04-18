@@ -41,8 +41,8 @@ module.exports = {
               house_in_user: user.house_in_user,
             }).then((inserted) => {
               console.log('inserted:  ', inserted);
-              db.select().from('user').where('user_email', user.user_email)
-                .then((newUser) => {
+              db.select().from('user').where('user_email', user.user_email).then((newUser) => {
+                  console.log("PLESASFFRCA",newUser[0])
                   callback(null, newUser[0]);
                 })
                 .catch((selectErr) => {
@@ -80,19 +80,19 @@ module.exports = {
       .then(user => callback(null, user));
   },
 
-  // updateUser: (update, callback) => {
-  //   console.log('put by ID: ', update);
-  //   db('user').where('user_id', update.id)
-  //     .update({
-  //       [update.key]: update.value,
-  //     })
-  //     .then(() => {
-  //       callback(null, true);
-  //     })
-  //     .catch((err) => {
-  //       callback(err);
-  //     });
-  // },
+  joinHouse: (update, callback) => {
+    console.log('put by ID: ', update);
+    db('user').where('user_id', update.id)
+      .update({
+        [update.key]: update.value,
+      })
+      .then(() => {
+        callback(null, true);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+  },
 
   updateUser: (user, callback) => {
     console.log(user);

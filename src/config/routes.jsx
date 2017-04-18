@@ -13,6 +13,7 @@ import Login from '../components/login';
 import Profile from '../containers/profileContainer';
 import Signup from '../components/signup';
 import Tasks from '../containers/tasksContainer';
+import Change from '../components/changepassword'
 import Welcome from '../containers/welcomeContainer';
 
 
@@ -33,6 +34,7 @@ class Routes extends Component {
             <Route path="/chores" component={requireAuth(Chores)} />
             <Route path="/tasks" component={requireAuth(Tasks)} />
             <Route path="/bills" component={requireAuth(Bills)} />
+            <Route path="/change" component={requireAuth(Change)} />
           </App>
         </Switch>
       </Router>

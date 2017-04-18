@@ -58,6 +58,18 @@ const updateUser = (req, res, next) => {
   });
 };
 
+const change = (req,res,next) => {
+  console.log('im inside change in the controller');
+  User.change(req.body, (err, user) => {
+    if(err){
+      next(new Error(err));
+    }else{
+      console.log(req.body)
+    }
+  });
+};
+
+
 const removeUser = (req, res, next) => {
   console.log('got into update user');
       User.removeUser(req.body, (err, user) => {

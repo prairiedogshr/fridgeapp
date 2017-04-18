@@ -64,7 +64,7 @@ const change = (req,res,next) => {
     if(err){
       next(new Error(err));
     }else{
-      res.send(user)
+      console.log(req.body)
     }
   });
 };

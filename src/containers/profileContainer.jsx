@@ -25,7 +25,7 @@ class User extends Component {
       user_info: this.props.user.user_info || null,
       user_chore_rotation: this.props.user.user_chore_rotation || null,
     };
-    
+
     this.styles = {
       paper: {
         padding: 16,

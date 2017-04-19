@@ -26,14 +26,14 @@ class JoinHouse extends Component {
   handleSubmit(e) {
     const user = this.state.user;
     const house = parseInt(this.state.house);
-    console.log("user: ", user);
-    console.log("house: ", house);
-    this.props.joinHouse(house,user).then((resp) => {
-      if (resp) {
-        console.log('updated the user!');
-        this.props.history.push('/profile');
-      }
-    });
+
+    this.props.joinHouse(house, user)
+      .then((resp) => {
+        if (resp) {
+          console.log('updated the user!');
+          this.props.history.push('/dashboard');
+        }
+      });
   }
 
   render() {

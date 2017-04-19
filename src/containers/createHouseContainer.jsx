@@ -1,97 +1,127 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import { createHouse } from '../actions/house/house';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import ThemeDefault from '../styles/theme-default';
+
+const logo = require('../assets/fridge-logo-black.svg');
 
 class CreateHouse extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      address: undefined,
-      unit: undefined,
-      city: undefined,
-      state: undefined,
-      zip: undefined,
-      info: undefined,
+      address: '',
+      unit: '',
+      city: '',
+      state: '',
+      zip: '',
+      info: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(event) {
-    // console.log('Ayyo');
-    // console.log(createHouse);
-    const a = this.state.address;
-    const c = this.state.city;
-    const s = this.state.state;
-    const z = this.state.zip;
-
-    event.preventDefault();
-    if (a && c && s && z) {
-      console.log('ok');
-      this.props.createHouse(this.state).then(resp => {
-        if(resp){
+  handleSubmit(e) {
+    this.props.createHouse(this.state)
+      .then((resp) => {
+        if (resp) {
           this.props.history.push('/dashboard');
         }
-      })
-    } else {
-      console.log('enter all fields');
-    }
+      });
   }
 
   render() {
-    const state = this.state;
-    const change = this.handleChange;
     return (
-      <div className="centered">
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="address">
-            *Address:
-            <br />
-            <input type="text" name="address" value={state.address} onChange={change} />
-          </label>
-          <br />
-          <label htmlFor="unit">
-            Unit:
-            <br />
-            <input type="text" name="unit" value={state.unit} onChange={change} />
-          </label>
-          <br />
-          <label htmlFor="city">
-            *City:
-            <br />
-            <input type="text" name="city" value={state.city} onChange={change} />
-          </label>
-          <br />
-          <label htmlFor="state">
-            *State:
-            <br />
-            <input type="text" name="state" value={state.state} onChange={change} />
-          </label>
-          <br />
-          <label htmlFor="zip">
-            *Zip:
-            <br />
-            <input type="text" name="zip" value={state.zip} onChange={change} />
-          </label>
-          <br />
-          <label htmlFor="info">
-            Info:
-            <br />
-            <input type="text" name="info" value={state.info} onChange={change} />
-          </label>
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <Grid fluid>
+          <Row>
+            <Col xs={12}>
+              <Row center="xs">
+                <Col md={4}>
+                  <img src={logo} style={{ width: 200, height: 'auto', margin: 20 }} alt="Fridge" />
+                  <Paper style={{ padding: 20 }}>
+                    <ValidatorForm onSubmit={e => {this.handleSubmit(e)}} >
+                      <h2>Create a House</h2>
+                      <TextValidator
+                        hintText="Address"
+                        floatingLabelText="Address"
+                        fullWidth={true}
+                        name="address"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.address}
+                        validators={['required']}
+                        errorMessages={['this field is required']}
+                      />
+                      <TextField
+                        hintText="Unit"
+                        floatingLabelText="Unit"
+                        fullWidth={true}
+                        name="unit"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.unit}
+                      />
+                      <TextValidator
+                        hintText="City"
+                        floatingLabelText="City"
+                        fullWidth={true}
+                        name="city"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.city}
+                        validators={['required']}
+                        errorMessages={['this field is required']}
+                      />
+                      <TextValidator
+                        hintText="State"
+                        floatingLabelText="State"
+                        fullWidth={true}
+                        name="state"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.state}
+                        validators={['required']}
+                        errorMessages={['this field is required']}
+                      />
+                      <TextValidator
+                        hintText="Zip Code"
+                        floatingLabelText="Zip Code"
+                        fullWidth={true}
+                        name="zip"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.zip}
+                        validators={['required', 'isNumber']}
+                        errorMessages={['this field is required', 'zip is invalid']}
+                      />
+                      <TextField
+                        hintText="Any important info about your house"
+                        floatingLabelText="Info"
+                        fullWidth={true}
+                        name="info"
+                        onChange={e => {this.handleChange(e)}}
+                        value={this.state.info}
+                      />
+                      <RaisedButton
+                        label="Sign Up"
+                        primary={true}
+                        type="submit"
+                        style={{ marginTop: 15 }}
+                      />
+                    </ValidatorForm>
+                  </Paper>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </MuiThemeProvider>
     );
   }
-
 }
 
 const mapStateToProps = ({ createHouseReducer }) => ({

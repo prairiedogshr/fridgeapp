@@ -19,22 +19,18 @@ module.exports = {
   },
 
   change: (user, callback) => {
-    console.log('inside with emailL ', user);
-    helpers.checkPass(user.email, user.old, (err,match)=>{
+    helpers.checkPass(user.email, user.old, (err, match)=>{
       if(err){
         callback(err)
       }else if(!match){
         callback("wrong password")
       }else{
-        console.log('ALL CLEAR')
-           helpers.hashPass(user.new1,(err,result)=>{
+           helpers.hashPass(user.new1, (err,result)=>{
              db('user').where('user_id', user.email)
                .update({
                  user_password: result,
                })
                .then(() => {
-                 console.log("successful pass change")
-                 console.log("user email")
                  callback(null, true);
                })
                .catch((err) => {
@@ -126,7 +122,6 @@ module.exports = {
         user_phone: user.user_phone,
         user_birthday: user.user_birthday,
         user_info: user.user_info,
-        user_chore_rotation: user.user_chore_rotation,
       })
       .then(() => {
         callback(null, true);
@@ -181,12 +176,7 @@ module.exports = {
             incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
             groups: [1]
           },
-          //this would be for a year
-          expensesReducer: {
-            yearly: dataa[7].filter((exp) => exp.expense_due > new Date(new Date() - 3.154e+10)),
-            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,3)),
-            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,4)),
-            },  
+          expensesReducer: dataa[7],
         };
         callback(null, formedData);
       })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EDIT_PROFILE } from '../actionTypes';
+import { EDIT_PROFILE, CHANGE_PASS } from '../actionTypes';
 
 export const updateUser = (profile) => {
   return (dispatch) => {
@@ -27,8 +27,8 @@ export const changePassword = (user) => {
 >>>>>>> got change password to work
       .then((res) =>{
         return dispatch({
-          type: EDIT_PROFILE,
-          payload: res,
+          type: CHANGE_PASS,
+          payload: user,
         });
       })
       .catch((error) => {

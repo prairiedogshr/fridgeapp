@@ -25,8 +25,17 @@ class Change extends Component {
     const user={"old": old, "new1": new1, "new2": new2, "email":email}
     console.log("USER", user)
     if( new1 !== new2){
+      alert("your new password fields dont match, try again");
     }else{
       this.props.changePassword(user)
+        .then((resp) => {
+          if(resp){
+            console.log("changed the password!");
+            this.props.history.push('/dashboard');
+          }else{
+            alert("Please enter the correct original password")
+          }
+        });
     }
 
   };

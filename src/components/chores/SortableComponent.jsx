@@ -1,17 +1,69 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import { withRouter } from 'react-router-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 import {List, ListItem} from 'material-ui/List';
 
+const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assignGroup }) => (
+  <button
+    type="button"
+    onClick={() => {
+
+      {/*rotateGroups(roomies);*/}
+
+      let groupIndexes = [];
+      groups.forEach(group => {
+        let index = items.findIndex(item => {
+          return item === `GROUP #${group}`;
+        });
+        if (index >= 0) groupIndexes.push([group, index]);
+      });
+
+      {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', groupIndexes);*/}
+
+      let currentGroup = null;
+      items.forEach((item, ind) => {
+        if (groupIndexes.length > 0) {
+          if (ind === groupIndexes[0][1]) {
+            currentGroup = groupIndexes[0][0];
+            groupIndexes.shift();
+
+          } else {
+            assignGroup(item.chore_id, currentGroup)
+              .then(result => {
+                {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', result);*/}
+              });
+          }
+        } else {
+          assignGroup(item.chore_id, currentGroup)
+            .then(result => {
+              {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', result);*/}
+            });
+        }
+      });
+      {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++ DONE');*/}
+      {/*console.log(groupIndexes);*/}
+      history.push('/dashboard');
+    }}
+  >
+    SAVE
+  </button>
+));
+
+
+
 const SortableItem = SortableElement(({value, index}) => {
-  return <ListItem>{value}</ListItem>
+  if (/GROUP #/.test(value)) return <ListItem><b>{value}</b></ListItem>
+  return <ListItem>{value.chore_name}</ListItem>
 });
 
 const SortableList = SortableContainer(({items,}) => {
+  console.log(items);
   return (
     <div>
       <h3>Group Chores</h3>
+      <p><u>Drag each chore under a GROUP #</u></p>
       <List>
         {items.map((value, index) => (
           <SortableItem key={`item-${index}`} index={index} value={value} />
@@ -24,9 +76,12 @@ const SortableList = SortableContainer(({items,}) => {
 export default class SortableComponent extends Component {
   state = {
     items: this.props.houseChores.concat(this.props.groups).map(item => {
-      if (item.chore_name) return item.chore_name;
-      return item.toString();
-    }),
+      if (item.chore_name) return item;
+      if (typeof item === "number") return `GROUP #${item}`;
+    })
+      .filter(val => {
+        return val !== undefined;
+      }),
   };
   onSortEnd = ({oldIndex, newIndex}) => {
     console.log(oldIndex, newIndex);
@@ -36,6 +91,11 @@ export default class SortableComponent extends Component {
   };
   render() {
     console.log(this.state.items);
-    return <SortableList items={this.state.items} onSortEnd={this.onSortEnd} groups={this.props.groups}/>;
+    return (
+      <div>
+        <SortableList items={this.state.items} onSortEnd={this.onSortEnd} groups={this.props.groups}/>
+        <Button items={this.state.items} groups={this.props.groups} assignGroup={this.props.assignGroup} />
+      </div>
+    )
   }
 }

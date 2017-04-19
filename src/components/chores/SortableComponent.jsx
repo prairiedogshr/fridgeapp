@@ -3,12 +3,14 @@ import {render} from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
+import RaisedButton from 'material-ui/RaisedButton';
 import {List, ListItem} from 'material-ui/List';
 
 const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assignGroup }) => (
-  <button
-    type="button"
-    onClick={() => {
+  <RaisedButton
+    label="Save"
+    primary
+    onTouchTap={() => {
 
       {/*rotateGroups(roomies);*/}
 
@@ -40,20 +42,18 @@ const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assi
       });
       history.push('/dashboard');
     }}
-  >
-    SAVE
-  </button>
+  />
+
 ));
 
 const CancelButton = withRouter(({ history, }) => (
-  <button
-    type="button"
-    onClick={() => {
-      history.push('/chores');
+  <RaisedButton
+    label="Cancel"
+    primary
+    onTouchTap={() => {
+      history.push('/dashboard');
     }}
-  >
-    CANCEL
-  </button>
+  />
 ));
 
 

@@ -15,7 +15,6 @@ const findUserByEmail = (req, res, next) => {
 };
 
 const getAppState = (req, res, next) => {
-  console.log('almost');
   User.getAppState(req.params.id, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -26,7 +25,6 @@ const getAppState = (req, res, next) => {
 };
 
 const getUser = (req, res, next) => {
-  console.log('getting user');
   User.findUserById(req.params.id, (err, user) => {
     if (err) next(err);
     if (user.length) {
@@ -48,7 +46,6 @@ const signup = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  console.log('got into update user',req,res);
   User.updateUser(req.body, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -59,7 +56,6 @@ const updateUser = (req, res, next) => {
 };
 
 const change = (req,res,next) => {
-  console.log('im inside change in the controller',req.body);
   User.change(req.body, (err, user) => {
     if(err){
       next(new Error(err));
@@ -71,7 +67,6 @@ const change = (req,res,next) => {
 
 
 const removeUser = (req, res, next) => {
-  console.log('got into update user');
       User.removeUser(req.body, (err, user) => {
         if (err) {
           next(new Error(err));
@@ -81,12 +76,10 @@ const removeUser = (req, res, next) => {
 };
 
 const joinHouse = (req, res, next) => {
-  console.log('got into update user');
   User.joinHouse(req.body, (err, user) => {
     if (err) {
       next(new Error(err));
     } else {
-      console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%',user)
       res.send(user);
     }
   });

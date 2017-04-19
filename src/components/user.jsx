@@ -25,14 +25,11 @@ class Form extends Component {
   // componentWillMount() {
   //   axios.get('/api/users/1')
   //   .then(data => {
-  //     //console.log(data)
   //     this.setState(data)
-  //     console.log("STATE",this.state)
   //   })
   // }
 
   render() {
-    console.log(this.props);
     return (
       <Grid fluid>
         <Row>

@@ -20,8 +20,6 @@ const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assi
         if (index >= 0) groupIndexes.push([group, index]);
       });
 
-      {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', groupIndexes);*/}
-
       let currentGroup = null;
       items.forEach((item, ind) => {
         if (groupIndexes.length > 0) {
@@ -32,18 +30,14 @@ const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assi
           } else {
             assignGroup(item.chore_id, currentGroup)
               .then(result => {
-                {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', result);*/}
               });
           }
         } else {
           assignGroup(item.chore_id, currentGroup)
             .then(result => {
-              {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++', result);*/}
             });
         }
       });
-      {/*console.log('++++++++++++++++++++++++@@@@@@@@@@@+++++++++++++++ DONE');*/}
-      {/*console.log(groupIndexes);*/}
       history.push('/dashboard');
     }}
   >
@@ -84,13 +78,11 @@ export default class SortableComponent extends Component {
       }),
   };
   onSortEnd = ({oldIndex, newIndex}) => {
-    console.log(oldIndex, newIndex);
     this.setState({
       items: arrayMove(this.state.items, oldIndex, newIndex),
     });
   };
   render() {
-    console.log(this.state.items);
     return (
       <div>
         <SortableList items={this.state.items} onSortEnd={this.onSortEnd} groups={this.props.groups}/>

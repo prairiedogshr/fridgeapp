@@ -11,13 +11,11 @@ const getTask = (taskId, callback) => {
 };
 
 const createTask = (task, callback) => {
-  console.log('task: ', task);
   db('task').insert({
     house_in_task: task.house_in_task,
     task_name: task.task_name,
   })
     .then((newTask) => {
-      console.log('new task? ', newTask)
       callback(null, newTask);
     })
     .catch((err) => {

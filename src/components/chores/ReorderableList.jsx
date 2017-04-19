@@ -19,7 +19,6 @@ class ReorderableList extends Component {
   render() {
     const { children, ...props } = this.props;
     const { dndConstraint } = this.state;
-    console.log(React.Children);
     return (
       <List {...props}>
         {React.Children.map(children, (child) => {

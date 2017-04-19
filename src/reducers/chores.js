@@ -13,14 +13,12 @@ const initialState = {
 // let idCount = 5;
 let last;
 export default function choresReducer(state = initialState, action) {
-  console.log('action type outer: ', action.type);
   let item;
 
   switch (action.type) {
     case UNAUTH_USER:
       return { ...{} };
     case ADD_CHORE: {
-      console.log('action payload inner: ', action.payload);
       return {
         ...state,
         incomplete: [...state.incomplete, { chore_id: Date.now(), chore_name: action.payload }],
@@ -28,7 +26,6 @@ export default function choresReducer(state = initialState, action) {
       };
     }
     case COMPLETE_CHORE: {
-      console.log('action payload inner: ', action.payload);
       const incomplete = state.incomplete.filter((val) => {
         if (val.chore_id === action.payload) {
           item = val;
@@ -47,7 +44,6 @@ export default function choresReducer(state = initialState, action) {
     }
 
     case UNDO_COMPLETE: {
-      console.log('action payload inner: ', action.payload);
       const complete = state.complete.filter((val) => {
         if (val.chore_id === action.payload) {
           item = val;
@@ -118,7 +114,6 @@ export default function choresReducer(state = initialState, action) {
       };
 
     default:
-      console.log('default');
       return state;
   }
 }

@@ -25,7 +25,6 @@ class Change extends Component {
     const user={"old": old, "new1": new1, "new2": new2, "email":email}
     console.log("USER", user)
     if( new1 !== new2){
-      console.log("You entered the word, try again!");
     }else{
       this.props.changePassword(user)
     }

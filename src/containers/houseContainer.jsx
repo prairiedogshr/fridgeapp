@@ -8,7 +8,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 class House extends Component {
 
   componentWillMount() {
-    console.log('rendering with props: ', this.props);
   }
 
 	render() {
@@ -16,11 +15,11 @@ class House extends Component {
 			<Grid fluid>
 				<Row>
 					<Col xs={6}>
-						<HouseInfo info={this.props.house} 
+						<HouseInfo info={this.props.house}
 						update={this.props.updateHouseInfo} currentUser={this.props.currentUser} />
 					</Col>
 					<Col xs={6}>
-						{this.props.house.users.map(user => 
+						{this.props.house.users.map(user =>
 							<Roommate roommate={user} currentUser={this.props.currentUser} remove={this.props.removeUser} />
 						)}
 				</Col>

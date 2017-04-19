@@ -46,7 +46,6 @@ export const errorHandler = (dispatch, error, type) => {
 export const loginUser = creds => dispatch =>
 axios.post('/api/users/signin', creds).then((response) => {
         if (response) {
-          console.log('Good work!!! ', response);
           dispatch({
             type: INIT_USER,
             payload: response.data,
@@ -59,7 +58,6 @@ axios.post('/api/users/signin', creds).then((response) => {
       })
       .catch((error) => {
         // user not found in system
-        console.log('no user: ', error);
         return 'no user';
         // errorHandler(dispatch, error.response, AUTH_ERROR);
       });
@@ -68,7 +66,6 @@ export const registerUser = creds => (dispatch) => {
   return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
-        console.log("the data you're lookin for", response, creds)
         dispatch({ type: INIT_USER, payload: response.data });
         // window.location.href = '#/profile';
         // history.push('/dashboard');

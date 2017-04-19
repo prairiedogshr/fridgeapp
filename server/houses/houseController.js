@@ -1,7 +1,6 @@
 const House = require('./houseModel.js');
 
 const getHouse = (req, res, next) => {
-	console.log('getting house!!',req, req.params.house)
 	House.getHouse(req.params.house, (err, house) => {
 		if (err) {
 			next(new Error(err));
@@ -22,7 +21,6 @@ const createHouse = (req, res, next) => {
 };
 
 const updateHouse = (req, res, next) => {
-  console.log('got into update House');
   House.updateHouse(req.body, (err, house) => {
     if (err) {
       next(new Error(err));

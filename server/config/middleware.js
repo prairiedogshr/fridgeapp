@@ -18,7 +18,6 @@ module.exports = (app, express) => {
   app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, '/../../build')));
   app.use(ignore('/api/users/signin', '/api/users/signup', (req, res, next) => {
-    console.log('heeey in auth!')
-    next()
-  }))
+    next();
+  }));
 };

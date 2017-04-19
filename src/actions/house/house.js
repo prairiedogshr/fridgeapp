@@ -11,7 +11,6 @@ import { isEmpty } from 'underscore'
 import { HYDRATE } from '../actionTypes.js';
 
 export const updateHouseInfo = (updateInfo) => {
-  console.log('here with update house: ', updateInfo);
   return (dispatch, getState) => {
     const currHouseState = getState().houseReducer;
     const currHouse = {
@@ -63,10 +62,8 @@ export const removeUser = (user) => {
 
 export const getHouse = (id) => {
   return (dispatch, getState) => {
-    //  console.log('does this work? ', getState())
     return axios.get(`/api/houses/${id}`)
       .then((resp) => {
-        console.log('house!! ', resp);
         return dispatch({
           type: RECEIVE_HOUSE,
           payload: resp.data,
@@ -77,7 +74,6 @@ export const getHouse = (id) => {
 
 export const createHouse = (house) => {
   return (dispatch, getState) => {
-    console.log('In the action', house);
     axios.post('/api/houses/', {
       admin_user_in_house: 1,
       house_address: house.address,
@@ -87,7 +83,6 @@ export const createHouse = (house) => {
       house_zip: house.zip,
       house_info: house.info,
     }).then((data) => {
-      console.log('in the THEN', data);
       return dispatch({
         type: CREATE_HOUSE,
         payload: data.data,
@@ -110,13 +105,11 @@ export const houseExist = (number) => {
 export const joinHouse = (house, user) => {
   return (dispatch, getState) => {
     const id = getState().initReducer.user_id || getState().initReducer.id;
-    console.log(id, "@%(@$)%*&@%(&@#()%*@#($*#Y#$!_$*@#))")
     return axios.put('/api/users/joinhouse', {
       key: 'house_in_user',
       value: house,
       id,
     }).then((resp) => {
-      console.log('response! ', resp.data);
       dispatch({
         type: HYDRATE,
         payload: {
@@ -133,14 +126,12 @@ export const joinHouse = (house, user) => {
 
 // return(dispatch,getState) =>{
 //   const id = getState().initReducer.user_id
-//   console.log(id)
 //   return axios.put('/api/users', {
 //     key: 'house_in_user',
 //     value: house,
 //     id,
 //   })
 //   .then((res)=>{
-//     console.log('response!!!',res.data)
 // }).then(()=>{
 //   return true
 // })
@@ -154,7 +145,6 @@ export const joinHouse = (house, user) => {
 //
 //     // axios.get('api/users/3').then((user) =>{
 //     //   const q = user.data
-//     //   console.log(q)
 //     // })
 //
 //   };

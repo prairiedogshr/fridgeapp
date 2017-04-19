@@ -30,7 +30,6 @@ class JoinHouse extends Component {
     this.props.joinHouse(house, user)
       .then((resp) => {
         if (resp) {
-          console.log('updated the user!');
           this.props.history.push('/dashboard');
         }
       });

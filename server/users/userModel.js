@@ -4,13 +4,12 @@ const helpers = require('../config/helpers.js');
 module.exports = {
 
   findUserByEmail: (email, callback) => {
-    console.log('inside with emailL ', email)
     db.select().from('user').where('user_email', email)
       .then((user) => {
         callback(null, user);
-      }).catch(err => console.log('err: ', err))
+      })
+        .catch(err => console.log('err: ', err));
       //   if (user.length) {
-      //     console.log('found user: ', user);
       //     callback(null, user[0]);
       //   } else {
       //     console.log('no user');
@@ -51,10 +50,8 @@ module.exports = {
 
 
   signup: (user, callback) => {
-    console.log('user being created: ', user);
     db.select().from('user').where('user_email', user.user_email)
       .then((foundUser) => {
-        console.log('user:  ', user);
         if (foundUser.length) {
           callback('email already exists', null);
         } else {
@@ -71,9 +68,7 @@ module.exports = {
               user_info: user.user_info,
               house_in_user: user.house_in_user,
             }).then((inserted) => {
-              console.log('inserted:  ', inserted);
               db.select().from('user').where('user_email', user.user_email).then((newUser) => {
-                  console.log("PLESASFFRCA",newUser[0])
                   callback(null, newUser[0]);
                 })
                 .catch((selectErr) => {
@@ -86,7 +81,7 @@ module.exports = {
   },
 
   signin: (email, password, callback) => {
-    console.log('~~~~~~~~` ', email, password);
+
     helpers.checkPass(email, password, (err, match) => {
       if (err) {
         console.log('error inside pass');
@@ -95,10 +90,8 @@ module.exports = {
         console.log('wrong pass');
         callback('wrong pass');
       } else {
-        console.log('pass all good');
         db.select('user_id').from('user').where('user_email', email)
         .then((resp) => {
-          console.log('shoudl be user id: ', resp);
           callback(null, resp[0].user_id);
         });
       }
@@ -106,13 +99,11 @@ module.exports = {
   },
 
   findUserById: (id, callback) => {
-    console.log('trying to find by id: ', id);
     db.select().from('user').where('user_id', id)
       .then(user => callback(null, user));
   },
 
   joinHouse: (update, callback) => {
-    console.log('put by ID: ', update);
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,
@@ -126,7 +117,6 @@ module.exports = {
   },
 
   updateUser: (user, callback) => {
-    console.log(user);
     db('user').where('user_id', user.user_id)
       .update({
         house_in_user: user.house_in_admin,

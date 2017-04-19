@@ -27,28 +27,26 @@ class ExpensesGraph extends Component {
       slide: {
         padding: 10,
       },
-    }; 
+    };
 
     this.COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-    this.RADIAN = Math.PI / 180; 
+    this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}]; 
+                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
   }
 
 
     handleSwipe = (value) => {
-      console.log('hello? with: ', value  )
       this.setState({
         slideIndex: value,
       });
     };
 
     renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-      console.log('getting called?' , this.state.data[index].name)
       const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
       const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
       const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
-     
+
       return (
         <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
           {this.state.data[index].name}
@@ -57,7 +55,6 @@ class ExpensesGraph extends Component {
     };
 
     handleOnMouseOver = (event) => {
-      console.log('mouse event? ', event)
       return (
           <Tooltip content={this.state.data}></Tooltip>
       );
@@ -85,10 +82,10 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
-                    data={this.state.data} 
+                    data={this.state.data}
                     labelLine={false}
                     label={this.renderCustomizedLabel}
-                    outerRadius={'80%'} 
+                    outerRadius={'80%'}
                     fill="#8884d8"
                     onMouseOver={this.handleOnMouseOver}
                   >

@@ -82,7 +82,6 @@ class Register extends Component {
 
     axios.get(`/api/users/exists/${this.state.user_email}`)
       .then(response => {
-        console.log(response.data)
         if (response.data === true) {
           alert('user already exists!');
         } else {

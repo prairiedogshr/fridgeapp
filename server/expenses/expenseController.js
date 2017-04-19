@@ -21,7 +21,6 @@ const createExpense = (req, res, next) => {
 };
 
 const updateExpense = (req, res, next) => {
-  console.log('got into update expense');
   Expense.updateExpense(req.body, (err, expense) => {
     if (err) {
       next(new Error(err));

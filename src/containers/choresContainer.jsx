@@ -42,7 +42,6 @@ class Chores extends Component {
   };
 
   buttonSubmit () {
-    console.log(this.state.inputField);
     const today = new Date();
     const year = today.getUTCFullYear().toString();
     let month = today.getUTCMonth() + 1;
@@ -68,7 +67,6 @@ class Chores extends Component {
     }
     this.props.addChore(chore);
     this.setState({inputField: ''});
-    console.log(AddChore.inputField);
   };
 
   render() {

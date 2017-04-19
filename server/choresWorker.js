@@ -15,10 +15,9 @@ const transporter = nodemailer.createTransport({
 });
 
 // const nowDate = new Date();
-// console.log(`nowDate: ${nowDate.getUTCDay()}`);
 
 setInterval(() => {
-  console.log('rotating users chore groups');
+
   db.select().from('house')
     .then((houses) => {
       houses.forEach((house) => {
@@ -57,9 +56,9 @@ setInterval(() => {
                   //     };
                   //     transporter.sendMail(mailOptions, (error, info) => {
                   //       if (error) {
-                  //         return console.log(error);
+                  //         return
                   //       }
-                  //       console.log('Message %s sent: %s', info.messageId, info.response);
+                  //
                   //     });
                   //   });
                   return response;

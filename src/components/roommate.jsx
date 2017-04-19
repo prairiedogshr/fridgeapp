@@ -6,7 +6,6 @@ import Dialog from 'material-ui/Dialog';
 
 export default class Roommate extends Component {
   constructor(props) {
-    console.log('roommate props: ', props)
     super(props);
     this.roommate = props.roommate;
     this.phone = props.roommate.user_phone;
@@ -38,10 +37,9 @@ export default class Roommate extends Component {
 
   handleClose = () => {
     this.setState({open: false});
-  };  
+  };
 
   handleRemove(event) {
-    console.log('remove target: ', this)
     this.props.remove(this.roommate.user_id);
     this.forceUpdate();
     this.setState({open: false});
@@ -80,8 +78,8 @@ export default class Roommate extends Component {
           {this.props.currentUser.admin && this.roommate.user_id !== this.props.currentUser.id &&
             <CardActions expandable={true}>
               <FlatButton
-                style={{color: 'white'}} 
-                backgroundColor='tomato' 
+                style={{color: 'white'}}
+                backgroundColor='tomato'
                 hoverColor="grey"
                 fullWidth={true}
                 label="Remove"
@@ -95,7 +93,7 @@ export default class Roommate extends Component {
               >
                 Would you like to remove {this.roommate.user_first_name} ?
               </Dialog>
-            </CardActions>              
+            </CardActions>
           }
         </Card>
         <br />

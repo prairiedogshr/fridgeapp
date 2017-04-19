@@ -21,7 +21,6 @@ const createTask = (req, res, next) => {
 };
 
 const updateTask = (req, res, next) => {
-  console.log('got into update task');
   Task.updateTask(req.body, (err, task) => {
     if (err) {
       next(new Error(err));

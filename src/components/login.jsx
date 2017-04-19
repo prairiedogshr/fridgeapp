@@ -68,17 +68,14 @@ class Login extends Component {
       password: document.getElementById("passwordInput").value
     }).then(resp => {
       if (resp === 'no user') {
-        console.log('no user found!');
         document.getElementById("emailInput").value = '';
         document.getElementById("passwordInput").value = '';
         // pop up aert for user
         NoUserAlert.handleOpen();
 
       } else if (resp) {
-        console.log('found house!');
         this.props.history.push('/dashboard');
       } else {
-        console.log('no house?');
         this.props.history.push('/welcome')
       }
     }).catch(err => { console.log('err: ', err)});

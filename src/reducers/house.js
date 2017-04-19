@@ -63,14 +63,12 @@ export default function houseReducer(state = {}, action) {
       };
 
     case REMOVE_USER:
-    console.log('removing with payload: ', action.payload)
       return {
         ...state,
         users: [...state.users].filter(user => user.user_id !== action.payload),
       };
 
     case UPDATE_HOUSE_INFO: {
-      console.log('update house payload!', action.payload)
       return {
         ...state,
         ...action.payload,
@@ -78,9 +76,7 @@ export default function houseReducer(state = {}, action) {
     }
 
     case RECEIVE_HOUSE: {
-      console.log('hello? inside receive house with action: ', action);
       const newState = { ...state, ...action.payload, loaded: true };
-      console.log('heres the new state: ', newState);
       return {
         ...state,
         info: {
@@ -104,7 +100,6 @@ export default function houseReducer(state = {}, action) {
       };
 
     default:
-      console.log('house reducer running default: ', state);
       return state;
   }
 }

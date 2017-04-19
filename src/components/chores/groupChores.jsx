@@ -3,13 +3,14 @@ import IconButton from 'material-ui/IconButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 
+import Header from 'material-ui/Subheader';
+
 export default function GroupChores(props) {
   return (
     <div>
-      <h2>
-        Group Chores
-      </h2>
-      <p>How many chore rotations would you like?</p>
+      <Header>
+        How many chore rotations would you like?
+      </Header>
       <div>
         <IconButton tooltip="decrease groups" touch tooltipPosition="top-right">
           <ContentRemove

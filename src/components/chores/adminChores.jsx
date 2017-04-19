@@ -1,11 +1,15 @@
 import React from 'react';
 
+import Header from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+
 export default function AdminChores(props) {
   return (
     <div>
-      <h2>
+      <Header>
         House Chores
-      </h2>
+      </Header>
+      <Divider />
       <ol>
         {props.chores.houseChores.map(chore => (
           <li key={chore.chore_id}>{chore.chore_name}</li>

@@ -34,7 +34,6 @@ class Routes extends Component {
               <Route path="/chores" component={requireAuth(Chores)} />
               <Route path="/tasks" component={requireAuth(Tasks)} />
               <Route path="/bills" component={requireAuth(Bills)} />
-              {/* <Route path="/change" component={requireAuth(Change)} /> */}
             </div>
           </App>
         </Switch>

@@ -3,29 +3,32 @@ import { withRouter } from 'react-router-dom';
 
 import SortableComponent from './SortableComponent';
 
+/*
 const Button = withRouter(({ history, roomies, rotateGroups }) => (
   <button
     type="button"
     onClick={() => {
       history.push('/dashboard');
-      {/*rotateGroups(roomies);*/}
     }}
   >
-    Done!
+    SAVE
   </button>
 ));
+*/
 
 export default function GroupingOfChores({ assignGroup, rotateGroups, chores, roomies }) {
   const houseChores = chores.houseChores;
   return (
-    <SortableComponent
-      assignGroup={assignGroup}
-      rorateGroups={rotateGroups}
-      houseChores={houseChores}
-      chores={chores}
-      groups={chores.groups}
-      roomies={roomies}
-    />
+    <div>
+      <SortableComponent
+        assignGroup={assignGroup}
+        rorateGroups={rotateGroups}
+        houseChores={houseChores}
+        chores={chores}
+        groups={chores.groups}
+        roomies={roomies}
+      />
+    </div>
   );
 
   /*return (

@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 // const nowDate = new Date();
 // console.log(`nowDate: ${nowDate.getUTCDay()}`);
 
-// setInterval(() => {
+setInterval(() => {
   console.log('rotating users chore groups');
   db.select().from('house')
     .then((houses) => {
@@ -95,5 +95,5 @@ const transporter = nodemailer.createTransport({
           return true;
         });
     });
-// }, 1000 * 60 * 60 * 24);
+}, 1000 * 60 * 60 * 24);
 // once per day

@@ -37,7 +37,6 @@ module.exports = (passport) => {
     session: true,
     passReqToCallback: true,
   }, (req, user, done) => {
-    console.log('hello?')
     process.nextTick(() => {
       User.signup(req.body, (err, newUser) => {
         if (err) return done(err);
@@ -53,7 +52,6 @@ module.exports = (passport) => {
     callbackURL: "localhost:1337/#/dashboard"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log('hello?');
     return cb(null, 'hi!')
     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
     //   return cb(err, user);
@@ -67,25 +65,24 @@ module.exports = (passport) => {
     session: true,
     passReqToCallback: true,
   }, (req, email, password, done) => {
-    console.log('inside local login with email: ', email);
+
     User.signin(email, password, (err, id) => {
       if (err) {
         console.log('error ', err);
         return done(err);
       }
-      console.log('got in here with: ', id);
       return done(null, id);
     });
   }));
 
-  //paypal
+  // paypal
   passport.use('paypal', new PayPalStrategy({
     clientID: process.env.PAYPAL_CLIENT_ID,
     clientSecret: process.env.PAYPAL_CLIENT_SECRET,
     callbackURL: 'http://localhost:1337/dashboard'
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log('got in paypal here');
+
     return done(null, 1)
   }))
 };

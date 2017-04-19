@@ -22,7 +22,7 @@ const createChore = (req, res, next) => {
 };
 
 const updateChore = (req, res, next) => {
-  console.log('got into update chore');
+
   Chore.updateChore(req.body, (err, chore) => {
     if (err) {
       next(new Error(err));

@@ -3,7 +3,6 @@ import React from 'react';
 export default function IncompletedTask(props) {
   const incomplete = props.tasks.incomplete;
   if (incomplete.length) {
-    console.log('inc!!!',incomplete)
     return (
       <div>
         <h1>

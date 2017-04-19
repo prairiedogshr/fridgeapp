@@ -11,7 +11,6 @@ export default function initReducer(state = {}, action) {
         authenticated: true,
       };
     case INIT_USER: {
-      console.log('@$%@%@#%@%@%@%@%@%@%@%@%', action.payload)
       return {
         ...state,
         ...action.payload,

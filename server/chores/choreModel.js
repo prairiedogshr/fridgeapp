@@ -11,7 +11,6 @@ const getChore = (choreId, callback) => {
 };
 
 const createChore = (chore, callback) => {
-  console.log('chore: ', chore);
   db('chore').insert({
     house_in_chore: chore.house_in_chore,
     chore_name: chore.chore_name,

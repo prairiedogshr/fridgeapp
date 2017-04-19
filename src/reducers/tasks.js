@@ -4,19 +4,15 @@ import { ADD_TASK, COMPLETE_TASK, UNDO_COMPLETE_TASK, UNAUTH_USER } from '../act
 const initialState = { complete: [{ id: 1, value: 'task 1' }, { id: 2, value: 'task 2' }, { id: 3, value: 'task 3' }], incomplete: [{ id: 4, value: 'task 4' }] };
 
 export default function tasksReducer(state = initialState, action) {
-  console.log('action type outer: ', action.type);
-  console.log('with payload: ', action.payload)
   let value;
   switch (action.type) {
     case UNAUTH_USER:
       return { ...{} };
 
     case ADD_TASK:
-      console.log('action payload inner: ', state);
-      console.log('new state? ', {...state,incomplete: [...state.incomplete, ...action.payload]})
       return {
         ...state,
-        incomplete: [...state.incomplete, 
+        incomplete: [...state.incomplete,
         {
           house_in_task: action.payload.house_in_task,
           task_name: action.payload.task_name
@@ -24,7 +20,6 @@ export default function tasksReducer(state = initialState, action) {
       };
 
     // case COMPLETE_TASK:
-    //   console.log('action payload inner: ', action.payload);
       // const complete = state.complete.filter((val) => {
       //   if (val.id === action.payload) {
       //     value = val.value;
@@ -40,7 +35,6 @@ export default function tasksReducer(state = initialState, action) {
       // })
 
       case COMPLETE_TASK: {
-        console.log('action payload inner: ', action.payload);
         const incomplete = state.incomplete.filter((val) => {
           if (val.task_id === action.payload.task_id) {
             value = val;
@@ -67,7 +61,6 @@ export default function tasksReducer(state = initialState, action) {
       }
 
     case UNDO_COMPLETE_TASK: {
-      console.log('action payload inner: ', action.payload);
       const complete = state.complete.filter((val) => {
         if (val.task_id === action.payload.task_id) {
           value = val;
@@ -93,7 +86,6 @@ export default function tasksReducer(state = initialState, action) {
     }
 
     default:
-      console.log('default');
       return state;
   }
 }

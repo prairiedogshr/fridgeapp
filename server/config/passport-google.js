@@ -7,7 +7,6 @@ passport.use('google', new GoogleStrategy({
     callbackURL: "http://www.hugequickly.com"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log('hello?');
     return cb(null, 'hi!')
     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
     //   return cb(err, user);

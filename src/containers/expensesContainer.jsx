@@ -25,14 +25,9 @@ class houseExpenses extends Component {
         overflow: 'auto',
       },
     };
-
-  //   setInterval(() => {
-  //     console.log(this.state)
-  //   },2000)
   };
 
   handleOnToggle = (event) => {
-    console.log('event! ', event)
     if (event === 'all') {
       this.setState({
         billTotal: this.props.expenses.currentMonth.reduce((all, item) => {
@@ -77,7 +72,7 @@ class houseExpenses extends Component {
               <PaypalButton paypalAdmin={this.props.paypalAdmin} total={this.state.billTotal} />
             </Paper>
               <br />
-            <Paper style={this.styles.paper}>  
+            <Paper style={this.styles.paper}>
               <Summary roommates={this.props.roommates} bill={this.state.billTotal} handleOnToggle={this.handleOnToggle} expenses={this.props.expenses.currentMonth} />
             </Paper>
           </Col>

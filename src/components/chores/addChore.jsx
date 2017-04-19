@@ -11,15 +11,19 @@ export default function AddChore(props) {
         floatingLabelText="Add Chore"
         fullWidth={false}
         onKeyUp={(e) => {
-          props.handleKeyUp(e) && (document.getElementById('addChoreInput').value = '');
+          if (document.getElementById('addChoreInput').value.length > 0) {
+            props.handleKeyUp(e) && (document.getElementById('addChoreInput').value = '');
+          }
         }}
       />
       <FlatButton
         label="Submit"
         primary
         onClick={() => {
-          props.buttonSubmit();
-          document.getElementById('addChoreInput').value = '';
+          if (document.getElementById('addChoreInput').value.length > 0) {
+            props.buttonSubmit();
+            document.getElementById('addChoreInput').value = '';
+          }
         }}
       />
     </div>

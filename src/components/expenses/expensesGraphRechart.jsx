@@ -41,28 +41,26 @@ class ExpensesGraph extends Component {
       slide: {
         padding: 10,
       },
-    }; 
+    };
 
     this.COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-    this.RADIAN = Math.PI / 180; 
+    this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}]; 
+                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
   }
 
 
     handleSwipe = (value) => {
-      console.log('hello? with: ', value  )
       this.setState({
         slideIndex: value,
       });
     };
 
     renderCustomizedLabelHouse = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-      console.log('getting called?' , this.state.currentHouse[index].name)
       const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
       const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
       const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
-     
+
       return (
         <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
           {this.state.currentHouse[index].name}
@@ -71,11 +69,9 @@ class ExpensesGraph extends Component {
     };
 
     renderCustomizedLabelShare = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-      console.log('getting called?' , this.state.yourShare[index].name)
       const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
       const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
       const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
-     
       return (
         <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
           {this.state.yourShare[index].name}
@@ -105,10 +101,10 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
-                    data={this.state.yourShare} 
+                    data={this.state.yourShare}
                     labelLine={false}
                     label={this.renderCustomizedLabelShare}
-                    outerRadius={'80%'} 
+                    outerRadius={'80%'}
                     fill="#8884d8"
                   >
                     {
@@ -126,10 +122,10 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
-                    data={this.state.currentHouse} 
+                    data={this.state.currentHouse}
                     labelLine={false}
                     label={this.renderCustomizedLabelHouse}
-                    outerRadius={'80%'} 
+                    outerRadius={'80%'}
                     fill="#8884d8"
                   >
                     {

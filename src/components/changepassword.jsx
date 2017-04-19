@@ -22,7 +22,6 @@ class Change extends Component {
     const new1 = this.refs.newpassword.value;
     const new2 = this.refs.newpassword2.value;
     if( new1 !== new2){
-      console.log("You entered the word, try again!");
     }else{
       changePassword(old,new1,new2);
     }

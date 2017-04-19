@@ -2,7 +2,6 @@ import axios from 'axios';
 import { EDIT_PROFILE } from '../actionTypes';
 
 export const updateUser = (profile) => {
-  console.log(profile);
   return (dispatch) => {
     return axios.put('/api/users/', profile)
       .then((res) => {
@@ -18,7 +17,6 @@ export const updateUser = (profile) => {
 };
 
 export const changePassword = (old, new1, new2) =>{
-  console.log("parameters",old,new1,new2);
   return(dispatch) => {
     return axios.put('api/users/change', old, new1, new2)
       .then((res) =>{
@@ -27,8 +25,8 @@ export const changePassword = (old, new1, new2) =>{
           payload: new1,
         });
       })
-      .catch((error) =>{
-        console.log(error)
+      .catch((error) => {
+        console.log(error);
       });
   };
 };

@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 
 // export const addChore = (choreText) => {
-//   console.log('ACTION - adding chore: ', choreText);
+//
 //   return {
 //     type: ADD_CHORE,
 //     payload: choreText,
@@ -19,22 +19,19 @@ import axios from 'axios';
 // };
 
 export const addChore = (chore) => {
-  console.log('chore+++++', chore);
   return (dispatch) => {
     return axios.post('/api/chores', chore)
     .then(choreText => {
-      console.log('choreText+++++', choreText);
-      console.log('chore.chore_name+++++', chore.chore_name);
       return dispatch({
         type: ADD_CHORE,
         payload: chore.chore_name,
       });
     }); // catch?
-  }
+  };
 };
 
 // export const completeChore = (choreId) => {
-//   console.log(`ACTION - completing chore: ${choreId}`);
+//
 //   return {
 //     type: COMPLETE_CHORE,
 //     payload: choreId,
@@ -42,7 +39,7 @@ export const addChore = (chore) => {
 // };
 
 // export const undoComplete = (choreId) => {
-//   console.log(`ACTION - undo complete: ${choreId}`);
+//
 //   return {
 //     type: UNDO_COMPLETE,
 //     payload: choreId,
@@ -86,8 +83,6 @@ export const undoComplete = (choreId) => {
 }
 
 export const increaseGroups = (roomies) => {
-  console.log('ACTION - increaseGroups:');
-  console.log(roomies.length);
   return {
     type: INCREASE_GROUPS,
     payload: roomies.length,
@@ -95,7 +90,6 @@ export const increaseGroups = (roomies) => {
 };
 
 export const decreaseGroups = (roomies) => {
-  console.log('ACTION - decreaseGroups:');
   return {
     type: DECREASE_GROUPS,
     payload: roomies.length,
@@ -103,8 +97,6 @@ export const decreaseGroups = (roomies) => {
 };
 
 export const assignGroup = (choreId, group) => {
-  console.log(`ACTION - assignGroups: choreId:${choreId} group:${group}`);
-
   return (dispatch) => {
     return axios.put('/api/chores',
       {
@@ -126,13 +118,11 @@ export const rotateGroups = (roomies) => {
     roomies.forEach((roomie, ind) => {
       let newRotation;
       if (allAssigned) {
-        console.log('all assigned');
         newRotation = roomie.user_chore_rotation + 1;
         if (newRotation > max) {
           newRotation = 1;
         }
       } else {
-        console.log('not all assigned');
         newRotation = ind + 1;
       }
 
@@ -155,8 +145,6 @@ export const rotateGroups = (roomies) => {
 
   // // iterate through roommates
 
-  // console.log(`roomies: ${roomies}`);
-  // console.log(roomies);
 
   // let groupsTaken = {};
 

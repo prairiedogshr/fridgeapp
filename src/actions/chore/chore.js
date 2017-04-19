@@ -112,13 +112,7 @@ export const assignGroup = (choreId, group) => {
         "key": "chore_group",
         "value": group,
       }
-    )
-      .then(result => {
-        return dispatch({
-          type: ASSIGN_GROUP,
-          payload: { choreId, group },
-        });
-      });
+    );
   };
 };
 

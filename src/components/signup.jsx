@@ -178,7 +178,8 @@ class Register extends Component {
                             onChange={e => {this.handleChange(e)}}
                             value={this.state.user_username}
                             validators={['required', 'longEnough']}
-                            errorMessages={['this field is required', 'your username should be at least 8 characters']}                        />
+                            errorMessages={['this field is required', 'your username should be at least 8 characters']}
+                          />
                           <TextValidator
                             hintText="Phone"
                             floatingLabelText="Phone"

@@ -70,6 +70,8 @@ const removeUser = (req, res, next) => {
       User.removeUser(req.body, (err, user) => {
         if (err) {
           next(new Error(err));
+        } else {
+          res.send(user)
         }
       }
   );

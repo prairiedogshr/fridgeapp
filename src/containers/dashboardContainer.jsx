@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import ChoresDashboard from './choresDashboardContainer';
-import Tasks from './tasksContainer';
+import TasksDashboard from './tasksDashboardContainer';
 import { getAppState } from '../actions/init/init';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
@@ -23,7 +23,7 @@ class Dashboard extends Component {
     this.state = {
       loading: true
     }
-  }
+  };
 
   componentWillMount() {
     this.setState({
@@ -52,12 +52,12 @@ class Dashboard extends Component {
     } else {
     return (
         <div className="dashboardCont">
-
-          <div><ChoresDashboard /></div>
-          <div><Tasks /></div>
-          <div>Dashboard</div>
-          <div>Dashboard</div>
-          <div>Dashboard</div>
+          <div>
+            <ChoresDashboard />
+          </div>
+          <div>
+            <TasksDashboard />
+          </div>
         </div>
       )
     }

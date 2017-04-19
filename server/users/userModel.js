@@ -135,9 +135,11 @@ module.exports = {
         house_in_user: null
       })
       .then(() => {
+        console.log('looks good')
         callback(null, true)
       })
       .catch((err) => {
+        console.log('err')
         callback(err);
       })
   },

@@ -16,6 +16,7 @@ import {
 } from '../actions/chore/chore';
 
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 class Chores extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class Chores extends Component {
     this.state = {
       inputField: '',
       nextClicked: false,
+      snackOpen: false,
+      snackMessage: 'message default',
     }
     this.buttonSubmit = this.buttonSubmit.bind(this);
   }
@@ -41,7 +44,18 @@ class Chores extends Component {
     }
   };
 
+  handleRequestClose = () => {
+    this.setState({
+      snackOpen: false,
+    });
+  };
+
   buttonSubmit () {
+    if (this.state.inputField === '') {
+      this.setState({snackMessage: 'Cannot leave field blank'});
+      this.setState({snackOpen: true});
+      return;
+    }
     const today = new Date();
     const year = today.getUTCFullYear().toString();
     let month = today.getUTCMonth() + 1;
@@ -67,6 +81,8 @@ class Chores extends Component {
     }
     this.props.addChore(chore);
     this.setState({inputField: ''});
+    this.setState({snackMessage: 'Chore Saved!'});
+    this.setState({snackOpen: true});
   };
 
   render() {
@@ -100,6 +116,13 @@ class Chores extends Component {
               />
             </div>
           }
+          <Snackbar
+            open={this.state.snackOpen}
+            message={this.state.snackMessage}
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+            contentStyle={{ textAlign: 'center' }}
+          />
         </div>
       );
     } else {

@@ -1,4 +1,4 @@
-import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell } from 'Recharts';
+import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'Recharts';
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
@@ -10,20 +10,20 @@ class ExpensesGraph extends Component {
     this.roommates = this.props.roommates;
     console.log('roommates? ', this.roommates)
     this.state = {
-      yourShare: this.props.expenses.reduce((all, item) => {
+      yourShare: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: (item.expense_balance / this.roommates)
         })
         return all;
-        },[]).slice(0,5),
-      currentHouse: this.props.expenses.reduce((all, item) => {
+        },[]).slice(0,10),
+      currentHouse: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: item.expense_balance
         })
         return all;
-        },[]).slice(0,5),
+        },[]).slice(0,10),
       slideIndex: 0
       }
 
@@ -92,7 +92,7 @@ class ExpensesGraph extends Component {
           >
             <Tab label="Your Current Share" value={0} />
             <Tab label="Total House" value={1} />
-            <Tab label="Yearly Average" value={2} />
+            <Tab label="Yearly" value={2} />
           </Tabs>
           <SwipeableViews
             index={this.state.slideIndex}
@@ -141,7 +141,20 @@ class ExpensesGraph extends Component {
             </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
-              slide n°3
+              <ResponsiveContainer
+                width="100%"
+                  height={400}
+              >
+                <AreaChart
+                  data={this.props.expenses.yearly}
+                >
+                <XAxis dataKey="expense_billing_month" />
+                <YAxis/>
+                <CartesianGrid strokeDasharray="3 3"/>
+                <Tooltip/>
+                <Area type='monotone' dataKey='expense_balance' stackId="1" stroke='#8884d8' fill='#8884d8' />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </SwipeableViews>
         </div>

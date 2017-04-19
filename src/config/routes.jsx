@@ -27,13 +27,15 @@ class Routes extends Component {
           <Route path="/joinhouse" component={requireAuth(JoinHouse)} />
           <Route path="/createhouse" component={requireAuth(CreateHouse)} />
           <App>
-            <Route path="/dashboard" component={requireAuth(Dashboard)} />
-            <Route path="/profile" component={requireAuth(Profile)} />
-            <Route path="/house" component={requireAuth(House)} />
-            <Route path="/chores" component={requireAuth(Chores)} />
-            <Route path="/tasks" component={requireAuth(Tasks)} />
-            <Route path="/bills" component={requireAuth(Bills)} />
-            {/* <Route path="/change" component={requireAuth(Change)} /> */}
+            <div>
+              <Route path="/dashboard" component={requireAuth(Dashboard)} />
+              <Route path="/profile" component={requireAuth(Profile)} />
+              <Route path="/house" component={requireAuth(House)} />
+              <Route path="/chores" component={requireAuth(Chores)} />
+              <Route path="/tasks" component={requireAuth(Tasks)} />
+              <Route path="/bills" component={requireAuth(Bills)} />
+              {/* <Route path="/change" component={requireAuth(Change)} /> */}
+            </div>
           </App>
         </Switch>
       </Router>

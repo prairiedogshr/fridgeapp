@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import SortableComponent from './SortableComponent';
+
 const Button = withRouter(({ history, roomies, rotateGroups }) => (
   <button
     type="button"
@@ -13,9 +15,20 @@ const Button = withRouter(({ history, roomies, rotateGroups }) => (
   </button>
 ));
 
-export default function GroupingOfChores(props) {
-  const houseChores = props.chores.houseChores;
+export default function GroupingOfChores({ assignGroup, rotateGroups, chores, roomies }) {
+  const houseChores = chores.houseChores;
   return (
+    <SortableComponent
+      assignGroup={assignGroup}
+      rorateGroups={rotateGroups}
+      houseChores={houseChores}
+      chores={chores}
+      groups={chores.groups}
+      roomies={roomies}
+    />
+  );
+
+  /*return (
     <div>
       <h3>
         Assign Chore Groups
@@ -45,5 +58,6 @@ export default function GroupingOfChores(props) {
       </ul>
       <Button roomies={props.roomies} rotateGroups={props.rotateGroups} />
     </div>
-  );
+  );/*/
 }
+

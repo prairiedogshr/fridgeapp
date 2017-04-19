@@ -1,4 +1,4 @@
-import { EDIT_PROFILE, UNAUTH_USER } from '../actions/actionTypes';
+import { EDIT_PROFILE, UNAUTH_USER, CHANGE_PASS } from '../actions/actionTypes';
 
 export default function userReducer(state = {}, action) {
   switch (action.type) {
@@ -11,6 +11,13 @@ export default function userReducer(state = {}, action) {
       return {
         ...{},
       };
+
+    case CHANGE_PASS:
+      return {
+        ...state,
+        ...action.payload,
+      }
+
     default:
       return state;
   }

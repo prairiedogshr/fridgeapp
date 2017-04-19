@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EDIT_PROFILE } from '../actionTypes';
+import { EDIT_PROFILE, CHANGE_PASS} from '../actionTypes';
 
 export const updateUser = (profile) => {
   return (dispatch) => {
@@ -16,13 +16,13 @@ export const updateUser = (profile) => {
   };
 };
 
-export const changePassword = (old, new1, new2) =>{
-  return(dispatch) => {
-    return axios.put('api/users/change', old, new1, new2)
+export const changePassword = (user) => {
+  return (dispatch) => {
+    return axios.put('/api/users/change', user)
       .then((res) =>{
         return dispatch({
-          type: EDIT_PROFILE,
-          payload: new1,
+          type: CHANGE_PASS,
+          payload: res,
         });
       })
       .catch((error) => {

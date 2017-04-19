@@ -60,7 +60,7 @@ const change = (req,res,next) => {
     if(err){
       next(new Error(err));
     }else{
-      console.log(req.body);
+      res.send(user);
     }
   });
 };
@@ -90,6 +90,7 @@ module.exports = {
   getAppState,
   getUser,
   signup,
+  change,
   updateUser,
   removeUser,
   joinHouse,

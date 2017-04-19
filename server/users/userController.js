@@ -56,19 +56,11 @@ const updateUser = (req, res, next) => {
 };
 
 const change = (req,res,next) => {
-<<<<<<< HEAD
-=======
-  console.log('im inside change in the controller',req.body);
->>>>>>> got change password to work
   User.change(req.body, (err, user) => {
     if(err){
       next(new Error(err));
     }else{
-<<<<<<< HEAD
-      console.log(req.body);
-=======
       res.send(user);
->>>>>>> got change password to work
     }
   });
 };

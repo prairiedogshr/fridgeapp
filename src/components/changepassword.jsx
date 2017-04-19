@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init';
 import { changePassword } from '../actions/profile/profile';
@@ -23,7 +23,6 @@ class Change extends Component {
     const new2 = this.refs.newpassword2.value;
     const email = this.props.user.user_email;
     const user={"old": old, "new1": new1, "new2": new2, "email":email}
-    console.log("USER", user)
     if( new1 !== new2){
       alert("your new password fields dont match, try again");
     }else{

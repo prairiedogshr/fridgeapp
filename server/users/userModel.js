@@ -43,8 +43,6 @@ module.exports = {
   },
 
 
-
-
   signup: (user, callback) => {
     db.select().from('user').where('user_email', user.user_email)
       .then((foundUser) => {

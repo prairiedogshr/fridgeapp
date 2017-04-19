@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ExpenseMonth from '../components/expenses/currentMonth';
-import CurrentMonthExpense from '../components/expenses/currentMonthExpenses';
 import ExpensesGraph from '../components/expenses/expensesGraphRechart';
 import PaypalButton from '../components/expenses/paypalButton';
 import Summary from '../components/expenses/summary';
@@ -27,17 +25,17 @@ class houseExpenses extends Component {
         overflow: 'auto',
       },
     };
-    console.log('paypal!!!!!! ', this.props.paypalAdmin)
-    // setInterval(() => {
-    //   console.log(this.state)
-    // },2000)
+
+  //   setInterval(() => {
+  //     console.log(this.state)
+  //   },2000)
   };
 
   handleOnToggle = (event) => {
     console.log('event! ', event)
     if (event === 'all') {
       this.setState({
-        billTotal: this.props.expenses.reduce((all, item) => {
+        billTotal: this.props.expenses.currentMonth.reduce((all, item) => {
           all += item.expense_balance;
           return all;
         },0)
@@ -49,7 +47,7 @@ class houseExpenses extends Component {
     } else if (event.length) {
       this.setState({
         billTotal: event.reduce((all, item) => {
-          all += this.props.expenses[item].expense_balance;
+          all += this.props.expenses.currentMonth[item].expense_balance;
           return all;
         },0)
       })
@@ -66,11 +64,11 @@ class houseExpenses extends Component {
         <Row>
           <Col xs={6}>
             <Paper style={this.styles.paper}>
-              <ExpensesGraph expenses={this.props.expenses} />
+              <MonthlyFinances roommates={this.props.roommates} expenses={this.props.expenses.currentMonth} />
             </Paper>
             <br />
             <Paper style={this.styles.paper}>
-            <MonthlyFinances expenses={this.props.expenses} />
+              <ExpensesGraph roommates={this.props.roommates} expenses={this.props.expenses} />
             </Paper>
           </Col>
           <Col xs={6}>
@@ -80,7 +78,7 @@ class houseExpenses extends Component {
             </Paper>
               <br />
             <Paper style={this.styles.paper}>  
-              <Summary bill={this.state.billTotal} handleOnToggle={this.handleOnToggle} expenses={this.props.expenses} />
+              <Summary roommates={this.props.roommates} bill={this.state.billTotal} handleOnToggle={this.handleOnToggle} expenses={this.props.expenses.currentMonth} />
             </Paper>
           </Col>
         </Row>
@@ -92,6 +90,7 @@ class houseExpenses extends Component {
 const mapStateToProps = ({ expensesReducer, houseReducer }) => ({
   expenses: expensesReducer,
   paypalAdmin: houseReducer.house_account,
+  roommates: houseReducer.users.length
 });
 
 export default connect(

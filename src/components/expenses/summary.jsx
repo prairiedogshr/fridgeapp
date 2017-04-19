@@ -19,7 +19,7 @@ export default function Summary(props) {
         {props.expenses.map((expense) => 
           <TableRow>
             <TableRowColumn>{expense.expense_name}</TableRowColumn>
-            <TableRowColumn>{expense.expense_balance}</TableRowColumn>
+            <TableRowColumn>{expense.expense_balance/props.roommates}</TableRowColumn>
             <TableRowColumn>{expense.is_paid === 1 ? 'true' : 'false'}</TableRowColumn>
           </TableRow>
         )}

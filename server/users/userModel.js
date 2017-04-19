@@ -105,6 +105,7 @@ module.exports = {
         user_phone: user.user_phone,
         user_birthday: user.user_birthday,
         user_info: user.user_info,
+        user_chore_rotation: user.user_chore_rotation,
       })
       .then(() => {
         callback(null, true);

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init';
-import { updateUser, changePassword } from '../actions/profile/profile';
+import { changePassword } from '../actions/profile/profile';
 
 class Change extends Component {
   constructor(props){
@@ -21,9 +21,12 @@ class Change extends Component {
     const old = this.refs.oldpass.value;
     const new1 = this.refs.newpassword.value;
     const new2 = this.refs.newpassword2.value;
+    const email = this.props.user.user_email;
+    const user={"old": old, "new1": new1, "new2": new2, "email":email}
+    console.log("USER", user)
     if( new1 !== new2){
     }else{
-      changePassword(old,new1,new2);
+      this.props.changePassword(user)
     }
 
   };
@@ -42,8 +45,18 @@ class Change extends Component {
   }
 }
 
-function mapStateToProps({ userReducer }){
-  user: userReducer
+Change.propTypes = {
+  changePassword: React.PropTypes.func,
 }
 
-export default connect(mapStateToProps, { updateUser })(Change)
+
+const mapStateToProps = ({ userReducer }) => ({
+  user: userReducer,
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    changePassword
+  }
+)(Change);

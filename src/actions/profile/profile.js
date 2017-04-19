@@ -16,13 +16,19 @@ export const updateUser = (profile) => {
   };
 };
 
+<<<<<<< HEAD
 export const changePassword = (old, new1, new2) =>{
   return(dispatch) => {
     return axios.put('api/users/change', old, new1, new2)
+=======
+export const changePassword = (user) => {
+  return (dispatch) => {
+    return axios.put('/api/users/change', user)
+>>>>>>> got change password to work
       .then((res) =>{
         return dispatch({
           type: EDIT_PROFILE,
-          payload: new1,
+          payload: res,
         });
       })
       .catch((error) => {

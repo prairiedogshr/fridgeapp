@@ -101,15 +101,9 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
-<<<<<<< HEAD
                     data={this.state.yourShare}
                     labelLine={false}
                     label={this.renderCustomizedLabelShare}
-=======
-                    data={this.state.data}
-                    labelLine={false}
-                    label={this.renderCustomizedLabel}
->>>>>>> yup
                     outerRadius={'80%'}
                     fill="#8884d8"
                   >

@@ -16,13 +16,13 @@ class User extends Component {
     super(props);
     this.state = {
       user_id: this.props.user.user_id,
-      house_in_user: this.props.user.house_in_admin || 'null',
+      house_in_user: this.props.user.house_in_admin || null,
       user_first_name: this.props.user.user_first_name,
       user_last_name: this.props.user.user_last_name,
-      user_email: this.props.user.user_email || 'null',
-      user_phone: this.props.user.user_phone || 'null',
-      user_birthday: this.props.user.user_birthday || 'null',
-      user_info: this.props.user.user_info || 'null',
+      user_email: this.props.user.user_email || null,
+      user_phone: this.props.user.user_phone || null,
+      user_birthday: this.props.user.user_birthday || null,
+      user_info: this.props.user.user_info || null,
     };
     this.styles = {
       paper: {
@@ -52,21 +52,16 @@ class User extends Component {
   }
 
   handleChange = (e) => {
-    let field = e.target.name;
-    this.setState({ [field]: e.target.value.trim() });
-    console.log(this.state);
+    this.setState({ [e.target.name]: e.target.value.trim() });
   };
 
   handleDateChange = (e, date) => {
-    console.log('handleOnDateChange1', this.state.user_birthday);
     this.setState({ user_birthday: date });
-    console.log('handleOnDateChange2', this.state.user_birthday);
   };
 
   handleSubmit = (e) => {
     // e.preventDefault();
 
-    this.state.user_birthday = this.state.user_birthday.toISOString().slice(0,10);
     this.props.updateUser(this.state)
       .then(response => {
         if (response === true) {
@@ -76,7 +71,6 @@ class User extends Component {
   };
 
   render() {
-    const birthday = this.state.user_birthday;
 
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
@@ -124,7 +118,7 @@ class User extends Component {
                       <DatePicker
                         floatingLabelText="Birthday"
                         fullWidth={true}
-                        defaultDate={new Date(this.state.user_birthday)}
+                        defaultDate={(this.state.user_birthday) ? new Date(this.state.user_birthday) : undefined}
                         name="user_birthday"
                         onChange={(e, date) => {this.handleDateChange(e, date)}}
                       />

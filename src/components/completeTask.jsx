@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CompletedTask(props) {
   const complete = props.tasks.complete;
-  if (complete) {
+  if (complete.length) {
     return (
       <div>
         <h1>

@@ -10,7 +10,7 @@ class ExpensesGraph extends Component {
   }
 
   testFunc() {
-    console.log('hi!')
+    console.log('hi!');
   }
 
   expenseGraph() {
@@ -18,7 +18,7 @@ class ExpensesGraph extends Component {
 
     let svg = d3.select("#map").append('svg')
       .attr('width', 960)
-      .attr('height', 600)  
+      .attr('height', 600)
 
     let map = d3.select('svg'),
       margin = {top: 50, right: 50, bottom: 150, left: 150},
@@ -81,7 +81,6 @@ class ExpensesGraph extends Component {
   }
 
   componentDidMount() {
-    console.log('props? ', this.props)
     this.expenseGraph()
   }
 

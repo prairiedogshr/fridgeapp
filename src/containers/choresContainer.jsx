@@ -15,6 +15,8 @@ import {
   rotateGroups,
 } from '../actions/chore/chore';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 class Chores extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +42,6 @@ class Chores extends Component {
   };
 
   buttonSubmit () {
-    console.log(this.state.inputField);
     const today = new Date();
     const year = today.getUTCFullYear().toString();
     let month = today.getUTCMonth() + 1;
@@ -66,7 +67,6 @@ class Chores extends Component {
     }
     this.props.addChore(chore);
     this.setState({inputField: ''});
-    console.log(AddChore.inputField);
   };
 
   render() {
@@ -84,7 +84,6 @@ class Chores extends Component {
                 handleKeyUp={this.handleKeyUp}
                 buttonSubmit={this.buttonSubmit}
               />
-
               <AdminChores
                 chores={this.props.chores}
               />
@@ -94,7 +93,11 @@ class Chores extends Component {
                 decreaseGroups={this.props.decreaseGroups}
                 roomies={this.props.house.users}
               />
-              <button onClick={() => { this.state.nextClicked = true; this.forceUpdate(); }}>Next</button>
+              <RaisedButton
+                label="Next"
+                primary
+                onTouchTap={() => { this.setState({nextClicked: true }) }}
+              />
             </div>
           }
         </div>

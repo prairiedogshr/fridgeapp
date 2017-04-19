@@ -1,51 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { houseExist } from '../actions/house/house';
-import { joinHouse } from '../actions/house/house';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import { houseExist, joinHouse } from '../actions/house/house';
+import ThemeDefault from '../styles/theme-default';
 
+const logo = require('../assets/fridge-logo-black.svg');
 
 class JoinHouse extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: this.props.user,
       house: '',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
+  handleKeyUp = (e) => {
+    this.state[e.target.dataset.field] = e.target.value.trim();
+  };
 
-  handleSubmit(event) {
-    const user = this.props;
+  handleSubmit(e) {
+    const user = this.state.user;
     const house = parseInt(this.state.house);
-    console.log("USER", user)
-    console.log("House", house)
-    this.props.joinHouse(house,user).then(resp =>{
-      if(resp){
-        console.log("updated the user!");
-        this.props.history.push('/profile');
-      }
-    })
 
+    this.props.joinHouse(house, user)
+      .then((resp) => {
+        if (resp) {
+          this.props.history.push('/dashboard');
+        }
+      });
   }
 
   render() {
-    const state = this.state;
-    const change = this.handleChange;
     return (
-      <div className="centered">
-        <label htmlFor="house code">
-          *Enter the House Code:
-          <br />
-        </label>
-        <input type="number" name="house" value={state.house} onChange={change}/>
-        <button onClick={(event) => this.handleSubmit(event)} className="btn btn-primary">
-          Submit
-        </button>
-      </div>
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <Grid fluid>
+          <Row>
+            <Col xs={12}>
+              <Row center="xs">
+                <Col md={4}>
+                  <img src={logo} style={{ width: 200, height: 'auto', margin: 20 }} alt="Fridge" />
+                  <Paper style={{ padding: 20 }}>
+                    <h2>Join a House</h2>
+                    <TextField
+                      hintText="House Code"
+                      floatingLabelText="House Code"
+                      fullWidth={true}
+                      data-field="house"
+                      onKeyUp={e => {this.handleKeyUp(e)}}
+                    />
+                    <RaisedButton
+                      label="Join"
+                      primary={true}
+                      style={{ display: 'block' }}
+                      onClick={(e) => this.handleSubmit(e)}
+                    />
+                  </Paper>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </MuiThemeProvider>
     );
   }
 }

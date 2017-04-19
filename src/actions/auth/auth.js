@@ -43,13 +43,12 @@ export const errorHandler = (dispatch, error, type) => {
   }
 };
 
-export const loginUser = creds => dispatch => axios.post('/api/users/signin', creds)
-      .then((response) => {
+export const loginUser = creds => dispatch =>
+axios.post('/api/users/signin', creds).then((response) => {
         if (response) {
-          console.log('Good work!!! ', response);
           dispatch({
             type: INIT_USER,
-            payload: response.data.id,
+            payload: response.data,
           });
           // check if user has a house
           return axios.get(`/api/users/${response.data.id}`)
@@ -59,7 +58,6 @@ export const loginUser = creds => dispatch => axios.post('/api/users/signin', cr
       })
       .catch((error) => {
         // user not found in system
-        console.log('no user: ', error);
         return 'no user';
         // errorHandler(dispatch, error.response, AUTH_ERROR);
       });
@@ -68,7 +66,7 @@ export const registerUser = creds => (dispatch) => {
   return axios.post('/api/users/', creds)
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: INIT_USER, payload: response.data });
         // window.location.href = '#/profile';
         // history.push('/dashboard');
         return true;

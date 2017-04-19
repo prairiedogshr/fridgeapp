@@ -11,7 +11,6 @@ const getExpense = (expenseId, callback) => {
 };
 
 const createExpense = (expense, callback) => {
-  console.log('expense: ', expense);
   db('expense').insert({
     house_in_expense: expense.house_in_expense,
     expense_name: expense.expense_name,

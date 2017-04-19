@@ -1,17 +1,5 @@
 const User = require('./userModel.js');
 
-const getUser = (req, res, next) => {
-  console.log('getting user');
-  User.findUserById(req.params.id, (err, user) => {
-    if (err) next(err);
-    if (user.length) {
-      res.send(user[0]);
-    } else {
-      next(new Error('no user'));
-    }
-  });
-};
-
 const findUserByEmail = (req, res, next) => {
   User.findUserByEmail(req.params.email, (err, user) => {
     if (err) {
@@ -26,29 +14,7 @@ const findUserByEmail = (req, res, next) => {
   });
 };
 
-const signup = (req, res, next) => {
-  User.signup(req.body, (err, user) => {
-    if (err) {
-      console.log('err: ', err);
-      next(new Error(err));
-    }
-    res.redirect('/#/dashboard');
-  });
-};
-
-const updateUser = (req, res, next) => {
-  console.log('got into update user');
-  User.updateUser(req.body, (err, user) => {
-    if (err) {
-      next(new Error(err));
-    } else {
-      res.send(user);
-    }
-  });
-};
-
 const getAppState = (req, res, next) => {
-  console.log('almost');
   User.getAppState(req.params.id, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -58,10 +24,73 @@ const getAppState = (req, res, next) => {
   });
 };
 
+const getUser = (req, res, next) => {
+  User.findUserById(req.params.id, (err, user) => {
+    if (err) next(err);
+    if (user.length) {
+      res.send(user[0]);
+    } else {
+      next(new Error('no user'));
+    }
+  });
+};
+
+const signup = (req, res, next) => {
+  User.signup(req.body, (err, user) => {
+    if (err) {
+      console.log('err: ', err);
+      next(new Error(err));
+    }
+    res.send(user);
+  });
+};
+
+const updateUser = (req, res, next) => {
+  User.updateUser(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user);
+    }
+  });
+};
+
+const change = (req,res,next) => {
+  User.change(req.body, (err, user) => {
+    if(err){
+      next(new Error(err));
+    }else{
+      console.log(req.body);
+    }
+  });
+};
+
+
+const removeUser = (req, res, next) => {
+      User.removeUser(req.body, (err, user) => {
+        if (err) {
+          next(new Error(err));
+        }
+      }
+  );
+};
+
+const joinHouse = (req, res, next) => {
+  User.joinHouse(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user);
+    }
+  });
+};
+
 module.exports = {
+  findUserByEmail,
   getAppState,
   getUser,
-  findUserByEmail,
   signup,
   updateUser,
+  removeUser,
+  joinHouse,
 };

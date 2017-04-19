@@ -15,10 +15,9 @@ const transporter = nodemailer.createTransport({
 });
 
 // const nowDate = new Date();
-// console.log(`nowDate: ${nowDate.getUTCDay()}`);
 
 setInterval(() => {
-  console.log('rotating users chore groups');
+
   db.select().from('house')
     .then((houses) => {
       houses.forEach((house) => {
@@ -38,9 +37,15 @@ setInterval(() => {
               }
 
               const update = {
-                id: roomie.user_id,
-                key: 'user_chore_rotation',
-                value: newRotation,
+                user_id: roomie.user_id,
+                house_in_user: roomie.house_in_admin,
+                user_first_name: roomie.user_first_name,
+                user_last_name: roomie.user_last_name,
+                user_email: roomie.user_email,
+                user_phone: roomie.user_phone,
+                user_birthday: roomie.user_birthday,
+                user_info: roomie.user_info,
+                user_chore_rotation: newRotation,             
               };
               userModel.updateUser(update, (err, response) => {
                 if (response) {
@@ -57,9 +62,9 @@ setInterval(() => {
                   //     };
                   //     transporter.sendMail(mailOptions, (error, info) => {
                   //       if (error) {
-                  //         return console.log(error);
+                  //         return
                   //       }
-                  //       console.log('Message %s sent: %s', info.messageId, info.response);
+                  //
                   //     });
                   //   });
                   return response;

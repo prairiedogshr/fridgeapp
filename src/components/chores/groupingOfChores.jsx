@@ -1,26 +1,37 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import SortableComponent from './SortableComponent';
+
+/*
 const Button = withRouter(({ history, roomies, rotateGroups }) => (
   <button
     type="button"
     onClick={() => {
-      console.log('history: ', history);
-      // save the groups to the database
       history.push('/dashboard');
-      // add function here to make initial assignment of users to chore groups
-      rotateGroups(roomies);
     }}
   >
-    Done!
+    SAVE
   </button>
 ));
+*/
 
-export default function GroupingOfChores(props) {
-  // const complete = props.chores.complete;
-  // const incomplete = props.chores.incomplete;
-  const houseChores = props.chores.houseChores;
+export default function GroupingOfChores({ assignGroup, rotateGroups, chores, roomies }) {
+  const houseChores = chores.houseChores;
   return (
+    <div>
+      <SortableComponent
+        assignGroup={assignGroup}
+        rorateGroups={rotateGroups}
+        houseChores={houseChores}
+        chores={chores}
+        groups={chores.groups}
+        roomies={roomies}
+      />
+    </div>
+  );
+
+  /*return (
     <div>
       <h3>
         Assign Chore Groups
@@ -50,5 +61,6 @@ export default function GroupingOfChores(props) {
       </ul>
       <Button roomies={props.roomies} rotateGroups={props.rotateGroups} />
     </div>
-  );
+  );/*/
 }
+

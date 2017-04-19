@@ -15,13 +15,12 @@ const createTask = (req, res, next) => {
     if (err) {
       next(new Error(err));
     } else {
-      res.redirect('/#/dashboard');
+      res.send(true)
     }
   });
 };
 
 const updateTask = (req, res, next) => {
-  console.log('got into update task');
   Task.updateTask(req.body, (err, task) => {
     if (err) {
       next(new Error(err));

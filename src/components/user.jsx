@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { updateProfile, submitProfile } from '../actions/profile/profile';
+import { submitProfile } from '../actions/profile/profile';
 // import axios from 'axios';
 
 import Paper from 'material-ui/Paper';
@@ -25,14 +25,11 @@ class Form extends Component {
   // componentWillMount() {
   //   axios.get('/api/users/1')
   //   .then(data => {
-  //     //console.log(data)
   //     this.setState(data)
-  //     console.log("STATE",this.state)
   //   })
   // }
 
   render() {
-    console.log(this.props);
     return (
       <Grid fluid>
         <Row>
@@ -77,7 +74,6 @@ Form.propTypes = {
   submitProfile: React.PropTypes.func,
   profileSubmit: React.PropTypes.func,
   OnSubmit: React.PropTypes.func,
-  updateProfile: React.PropTypes.func,
   field: React.PropTypes.string,
   data: React.PropTypes.string,
   dbField: React.PropTypes.string,
@@ -91,6 +87,5 @@ export default connect(
   mapStateToProps,
   {
     submitProfile,
-    updateProfile,
   },
 )(Form);

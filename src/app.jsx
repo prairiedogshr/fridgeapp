@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       navDrawerOpen: false,
     };
+    this.handleChangeRequestNavDrawer = this.handleChangeRequestNavDrawer.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,12 +27,6 @@ class App extends Component {
       navDrawerOpen: !this.state.navDrawerOpen,
     });
   }
-
-  // handleClose() {
-  //   this.setState({
-  //     navDrawerOpen: !this.state.navDrawerOpen,
-  //   });
-  // }
 
   render() {
     let { navDrawerOpen } = this.state;
@@ -51,12 +46,12 @@ class App extends Component {
         <div>
           <Header
             styles={styles.header}
-            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
           />
           <LeftDrawer
             navDrawerOpen={navDrawerOpen}
             menus={menus.sideMenu}
-            // username="Rich"
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
           />
           <div style={styles.container}>
             {this.props.children}
@@ -68,7 +63,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.object,
   width: PropTypes.number,
 };
 

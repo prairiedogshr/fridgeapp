@@ -11,7 +11,6 @@ const getHouse = (houseId, callback) => {
 };
 
 const createHouse = (house, callback) => {
-  console.log("AYE BUD", house);
   db('house').insert({
     admin_user_in_house: house.admin_user_in_house,
     house_address: house.house_address,
@@ -30,10 +29,16 @@ const createHouse = (house, callback) => {
 };
 
 const updateHouse = (update, callback) => {
-  console.log('~~~~~~~~~` ', update)
   db('house').where('house_id', update.id)
     .update({
-      [update.key]: update.value,
+      admin_user_in_house: update.admin_user_in_house,
+      house_address: update.house_address,
+      house_unit_number: update.house_unit_number,
+      house_city: update.house_city,
+      house_state: update.house_state,
+      house_zip: update.house_zip,
+      house_account: update.house_account,
+      house_info: update.house_info,
     })
     .then((updated) => {
       callback(null, true);

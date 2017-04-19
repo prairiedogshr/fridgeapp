@@ -78,14 +78,14 @@ class Chores extends Component {
       return (
         <div>
           <ChoresDashboardContainer />
+          <AdminChores
+            chores={this.props.chores}
+          />
           {this.props.admin &&
             <div>
               <AddChore
                 handleKeyUp={this.handleKeyUp}
                 buttonSubmit={this.buttonSubmit}
-              />
-              <AdminChores
-                chores={this.props.chores}
               />
               <GroupChores
                 chores={this.props.chores}

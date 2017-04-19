@@ -17,14 +17,13 @@ export const updateUser = (profile) => {
   };
 };
 
-export const changePassword = (old, new1, new2) =>{
-  console.log("parameters",old,new1,new2);
-  return(dispatch) => {
-    return axios.put('api/users/change', old, new1, new2)
+export const changePassword = (user) => {
+  return (dispatch) => {
+    return axios.put('/api/users/change', user)
       .then((res) =>{
         return dispatch({
           type: EDIT_PROFILE,
-          payload: new1,
+          payload: res,
         });
       })
       .catch((error) =>{

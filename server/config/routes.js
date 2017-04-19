@@ -36,7 +36,7 @@ module.exports = (app, passport) => {
   app.get('/api/users/exists/:email', userController.findUserByEmail);
   app.put('/api/users/', userController.updateUser);
   app.post('/api/users/', userController.signup);
-  // app.put('/api/users/change', userController.change);
+  app.put('/api/users/change', userController.change);
   app.post('/api/users/remove', userController.removeUser);
   app.put('/api/users/joinhouse', userController.joinHouse);
 

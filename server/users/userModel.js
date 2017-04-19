@@ -19,6 +19,37 @@ module.exports = {
       // });
   },
 
+  change: (user, callback) => {
+    console.log('inside with emailL ', user);
+    helpers.checkPass(user.email, user.old, (err,match)=>{
+      if(err){
+        callback(err)
+      }else if(!match){
+        callback("wrong password")
+      }else{
+        console.log('ALL CLEAR')
+           helpers.hashPass(user.new1,(err,result)=>{
+             db('user').where('user_id', user.email)
+               .update({
+                 user_password: result,
+               })
+               .then(() => {
+                 console.log("successful pass change")
+                 console.log("user email")
+                 callback(null, true);
+               })
+               .catch((err) => {
+                 callback(err);
+               });
+           })
+      }
+    })
+
+  },
+
+
+
+
   signup: (user, callback) => {
     console.log('user being created: ', user);
     db.select().from('user').where('user_email', user.user_email)

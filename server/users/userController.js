@@ -59,12 +59,12 @@ const updateUser = (req, res, next) => {
 };
 
 const change = (req,res,next) => {
-  console.log('im inside change in the controller');
+  console.log('im inside change in the controller',req.body);
   User.change(req.body, (err, user) => {
     if(err){
       next(new Error(err));
     }else{
-      console.log(req.body)
+      res.send(user);
     }
   });
 };
@@ -97,6 +97,7 @@ module.exports = {
   getAppState,
   getUser,
   signup,
+  change,
   updateUser,
   removeUser,
   joinHouse,

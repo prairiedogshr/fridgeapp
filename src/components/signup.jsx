@@ -75,7 +75,6 @@ class Register extends Component {
   handleChange = (e) => {
     let field = e.target.name;
     this.setState({ [field]: e.target.value.trim() });
-    console.log(this.state);
   };
 
   handleClick = (e) => {
@@ -138,7 +137,7 @@ class Register extends Component {
                             onChange={e => {this.handleChange(e)}}
                             type="password"
                             value={this.state.user_password}
-                            validators={['required', 'isEmpty', 'longEnough']}
+                            validators={['required', 'longEnough']}
                             errorMessages={['this field is required', 'your password should be at least 8 characters']}
                           />
                           <RaisedButton
@@ -177,7 +176,7 @@ class Register extends Component {
                             name="user_username"
                             onChange={e => {this.handleChange(e)}}
                             value={this.state.user_username}
-                            validators={['required', 'isEmpty', 'longEnough']}
+                            validators={['required', 'longEnough']}
                             errorMessages={['this field is required', 'your username should be at least 8 characters']}                        />
                           <TextValidator
                             hintText="Phone"
@@ -186,7 +185,7 @@ class Register extends Component {
                             name="user_phone"
                             onChange={e => {this.handleChange(e)}}
                             value={this.state.user_phone}
-                            validators={['required', 'isEmpty', 'isPhone']}
+                            validators={['required', 'isPhone']}
                             errorMessages={['this field is required', 'phone is not valid']}
                           />
                           <RaisedButton

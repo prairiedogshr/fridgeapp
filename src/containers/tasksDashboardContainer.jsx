@@ -4,7 +4,6 @@ import AddTask from '../components/addTask';
 import IncompleteTasks from '../components/tasks/incompleteTask.jsx';
 import { connect } from 'react-redux';
 
-
 class TasksDashboard extends Component {
   constructor(props) {
     super(props)

@@ -8,6 +8,10 @@ import {
   undoComplete,
 } from '../actions/chore/chore';
 
+import {List, ListItem} from 'material-ui/List';
+import Header from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+
 class ChoresDashboard extends Component {
   constructor(props) {
     super(props);
@@ -31,9 +35,10 @@ class ChoresDashboard extends Component {
 
     return (
       <div>
-        <h1>
+        <Header>
           Your Chores
-        </h1>
+        </Header>
+        <Divider />
         <IncompleteChore
           chores={this.props.chores}
           completeChore={this.completeChore}

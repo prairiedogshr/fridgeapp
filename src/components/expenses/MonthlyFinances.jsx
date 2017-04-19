@@ -9,7 +9,7 @@ export default function MonthlyFinances(props) {
       <ListItem primaryText="Monthly Total" secondaryText={props.expenses.reduce((all, item) => {
         all += item.expense_balance
         return all;
-      },0)} />
+      },0).toLocaleString()} />
     </List>
     <Divider inset={false} />
     </div>

@@ -6,8 +6,18 @@ import SwipeableViews from 'react-swipeable-views';
 class ExpensesGraph extends Component {
   constructor(props) {
     super(props)
+    console.log('props..', this.props)
+    this.roommates = this.props.roommates;
+    console.log('roommates? ', this.roommates)
     this.state = {
-      data: this.props.expenses.reduce((all, item) => {
+      yourShare: this.props.expenses.reduce((all, item) => {
+        all.push({
+          name: item.expense_name,
+          value: (item.expense_balance / this.roommates)
+        })
+        return all;
+        },[]).slice(0,5),
+      currentHouse: this.props.expenses.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: item.expense_balance
@@ -16,6 +26,10 @@ class ExpensesGraph extends Component {
         },[]).slice(0,5),
       slideIndex: 0
       }
+
+    // setInterval(() => {
+    //   console.log(this.state)
+    // }, 2000)
 
     this.styles = {
       headline: {
@@ -43,23 +57,29 @@ class ExpensesGraph extends Component {
       });
     };
 
-    renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-      console.log('getting called?' , this.state.data[index].name)
+    renderCustomizedLabelHouse = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+      console.log('getting called?' , this.state.currentHouse[index].name)
       const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
       const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
       const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
      
       return (
         <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
-          {this.state.data[index].name}
+          {this.state.currentHouse[index].name}
         </text>
       );
     };
 
-    handleOnMouseOver = (event) => {
-      console.log('mouse event? ', event)
+    renderCustomizedLabelShare = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+      console.log('getting called?' , this.state.yourShare[index].name)
+      const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+      const x  = cx + radius * Math.cos(-midAngle * this.RADIAN);
+      const y = cy  + radius * Math.sin(-midAngle * this.RADIAN);
+     
       return (
-          <Tooltip content={this.state.data}></Tooltip>
+        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'}  dominantBaseline="central">
+          {this.state.yourShare[index].name}
+        </text>
       );
     };
 
@@ -70,8 +90,8 @@ class ExpensesGraph extends Component {
             onChange={this.handleSwipe}
             value={this.state.slideIndex}
           >
-            <Tab label="Current Month" value={0} />
-            <Tab label="Last Month" value={1} />
+            <Tab label="Your Current Share" value={0} />
+            <Tab label="Total House" value={1} />
             <Tab label="Yearly Average" value={2} />
           </Tabs>
           <SwipeableViews
@@ -85,15 +105,14 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
-                    data={this.state.data} 
+                    data={this.state.yourShare} 
                     labelLine={false}
-                    label={this.renderCustomizedLabel}
+                    label={this.renderCustomizedLabelShare}
                     outerRadius={'80%'} 
                     fill="#8884d8"
-                    onMouseOver={this.handleOnMouseOver}
                   >
                     {
-                      this.state.data.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
+                      this.state.yourShare.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
                     }
                   </Pie>
                   <Tooltip />
@@ -101,7 +120,25 @@ class ExpensesGraph extends Component {
             </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
-              slide n°2
+              <ResponsiveContainer
+                width="100%"
+                  height={400}
+              >
+                <PieChart>
+                  <Pie
+                    data={this.state.currentHouse} 
+                    labelLine={false}
+                    label={this.renderCustomizedLabelHouse}
+                    outerRadius={'80%'} 
+                    fill="#8884d8"
+                  >
+                    {
+                      this.state.currentHouse.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
+                    }
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+            </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
               slide n°3

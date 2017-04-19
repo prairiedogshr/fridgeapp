@@ -1,4 +1,4 @@
-import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'Recharts';
+import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell } from 'recharts';
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
@@ -101,9 +101,15 @@ class ExpensesGraph extends Component {
               >
                 <PieChart>
                   <Pie
+<<<<<<< HEAD
                     data={this.state.yourShare}
                     labelLine={false}
                     label={this.renderCustomizedLabelShare}
+=======
+                    data={this.state.data}
+                    labelLine={false}
+                    label={this.renderCustomizedLabel}
+>>>>>>> yup
                     outerRadius={'80%'}
                     fill="#8884d8"
                   >

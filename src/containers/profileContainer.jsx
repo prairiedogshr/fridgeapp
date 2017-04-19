@@ -23,7 +23,9 @@ class User extends Component {
       user_phone: this.props.user.user_phone || null,
       user_birthday: this.props.user.user_birthday || null,
       user_info: this.props.user.user_info || null,
+      user_chore_rotation: this.props.user.user_chore_rotation || null,
     };
+    
     this.styles = {
       paper: {
         padding: 16,

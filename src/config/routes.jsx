@@ -28,16 +28,18 @@ class Routes extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <App>
-            <Route path="/dashboard" component={requireAuth(Dashboard)} />
-            <Route path="/profile" component={requireAuth(Profile)} />
-            <Route path="/house" component={requireAuth(House)} />
-            <Route path="/chores" component={requireAuth(Chores)} />
-            <Route path="/tasks" component={requireAuth(Tasks)} />
-            <Route path="/bills" component={requireAuth(Bills)} />
-            <Route path="/settings" component={requireAuth(Settings)} />
-            <Route path="/createhouse" component={requireAuth(CreateHouse)} />
-            <Route path="/join" component={requireAuth(Join)} />
-            <Route path="/welcome" component={requireAuth(Welcome)} />
+            <div>
+              <Route path="/dashboard" component={requireAuth(Dashboard)} />
+              <Route path="/profile" component={requireAuth(Profile)} />
+              <Route path="/house" component={requireAuth(House)} />
+              <Route path="/chores" component={requireAuth(Chores)} />
+              <Route path="/tasks" component={requireAuth(Tasks)} />
+              <Route path="/bills" component={requireAuth(Bills)} />
+              <Route path="/settings" component={requireAuth(Settings)} />
+              <Route path="/createhouse" component={requireAuth(CreateHouse)} />
+              <Route path="/join" component={requireAuth(Join)} />
+              <Route path="/welcome" component={requireAuth(Welcome)} />
+            </div>
           </App>
         </Switch>
       </Router>

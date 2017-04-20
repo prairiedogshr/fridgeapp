@@ -76,6 +76,7 @@ const removeUser = (req, res, next) => {
 };
 
 const joinHouse = (req, res, next) => {
+  console.log('join house body? ', req.body)
   User.joinHouse(req.body, (err, user) => {
     if (err) {
       next(new Error(err));

@@ -16,6 +16,7 @@ export default function createHouseReducer(state = {}, action) {
     case UNAUTH_USER:
       return { ...{} };
     case CREATE_HOUSE:
+    console.log('inside create house with: ', action.payload)
       return { ...state,
         [action.payload.field]: action.payload.data,
       };

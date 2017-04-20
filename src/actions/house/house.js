@@ -74,23 +74,35 @@ export const getHouse = (id) => {
 
 export const createHouse = (house) => {
   return (dispatch, getState) => {
-    axios.post('/api/houses/', {
-      admin_user_in_house: 1,
+    console.log('state? ', getState())
+    const user_id = getState().initReducer.user_id;
+    const user_email = getState().initReducer.user_email;
+
+    return axios.post('/api/houses/', {
+      admin_user_in_house: user_id,
       house_address: house.address,
       house_unit_number: house.unit,
       house_city: house.city,
       house_state: house.state,
       house_zip: house.zip,
       house_info: house.info,
+      house_account: user_email,
     }).then((data) => {
-      return dispatch({
-        type: CREATE_HOUSE,
-        payload: data.data,
-      }).then(() => {
-        return true;
-      });
-    });
-  };
+      console.log('house data: ', data)
+      return axios.put('/api/users/joinhouse', {
+        key: 'house_in_user',
+        value: data.data.house,
+        id: user_id,
+      })
+      .then(() => {
+        return axios.put('/api/users/joinhouse', {
+          key: 'user_is_admin',
+          value: 1,
+          id: user_id,
+        })
+      })
+    }).catch((err) => false)
+  }
 };
 
 export const houseExist = (number) => {

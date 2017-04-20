@@ -26,14 +26,12 @@ module.exports = {
         callback("wrong password")
       }else{
            helpers.hashPass(user.new1, (err,result)=>{
-             db('user').where('user_id', user.email)
+             db('user').where('user_email', user.email)
                .update({
                  user_password: result,
-               })
-               .then(() => {
+               }).then(() => {
                  callback(null, true);
-               })
-               .catch((err) => {
+               }).catch((err) => {
                  callback(err);
                });
            })

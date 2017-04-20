@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { addTask, completeTask, undoCompleteTask } from '../actions/task/task.js';
-import AddTask from '../components/addTask';
+import AddTask from '../components/tasks/addTask';
 import IncompleteTasks from '../components/tasks/incompleteTask.jsx';
 import { connect } from 'react-redux';
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addTask, completeTask, undoCompleteTask } from '../actions/task/task';
 import CompleteTask from '../components/tasks/completeTask';
 import IncompleteTask from '../components/tasks/incompleteTask';
-import AddTask from '../components/addTask';
+import AddTask from '../components/tasks/addTask';
 import { Row, Col, Grid } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 

@@ -9,6 +9,14 @@ import ThemeDefault from '../styles/theme-default';
 
 class House extends Component {
   render() {
+    const roommateList = this.props.house.users.sort((user1, user2) => {
+      if (user1.user_id === this.props.currentUser.id) {
+        return -1
+      } else {
+        return 1
+      }
+    });
+
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div className="container-fluid">
@@ -21,7 +29,7 @@ class House extends Component {
               />
             </div>
             <div className="col-xs-12 col-md-6">
-              {this.props.house.users.map(user =>
+              {roommateList.map(user =>
                 <div className="col-xs-12 col-md-6" style={{ marginBottom: 15 }}>
                   <Roommate
                     roommate={user}

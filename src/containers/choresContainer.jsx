@@ -42,13 +42,6 @@ class Chores extends Component {
         marginTop: 15,
         marginBottom: 6,
       },
-      loadContainer: {
-        position: 'relative',
-      },
-      loadRefresh: {
-        display: 'inline-block',
-        position: 'relative',
-      },
     };
   }
 
@@ -119,47 +112,59 @@ class Chores extends Component {
           <Grid fluid>
             <Row>
               <Col xs={12}>
-                <Row between="xs">
+                <Row around="xs">
 
-                  <Col md={8}>
-                    <ChoresDashboardContainer />
+                  <Col sm={8} xs={12}>
+                    <Paper style={this.styles.paper} >
+                      <ChoresDashboardContainer />
+                    </Paper>
                   </Col>
 
-                  <Col md={4}>
-                    <AdminChores
-                      chores={this.props.chores}
-                    />
+                  <Col sm={4} xs={12}>
+                    <Paper style={this.styles.paper} >
+                      <AdminChores
+                        chores={this.props.chores}
+                      />
+                    </Paper>
                   </Col>
-
-
-                  {this.props.admin &&
-                  <Row>
-                    <AddChore
-                      handleKeyUp={this.handleKeyUp}
-                      buttonSubmit={this.buttonSubmit}
-                    />
-                    <GroupChores
-                      chores={this.props.chores}
-                      increaseGroups={this.props.increaseGroups}
-                      decreaseGroups={this.props.decreaseGroups}
-                      roomies={this.props.house.users}
-                    />
-                    <RaisedButton
-                      label="Next"
-                      primary
-                      onTouchTap={() => { this.setState({nextClicked: true }) }}
-                    />
+                  <Row between="xs" style={{"marginTop": 50}}>
+                      {this.props.admin &&
+                        <Col xs={12}>
+                          <Row center="xs">
+                            <Col lg={4}>
+                              <AddChore
+                                handleKeyUp={this.handleKeyUp}
+                                buttonSubmit={this.buttonSubmit}
+                              />
+                            </Col>
+                            <Col lg={8}>
+                              <GroupChores
+                                chores={this.props.chores}
+                                increaseGroups={this.props.increaseGroups}
+                                decreaseGroups={this.props.decreaseGroups}
+                                roomies={this.props.house.users}
+                              />
+                              <RaisedButton
+                                style={this.styles.btn}
+                                label="Next"
+                                primary
+                                onTouchTap={() => {
+                                  this.setState({nextClicked: true });
+                                  window.scrollTo(0, 0);
+                                }}
+                              />
+                            </Col>
+                          </Row>
+                        </Col>
+                      }
                   </Row>
-                  }
-
-
                 </Row>
               </Col>
             </Row>
             <Snackbar
               open={this.state.snackOpen}
               message={this.state.snackMessage}
-              autoHideDuration={4000}
+              autoHideDuration={2500}
               onRequestClose={this.handleRequestClose}
               contentStyle={{ textAlign: 'center' }}
             />
@@ -170,6 +175,7 @@ class Chores extends Component {
       return (
         <div>
           <GroupingOfChores
+            id="top"
             chores={this.props.chores}
             assignGroup={this.props.assignGroup}
             roomies={this.props.house.users}

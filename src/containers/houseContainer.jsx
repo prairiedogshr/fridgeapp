@@ -9,7 +9,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 class House extends Component {
 
   componentWillMount() {
-    console.log('house props! ', this.props)
   }
 
 	render() {

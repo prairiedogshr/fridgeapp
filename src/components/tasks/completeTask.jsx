@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default function CompletedTask(props) {
   const complete = props.tasks.complete;
   if (complete.length) {
@@ -10,7 +11,7 @@ export default function CompletedTask(props) {
         </h1>
         <ul>
           {complete.map(task => (
-            <li key={task.task_id} onClick={() => { props.undoCompleteTask(task); }}>{task.task_name} ${task.expense_in_task}</li>
+            <li key={task.task_id} onClick={() => { props.undoCompleteTask(task); }}>{task.task_name}</li>
             ), this)
           }
         </ul>
@@ -19,3 +20,5 @@ export default function CompletedTask(props) {
   }
   return null;
 }
+
+

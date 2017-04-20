@@ -3,7 +3,6 @@ import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 
 // import different reducers here
-import homelessReducer from './test';
 import choresReducer from './chores';
 import houseReducer from './house';
 import userReducer from './user';
@@ -19,7 +18,6 @@ import expensesReducer from './expenses';
 
 const rootReducer = combineReducers({
   logoutReducer,
-  homelessReducer,
   choresReducer,
   tasksReducer,
   settingsReducer,

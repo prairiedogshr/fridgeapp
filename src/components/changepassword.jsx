@@ -63,7 +63,6 @@ class Change extends Component {
         .then((resp) => {
           if(resp){
             alert("changed the password!");
-
           }else{
             alert("Please enter the correct original password")
           }

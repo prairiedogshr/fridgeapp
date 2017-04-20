@@ -22,7 +22,6 @@ class Routes extends Component {
     return (
       <Router>
         <Switch>
-          <Route path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/welcome" component={requireAuth(Welcome)} />

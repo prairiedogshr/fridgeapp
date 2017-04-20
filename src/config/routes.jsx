@@ -22,7 +22,7 @@ class Routes extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/login" /> } />
+          <Route exact path="/" render={() => <Redirect to="/dashboard" /> } />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/welcome" component={requireAuth(Welcome)} />

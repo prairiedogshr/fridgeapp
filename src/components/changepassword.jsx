@@ -50,40 +50,31 @@ class Change extends Component {
     this.state.profile[e.target.dataset.field] = e.target.value.trim();
   };
 
-  handleSubmit = (e) =>{
+  handleClick = (event) =>{
     event.preventDefault();
 
-    const old = this.id.oldpass.value;
-    const new1 = this.id.newpassword.value;
-    const new2 = this.id.newpassword2.value;
+    const old = document.getElementById("oldpass").value;
+    const new1 = document.getElementById("newpassword").value
+    const new2 = document.getElementById("newpassword2").value
     const email = this.props.user.user_email;
     const user={"old": old, "new1": new1, "new2": new2, "email":email}
-    console.log(email);
-    console.log(new2);
-    // if( new1 !== new2){
-    //   alert("your new password fields dont match, try again");
-    // }else{
-    //   this.props.changePassword(user)
-    //     .then((resp) => {
-    //       if(resp){
-    //         console.log("changed the password!");
-    //         this.props.history.push('/dashboard');
-    //       }else{
-    //         alert("Please enter the correct original password")
-    //       }
-    //     });
-    // }
-
+    if( new1 !== new2){
+      alert("Your new password fields dont match, try again");
+    }else if((old === new1) || (old === new2)){
+      alert("Your old password cant be your new one.")
+    }else{
+      this.props.changePassword(user)
+        .then((resp) => {
+          if(resp){
+            alert("changed the password!");
+            
+          }else{
+            alert("Please enter the correct original password")
+          }
+        });
+    }
   };
 
-  // <div>
-  //   <input type='password' ref='oldpass' className="form-control" placeholder='oldpassword'/>
-  //   <input type='password' ref='newpassword' className="form-control" placeholder='newpassword'/>
-  //   <input type='password' ref='newpassword2' className="form-control" placeholder='confirm new password'/>
-  //   <button onClick={(event) => this.handleSubmit(event)} className="btn btn-primary">
-  //     change!
-  //   </button>
-  // </div>
 
 
 
@@ -97,7 +88,7 @@ class Change extends Component {
                 <Col md ={4}>
                   <Paper style = {this.styles.paper}>
                     <h2>Change password</h2>
-                    <form onSubmit={event => this.handleSubmit(event)}>
+                    <form onSubmit={event => this.handleClick(event)}>
                       <TextField
                         id="oldpass"
                         floatingLabelText = "Old Password"
@@ -119,7 +110,7 @@ class Change extends Component {
                         type = "password"
                       />
                       <RaisedButton
-                        label="Login"
+                        label="Change"
                         primary={true}
                         style={{...this.styles.loginBtn, ...this.styles.btnSpan}}
                         type="submit"

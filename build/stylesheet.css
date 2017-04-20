@@ -1,29 +1,17 @@
-.navItem {
-  margin-right: 11px;
-  padding-top: 15px
-}
-.centered {
-  text-align: center;
-  margin: auto;
-}
-.profilePicture {
-  width: 100px;
-  height: 100px;
-  border-radius: 33px;
-}
-
-.user_info {
-  height:50px;
-}
-
-/*
- NEW
- */
-
 body {
   background-color: #f8f8f8;
   font-family: Roboto, Arial, sans-serif;
+  color: #0b0b0b;
   margin: 0;
+}
+
+a {
+  color: #551a8b;
+}
+
+a:focus, a:hover {
+  color: #0b0b0b;
+  text-decoration: none;
 }
 
 #wrapper {
@@ -44,6 +32,79 @@ body {
     border-left: 1px solid #e7e7e7;
   }
 }
+
+/* SUMMARY WIDGET */
+
+.summary-widget {
+  margin-bottom: 30px;
+}
+.summary-widget .wrapper {
+  padding: 16px;
+}
+.summary-widget .icon .material-icons {
+  float: left;
+  font-size: 40px;
+}
+.summary-widget:nth-child(1) .icon .material-icons {
+  color: #36a2eb;
+}
+.summary-widget:nth-child(2) .icon .material-icons {
+  color: #ff9802;
+}
+.summary-widget:nth-child(3) .icon .material-icons {
+  color: #e91d63;
+}
+.summary-widget:nth-child(4) .icon .material-icons {
+  color: #4caf50;
+}
+.summary-widget .icon .material-icons {
+  float: left;
+  font-size: 40px;
+}.summary-widget .icon .material-icons {
+   float: left;
+   font-size: 40px;
+ }
+.summary-widget .icon .material-icons {
+  float: left;
+  font-size: 40px;
+}
+
+.summary-widget .count {
+  float: right;
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  text-align: right;
+}
+.summary-widget .title {
+  float: right;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+  text-align: right;
+  color: #666;
+  margin-bottom: 15px;
+}
+.summary-widget hr {
+  clear: both;
+}
+.summary-widget .footer {
+  margin-top: 15px;
+  clear: both;
+}
+.summary-widget .footer-text {
+  float: left;
+  font-size: 16px;
+}
+.summary-widget .footer-icon .material-icons {
+  float: right;
+  text-align: right;
+  font-size: 20px;
+  line-height: 16px;
+}
+
+
+
 .icon-bar {
   color: #222;
 }
@@ -51,11 +112,13 @@ body {
 .navbar-nav {
   float: right;
 }
+
 button.navbar-toggle {
   position: absolute;
   right: 0;
   top: 6px;
 }
+
 .navbar-default .navbar-toggle {
   border: 0;
 }

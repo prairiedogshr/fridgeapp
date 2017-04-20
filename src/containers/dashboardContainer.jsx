@@ -75,7 +75,7 @@ class Dashboard extends Component {
             <SummaryWidget
               widgetID="bills"
               icon="credit_card"
-              count={this.props.expenses.length}
+              count={this.props.expenses.currentMonth.length}
               headerText="Bills This Month"
               linkTo="/bills"
               footerText="Pay Your Bills"

@@ -21,28 +21,28 @@ class Tasks extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row center={'xs'}>
-          <Col xs={12}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-xs-12">
             <AddTask addTask={this.props.addTask} house={this.props.user.house_in_user}
             />
-          </Col>
-        </Row>
-        <Row between={'xs'}>
-          <Col xs={4}>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-md-6">
             <IncompleteTask
               tasks={this.props.tasks}
               completeTask={this.completeTask}
             />
-          </Col>
-          <Col xs={4}>
+          </div>
+          <div className="col-xs-12 col-md-6">
             <CompleteTask
               tasks={this.props.tasks}
               undoCompleteTask={this.undoCompleteTask}
             />
-          </Col>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     );
   }
 }

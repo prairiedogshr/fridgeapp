@@ -86,11 +86,11 @@ class User extends Component {
 
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
-        <Grid fluid>
-          <Row>
-            <Col xs={12}>
-              <Row center="xs">
-                <Col md={4}>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="row">
+                <div className="col-xs-12 col-md-4 col-md-offset-4 text-center">
                   <Paper style={this.styles.paper}>
                     <ValidatorForm onSubmit={e => {this.handleSubmit(e)}}>
                       <TextField
@@ -156,11 +156,11 @@ class User extends Component {
                       contentStyle={{ textAlign: 'center' }}
                     />
                   </Paper>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </MuiThemeProvider>
     );
   }

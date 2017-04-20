@@ -41,8 +41,13 @@ export default class Roommate extends Component {
 
   handleRemove(event) {
     this.props.remove(this.roommate.user_id);
-    this.forceUpdate();
     this.setState({open: false});
+
+  }
+
+  handleUserRemove(event) {
+    this.props.remove(this.roommate.user_id);
+    this.props.history.push('/welcome');
   }
 
   render() {
@@ -58,6 +63,19 @@ export default class Roommate extends Component {
         onTouchTap={this.handleRemove.bind(this)}
         />
       ];
+
+      const userRemoveActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose.bind(this)}
+        />,
+      <FlatButton
+        label="Leave"
+        backgroundColor='tomato'
+        onTouchTap={this.handleUserRemove.bind(this)}
+        />        
+      ]
     return (
       <div className="roommateCard">
         <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -95,6 +113,26 @@ export default class Roommate extends Component {
               </Dialog>
             </CardActions>
           }
+           {this.roommate.user_id === this.props.currentUser.id &&
+            <CardActions expandable={true}>
+              <FlatButton
+                style={{color: 'white'}}
+                backgroundColor='tomato'
+                hoverColor="grey"
+                fullWidth={true}
+                label="Leave House"
+                onTouchTap={this.handleOpen}
+              />
+              <Dialog
+                title="Leave House"
+                actions={userRemoveActions}
+                modal={true}
+                open={this.state.open}
+              >
+                Would you like to leave the house, {this.roommate.user_first_name} ?
+              </Dialog>
+            </CardActions>
+          } 
         </Card>
         <br />
       </div>

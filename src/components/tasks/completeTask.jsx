@@ -1,20 +1,21 @@
 import React from 'react';
-
+import {List, ListItem} from 'material-ui/List';
 
 export default function CompletedTask(props) {
   const complete = props.tasks.complete;
   if (complete.length) {
     return (
       <div>
-        <h1>
-          Complete Tasks
-        </h1>
-        <ul>
+        <h2>Complete Tasks</h2>
+        <List>
           {complete.map(task => (
-            <li key={task.task_id} onClick={() => { props.undoCompleteTask(task); }}>{task.task_name}</li>
-            ), this)
-          }
-        </ul>
+            <ListItem 
+              key={task.task_id} 
+              primaryText={task.task_name}
+              onClick={() => { props.undoCompleteTask(task); }}
+            />
+          ))}
+        </List>
       </div>
     );
   }

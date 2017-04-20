@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { updateHouseInfo, removeUser, addUser, getHouse } from '../actions/house/house.js';
 import HouseInfo from '../components/houseInfo.jsx';
 import Roommate from '../components/roommate.jsx';
@@ -11,6 +12,14 @@ class House extends Component {
   }
 
 	render() {
+    const roommateList = this.props.house.users.sort((user1, user2) => {
+      if (user1.user_id === this.props.currentUser.id) {
+        return -1
+      } else {
+        return 1
+      }
+    });
+
 		return (
 			<Grid fluid>
 				<Row>
@@ -19,8 +28,8 @@ class House extends Component {
 						update={this.props.updateHouseInfo} currentUser={this.props.currentUser} />
 					</Col>
 					<Col xs={6}>
-						{this.props.house.users.map(user =>
-							<Roommate roommate={user} currentUser={this.props.currentUser} remove={this.props.removeUser} />
+						{roommateList.map(user =>
+							<Roommate history={this.props.history} roommate={user} currentUser={this.props.currentUser} remove={this.props.removeUser} />
 						)}
 				</Col>
 			</Row>
@@ -36,7 +45,7 @@ const mapStateToProps = ({ houseReducer, userReducer }) => ({
   }
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     addUser,
@@ -44,6 +53,6 @@ export default connect(
     updateHouseInfo,
     getHouse,
   },
-)(House);
+)(House));
 
 // export default connect(mapStateToProps, mapDispatchToProps)(House);

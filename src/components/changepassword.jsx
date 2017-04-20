@@ -76,8 +76,6 @@ class Change extends Component {
 
 
 
-
-
   render(){
     return(
       <MuiThemeProvider muiTheme={ThemeDefault}>

@@ -44,6 +44,7 @@ class Change extends Component {
     };
   }
 
+
   handleOnChange = (e) => {
     this.state.profile[e.target.dataset.field] = e.target.value.trim();
   };
@@ -76,6 +77,7 @@ class Change extends Component {
 
 
 
+
   render(){
     return(
       <MuiThemeProvider muiTheme={ThemeDefault}>
@@ -87,6 +89,7 @@ class Change extends Component {
                   <Paper style = {this.styles.paper}>
                     <h2>Change password</h2>
                     <form onSubmit={event => this.handleClick(event)}>
+
                       <TextField
                         id="oldpass"
                         floatingLabelText = "Old Password"

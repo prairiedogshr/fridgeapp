@@ -3,6 +3,18 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { getAppState } from '../actions/init/init';
 import { changePassword } from '../actions/profile/profile';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import ThemeDefault from '../styles/theme-default';
+
+
 
 class Change extends Component {
   constructor(props){
@@ -12,6 +24,32 @@ class Change extends Component {
       user_newpass: ''
     }
   }
+
+
+  this.styles = {
+    paper: {
+      padding: 16,
+      overflow: 'auto'
+    },
+    btn: {
+      marginTop: 15,
+      marginBottom: 6,
+    },
+    loadContainer: {
+      position: 'relative',
+    },
+    loadRefresh: {
+      display: 'inline-block',
+      position: 'relative',
+    },
+  };
+  }
+
+
+
+
+
+
 
   handleOnChange = (e) => {
     this.state.profile[e.target.dataset.field] = e.target.value.trim();

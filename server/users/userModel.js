@@ -176,7 +176,11 @@ module.exports = {
             incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
             groups: [1]
           },
-          expensesReducer: dataa[7],
+          expensesReducer: {
+            yearly: dataa[7].filter((exp) => exp.expense_due > new Date(new Date() - 3.154e+10)),
+            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,3)),
+            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,4)),
+          },
         };
         callback(null, formedData);
       })

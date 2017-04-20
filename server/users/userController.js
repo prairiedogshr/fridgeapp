@@ -55,26 +55,24 @@ const updateUser = (req, res, next) => {
   });
 };
 
-const change = (req,res,next) => {
+const change = (req, res, next) => {
   User.change(req.body, (err, user) => {
-    if(err){
+    if (err) {
       next(new Error(err));
-    }else{
+    } else {
       res.send(user);
     }
   });
 };
 
-
 const removeUser = (req, res, next) => {
-      User.removeUser(req.body, (err, user) => {
-        if (err) {
-          next(new Error(err));
-        } else {
-          res.send(user)
-        }
-      }
-  );
+  User.removeUser(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user)
+    }
+  });
 };
 
 const joinHouse = (req, res, next) => {

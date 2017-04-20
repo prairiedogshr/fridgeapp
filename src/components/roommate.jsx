@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
 import Dialog from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
 
 export default class Roommate extends Component {
   constructor(props) {
@@ -11,16 +11,13 @@ export default class Roommate extends Component {
     this.phone = props.roommate.user_phone;
     this.state = {
       expanded: false,
-      open: false
+      open: false,
+      snackBarOpen: false,
     };
   }
 
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
-  };
-
-  handleToggle = (event, toggle) => {
-    this.setState({expanded: toggle});
   };
 
   handleExpand = () => {
@@ -39,15 +36,22 @@ export default class Roommate extends Component {
     this.setState({open: false});
   };
 
+  handleSnackBarClose = () => {
+    this.setState({
+      snackBarOpen: false,
+    });
+  };
+
   handleRemove(event) {
     this.props.remove(this.roommate.user_id);
     this.setState({open: false});
-
   }
 
   handleUserRemove(event) {
     this.props.remove(this.roommate.user_id);
     this.props.history.push('/welcome');
+    this.forceUpdate();
+    this.setState({open: false, snackBarOpen: true });
   }
 
   render() {
@@ -60,6 +64,7 @@ export default class Roommate extends Component {
       <FlatButton
         label="Remove Roommate"
         backgroundColor='tomato'
+        style={{ color: 'white' }}
         onTouchTap={this.handleRemove.bind(this)}
         />
       ];
@@ -77,19 +82,20 @@ export default class Roommate extends Component {
         />        
       ]
     return (
-      <div className="roommateCard">
+      <div>
         <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
           <CardHeader
             title={this.roommate.user_first_name + ' ' + this.roommate.user_last_name}
             avatar="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAYiAAAAJGYzZGYxOTkwLTM0NjAtNDEwMC05ZWUzLWZkNGJmYjM5M2VlYg.jpg"
             actAsExpander={true}
             showExpandableButton={true}
+            fullWidth={true}
           />
-          <CardText>
+          <CardText  style={{ padding: '0 16px' }}>
           <p><strong>Email: </strong>{this.roommate.user_email}</p>
           <p><strong>Phone: </strong>{'(' + this.phone.slice(0,3) + ') ' + this.phone.slice(3,6) + '-' + this.phone.slice(6)}</p>
           </CardText>
-          <CardText expandable={true}>
+          <CardText expandable={true} style={{ padding: '0 16px' }}>
             <p><strong>Birthday! </strong>{this.roommate.user_birthday}</p>
             <p><strong>Info: </strong>{this.roommate.user_info}</p>
           </CardText>
@@ -134,7 +140,13 @@ export default class Roommate extends Component {
             </CardActions>
           } 
         </Card>
-        <br />
+        <Snackbar
+          open={this.state.snackBarOpen}
+          message="Roommate removed."
+          autoHideDuration={3000}
+          onRequestClose={this.handleSnackBarClose}
+          contentStyle={{ textAlign: 'center' }}
+        />
       </div>
     );
   }

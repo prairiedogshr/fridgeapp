@@ -24,7 +24,6 @@ const LeftDrawer = (props) => {
     logo: {
       height: 40,
       width: 'auto',
-      paddingTop: 10,
     },
     menuItem: {
       color: white,
@@ -75,9 +74,9 @@ const LeftDrawer = (props) => {
             primaryText={menu.text}
             leftIcon={menu.icon}
             containerElement={<Link to={menu.link} />}
-            onTouchTap={() => {
-              props.handleChangeRequestNavDrawer();
-            }}
+            // onTouchTap={() => {
+            //   props.handleChangeRequestNavDrawer();
+            // }}
           />,
         )}
       </div>

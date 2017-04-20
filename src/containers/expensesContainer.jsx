@@ -8,7 +8,6 @@ import Payment from '../components/expenses/payment';
 import { Row, Col, Grid } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 
-
 class houseExpenses extends Component {
   constructor(props) {
     super(props)
@@ -57,7 +56,7 @@ class houseExpenses extends Component {
     return (
       <Grid fluid>
         <Row>
-          <Col xs={6}>
+          <Col md={6}>
             <Paper style={this.styles.paper}>
               <MonthlyFinances roommates={this.props.roommates} expenses={this.props.expenses.currentMonth} />
             </Paper>
@@ -66,7 +65,7 @@ class houseExpenses extends Component {
               <ExpensesGraph roommates={this.props.roommates} expenses={this.props.expenses} />
             </Paper>
           </Col>
-          <Col xs={6}>
+          <Col md={6}>
             <Paper style={this.styles.paper}>
               <Payment total={this.state.billTotal} />
               <PaypalButton paypalAdmin={this.props.paypalAdmin} total={this.state.billTotal} />

@@ -11,11 +11,13 @@ const getHouse = (req, res, next) => {
 };
 
 const createHouse = (req, res, next) => {
-	House.createHouse(req.body, (err, ok) => {
+	House.createHouse(req.body, (err, house) => {
 		if (err) {
 			next(new Error(err));
 		} else {
-			res.redirect('/#/dashboard');
+			res.json({
+        house: house[0]
+      })
 		}
 	})
 };

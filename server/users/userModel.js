@@ -98,6 +98,7 @@ module.exports = {
   },
 
   joinHouse: (update, callback) => {
+    console.log('join house update: ', update)
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,

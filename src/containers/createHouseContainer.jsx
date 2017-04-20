@@ -34,6 +34,9 @@ class CreateHouse extends Component {
       .then((resp) => {
         if (resp) {
           this.props.history.push('/dashboard');
+        } else {
+          //error in create house
+          //handle error
         }
       });
   }

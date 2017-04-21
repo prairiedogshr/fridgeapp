@@ -65,11 +65,7 @@ class Change extends Component {
           if(resp){
             alert("changed the password!");
             this.props.history.push('/dashboard')
-<<<<<<< HEAD
-          } else {
-=======
           }else{
->>>>>>> hotfix
             alert("Please enter the correct original password")
           }
         });
@@ -89,22 +85,16 @@ class Change extends Component {
                   <Paper style = {this.styles.paper}>
                     <h2>Change password</h2>
                     <form onSubmit={event => this.handleClick(event)}>
-<<<<<<< HEAD
-
-=======
->>>>>>> hotfix
                       <TextField
                         id="oldpass"
                         floatingLabelText = "Old Password"
                         fullWidth={true}
-
                         type = "password"
                       />
                       <TextField
                         id = "newpassword"
                         floatingLabelText = "New Password"
                         fullWidth={true}
-
                         type = "password"
                       />
                       <TextField

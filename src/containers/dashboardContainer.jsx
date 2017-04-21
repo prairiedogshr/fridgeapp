@@ -114,8 +114,6 @@ const mapStateToProps = ({ choresReducer, tasksReducer, expensesReducer, houseRe
   house: houseReducer,
 });
 
-export default connect(mapStateToProps, { getAppState })(Dashboard);
-
 export default connect(
   mapStateToProps,
   {

@@ -83,7 +83,7 @@ class Change extends Component {
               <Row center = "xs">
                 <Col md ={4}>
                   <Paper style = {this.styles.paper}>
-                    <h2>Change password</h2>
+                    <h2>Change Password</h2>
                     <form onSubmit={event => this.handleClick(event)}>
                       <TextField
                         id="oldpass"
@@ -106,7 +106,7 @@ class Change extends Component {
                       <RaisedButton
                         label="Change"
                         primary={true}
-                        style={{...this.styles.loginBtn, ...this.styles.btnSpan}}
+                        style={this.styles.btn}
                         type="submit"
                       />
                     </form>

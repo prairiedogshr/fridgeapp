@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Feedback from 'material-ui/svg-icons/action/feedback';
-import CheckCircle from 'material-ui/svg-icons/action/check-circle';
+import CheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-outline-blank';
+
 import { addTask, completeTask, undoCompleteTask } from '../../actions/task/task';
 
 export default IncompleteTasks = (props) => {
@@ -15,7 +16,7 @@ export default IncompleteTasks = (props) => {
               primaryText={task.task_name}
               key={task.task_id}
               leftIcon={<Feedback />}
-              rightIcon={<CheckCircle style={{ fill: '#551a8b', width: 16, height: 16, top: 4 }} />}
+              rightIcon={<CheckBoxOutlineBlank />}
               onClick={() => { props.completeTask(task); }}
             />
           ))}

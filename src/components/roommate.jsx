@@ -55,6 +55,7 @@ export default class Roommate extends Component {
   }
 
   render() {
+    const DefaultAvatar = 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAYiAAAAJGYzZGYxOTkwLTM0NjAtNDEwMC05ZWUzLWZkNGJmYjM5M2VlYg.jpg';
     const removeActions = [
       <FlatButton
         label="Cancel"
@@ -68,8 +69,7 @@ export default class Roommate extends Component {
         onTouchTap={this.handleRemove.bind(this)}
         />
       ];
-
-      const userRemoveActions = [
+    const userRemoveActions = [
       <FlatButton
         label="Cancel"
         primary={true}
@@ -79,17 +79,16 @@ export default class Roommate extends Component {
         label="Leave"
         backgroundColor='tomato'
         onTouchTap={this.handleUserRemove.bind(this)}
-        />        
-      ]
+        />
+      ];
     return (
       <div>
         <Card id={this.roommate.user_id} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
           <CardHeader
             title={this.roommate.user_first_name + ' ' + this.roommate.user_last_name}
-            avatar="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAYiAAAAJGYzZGYxOTkwLTM0NjAtNDEwMC05ZWUzLWZkNGJmYjM5M2VlYg.jpg"
+            avatar={require(`../assets/headshots/${this.roommate.user_first_name}.jpg` || DefaultAvatar)}
             actAsExpander={true}
             showExpandableButton={true}
-            fullWidth={true}
           />
           <CardText  style={{ padding: '0 16px' }}>
           <p><strong>Email: </strong>{this.roommate.user_email}</p>

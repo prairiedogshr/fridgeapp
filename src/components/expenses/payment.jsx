@@ -8,7 +8,7 @@ export default function Payment(props) {
       <h3>Make A Payment!</h3>
       <p>Click on expenses to add them to your payment</p>
     <Divider inset={false} />
-      <p>Current Amount: ${props.total}</p>
+      <p>Current Amount: ${parseFloat(props.total).toFixed(2)}</p>
     </div>
     )
 }

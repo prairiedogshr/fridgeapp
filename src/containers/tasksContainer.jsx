@@ -20,6 +20,7 @@ class Tasks extends Component {
   };
 
   render() {
+    console.log('props: ', this.props)
     return (
       <div className="container-fluid">
         <div className="row">

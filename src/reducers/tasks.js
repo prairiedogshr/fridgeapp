@@ -15,7 +15,8 @@ export default function tasksReducer(state = initialState, action) {
         incomplete: [...state.incomplete,
         {
           house_in_task: action.payload.house_in_task,
-          task_name: action.payload.task_name
+          task_name: action.payload.task_name,
+          task_id: action.payload.task_id,
         }]
       };
 

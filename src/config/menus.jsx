@@ -8,7 +8,7 @@ import Announcement from 'material-ui/svg-icons/action/announcement';
 
 const menus = {
   sideMenu: [
-    { text: 'DashBoard', icon: <Dashboard />, link: '/dashboard' },
+    { text: 'Dashboard', icon: <Dashboard />, link: '/dashboard' },
     { text: 'Profile', icon: <AccountBox />, link: '/profile' },
     { text: 'House', icon: <Home />, link: '/house' },
     { text: 'Chores', icon: <Assignment />, link: '/chores' },

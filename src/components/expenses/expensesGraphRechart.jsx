@@ -127,9 +127,9 @@ class ExpensesGraph extends Component {
     for (let key in monthlyExpensesObj) {
       monthlyExpensesArr.push({
         month: key,
-        electricity: monthlyExpensesObj['Electricity'],
+        electricity: monthlyExpensesObj[key]['Electricity'],
         internet: monthlyExpensesObj[key]['Internet'],
-        water: monthlyExpensesObj[key]['Water'],
+        water: parseFloat(monthlyExpensesObj[key]['Water']).toFixed(2),
         cable: monthlyExpensesObj[key]['Cable'],
         rent: monthlyExpensesObj[key]['Rent'],
       })
@@ -207,7 +207,7 @@ class ExpensesGraph extends Component {
               <XAxis dataKey='month'/>
               <YAxis/>
               <CartesianGrid strokeDasharray="3 3"/>
-              <Tooltip/>
+              <Tooltip separator=": $"/>
               <Area type='monotone' dataKey='electricity' fill='#ff9802' />
               <Area type='monotone' dataKey='internet' fill='#89c541' />
               <Area type='monotone' dataKey='cable' fill='#ec1561' />

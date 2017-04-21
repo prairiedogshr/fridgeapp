@@ -147,6 +147,12 @@ class User extends Component {
                         style={this.styles.btn}
                         type="Submit"
                       />
+                      <RaisedButton
+                        label="Change Password"
+                        primary={true}
+                        style={this.styles.btn}
+                        href= "/change"
+                      />
                     </ValidatorForm>
                     <Snackbar
                       open={this.state.snackBarOpen}

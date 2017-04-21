@@ -151,6 +151,3 @@ export default withRouter(connect(
     getAppState
   }
 )(Login));
-
-
-

@@ -118,7 +118,7 @@ class Chores extends Component {
                 {this.props.admin &&
                   <div>
                     <Paper className="paper-wrapper">
-                      <Header>
+                      <Header className="header-sub-title">
                         <h3>Add a Chore</h3>
                       </Header>
                       <Divider />
@@ -128,7 +128,7 @@ class Chores extends Component {
                       />
                     </Paper>
                     <Paper className="paper-wrapper">
-                      <Header>
+                      <Header className="header-sub-title">
                         <h3>Set Chore Groups</h3>
                       </Header>
                       <Divider />

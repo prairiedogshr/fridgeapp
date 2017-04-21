@@ -11,34 +11,35 @@ class House extends Component {
   render() {
     const roommateList = this.props.house.users.sort((user1, user2) => {
       if (user1.user_id === this.props.currentUser.id) {
-        return -1
-      } else {
-        return 1
+        return -1;
       }
+      return 1;
     });
 
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-xs-12 col-md-6" style={{ marginBottom: 15 }} >
+            <div className="col-md-6" style={{ marginBottom: 15 }} >
               <HouseInfo
                 info={this.props.house}
                 update={this.props.updateHouseInfo}
                 currentUser={this.props.currentUser}
               />
             </div>
-            <div className="col-xs-12 col-md-6">
-              {roommateList.map(user =>
-                <div className="col-xs-12 col-md-6" style={{ marginBottom: 15 }}>
-                  <Roommate
-                    history={this.props.history}
-                    roommate={user}
-                    currentUser={this.props.currentUser}
-                    remove={this.props.removeUser}
-                  />
-                </div>
-              )}
+            <div className="col-md-6">
+              <div className="row">
+                {roommateList.map(user =>
+                  <div className="col-md-6" style={{ marginBottom: 15 }}>
+                    <Roommate
+                      history={this.props.history}
+                      roommate={user}
+                      currentUser={this.props.currentUser}
+                      remove={this.props.removeUser}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

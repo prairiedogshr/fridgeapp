@@ -37,7 +37,6 @@ a:focus, a:hover {
   padding: 16px;
   margin-bottom: 30px;
 }
-
 .paper-wrapper .header-title {
   background: #26c6da;
   height: 72px;
@@ -54,6 +53,12 @@ a:focus, a:hover {
   margin: 0;
   padding: 0 0 5px 0;
   color: #fff;
+}
+.paper-wrapper .header-sub-title {
+  padding-left: 0 !important;
+}
+.paper-wrapper .header-sub-title h3 {
+  font-size: 20px;
 }
 .group-number {
   font-size: 60px;

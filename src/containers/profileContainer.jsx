@@ -5,9 +5,13 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import Snackbar from 'material-ui/Snackbar';
+import LockOutline from 'material-ui/svg-icons/action/lock-outline';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import ThemeDefault from '../styles/theme-default';
 
@@ -24,8 +28,8 @@ class User extends Component {
       user_birthday: this.props.user.user_birthday || null,
       user_info: this.props.user.user_info || null,
       user_chore_rotation: this.props.user.user_chore_rotation || null,
+      snackBarOpen: false,
     };
-    
     this.styles = {
       paper: {
         padding: 16,
@@ -61,13 +65,22 @@ class User extends Component {
     this.setState({ user_birthday: date });
   };
 
+  handleSnackBarClose = () => {
+    this.setState({
+      snackBarOpen: false,
+    });
+  };
+
   handleSubmit = (e) => {
     // e.preventDefault();
 
     this.props.updateUser(this.state)
       .then(response => {
-        if (response === true) {
-          return this.props.history.push('/profile');
+        if (response) {
+          console.log('updated profile');
+          this.setState({
+            snackBarOpen: true,
+          });
         }
       });
   };
@@ -76,11 +89,11 @@ class User extends Component {
 
     return (
       <MuiThemeProvider muiTheme={ThemeDefault}>
-        <Grid fluid>
-          <Row>
-            <Col xs={12}>
-              <Row center="xs">
-                <Col md={4}>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="row">
+                <div className="col-xs-12 col-md-4 col-md-offset-4 text-center">
                   <Paper style={this.styles.paper}>
                     <ValidatorForm onSubmit={e => {this.handleSubmit(e)}}>
                       <TextField
@@ -137,13 +150,27 @@ class User extends Component {
                         style={this.styles.btn}
                         type="Submit"
                       />
+                      <div className="clearfix" style={{ height: 15 }}></div>
+                      <FlatButton
+                        label="Change Password &raquo;"
+                        secondary={true}
+                        icon={<LockOutline />}
+                        href= "/change"
+                      />
                     </ValidatorForm>
+                    <Snackbar
+                      open={this.state.snackBarOpen}
+                      message="Profile updated!"
+                      autoHideDuration={3000}
+                      onRequestClose={this.handleSnackBarClose}
+                      contentStyle={{ textAlign: 'center' }}
+                    />
                   </Paper>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </MuiThemeProvider>
     );
   }

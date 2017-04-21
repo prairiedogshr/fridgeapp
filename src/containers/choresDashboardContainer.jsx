@@ -3,10 +3,10 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import CompleteChore from '../components/chores/completeChore';
 import IncompleteChore from '../components/chores/incompleteChore';
-import {
-  completeChore,
-  undoComplete,
-} from '../actions/chore/chore';
+import { completeChore, undoComplete } from '../actions/chore/chore';
+import Paper from 'material-ui/Paper';
+import Header from 'material-ui/Subheader';
+import Info from 'material-ui/svg-icons/action/info';
 
 class ChoresDashboard extends Component {
   constructor(props) {
@@ -30,10 +30,11 @@ class ChoresDashboard extends Component {
     const incomplete = this.props.chores.incomplete;
 
     return (
-      <div>
-        <h1>
-          Your Chores
-        </h1>
+      <Paper className="paper-wrapper">
+        <Header className="header-title">
+          <h2>Your Chores</h2>
+          <h3><Info style={{ fill: '#fff', width: 16, height: 16, verticalAlign: 'bottom' }} /> Click on an item to mark as done</h3>
+        </Header>
         <IncompleteChore
           chores={this.props.chores}
           completeChore={this.completeChore}
@@ -42,7 +43,7 @@ class ChoresDashboard extends Component {
           chores={this.props.chores}
           undoComplete={this.undoComplete}
         />
-      </div>
+      </Paper>
     );
   }
 }

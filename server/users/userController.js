@@ -55,27 +55,28 @@ const updateUser = (req, res, next) => {
   });
 };
 
-const change = (req,res,next) => {
+const change = (req, res, next) => {
   User.change(req.body, (err, user) => {
-    if(err){
+    if (err) {
       next(new Error(err));
-    }else{
-      console.log(req.body);
+    } else {
+      res.send(user);
     }
   });
 };
 
-
 const removeUser = (req, res, next) => {
-      User.removeUser(req.body, (err, user) => {
-        if (err) {
-          next(new Error(err));
-        }
-      }
-  );
+  User.removeUser(req.body, (err, user) => {
+    if (err) {
+      next(new Error(err));
+    } else {
+      res.send(user)
+    }
+  });
 };
 
 const joinHouse = (req, res, next) => {
+  console.log('join house body? ', req.body)
   User.joinHouse(req.body, (err, user) => {
     if (err) {
       next(new Error(err));
@@ -90,6 +91,7 @@ module.exports = {
   getAppState,
   getUser,
   signup,
+  change,
   updateUser,
   removeUser,
   joinHouse,

@@ -66,19 +66,19 @@ class Login extends Component {
     this.props.loginUser({
       email: document.getElementById("emailInput").value,
       password: document.getElementById("passwordInput").value
-    }).then(resp => {
-      if (resp === 'no user') {
-        document.getElementById("emailInput").value = '';
-        document.getElementById("passwordInput").value = '';
-        // pop up aert for user
-        NoUserAlert.handleOpen();
+      }).then(resp => {
+        if (resp === 'no user') {
+          document.getElementById("emailInput").value = '';
+          document.getElementById("passwordInput").value = '';
+          // pop up alert for user
+          NoUserAlert.handleOpen();
 
-      } else if (resp) {
-        this.props.history.push('/dashboard');
-      } else {
-        this.props.history.push('/welcome')
-      }
-    }).catch(err => { console.log('err: ', err)});
+        } else if (resp) {
+          this.props.history.push('/dashboard');
+        } else {
+          this.props.history.push('/welcome')
+        }
+      }).catch(err => { console.log('err: ', err)});
   };
 
   render() {
@@ -151,6 +151,3 @@ export default withRouter(connect(
     getAppState
   }
 )(Login));
-
-
-

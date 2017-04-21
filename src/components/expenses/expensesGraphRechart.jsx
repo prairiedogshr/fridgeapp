@@ -1,54 +1,49 @@
-import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'Recharts';
 import React, { Component } from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'recharts';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import Event from 'material-ui/svg-icons/action/event';
+import DateRange from 'material-ui/svg-icons/action/date-range';
+import Home from 'material-ui/svg-icons/action/home';
 import SwipeableViews from 'react-swipeable-views';
 
 class ExpensesGraph extends Component {
   constructor(props) {
     super(props)
-    console.log('props..', this.props)
     this.roommates = this.props.roommates;
-    console.log('roommates? ', this.roommates)
     this.state = {
       yourShare: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
-          value: (item.expense_balance / this.roommates)
-        })
+          value: parseFloat((item.expense_balance / this.roommates).toFixed(2)),
+        });
         return all;
         },[]).slice(0,10),
       currentHouse: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: item.expense_balance
-        })
+        });
         return all;
         },[]).slice(0,10),
       slideIndex: 0
-      }
-
-    // setInterval(() => {
-    //   console.log(this.state)
-    // }, 2000)
-
+    };
     this.styles = {
       headline: {
-      fontSize: 24,
-      paddingTop: 16,
-      marginBottom: 12,
-      fontWeight: 400,
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
       },
       slide: {
         padding: 10,
       },
     };
 
-    this.COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    this.COLORS = ['#26c6da', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f' ];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
   }
-
 
     handleSwipe = (value) => {
       this.setState({
@@ -80,15 +75,81 @@ class ExpensesGraph extends Component {
     };
 
   render() {
+
+    const monthLookup = {
+      0: 'Jan',
+      1: 'Feb',
+      2: 'Mar',
+      3: 'Apr',
+      4: 'May',
+      5: 'Jun',
+      6: 'Jul',
+      7: 'Aug',
+      8: 'Sep',
+      9: 'Oct',
+      10: 'Nov',
+      11: 'Dec',
+    }
+
+    const monthOrder = {
+      'May': 0,
+      'Jun': 1,
+      'Jul': 2,
+      'Aug': 3,
+      'Sep': 4,
+      'Oct': 5,
+      'Nov': 6,
+      'Dec': 7,
+      'Jan': 8,
+      'Feb': 9,
+      'Mar': 10,
+      'Apr': 11,
+    }
+
+    const monthlyExpensesObj = this.props.expenses.yearly.reduce((all, item) => {
+      if (all[monthLookup[item.expense_billing_month]]) {
+        if (all[monthLookup[item.expense_billing_month]][item.expense_name]) {
+          all[monthLookup[item.expense_billing_month]][item.expense_name] += (item.expense_balance / this.props.roommates)
+        } else {
+        all[monthLookup[item.expense_billing_month]][item.expense_name] = (item.expense_balance / this.props.roommates)
+        }
+      } else {
+          all[monthLookup[item.expense_billing_month]] = {
+            [item.expense_name]: (item.expense_balance / this.props.roommates)
+          }
+        }
+      return all;
+    },{})
+
+    console.log('~~~~~~~~~~~~~~~~ ', monthlyExpensesObj)
+
+    let monthlyExpensesArr = [];
+    for (let key in monthlyExpensesObj) {
+      monthlyExpensesArr.push({
+        month: key,
+        electricity: monthlyExpensesObj['Electricity'],
+        internet: monthlyExpensesObj[key]['Internet'],
+        water: monthlyExpensesObj[key]['Water'],
+        cable: monthlyExpensesObj[key]['Cable'],
+        rent: monthlyExpensesObj[key]['Rent'],
+      })
+    }
+
+    monthlyExpensesArr = monthlyExpensesArr.sort((a, b) => {
+      return monthOrder[a.month] - monthOrder[b.month]
+    })
+
+    console.log('did this woooooooooork??? ', monthlyExpensesArr)
+
     return (
         <div>
           <Tabs
             onChange={this.handleSwipe}
             value={this.state.slideIndex}
           >
-            <Tab label="Your Current Share" value={0} />
-            <Tab label="Total House" value={1} />
-            <Tab label="Yearly" value={2} />
+            <Tab label="Month" value={0} style={{ textTransform: 'none' }} icon={<Event />} />
+            <Tab label="House" value={1} style={{ textTransform: 'none' }} icon={<Home />} />
+            <Tab label="Year" value={2} style={{ textTransform: 'none' }} icon={<DateRange />} />
           </Tabs>
           <SwipeableViews
             index={this.state.slideIndex}
@@ -97,7 +158,7 @@ class ExpensesGraph extends Component {
             <div>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
                 <PieChart>
                   <Pie
@@ -111,14 +172,14 @@ class ExpensesGraph extends Component {
                       this.state.yourShare.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
                     }
                   </Pie>
-                  <Tooltip />
+                  <Tooltip separator=": $" />
                 </PieChart>
-            </ResponsiveContainer>
+              </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
                 <PieChart>
                   <Pie
@@ -132,24 +193,27 @@ class ExpensesGraph extends Component {
                       this.state.currentHouse.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
                     }
                   </Pie>
-                  <Tooltip />
+                  <Tooltip separator=": $" />
                 </PieChart>
-            </ResponsiveContainer>
+              </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
-                <AreaChart
-                  data={this.props.expenses.yearly}
-                >
-                <XAxis dataKey="expense_billing_month" />
-                <YAxis/>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
-                <Area type='monotone' dataKey='expense_balance' stackId="1" stroke='#8884d8' fill='#8884d8' />
-                </AreaChart>
+            <AreaChart width={600} height={400} data={monthlyExpensesArr}
+              margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+              <XAxis dataKey='month'/>
+              <YAxis/>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <Tooltip/>
+              <Area type='monotone' dataKey='electricity' fill='#f0f9e8' />
+              <Area type='monotone' dataKey='internet' fill='#bae4bc' />
+              <Area type='monotone' dataKey='cable' fill='#7bccc4' />
+              <Area type='monotone' dataKey='water' fill='#43a2ca' />
+              <Area type='monotone' dataKey='rent' stroke='#8884d8' fill='#0868ac' />
+            </AreaChart>
               </ResponsiveContainer>
             </div>
           </SwipeableViews>

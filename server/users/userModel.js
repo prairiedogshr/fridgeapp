@@ -18,6 +18,29 @@ module.exports = {
       // });
   },
 
+  change: (user, callback) => {
+    helpers.checkPass(user.email, user.old, (err, match)=>{
+      if(err){
+        callback(err)
+      }else if(!match){
+        callback("wrong password")
+      }else{
+           helpers.hashPass(user.new1, (err,result)=>{
+             db('user').where('user_email', user.email)
+               .update({
+                 user_password: result,
+               }).then(() => {
+                 callback(null, true);
+               }).catch((err) => {
+                 callback(err);
+               });
+           })
+      }
+    })
+
+  },
+
+
   signup: (user, callback) => {
     db.select().from('user').where('user_email', user.user_email)
       .then((foundUser) => {
@@ -73,6 +96,7 @@ module.exports = {
   },
 
   joinHouse: (update, callback) => {
+    console.log('join house update: ', update)
     db('user').where('user_id', update.id)
       .update({
         [update.key]: update.value,
@@ -95,7 +119,6 @@ module.exports = {
         user_phone: user.user_phone,
         user_birthday: user.user_birthday,
         user_info: user.user_info,
-        user_chore_rotation: user.user_chore_rotation,
       })
       .then(() => {
         callback(null, true);
@@ -111,9 +134,11 @@ module.exports = {
         house_in_user: null
       })
       .then(() => {
+        console.log('looks good')
         callback(null, true)
       })
       .catch((err) => {
+        console.log('err')
         callback(err);
       })
   },
@@ -150,12 +175,11 @@ module.exports = {
             incomplete: dataa[3].filter(chore => chore.chore_is_done === 0),
             groups: [1]
           },
-          //this would be for a year
           expensesReducer: {
             yearly: dataa[7].filter((exp) => exp.expense_due > new Date(new Date() - 3.154e+10)),
-            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,3)),
-            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,4)),
-            },  
+            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017,2) && exp.expense_due < new Date(2017,3)),
+            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017,2) && exp.expense_due < new Date(2017,4)),
+          },
         };
         callback(null, formedData);
       })

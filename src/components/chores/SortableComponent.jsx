@@ -3,12 +3,14 @@ import {render} from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
+import RaisedButton from 'material-ui/RaisedButton';
 import {List, ListItem} from 'material-ui/List';
 
 const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assignGroup }) => (
-  <button
-    type="button"
-    onClick={() => {
+  <RaisedButton
+    label="Save"
+    primary
+    onTouchTap={() => {
 
       {/*rotateGroups(roomies);*/}
 
@@ -40,9 +42,18 @@ const Button = withRouter(({ history, roomies, rotateGroups, items, groups, assi
       });
       history.push('/dashboard');
     }}
-  >
-    SAVE
-  </button>
+  />
+
+));
+
+const CancelButton = withRouter(({ history, }) => (
+  <RaisedButton
+    label="Cancel"
+    primary
+    onTouchTap={() => {
+      history.push('/dashboard');
+    }}
+  />
 ));
 
 
@@ -53,7 +64,7 @@ const SortableItem = SortableElement(({value, index}) => {
 });
 
 const SortableList = SortableContainer(({items,}) => {
-  console.log(items);
+  // console.log(items);
   return (
     <div>
       <h3>Group Chores</h3>
@@ -69,7 +80,7 @@ const SortableList = SortableContainer(({items,}) => {
 
 export default class SortableComponent extends Component {
   state = {
-    items: this.props.houseChores.concat(this.props.groups).map(item => {
+    items: this.props.groups.concat(this.props.houseChores).map(item => {
       if (item.chore_name) return item;
       if (typeof item === "number") return `GROUP #${item}`;
     })
@@ -87,6 +98,7 @@ export default class SortableComponent extends Component {
       <div>
         <SortableList items={this.state.items} onSortEnd={this.onSortEnd} groups={this.props.groups}/>
         <Button items={this.state.items} groups={this.props.groups} assignGroup={this.props.assignGroup} />
+        <CancelButton />
       </div>
     )
   }

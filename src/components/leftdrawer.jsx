@@ -24,7 +24,6 @@ const LeftDrawer = (props) => {
     logo: {
       height: 40,
       width: 'auto',
-      paddingTop: 10,
     },
     menuItem: {
       color: white,
@@ -57,7 +56,9 @@ const LeftDrawer = (props) => {
       open={navDrawerOpen}
     >
       <div style={styles.logoDiv}>
-        <img src={logo} style={styles.logo} alt="Fridge" />
+        <Link to={'/dashboard'}>
+          <img src={logo} style={styles.logo} alt="Fridge" />
+        </Link>
       </div>
       <div style={styles.avatar.div}>
         {/*<Avatar*/}
@@ -75,9 +76,9 @@ const LeftDrawer = (props) => {
             primaryText={menu.text}
             leftIcon={menu.icon}
             containerElement={<Link to={menu.link} />}
-            onTouchTap={() => {
-              props.handleChangeRequestNavDrawer();
-            }}
+            // onTouchTap={() => {
+            //   props.handleChangeRequestNavDrawer();
+            // }}
           />,
         )}
       </div>

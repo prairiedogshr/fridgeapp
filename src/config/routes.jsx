@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import requireAuth from '../components/require-auth';
 
 import App from '../app';
@@ -13,6 +13,7 @@ import Login from '../components/login';
 import Profile from '../containers/profileContainer';
 import Signup from '../components/signup';
 import Tasks from '../containers/tasksContainer';
+import Change from '../components/changepassword';
 import Welcome from '../containers/welcomeContainer';
 
 
@@ -21,6 +22,7 @@ class Routes extends Component {
     return (
       <Router>
         <Switch>
+          <Route exact path="/" render={() => <Redirect to="/dashboard" /> } />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/welcome" component={requireAuth(Welcome)} />
@@ -34,6 +36,7 @@ class Routes extends Component {
               <Route path="/chores" component={requireAuth(Chores)} />
               <Route path="/tasks" component={requireAuth(Tasks)} />
               <Route path="/bills" component={requireAuth(Bills)} />
+              <Route path="/change" component={requireAuth(Change)} />
             </div>
           </App>
         </Switch>

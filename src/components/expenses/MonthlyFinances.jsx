@@ -3,6 +3,7 @@ import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 export default function MonthlyFinances(props) {
+  console.log('props? ', props)
   const topExpenses = props.expenses.sort((a, b) => b.expense_balance - a.expense_balance)
     .slice(0,5);
   topExpenses.forEach((exp) => {
@@ -10,14 +11,14 @@ export default function MonthlyFinances(props) {
   })
   return (
     <div>
-      <List>
-        <ListItem primaryText="Your Monthly Expenses" secondaryText={props.expenses.reduce((all, item) => {
+      <h3>This Month's Total - {'$' + parseFloat(props.expenses.reduce((all, item) => {
           all += (item.expense_balance / props.roommates)
           return all;
-        },0).toLocaleString()} />
+        },0)).toFixed(2)}</h3>
+      <List>
         <Divider inset={false} />
         {topExpenses.map((exp) =>
-          <p>{exp.expense_name} - ${(exp.expense_balance/props.roommates).toLocaleString()}</p>
+          <ListItem primaryText={exp.expense_name + ' - $' + parseFloat((exp.expense_balance/props.roommates)).toFixed(2)} />
         )}
       </List>
     </div>

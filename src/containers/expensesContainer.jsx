@@ -5,9 +5,7 @@ import PaypalButton from '../components/expenses/paypalButton';
 import Summary from '../components/expenses/summary';
 import MonthlyFinances from '../components/expenses/MonthlyFinances';
 import Payment from '../components/expenses/payment';
-import { Row, Col, Grid } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
-
 
 class houseExpenses extends Component {
   constructor(props) {
@@ -31,7 +29,7 @@ class houseExpenses extends Component {
     if (event === 'all') {
       this.setState({
         billTotal: this.props.expenses.currentMonth.reduce((all, item) => {
-          all += item.expense_balance;
+          all += item.expense_balance / this.props.roommates;
           return all;
         },0)
       })
@@ -42,7 +40,7 @@ class houseExpenses extends Component {
     } else if (event.length) {
       this.setState({
         billTotal: event.reduce((all, item) => {
-          all += this.props.expenses.currentMonth[item].expense_balance;
+          all += this.props.expenses.currentMonth[item].expense_balance / this.props.roommates;
           return all;
         },0)
       })
@@ -55,29 +53,27 @@ class houseExpenses extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row>
-          <Col xs={6}>
-            <Paper style={this.styles.paper}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-6">
+            <Paper className="paper-wrapper">
               <MonthlyFinances roommates={this.props.roommates} expenses={this.props.expenses.currentMonth} />
             </Paper>
-            <br />
-            <Paper style={this.styles.paper}>
+            <Paper className="paper-wrapper">
               <ExpensesGraph roommates={this.props.roommates} expenses={this.props.expenses} />
             </Paper>
-          </Col>
-          <Col xs={6}>
-            <Paper style={this.styles.paper}>
+          </div>
+          <div className="col-md-6">
+            <Paper className="paper-wrapper">
               <Payment total={this.state.billTotal} />
               <PaypalButton paypalAdmin={this.props.paypalAdmin} total={this.state.billTotal} />
             </Paper>
-              <br />
-            <Paper style={this.styles.paper}>
+            <Paper className="paper-wrapper">
               <Summary roommates={this.props.roommates} bill={this.state.billTotal} handleOnToggle={this.handleOnToggle} expenses={this.props.expenses.currentMonth} />
             </Paper>
-          </Col>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     );
   }
 }

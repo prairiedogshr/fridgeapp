@@ -1,76 +1,128 @@
-import React, { PropTypes } from 'react';
-import { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import ChoresDashboard from './choresDashboardContainer';
-import Tasks from './tasksContainer';
-import { getAppState } from '../actions/init/init';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Paper from 'material-ui/Paper';
 
-// import actions here and then add the to mapStateToProps
+import { getAppState } from '../actions/init/init';
+import SummaryWidget from '../components/summaryWidget';
+import RoommateWidget from '../components/roommateWidget';
+import ChoresDashboard from './choresDashboardContainer';
+import TasksDashboard from './tasksDashboardContainer';
+import ExpensesGraph from '../components/expenses/expensesGraphRechart';
+import ThemeDefault from '../styles/theme-default';
 
-// main react app component
 class Dashboard extends Component {
   constructor(props) {
-    super(props)
-
+    super(props);
+    this.state = {
+      loading: true,
+    };
     this.style = {
       refresh: {
         display: 'inline-block',
         position: 'relative',
-      }
+      },
     };
-
     this.state = {
-      loading: true
-    }
+      loading: true,
+    };
   }
 
   componentWillMount() {
     this.setState({
-      loading: true
+      loading: true,
     });
 
     this.props.getAppState()
-    .then(() => {
-      this.setState({
-        loading: false
-      })
-    })
+      .then(() => {
+        this.setState({
+          loading: false,
+        });
+      });
   }
+
   render() {
     if (this.state.loading) {
       return (
         <RefreshIndicator
-          size={50}
-          left={70}
-          top={0}
-          loadingColor="#FF9800"
+          size={200}
+          left={-100}
+          top={200}
+          loadingColor="#26c6da"
           status="loading"
-          style={this.style.refresh}
-          />      
-        )
-    } else {
-    return (
-        <div className="dashboardCont">
-
-          <div><ChoresDashboard /></div>
-          <div><Tasks /></div>
-          <div>Dashboard</div>
-          <div>Dashboard</div>
-          <div>Dashboard</div>
-        </div>
-      )
+          style={{ marginLeft: '50%' }}
+        />
+      );
     }
+    return (
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <div className="container-fluid">
+          <div className="row">
+            <SummaryWidget
+              widgetID="chores"
+              icon="assignment"
+              count={this.props.chores.incomplete.length}
+              headerText="Chores to Do"
+              linkTo="/chores"
+              footerText="Get to Work"
+            />
+            <SummaryWidget
+              widgetID="tasks"
+              icon="feedback"
+              count={this.props.tasks.incomplete.length}
+              headerText="Tasks Left"
+              linkTo="/tasks"
+              footerText="See All Tasks"
+            />
+            <SummaryWidget
+              widgetID="bills"
+              icon="credit_card"
+              count={this.props.expenses.currentMonth.length}
+              headerText="Bills this Month"
+              linkTo="/bills"
+              footerText="Pay Your Bills"
+            />
+            <RoommateWidget
+              widgetID="house"
+              icon="group"
+              headerText="Roommates"
+              linkTo="/house"
+              footerText="See Details"
+            />
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <ChoresDashboard />
+            </div>
+            <div className="col-md-4">
+              <TasksDashboard />
+            </div>
+            <div className="col-md-4">
+              <Paper className="paper-wrapper">
+                <ExpensesGraph
+                  roommates={this.props.house.users.length}
+                  expenses={this.props.expenses}
+                />
+              </Paper>
+            </div>
+          </div>
+        </div>
+      </MuiThemeProvider>
+    );
   }
 }
 
-// App.propTypes = {
-//   define destructured proptypes here
-// };
+const mapStateToProps = ({ choresReducer, tasksReducer, expensesReducer, houseReducer }) => ({
+  chores: choresReducer,
+  tasks: tasksReducer,
+  expenses: expensesReducer,
+  house: houseReducer,
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someKey: (someArg) => {dispatch(someFunc(someArg))}
-// })
-
-export default connect(null, { getAppState })(Dashboard);
-// export default App;
+export default connect(
+  mapStateToProps,
+  {
+    getAppState,
+  },
+)(Dashboard);

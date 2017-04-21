@@ -13,9 +13,6 @@ export default function GroupChores(props) {
           tooltip="Decrease groups"
           touch
           tooltipPosition="top-right"
-          mini={true}
-          backgroundColor="#aaa"
-          zDepth="1"
         >
           <RemoveCircleOutline
             onTouchTap={() => {
@@ -28,9 +25,6 @@ export default function GroupChores(props) {
           tooltip="Increase groups"
           touch
           tooltipPosition="top-right"
-          mini={true}
-          backgroundColor="#aaa"
-          zDepth={1}
         >
           <AddCircleOutline
             onTouchTap={() => {

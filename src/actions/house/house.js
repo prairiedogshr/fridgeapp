@@ -55,7 +55,7 @@ export const removeUser = (user) => {
         payload: user,
       });
     }).catch((err) => {
-      console.log('err! ', err);
+      console.log('error: ', err);
     });
   };
 };
@@ -73,9 +73,7 @@ export const getHouse = (id) => {
 };
 
 export const createHouse = (house) => {
-  console.log('creating house: ', house)
   return (dispatch, getState) => {
-    console.log('state? ', getState())
     const state = getState();
     const user_id = state.initReducer.user_id || state.userReducer.user_id;
     const user_email = state.initReducer.user_email || state.userReducer.user_email;
@@ -90,7 +88,6 @@ export const createHouse = (house) => {
       house_info: house.info,
       house_account: user_email,
     }).then((data) => {
-      console.log('house data: ', data)
       return axios.put('/api/users/joinhouse', {
         key: 'house_in_user',
         value: data.data.house,

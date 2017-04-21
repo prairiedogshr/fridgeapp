@@ -34,7 +34,7 @@ class RoommateWidget extends Component {
     const justRoommates = roommateList.slice(1);
 
     return (
-      <div id={this.props.widgetID} className="summary-widget col-sm-3 col-xs-6">
+      <div id={this.props.widgetID}>
         <Paper className="paper-wrapper">
           <div className="row">
             <div className="col-xs-4">
@@ -56,6 +56,7 @@ class RoommateWidget extends Component {
                   <Chip
                     style={{ margin: 4, cursor: 'pointer' }}
                     labelStyle={{ fontSize: 12 }}
+                    key={`roommate${roommate.user_id}`}
                     href={`tel:${roommate.user_phone}`}
                   >
                     <Avatar src={require(`../assets/headshots/${roommate.user_first_name}.jpg` || DefaultAvatar)} alt={roommate.user_first_name} />

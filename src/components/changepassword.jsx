@@ -14,8 +14,6 @@ import DatePicker from 'material-ui/DatePicker';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import ThemeDefault from '../styles/theme-default';
 
-
-
 class Change extends Component {
   constructor(props){
     super(props);
@@ -67,7 +65,7 @@ class Change extends Component {
         .then((resp) => {
           if(resp){
             alert("changed the password!");
-            
+            this.props.history.push('/dashboard')
           }else{
             alert("Please enter the correct original password")
           }

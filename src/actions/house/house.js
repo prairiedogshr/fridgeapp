@@ -73,10 +73,12 @@ export const getHouse = (id) => {
 };
 
 export const createHouse = (house) => {
+  console.log('creating house: ', house)
   return (dispatch, getState) => {
     console.log('state? ', getState())
-    const user_id = getState().initReducer.user_id;
-    const user_email = getState().initReducer.user_email;
+    const state = getState();
+    const user_id = state.initReducer.user_id || state.userReducer.user_id;
+    const user_email = state.initReducer.user_email || state.userReducer.user_email;
 
     return axios.post('/api/houses/', {
       admin_user_in_house: user_id,

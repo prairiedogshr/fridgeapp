@@ -91,6 +91,21 @@ class ExpensesGraph extends Component {
       11: 'Dec',
     }
 
+    const monthOrder = {
+      'May': 0,
+      'Jun': 1,
+      'Jul': 2,
+      'Aug': 3,
+      'Sep': 4,
+      'Oct': 5,
+      'Nov': 6,
+      'Dec': 7,
+      'Jan': 8,
+      'Feb': 9,
+      'Mar': 10,
+      'Apr': 11,
+    }
+
     const monthlyExpensesObj = this.props.expenses.yearly.reduce((all, item) => {
       if (all[monthLookup[item.expense_billing_month]]) {
         console.log('already here, adding: ', item)
@@ -111,6 +126,10 @@ class ExpensesGraph extends Component {
         total: monthlyExpensesObj[key].total,
       })
     }
+
+    monthlyExpensesArr = monthlyExpensesArr.sort((a, b) => {
+      return monthOrder[a.month] - monthOrder[b.month]
+    })
 
     console.log('did this woooooooooork??? ', monthlyExpensesArr)
 

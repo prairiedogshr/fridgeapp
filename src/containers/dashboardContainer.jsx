@@ -78,7 +78,7 @@ class Dashboard extends Component {
               widgetID="bills"
               icon="credit_card"
               count={this.props.expenses.currentMonth.length}
-              headerText="Bills This Month"
+              headerText="Bills this Month"
               linkTo="/bills"
               footerText="Pay Your Bills"
             />

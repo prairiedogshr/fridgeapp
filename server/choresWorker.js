@@ -45,28 +45,27 @@ setInterval(() => {
                 user_phone: roomie.user_phone,
                 user_birthday: roomie.user_birthday,
                 user_info: roomie.user_info,
-                user_chore_rotation: newRotation,             
+                user_chore_rotation: newRotation,
               };
               userModel.updateUser(update, (err, response) => {
                 if (response) {
-                  // db.select().from('chore').where('house_in_chore', roomie.house_in_user).andWhere('chore_group', roomie.user_chore_rotation)
-                  //   .then((chores) => {
-                  //     const mailText = chores.reduce((text, chore) => `${text}<div>${chore.chore_name}</div>`, '');
-                  //     // setup email data with unicode symbols
-                  //     const mailOptions = {
-                  //       from: '"The Fridge Team" <prairiedogsssfridge@gmail.com>', // sender address
-                  //       to: roomie.user_email, // list of receivers
-                  //       subject: 'You have new chores! ✔', // Subject line
-                  //       // text: `text: ${mailText}`, // plain text body
-                  //       html: `<div>${mailText}</div>`, // html body
-                  //     };
-                  //     transporter.sendMail(mailOptions, (error, info) => {
-                  //       if (error) {
-                  //         return
-                  //       }
-                  //
-                  //     });
-                  //   });
+                  db.select().from('chore').where('house_in_chore', roomie.house_in_user).andWhere('chore_group', roomie.user_chore_rotation)
+                    .then((chores) => {
+                      const mailText = chores.reduce((text, chore) => `${text}<div>${chore.chore_name}</div>`, '');
+                      // setup email data with unicode symbols
+                      const mailOptions = {
+                        from: '"The Fridge Team" <prairiedogsssfridge@gmail.com>', // sender address
+                        to: roomie.user_email, // list of receivers
+                        subject: 'You have new chores! ✔', // Subject line
+                        // text: `text: ${mailText}`, // plain text body
+                        html: `<div>${mailText}</div>`, // html body
+                      };
+                      transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                          return 0;
+                        }
+                      });
+                    });
                   return response;
                 }
                 return false;

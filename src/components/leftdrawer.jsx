@@ -56,7 +56,9 @@ const LeftDrawer = (props) => {
       open={navDrawerOpen}
     >
       <div style={styles.logoDiv}>
-        <img src={logo} style={styles.logo} alt="Fridge" />
+        <Link to={'/dashboard'}>
+          <img src={logo} style={styles.logo} alt="Fridge" />
+        </Link>
       </div>
       <div style={styles.avatar.div}>
         {/*<Avatar*/}

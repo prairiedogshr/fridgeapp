@@ -2,11 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Paper from 'material-ui/Paper';
 
 import { getAppState } from '../actions/init/init';
 import SummaryWidget from '../components/summaryWidget';
 import ChoresDashboard from './choresDashboardContainer';
 import TasksDashboard from './tasksDashboardContainer';
+import ExpensesGraph from '../components/expenses/expensesGraphRechart';
 import ThemeDefault from '../styles/theme-default';
 
 class Dashboard extends Component {
@@ -88,16 +90,20 @@ class Dashboard extends Component {
               linkTo="/house"
               footerText="See Details"
             />
-            {/*<Col md={3}>*/}
-              {/*<Paper>*/}
-                {/*<ChoresDashboard />*/}
-              {/*</Paper>*/}
-            {/*</Col>*/}
-            {/*<Col md={3}>*/}
-              {/*<Paper>*/}
-                {/*<TasksDashboard />*/}
-              {/*</Paper>*/}
-            {/*</Col>*/}
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <ChoresDashboard />
+            </div>
+            <TasksDashboard />
+            <div className="col-md-4">
+              <Paper className="paper-wrapper">
+                <ExpensesGraph
+                  roommates={this.props.house.users.length}
+                  expenses={this.props.expenses}
+                />
+              </Paper>
+            </div>
           </div>
         </div>
       </MuiThemeProvider>
@@ -112,4 +118,9 @@ const mapStateToProps = ({ choresReducer, tasksReducer, expensesReducer, houseRe
   house: houseReducer,
 });
 
-export default connect(mapStateToProps, { getAppState })(Dashboard);
+export default connect(
+  mapStateToProps,
+  {
+    getAppState,
+  },
+)(Dashboard);

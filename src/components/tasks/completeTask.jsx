@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 
 export default function CompletedTask(props) {
   const complete = props.tasks.complete;
@@ -9,10 +9,12 @@ export default function CompletedTask(props) {
         <h2>Complete Tasks</h2>
         <List>
           {complete.map(task => (
-            <ListItem 
-              key={task.task_id} 
+            <ListItem
+              key={task.task_id}
               primaryText={task.task_name}
-              onClick={() => { props.undoCompleteTask(task); }}
+              onClick={() => {
+                props.undoCompleteTask(task);
+              }}
             />
           ))}
         </List>
@@ -21,5 +23,3 @@ export default function CompletedTask(props) {
   }
   return null;
 }
-
-

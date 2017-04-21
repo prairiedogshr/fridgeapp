@@ -33,14 +33,38 @@ a:focus, a:hover {
   }
 }
 
-/* SUMMARY WIDGET */
-
-.summary-widget {
+.paper-wrapper {
+  padding: 16px;
   margin-bottom: 30px;
 }
-.summary-widget .wrapper {
-  padding: 16px;
+
+.paper-wrapper .header-title {
+  background: #26c6da;
+  height: 72px;
 }
+.paper-wrapper .header-title h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  padding: 15px 0 5px 0;
+  color: #fff;
+}
+.paper-wrapper .header-title h3 {
+  font-size: 13px;
+  margin: 0;
+  padding: 0 0 5px 0;
+  color: #fff;
+}
+.group-number {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  text-align: right;
+  padding: 0 20px;
+}
+
+/* SUMMARY WIDGET */
+
 .summary-widget .icon .material-icons {
   float: left;
   font-size: 40px;
@@ -60,15 +84,15 @@ a:focus, a:hover {
 .summary-widget .icon .material-icons {
   float: left;
   font-size: 40px;
-}.summary-widget .icon .material-icons {
-   float: left;
-   font-size: 40px;
- }
+}
 .summary-widget .icon .material-icons {
   float: left;
   font-size: 40px;
 }
-
+.summary-widget .icon .material-icons {
+  float: left;
+  font-size: 40px;
+}
 .summary-widget .count {
   float: right;
   font-size: 60px;
@@ -102,6 +126,7 @@ a:focus, a:hover {
   font-size: 20px;
   line-height: 16px;
 }
+
 
 
 

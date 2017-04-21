@@ -15,12 +15,13 @@ import {
   rotateGroups,
 } from '../actions/chore/chore';
 
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ThemeDefault from '../styles/theme-default';
+import Header from 'material-ui/Subheader';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
+import Divider from 'material-ui/Divider';
 
 class Chores extends Component {
   constructor(props) {
@@ -34,10 +35,6 @@ class Chores extends Component {
     this.buttonSubmit = this.buttonSubmit.bind(this);
 
     this.styles = {
-      paper: {
-        padding: 16,
-        overflow: 'auto'
-      },
       btn: {
         marginTop: 15,
         marginBottom: 6,
@@ -109,58 +106,52 @@ class Chores extends Component {
     if (this.state.nextClicked === false) {
       return (
         <MuiThemeProvider muiTheme={ThemeDefault}>
-          <Grid fluid>
-            <Row>
-              <Col xs={12}>
-                <Row around="xs">
-
-                  <Col sm={8} xs={12}>
-                    <Paper style={this.styles.paper} >
-                      <ChoresDashboardContainer />
-                    </Paper>
-                  </Col>
-
-                  <Col sm={4} xs={12}>
-                    <Paper style={this.styles.paper} >
-                      <AdminChores
-                        chores={this.props.chores}
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-4">
+                <ChoresDashboardContainer />
+              </div>
+              <div className="col-md-4">
+                <AdminChores chores={this.props.chores} />
+              </div>
+              <div className="col-md-4">
+                {this.props.admin &&
+                  <div>
+                    <Paper className="paper-wrapper">
+                      <Header>
+                        <h3>Add a Chore</h3>
+                      </Header>
+                      <Divider />
+                      <AddChore
+                        handleKeyUp={this.handleKeyUp}
+                        buttonSubmit={this.buttonSubmit}
                       />
                     </Paper>
-                  </Col>
-                  <Row between="xs" style={{"marginTop": 50}}>
-                      {this.props.admin &&
-                        <Col xs={12}>
-                          <Row center="xs">
-                            <Col lg={4}>
-                              <AddChore
-                                handleKeyUp={this.handleKeyUp}
-                                buttonSubmit={this.buttonSubmit}
-                              />
-                            </Col>
-                            <Col lg={8}>
-                              <GroupChores
-                                chores={this.props.chores}
-                                increaseGroups={this.props.increaseGroups}
-                                decreaseGroups={this.props.decreaseGroups}
-                                roomies={this.props.house.users}
-                              />
-                              <RaisedButton
-                                style={this.styles.btn}
-                                label="Next"
-                                primary
-                                onTouchTap={() => {
-                                  this.setState({nextClicked: true });
-                                  window.scrollTo(0, 0);
-                                }}
-                              />
-                            </Col>
-                          </Row>
-                        </Col>
-                      }
-                  </Row>
-                </Row>
-              </Col>
-            </Row>
+                    <Paper className="paper-wrapper">
+                      <Header>
+                        <h3>Set Chore Groups</h3>
+                      </Header>
+                      <Divider />
+                      <GroupChores
+                        chores={this.props.chores}
+                        increaseGroups={this.props.increaseGroups}
+                        decreaseGroups={this.props.decreaseGroups}
+                        roomies={this.props.house.users}
+                      />
+                      <RaisedButton
+                        style={this.styles.btn}
+                        label="Next"
+                        primary
+                        onTouchTap={() => {
+                          this.setState({nextClicked: true });
+                          window.scrollTo(0, 0);
+                        }}
+                      />
+                    </Paper>
+                  </div>
+                }
+              </div>
+            </div>
             <Snackbar
               open={this.state.snackOpen}
               message={this.state.snackMessage}
@@ -168,7 +159,7 @@ class Chores extends Component {
               onRequestClose={this.handleRequestClose}
               contentStyle={{ textAlign: 'center' }}
             />
-          </Grid>
+          </div>
         </MuiThemeProvider>
       );
     } else {

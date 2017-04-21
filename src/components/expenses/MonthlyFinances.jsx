@@ -3,12 +3,11 @@ import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 export default function MonthlyFinances(props) {
-  console.log('props? ', props)
   const topExpenses = props.expenses.sort((a, b) => b.expense_balance - a.expense_balance)
     .slice(0,5);
   topExpenses.forEach((exp) => {
-    console.log(exp.expense_due)
-  })
+    console.log(exp.expense_due);
+  });
   return (
     <div>
       <h3>This Month's Total - {'$' + parseFloat(props.expenses.reduce((all, item) => {

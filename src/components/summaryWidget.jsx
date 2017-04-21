@@ -16,7 +16,7 @@ class SummaryWidget extends Component{
 
   render() {
     return (
-      <div id={this.props.widgetID} className="summary-widget col-sm-3 col-xs-6">
+      <div id={this.props.widgetID}>
         <Paper className="paper-wrapper">
           <div className="row">
             <div className="col-xs-4">

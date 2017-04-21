@@ -119,9 +119,8 @@ class ExpensesGraph extends Component {
           }
         }
       return all;
-    },{})
+    },{});
 
-    console.log('~~~~~~~~~~~~~~~~ ', monthlyExpensesObj)
 
     let monthlyExpensesArr = [];
     for (let key in monthlyExpensesObj) {
@@ -137,9 +136,7 @@ class ExpensesGraph extends Component {
 
     monthlyExpensesArr = monthlyExpensesArr.sort((a, b) => {
       return monthOrder[a.month] - monthOrder[b.month]
-    })
-
-    console.log('did this woooooooooork??? ', monthlyExpensesArr)
+    });
 
     return (
         <div>

@@ -8,7 +8,7 @@ class SummaryWidget extends Component{
   static propTypes = {
     widgetID: React.PropTypes.string,
     icon: React.PropTypes.string,
-    count: React.PropTypes.string,
+    count: React.PropTypes.number,
     headerText: React.PropTypes.string,
     footerText: React.PropTypes.string,
     linkTo: React.PropTypes.string,

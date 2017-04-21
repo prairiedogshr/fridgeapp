@@ -23,8 +23,8 @@ export default function Summary(props) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {props.expenses.map((expense) =>
-          <TableRow>
+        {props.expenses.map((expense, index) =>
+          <TableRow key={`summaryItem${index}`}>
             <TableRowColumn>{expense.expense_name}</TableRowColumn>
             <TableRowColumn>${parseFloat(expense.expense_balance / props.roommates).toFixed(2)}</TableRowColumn>
             <TableRowColumn>{expense.expense_is_paid === 1 ? 'Yes' : 'No'}</TableRowColumn>

@@ -30,22 +30,20 @@ class ChoresDashboard extends Component {
     const incomplete = this.props.chores.incomplete;
 
     return (
-      <div className="col-md-4">
-        <Paper className="paper-wrapper">
-          <Header className="header-title">
-            <h2>Your Chores</h2>
-            <h3><Info style={{ fill: '#fff', width: 16, height: 16, verticalAlign: 'bottom' }} /> Click on an item to mark as done</h3>
-          </Header>
-          <IncompleteChore
-            chores={this.props.chores}
-            completeChore={this.completeChore}
-          />
-          <CompleteChore
-            chores={this.props.chores}
-            undoComplete={this.undoComplete}
-          />
-        </Paper>
-      </div>
+      <Paper className="paper-wrapper">
+        <Header className="header-title">
+          <h2>Your Chores</h2>
+          <h3><Info style={{ fill: '#fff', width: 16, height: 16, verticalAlign: 'bottom' }} /> Click on an item to mark as done</h3>
+        </Header>
+        <IncompleteChore
+          chores={this.props.chores}
+          completeChore={this.completeChore}
+        />
+        <CompleteChore
+          chores={this.props.chores}
+          undoComplete={this.undoComplete}
+        />
+      </Paper>
     );
   }
 }

@@ -5,7 +5,6 @@ import PaypalButton from '../components/expenses/paypalButton';
 import Summary from '../components/expenses/summary';
 import MonthlyFinances from '../components/expenses/MonthlyFinances';
 import Payment from '../components/expenses/payment';
-import { Row, Col, Grid } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 
 class houseExpenses extends Component {
@@ -54,29 +53,27 @@ class houseExpenses extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row>
-          <Col md={6}>
-            <Paper style={this.styles.paper}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-6">
+            <Paper className="paper-wrapper">
               <MonthlyFinances roommates={this.props.roommates} expenses={this.props.expenses.currentMonth} />
             </Paper>
-            <br />
-            <Paper style={this.styles.paper}>
+            <Paper className="paper-wrapper">
               <ExpensesGraph roommates={this.props.roommates} expenses={this.props.expenses} />
             </Paper>
-          </Col>
-          <Col md={6}>
-            <Paper style={this.styles.paper}>
+          </div>
+          <div className="col-md-6">
+            <Paper className="paper-wrapper">
               <Payment total={this.state.billTotal} />
               <PaypalButton paypalAdmin={this.props.paypalAdmin} total={this.state.billTotal} />
             </Paper>
-              <br />
-            <Paper style={this.styles.paper}>
+            <Paper className="paper-wrapper">
               <Summary roommates={this.props.roommates} bill={this.state.billTotal} handleOnToggle={this.handleOnToggle} expenses={this.props.expenses.currentMonth} />
             </Paper>
-          </Col>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     );
   }
 }

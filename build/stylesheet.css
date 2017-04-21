@@ -55,7 +55,13 @@ a:focus, a:hover {
   padding: 0 0 5px 0;
   color: #fff;
 }
-
+.group-number {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: bold;
+  text-align: right;
+  padding: 0 20px;
+}
 
 /* SUMMARY WIDGET */
 

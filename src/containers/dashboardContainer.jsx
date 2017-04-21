@@ -92,7 +92,9 @@ class Dashboard extends Component {
             />
           </div>
           <div className="row">
-            <ChoresDashboard />
+            <div className="col-md-4">
+              <ChoresDashboard />
+            </div>
             <TasksDashboard />
             <div className="col-md-4">
               <Paper className="paper-wrapper">

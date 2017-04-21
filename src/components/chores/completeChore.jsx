@@ -9,12 +9,18 @@ export default function CompletedChore(props) {
       <ul>
         <List>
           {complete.map(chore => (
-            <li style={{ textDecoration: 'line-through', listStyle: 'none' }} key={`completeChore:${chore.chore_id}`} onClick={() => { props.undoComplete(chore.chore_id); }}><ListItem>{chore.chore_name}</ListItem></li>
-            ), this)
+            <li
+              style={{ textDecoration: 'line-through', listStyle: 'none' }}
+              key={`completeChore:${chore.chore_id}`}
+              onClick={() => { props.undoComplete(chore.chore_id); }}
+            >
+              <ListItem>{chore.chore_name}</ListItem>
+            </li>
+          ), this)
           }
         </List>
       </ul>
-    )
+    );
   }
   return null;
 }

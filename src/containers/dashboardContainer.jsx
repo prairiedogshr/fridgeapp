@@ -88,16 +88,18 @@ class Dashboard extends Component {
               linkTo="/house"
               footerText="See Details"
             />
-            {/*<Col md={3}>*/}
-              {/*<Paper>*/}
-                {/*<ChoresDashboard />*/}
-              {/*</Paper>*/}
-            {/*</Col>*/}
-            {/*<Col md={3}>*/}
-              {/*<Paper>*/}
-                {/*<TasksDashboard />*/}
-              {/*</Paper>*/}
-            {/*</Col>*/}
+            <div className="row">
+              <ChoresDashboard />
+              <TasksDashboard />
+              <div className="col-md-4">
+                <Paper className="paper-wrapper">
+                  <ExpensesGraph
+                    roommates={this.props.house.users.length}
+                    expenses={this.props.expenses}
+                  />
+                </Paper>
+              </div>
+            </div>
           </div>
         </div>
       </MuiThemeProvider>
@@ -113,3 +115,10 @@ const mapStateToProps = ({ choresReducer, tasksReducer, expensesReducer, houseRe
 });
 
 export default connect(mapStateToProps, { getAppState })(Dashboard);
+
+export default connect(
+  mapStateToProps,
+  {
+    getAppState,
+  },
+)(Dashboard);

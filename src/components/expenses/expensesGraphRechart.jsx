@@ -1,54 +1,49 @@
-import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'recharts';
 import React, { Component } from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { LineChart, ResponsiveContainer, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Sector, Cell, AreaChart, Area } from 'recharts';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import Event from 'material-ui/svg-icons/action/event';
+import DateRange from 'material-ui/svg-icons/action/date-range';
+import Home from 'material-ui/svg-icons/action/home';
 import SwipeableViews from 'react-swipeable-views';
 
 class ExpensesGraph extends Component {
   constructor(props) {
     super(props)
-    console.log('props..', this.props)
     this.roommates = this.props.roommates;
-    console.log('roommates? ', this.roommates)
     this.state = {
       yourShare: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: (item.expense_balance / this.roommates)
-        })
+        });
         return all;
         },[]).slice(0,10),
       currentHouse: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
           value: item.expense_balance
-        })
+        });
         return all;
         },[]).slice(0,10),
       slideIndex: 0
-      }
-
-    // setInterval(() => {
-    //   console.log(this.state)
-    // }, 2000)
-
+    };
     this.styles = {
       headline: {
-      fontSize: 24,
-      paddingTop: 16,
-      marginBottom: 12,
-      fontWeight: 400,
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
       },
       slide: {
         padding: 10,
       },
     };
 
-    this.COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    this.COLORS = ['#36a2eb', '#ff9802', '#e91d63', '#4caf50'];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
   }
-
 
     handleSwipe = (value) => {
       this.setState({
@@ -85,10 +80,11 @@ class ExpensesGraph extends Component {
           <Tabs
             onChange={this.handleSwipe}
             value={this.state.slideIndex}
+            inkBarStyle={{ background: '#551a8b' }}
           >
-            <Tab label="Your Current Share" value={0} />
-            <Tab label="Total House" value={1} />
-            <Tab label="Yearly" value={2} />
+            <Tab label="Month" value={0} style={{ textTransform: 'none' }} icon={<Event />} />
+            <Tab label="House" value={1} style={{ textTransform: 'none' }} icon={<Home />} />
+            <Tab label="Year" value={2} style={{ textTransform: 'none' }} icon={<DateRange />} />
           </Tabs>
           <SwipeableViews
             index={this.state.slideIndex}
@@ -97,7 +93,7 @@ class ExpensesGraph extends Component {
             <div>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
                 <PieChart>
                   <Pie
@@ -113,12 +109,12 @@ class ExpensesGraph extends Component {
                   </Pie>
                   <Tooltip />
                 </PieChart>
-            </ResponsiveContainer>
+              </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
                 <PieChart>
                   <Pie
@@ -134,12 +130,12 @@ class ExpensesGraph extends Component {
                   </Pie>
                   <Tooltip />
                 </PieChart>
-            </ResponsiveContainer>
+              </ResponsiveContainer>
             </div>
             <div style={this.styles.slide}>
               <ResponsiveContainer
                 width="100%"
-                  height={400}
+                height={340}
               >
                 <AreaChart
                   data={this.props.expenses.yearly}

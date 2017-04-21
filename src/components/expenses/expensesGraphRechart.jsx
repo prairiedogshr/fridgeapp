@@ -39,7 +39,7 @@ class ExpensesGraph extends Component {
       },
     };
 
-    this.COLORS = ['#6734ba', '#00bcd6', '#89c541', '#ff9802', '#ec1561'];
+    this.COLORS = ['#bae4bc', '#7bccc4', '#43a2ca', '#0868ac'];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
@@ -108,22 +108,30 @@ class ExpensesGraph extends Component {
 
     const monthlyExpensesObj = this.props.expenses.yearly.reduce((all, item) => {
       if (all[monthLookup[item.expense_billing_month]]) {
-        console.log('already here, adding: ', item)
-        console.log('aaaallll ', all)
-        all[monthLookup[item.expense_billing_month]].total += item.expense_balance
+        if (all[monthLookup[item.expense_billing_month]][item.expense_name]) {
+          all[monthLookup[item.expense_billing_month]][item.expense_name] += (item.expense_balance / this.props.roommates)
         } else {
+        all[monthLookup[item.expense_billing_month]][item.expense_name] = (item.expense_balance / this.props.roommates)
+        }
+      } else {
           all[monthLookup[item.expense_billing_month]] = {
-            total: item.expense_balance
+            [item.expense_name]: (item.expense_balance / this.props.roommates)
           }
         }
       return all;
     },{})
 
+    console.log('~~~~~~~~~~~~~~~~ ', monthlyExpensesObj)
+
     let monthlyExpensesArr = [];
     for (let key in monthlyExpensesObj) {
       monthlyExpensesArr.push({
         month: key,
-        total: monthlyExpensesObj[key].total,
+        electricity: monthlyExpensesObj['Electricity'],
+        internet: monthlyExpensesObj[key]['Internet'],
+        water: monthlyExpensesObj[key]['Water'],
+        cable: monthlyExpensesObj[key]['Cable'],
+        rent: monthlyExpensesObj[key]['Rent'],
       })
     }
 
@@ -200,7 +208,11 @@ class ExpensesGraph extends Component {
               <YAxis/>
               <CartesianGrid strokeDasharray="3 3"/>
               <Tooltip/>
-              <Area type='monotone' dataKey='total' stroke='#8884d8' fill='#8884d8' />
+              <Area type='monotone' dataKey='electricity' fill='#f0f9e8' />
+              <Area type='monotone' dataKey='internet' fill='#bae4bc' />
+              <Area type='monotone' dataKey='cable' fill='#7bccc4' />
+              <Area type='monotone' dataKey='water' fill='#43a2ca' />
+              <Area type='monotone' dataKey='rent' stroke='#8884d8' fill='#0868ac' />
             </AreaChart>
               </ResponsiveContainer>
             </div>

@@ -30,7 +30,7 @@ class houseExpenses extends Component {
     if (event === 'all') {
       this.setState({
         billTotal: this.props.expenses.currentMonth.reduce((all, item) => {
-          all += item.expense_balance;
+          all += item.expense_balance / this.props.roommates;
           return all;
         },0)
       })
@@ -41,7 +41,7 @@ class houseExpenses extends Component {
     } else if (event.length) {
       this.setState({
         billTotal: event.reduce((all, item) => {
-          all += this.props.expenses.currentMonth[item].expense_balance;
+          all += this.props.expenses.currentMonth[item].expense_balance / this.props.roommates;
           return all;
         },0)
       })

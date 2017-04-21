@@ -16,7 +16,8 @@ const createTask = (task, callback) => {
     task_name: task.task_name,
   })
     .then((newTask) => {
-      callback(null, newTask);
+      console.log('new task? ', newTask)
+      callback(null, newTask[0]);
     })
     .catch((err) => {
       callback(err);

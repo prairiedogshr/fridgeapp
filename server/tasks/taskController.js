@@ -11,11 +11,13 @@ const getTask = (req, res, next) => {
 };
 
 const createTask = (req, res, next) => {
-  Task.createTask(req.body, (err, ok) => {
+  Task.createTask(req.body, (err, task) => {
     if (err) {
       next(new Error(err));
     } else {
-      res.send(true)
+      res.json({
+        task_id: task
+      })
     }
   });
 };

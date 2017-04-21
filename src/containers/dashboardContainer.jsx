@@ -2,11 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Paper from 'material-ui/Paper';
 
 import { getAppState } from '../actions/init/init';
 import SummaryWidget from '../components/summaryWidget';
 import ChoresDashboard from './choresDashboardContainer';
 import TasksDashboard from './tasksDashboardContainer';
+import ExpensesGraph from '../components/expenses/expensesGraphRechart';
 import ThemeDefault from '../styles/theme-default';
 
 class Dashboard extends Component {

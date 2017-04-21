@@ -14,7 +14,7 @@ class ExpensesGraph extends Component {
       yourShare: this.props.expenses.currentMonth.reduce((all, item) => {
         all.push({
           name: item.expense_name,
-          value: (item.expense_balance / this.roommates)
+          value: parseFloat((item.expense_balance / this.roommates).toFixed(2)),
         });
         return all;
         },[]).slice(0,10),
@@ -39,7 +39,7 @@ class ExpensesGraph extends Component {
       },
     };
 
-    this.COLORS = ['#36a2eb', '#ff9802', '#e91d63', '#4caf50'];
+    this.COLORS = ['#6734ba', '#00bcd6', '#89c541', '#ff9802', '#ec1561'];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
@@ -80,7 +80,6 @@ class ExpensesGraph extends Component {
           <Tabs
             onChange={this.handleSwipe}
             value={this.state.slideIndex}
-            inkBarStyle={{ background: '#551a8b' }}
           >
             <Tab label="Month" value={0} style={{ textTransform: 'none' }} icon={<Event />} />
             <Tab label="House" value={1} style={{ textTransform: 'none' }} icon={<Home />} />
@@ -107,7 +106,7 @@ class ExpensesGraph extends Component {
                       this.state.yourShare.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
                     }
                   </Pie>
-                  <Tooltip />
+                  <Tooltip separator=": $" />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -128,7 +127,7 @@ class ExpensesGraph extends Component {
                       this.state.currentHouse.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
                     }
                   </Pie>
-                  <Tooltip />
+                  <Tooltip separator=": $" />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -140,11 +139,11 @@ class ExpensesGraph extends Component {
                 <AreaChart
                   data={this.props.expenses.yearly}
                 >
-                <XAxis dataKey="expense_billing_month" />
-                <YAxis/>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
-                <Area type='monotone' dataKey='expense_balance' stackId="1" stroke='#8884d8' fill='#8884d8' />
+                  <XAxis dataKey="expense_billing_month" />
+                  <YAxis/>
+                  <CartesianGrid strokeDasharray="3 3"/>
+                  <Tooltip separator=": $" />
+                  <Area type='monotone' dataKey='expense_balance' stackId="1" stroke='#8884d8' fill='#8884d8' />
                 </AreaChart>
               </ResponsiveContainer>
             </div>

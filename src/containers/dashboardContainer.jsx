@@ -90,17 +90,17 @@ class Dashboard extends Component {
               linkTo="/house"
               footerText="See Details"
             />
-            <div className="row">
-              <ChoresDashboard />
-              <TasksDashboard />
-              <div className="col-md-4">
-                <Paper className="paper-wrapper">
-                  <ExpensesGraph
-                    roommates={this.props.house.users.length}
-                    expenses={this.props.expenses}
-                  />
-                </Paper>
-              </div>
+          </div>
+          <div className="row">
+            <ChoresDashboard />
+            <TasksDashboard />
+            <div className="col-md-4">
+              <Paper className="paper-wrapper">
+                <ExpensesGraph
+                  roommates={this.props.house.users.length}
+                  expenses={this.props.expenses}
+                />
+              </Paper>
             </div>
           </div>
         </div>

@@ -39,7 +39,7 @@ class ExpensesGraph extends Component {
       },
     };
 
-    this.COLORS = ['#26c6da', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f' ];
+    this.COLORS = ['#6734ba', '#ec1561', '#26c6da', '#89c541', '#ff9802'];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
@@ -166,7 +166,7 @@ class ExpensesGraph extends Component {
                     labelLine={false}
                     label={this.renderCustomizedLabelShare}
                     outerRadius={'80%'}
-                    fill="#8884d8"
+                    fill="#26c6da"
                   >
                     {
                       this.state.yourShare.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
@@ -187,7 +187,7 @@ class ExpensesGraph extends Component {
                     labelLine={false}
                     label={this.renderCustomizedLabelHouse}
                     outerRadius={'80%'}
-                    fill="#8884d8"
+                    fill="#26c6da"
                   >
                     {
                       this.state.currentHouse.map((entry, index) => <Cell fill={this.COLORS[index % this.COLORS.length]}/>)
@@ -208,11 +208,11 @@ class ExpensesGraph extends Component {
               <YAxis/>
               <CartesianGrid strokeDasharray="3 3"/>
               <Tooltip/>
-              <Area type='monotone' dataKey='electricity' fill='#f0f9e8' />
-              <Area type='monotone' dataKey='internet' fill='#bae4bc' />
-              <Area type='monotone' dataKey='cable' fill='#7bccc4' />
-              <Area type='monotone' dataKey='water' fill='#43a2ca' />
-              <Area type='monotone' dataKey='rent' stroke='#8884d8' fill='#0868ac' />
+              <Area type='monotone' dataKey='electricity' fill='#ff9802' />
+              <Area type='monotone' dataKey='internet' fill='#89c541' />
+              <Area type='monotone' dataKey='cable' fill='#ec1561' />
+              <Area type='monotone' dataKey='water' fill='#6734ba' />
+              <Area type='monotone' dataKey='rent' stroke='#26c6da' fill='#26c6da' />
             </AreaChart>
               </ResponsiveContainer>
             </div>

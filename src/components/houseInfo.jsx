@@ -127,6 +127,8 @@ export default class HouseInfo extends Component {
                   this.houseUpdateParams.house_info = e.target.value
                 }}
               />
+              <br />
+              <br />
               <CardMedia>
                 <FlatButton
                   style={{ color: 'white' }}

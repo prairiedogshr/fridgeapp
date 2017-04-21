@@ -177,8 +177,8 @@ module.exports = {
           },
           expensesReducer: {
             yearly: dataa[7].filter((exp) => exp.expense_due > new Date(new Date() - 3.154e+10)),
-            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,3)),
-            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017) && exp.expense_due < new Date(2017,4)),
+            lastMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017,2) && exp.expense_due < new Date(2017,3)),
+            currentMonth: dataa[7].filter((exp) => exp.expense_due > new Date(2017,2) && exp.expense_due < new Date(2017,4)),
           },
         };
         callback(null, formedData);

@@ -75,6 +75,45 @@ class ExpensesGraph extends Component {
     };
 
   render() {
+
+    const monthLookup = {
+      0: 'Jan',
+      1: 'Feb',
+      2: 'Mar',
+      3: 'Apr',
+      4: 'May',
+      5: 'Jun',
+      6: 'Jul',
+      7: 'Aug',
+      8: 'Sep',
+      9: 'Oct',
+      10: 'Nov',
+      11: 'Dec',
+    }
+
+    const monthlyExpensesObj = this.props.expenses.yearly.reduce((all, item) => {
+      if (all[monthLookup[item.expense_billing_month]]) {
+        console.log('already here, adding: ', item)
+        console.log('aaaallll ', all)
+        all[monthLookup[item.expense_billing_month]].total += item.expense_balance
+        } else {
+          all[monthLookup[item.expense_billing_month]] = {
+            total: item.expense_balance
+          }
+        }
+      return all;
+    },{})
+
+    let monthlyExpensesArr = [];
+    for (let key in monthlyExpensesObj) {
+      monthlyExpensesArr.push({
+        month: key,
+        total: monthlyExpensesObj[key].total,
+      })
+    }
+
+    console.log('did this woooooooooork??? ', monthlyExpensesArr)
+
     return (
         <div>
           <Tabs
@@ -136,15 +175,14 @@ class ExpensesGraph extends Component {
                 width="100%"
                 height={340}
               >
-                <AreaChart
-                  data={this.props.expenses.yearly}
-                >
-                  <XAxis dataKey="expense_billing_month" />
-                  <YAxis/>
-                  <CartesianGrid strokeDasharray="3 3"/>
-                  <Tooltip separator=": $" />
-                  <Area type='monotone' dataKey='expense_balance' stackId="1" stroke='#8884d8' fill='#8884d8' />
-                </AreaChart>
+            <AreaChart width={600} height={400} data={monthlyExpensesArr}
+              margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+              <XAxis dataKey='month'/>
+              <YAxis/>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <Tooltip/>
+              <Area type='monotone' dataKey='total' stroke='#8884d8' fill='#8884d8' />
+            </AreaChart>
               </ResponsiveContainer>
             </div>
           </SwipeableViews>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 export default function Summary(props) {
+  props.expenses.forEach((item) => (console.log(item.expense_is_paid)))
   return (
     <Table
     multiSelectable={true}
@@ -19,8 +20,8 @@ export default function Summary(props) {
         {props.expenses.map((expense) => 
           <TableRow>
             <TableRowColumn>{expense.expense_name}</TableRowColumn>
-            <TableRowColumn>{expense.expense_balance/props.roommates}</TableRowColumn>
-            <TableRowColumn>{expense.is_paid === 1 ? 'true' : 'false'}</TableRowColumn>
+            <TableRowColumn>${parseFloat(expense.expense_balance/props.roommates).toFixed(2)}</TableRowColumn>
+            <TableRowColumn>{expense.expense_is_paid === 1 ? 'Yes' : 'No'}</TableRowColumn>
           </TableRow>
         )}
       </TableBody>

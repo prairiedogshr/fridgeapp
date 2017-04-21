@@ -88,7 +88,7 @@ class Chores extends Component {
     }
     const date = `${year}-${month}-${day}`;
     let chore = {
-        "house_in_chore": 1,
+        "house_in_chore": this.props.house.house_id,
         "chore_name": this.state.inputField,
         "chore_due": date,
         "chore_group": null,

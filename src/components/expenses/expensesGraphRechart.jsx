@@ -39,7 +39,7 @@ class ExpensesGraph extends Component {
       },
     };
 
-    this.COLORS = ['#bae4bc', '#7bccc4', '#43a2ca', '#0868ac'];
+    this.COLORS = ['#26c6da', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f' ];
     this.RADIAN = Math.PI / 180;
     this.testData = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];

@@ -6,6 +6,7 @@ import Paper from 'material-ui/Paper';
 
 import { getAppState } from '../actions/init/init';
 import SummaryWidget from '../components/summaryWidget';
+import RoommateWidget from '../components/roommateWidget';
 import ChoresDashboard from './choresDashboardContainer';
 import TasksDashboard from './tasksDashboardContainer';
 import ExpensesGraph from '../components/expenses/expensesGraphRechart';
@@ -82,11 +83,10 @@ class Dashboard extends Component {
               linkTo="/bills"
               footerText="Pay Your Bills"
             />
-            <SummaryWidget
+            <RoommateWidget
               widgetID="house"
               icon="group"
-              count={this.props.house.users.length - 1}
-              headerText="Your Roommates"
+              headerText="Roommates"
               linkTo="/house"
               footerText="See Details"
             />
@@ -95,7 +95,9 @@ class Dashboard extends Component {
             <div className="col-md-4">
               <ChoresDashboard />
             </div>
-            <TasksDashboard />
+            <div className="col-md-4">
+              <TasksDashboard />
+            </div>
             <div className="col-md-4">
               <Paper className="paper-wrapper">
                 <ExpensesGraph

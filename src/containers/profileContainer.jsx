@@ -5,10 +5,13 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Snackbar from 'material-ui/Snackbar';
+import LockOutline from 'material-ui/svg-icons/action/lock-outline';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import ThemeDefault from '../styles/theme-default';
 
@@ -147,10 +150,11 @@ class User extends Component {
                         style={this.styles.btn}
                         type="Submit"
                       />
-                      <RaisedButton
-                        label="Change Password"
-                        primary={true}
-                        style={this.styles.btn}
+                      <div className="clearfix" style={{ height: 15 }}></div>
+                      <FlatButton
+                        label="Change Password &raquo;"
+                        secondary={true}
+                        icon={<LockOutline />}
                         href= "/change"
                       />
                     </ValidatorForm>

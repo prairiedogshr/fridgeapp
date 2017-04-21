@@ -35,7 +35,7 @@ class SummaryWidget extends Component{
               {this.props.headerText}
             </div>
           </div>
-          <Divider/>
+          <Divider />
           <div className="row footer">
             <div className="col-xs-9">
               <Link to={this.props.linkTo}>

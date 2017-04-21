@@ -9,7 +9,7 @@ export default function AddChore(props) {
         id="addChoreInput"
         hintText="Chore description"
         floatingLabelText="Add Chore"
-        fullWidth={false}
+        fullWidth={true}
         onKeyUp={(e) => {
           props.handleKeyUp(e) && (document.getElementById('addChoreInput').value = '');
         }}

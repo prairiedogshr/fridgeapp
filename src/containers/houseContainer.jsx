@@ -32,6 +32,7 @@ class House extends Component {
               {roommateList.map(user =>
                 <div className="col-xs-12 col-md-6" style={{ marginBottom: 15 }}>
                   <Roommate
+                    history={this.props.history}
                     roommate={user}
                     currentUser={this.props.currentUser}
                     remove={this.props.removeUser}

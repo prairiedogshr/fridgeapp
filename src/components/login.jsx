@@ -78,7 +78,7 @@ class Login extends Component {
         } else {
           this.props.history.push('/welcome')
         }
-      }).catch(err => { console.log('err: ', err)});
+      }).catch(err => { console.log('error: ', err)});
   };
 
   render() {

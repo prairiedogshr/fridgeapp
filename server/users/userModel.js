@@ -8,14 +8,7 @@ module.exports = {
       .then((user) => {
         callback(null, user);
       })
-        .catch(err => console.log('err: ', err));
-      //   if (user.length) {
-      //     callback(null, user[0]);
-      //   } else {
-      //     console.log('no user');
-      //     callback('no user found');
-      //   }
-      // });
+      .catch(err => console.log('error: ', err));
   },
 
   change: (user, callback) => {

@@ -8,7 +8,7 @@ class SummaryWidget extends Component{
   static propTypes = {
     widgetID: React.PropTypes.string,
     icon: React.PropTypes.string,
-    count: React.PropTypes.string,
+    count: React.PropTypes.number,
     headerText: React.PropTypes.string,
     footerText: React.PropTypes.string,
     linkTo: React.PropTypes.string,
@@ -16,7 +16,7 @@ class SummaryWidget extends Component{
 
   render() {
     return (
-      <div id={this.props.widgetID} className="summary-widget col-sm-3 col-xs-6">
+      <div id={this.props.widgetID}>
         <Paper className="paper-wrapper">
           <div className="row">
             <div className="col-xs-4">

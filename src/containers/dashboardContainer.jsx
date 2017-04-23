@@ -59,37 +59,45 @@ class Dashboard extends Component {
       <MuiThemeProvider muiTheme={ThemeDefault}>
         <div className="container-fluid">
           <div className="row">
-            <SummaryWidget
-              widgetID="chores"
-              icon="assignment"
-              count={this.props.chores.incomplete.length}
-              headerText="Chores to Do"
-              linkTo="/chores"
-              footerText="Get to Work"
-            />
-            <SummaryWidget
-              widgetID="tasks"
-              icon="feedback"
-              count={this.props.tasks.incomplete.length}
-              headerText="Tasks Left"
-              linkTo="/tasks"
-              footerText="See All Tasks"
-            />
-            <SummaryWidget
-              widgetID="bills"
-              icon="credit_card"
-              count={this.props.expenses.currentMonth.length}
-              headerText="Bills this Month"
-              linkTo="/bills"
-              footerText="Pay Your Bills"
-            />
-            <RoommateWidget
-              widgetID="house"
-              icon="group"
-              headerText="Roommates"
-              linkTo="/house"
-              footerText="See Details"
-            />
+            <div className="summary-widget col-sm-3 col-xs-6">
+              <SummaryWidget
+                widgetID="chores"
+                icon="assignment"
+                count={this.props.chores.incomplete.length}
+                headerText="Chores to Do"
+                linkTo="/chores"
+                footerText="Get to Work"
+              />
+            </div>
+            <div className="summary-widget col-sm-3 col-xs-6">
+              <SummaryWidget
+                widgetID="tasks"
+                icon="feedback"
+                count={this.props.tasks.incomplete.length}
+                headerText="Tasks Left"
+                linkTo="/tasks"
+                footerText="See All Tasks"
+              />
+            </div>
+            <div className="summary-widget col-sm-3 col-xs-12">
+              <SummaryWidget
+                widgetID="bills"
+                icon="credit_card"
+                count={this.props.expenses.currentMonth.length}
+                headerText="Bills this Month"
+                linkTo="/bills"
+                footerText="Pay Your Bills"
+              />
+            </div>
+            <div className="summary-widget col-sm-3 col-xs-12">
+              <RoommateWidget
+                widgetID="house"
+                icon="group"
+                headerText="Roommates"
+                linkTo="/house"
+                footerText="See Details"
+              />
+            </div>
           </div>
           <div className="row">
             <div className="col-md-4">

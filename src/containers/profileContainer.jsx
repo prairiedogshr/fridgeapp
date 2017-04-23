@@ -77,7 +77,6 @@ class User extends Component {
     this.props.updateUser(this.state)
       .then(response => {
         if (response) {
-          console.log('updated profile');
           this.setState({
             snackBarOpen: true,
           });

@@ -136,7 +136,6 @@ export default class HouseInfo extends Component {
                   hoverColor="tomato"
                   fullWidth={false}
                   onClick={(event) => {
-                    console.log('hi');
                     this.handleSubmit(event);
                   }}
                 >Save</FlatButton>

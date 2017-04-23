@@ -31,10 +31,10 @@ class RoommateWidget extends Component {
       }
       return 1;
     });
-    roommateList.shift();
+    const justRoommates = roommateList.slice(1);
 
     return (
-      <div id={this.props.widgetID} className="summary-widget col-sm-3 col-xs-6">
+      <div id={this.props.widgetID}>
         <Paper className="paper-wrapper">
           <div className="row">
             <div className="col-xs-4">
@@ -52,10 +52,11 @@ class RoommateWidget extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {roommateList.map(roommate =>
+                {justRoommates.map(roommate =>
                   <Chip
                     style={{ margin: 4, cursor: 'pointer' }}
                     labelStyle={{ fontSize: 12 }}
+                    key={`roommate${roommate.user_id}`}
                     href={`tel:${roommate.user_phone}`}
                   >
                     <Avatar src={require(`../assets/headshots/${roommate.user_first_name}.jpg` || DefaultAvatar)} alt={roommate.user_first_name} />
@@ -66,28 +67,6 @@ class RoommateWidget extends Component {
               </div>
             </div>
           </div>
-          {/*<div className="row title">*/}
-            {/*<div className="col-xs-12">*/}
-              {/*{this.props.headerText}*/}
-            {/*</div>*/}
-          {/*</div>*/}
-          {/*<Divider/>*/}
-          {/*<div className="row footer">*/}
-            {/*<div className="col-xs-9">*/}
-              {/*<Link to={this.props.linkTo}>*/}
-                {/*<div className="footer-text">*/}
-                  {/*{this.props.footerText}*/}
-                {/*</div>*/}
-              {/*</Link>*/}
-            {/*</div>*/}
-            {/*<div className="col-xs-3">*/}
-              {/*<Link to={this.props.linkTo}>*/}
-                {/*<div className="footer-icon">*/}
-                  {/*<i className="material-icons">arrow_forward</i>*/}
-                {/*</div>*/}
-              {/*</Link>*/}
-            {/*</div>*/}
-          {/*</div>*/}
         </Paper>
       </div>
     );

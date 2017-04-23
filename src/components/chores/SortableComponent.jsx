@@ -64,7 +64,6 @@ const SortableItem = SortableElement(({value, index}) => {
 });
 
 const SortableList = SortableContainer(({items,}) => {
-  // console.log(items);
   return (
     <div>
       <h3>Group Chores</h3>

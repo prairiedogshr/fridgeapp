@@ -9,10 +9,6 @@ class ExpensesGraph extends Component {
     super(props)
   }
 
-  testFunc() {
-    console.log('hi!');
-  }
-
   expenseGraph() {
     const expensesData = this.props.expenses;
 

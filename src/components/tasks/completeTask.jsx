@@ -9,14 +9,16 @@ export default function CompletedTask(props) {
       <div>
         <List>
           {complete.map(task => (
-            <ListItem
+            <li
               key={task.task_id}
-              primaryText={task.task_name}
-              rightIcon={<CheckBox style={{ fill: '#551a8b' }} />}
+              style={{textDecoration: 'line-through', listStyle: 'none', padding: 0 }}
               onClick={() => {
-                props.undoCompleteTask(task);
-              }}
-            />
+                props.undoCompleteTask(task); }}
+              >
+              <ListItem
+                rightIcon={<CheckBox style={{ fill: '#551a8b' }} />}
+              >{task.task_name}</ListItem>
+            </li>
           ))}
         </List>
       </div>

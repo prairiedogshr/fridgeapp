@@ -1,6 +1,6 @@
 # [Fridge](http://fridgeapp.xyz)
 
-![Fridge Logo](https://raw.github.com/prairiedogshr/fridgeapp/blob/master/build/assets/fridge-logo-black.png)
+![Fridge Logo](http://i.imgur.com/3h8v8eu.png)
 
 ---
 
